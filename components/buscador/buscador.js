@@ -4,6 +4,7 @@ import {
   Text,
   View
 } from 'react-native';
+import Maps from './maps';
 
 export default class Buscador extends Component {
 
@@ -16,9 +17,7 @@ export default class Buscador extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>
-          BUSCADOR
-        </Text>
+        <Maps />
       </View>
     );
   }
