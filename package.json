@@ -24,10 +24,12 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
+      "!**/__mocks__/**",
       "!**/node_modules/**",
       "!**/android/**",
       "!**/ios/**",
-      "!**/coverage/**"
+      "!**/coverage/**",
+      "!**/index.js"
     ],
     "coverageReporters": [
       "lcov",

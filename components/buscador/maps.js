@@ -17,6 +17,7 @@ export default class Maps extends Component {
   render() {
     return (
       <MapView
+        ref={ map => this.map = map }
         initialRegion={{
           latitude: 37.78825,
           longitude: -122.4324,
