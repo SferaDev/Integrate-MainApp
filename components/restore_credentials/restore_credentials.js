@@ -3,7 +3,10 @@ import {
     Platform,
     StyleSheet,
     Text,
-    View
+    View,
+    Button,
+    TextInput,
+    TouchableHighlight
 } from 'react-native';
 
 export default class RestoreCredentials extends Component {
@@ -14,9 +17,19 @@ export default class RestoreCredentials extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome to React Native Àlex Contreras!
+                <Text style={styles.basicText}>
+                    Recuperar credencials:
                 </Text>
+
+                <TextInput style={styles.basicInput}
+                           placeholder="NIE/NIF"
+                           onChangeText={(text) => this.setState({text})}>
+                </TextInput>
+
+                <TouchableHighlight style={styles.button}
+                                    onPress={()=>{console.log('Ive been pressed')}}>
+                    <Text style={{color:'white'}}>OK</Text>
+                </TouchableHighlight>
             </View>
         );
     }
@@ -27,11 +40,34 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F4F3F2',
     },
-    welcome: {
+    basicText: {
+        fontFamily: 'Helvetica',
         fontSize: 20,
-        textAlign: 'center',
         margin: 10,
     },
+    basicInput: {
+        borderWidth:1,
+        borderColor: '#0c59cf',
+        backgroundColor:'white',
+        height: 30,
+        width: 260,
+        borderRadius:2,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10,
+    },
+    button: {
+        borderWidth:1,
+        borderColor: '#0c59cf',
+        backgroundColor:'#094671',
+        color:'white',
+        width:260,
+        height:30,
+        borderRadius:4,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin:10,
+    }
 });
