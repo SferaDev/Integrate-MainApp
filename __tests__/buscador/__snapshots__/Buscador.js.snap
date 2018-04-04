@@ -55,8 +55,9 @@ exports[`renders buscador correctly 1`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      onPress={[Function]}
     >
-      GG
+      Menu
     </Text>
   </View>
   <View

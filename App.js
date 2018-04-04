@@ -33,6 +33,9 @@ export default class App extends Component<Props> {
         <Text style={styles.instructions}>
           {instructions}
         </Text>
+        <Text onPress={() => this.props.navigation.navigate('DrawerOpen')}>DrawerOpen</Text>
+        <Text onPress={() => this.props.navigation.navigate('DrawerNavigation')}>DrawerNavigation</Text>
+        <Text onPress={() => this.props.navigation.navigate('LoginStack')}>LoginStack</Text>
       </View>
     );
   }

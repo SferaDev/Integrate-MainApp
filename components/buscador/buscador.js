@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
 import Maps from './maps';
 
@@ -10,8 +11,11 @@ export default class Buscador extends Component {
 
   constructor(props){
     super(props);
-
     this.state = {};
+  }
+
+  openMenu(){
+    this.props.navigation.navigate('DrawerOpen');
   }
 
   render() {
@@ -24,7 +28,7 @@ export default class Buscador extends Component {
           <Maps />
         </View>
         <View style={{height: 100}}>
-          <Text>GG</Text>
+          <Text onPress={this.openMenu}>Menu</Text>
         </View>
 
         <View style={{display: 'none',position: 'absolute',top:0,left: 0,width: '100%', height: '100%',backgroundColor: 'rgba(0,0,0,0.5)'}} >
