@@ -54,3 +54,6 @@ buck-out/
 
 # JEST COVERAGe
 coverage/
+
+# TESTS Snaps
+__tests__/__snapshots__/

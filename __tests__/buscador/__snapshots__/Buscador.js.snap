@@ -14,8 +14,11 @@ exports[`renders buscador correctly 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "blue",
+        "backgroundColor": "#094671",
+        "display": "flex",
+        "flexDirection": "row",
         "height": 60,
+        "width": "100%",
       }
     }
   >
@@ -23,13 +26,34 @@ exports[`renders buscador correctly 1`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      onPress={[Function]}
       style={
         Object {
+          "alignSelf": "center",
           "color": "white",
+          "flex": 1,
+          "paddingLeft": 20,
+          "textAlign": "left",
         }
       }
     >
-      GG
+      MENU
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "white",
+          "flex": 1,
+          "paddingRight": 20,
+          "textAlign": "right",
+        }
+      }
+    >
+      LIST
     </Text>
   </View>
   <View
@@ -63,28 +87,127 @@ exports[`renders buscador correctly 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "rgba(0,0,0,0.5)",
-        "display": "none",
-        "height": "100%",
-        "left": 0,
+        "alignSelf": "center",
+        "backgroundColor": "white",
+        "borderRadius": 5,
+        "display": "flex",
+        "flexDirection": "row",
+        "height": 35,
         "position": "absolute",
-        "top": 0,
-        "width": "100%",
+        "top": 75,
+        "width": 345,
       }
     }
   >
-    <View
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
       style={
         Object {
-          "backgroundColor": "white",
-          "height": "100%",
-          "left": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "75%",
+          "alignSelf": "center",
+          "flex": 2,
+          "textAlign": "center",
+        }
+      }
+    >
+      Q
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      placeholder="HELLO"
+      style={
+        Object {
+          "flex": 18,
         }
       }
     />
+  </View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+        },
+        Object {
+          "backgroundColor": "red",
+          "borderRadius": 15,
+          "bottom": 115,
+          "height": 30,
+          "left": 15,
+          "position": "absolute",
+          "width": 30,
+        },
+      ]
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      C
+    </Text>
+  </View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+        },
+        Object {
+          "backgroundColor": "red",
+          "borderRadius": 22.5,
+          "bottom": 115,
+          "height": 45,
+          "position": "absolute",
+          "right": 15,
+          "width": 45,
+        },
+      ]
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      C
+    </Text>
   </View>
 </View>
 `;

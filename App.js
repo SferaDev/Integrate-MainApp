@@ -21,6 +21,11 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+
+  openNav(page){
+      this.props.navigation.navigate(page);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -33,9 +38,9 @@ export default class App extends Component<Props> {
         <Text style={styles.instructions}>
           {instructions}
         </Text>
-        <Text onPress={() => this.props.navigation.navigate('DrawerOpen')}>DrawerOpen</Text>
-        <Text onPress={() => this.props.navigation.navigate('DrawerNavigation')}>DrawerNavigation</Text>
-        <Text onPress={() => this.props.navigation.navigate('LoginStack')}>LoginStack</Text>
+        <Text onPress={this.openNav.bind(this,'DrawerOpen')}>DrawerOpen</Text>
+        <Text onPress={this.openNav.bind(this,'DrawerNavigation')}>DrawerNavigation</Text>
+        <Text onPress={this.openNav.bind(this,'LoginStack')}>LoginStack</Text>
       </View>
     );
   }

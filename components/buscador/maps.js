@@ -27,8 +27,9 @@ export default class Maps extends Component {
         showsUserLocation={true}
         followsUserLocation={true}
         showsPointsOfInterest={false}
-        showsMyLocationButton={true}
-        style={{...StyleSheet.absoluteFillObject}}
+        showsMyLocationButton={false}
+        showsCompass={false}
+        style={{...StyleSheet.absoluteFillObject,paddingTop: 100}}
       />
     );
   }

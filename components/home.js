@@ -31,9 +31,9 @@ const ConfigStack = StackNavigator({
 });
 
 const DrawerStack = DrawerNavigator({
-  screen1: { screen: Buscador },
-  screen2: { screen: App },
-  screen3: { screen: Buscador },
+  screen1: { screen: BuscadorStack },
+  screen2: { screen: ValsStack },
+  screen3: { screen: BuscadorStack },
 });
 
 
