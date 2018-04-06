@@ -4,9 +4,12 @@ import {
     Text,
     View,
     TextInput,
-    Button,
-    TouchableHighlight, Image, ImageBackground
+    TouchableHighlight,
+    Image,
+    ImageBackground,
 } from 'react-native';
+
+import Toast from './toast';
 
 type Props = {};
 export default class LogIn extends Component {
@@ -14,7 +17,8 @@ export default class LogIn extends Component {
         super(props);
         this.state = {
             nifnie: "",
-            password: ""
+            password: "",
+            error: false,
         };
     }
 
@@ -22,12 +26,7 @@ export default class LogIn extends Component {
         let nifnie = this.state.nifnie;
         let password = this.state.password;
             console.warn(nifnie);
-             console.warn(password);
-       /* if (nifnie == "") {
-
-        }
-        if (password = "") {
-        }*/
+            console.warn(password);
     }
 
     updateNifNie(value) {
@@ -70,6 +69,8 @@ export default class LogIn extends Component {
                             Entra
                         </Text>
                     </TouchableHighlight>
+                    <Toast visible = {this.state.error}/>
+
                 </ImageBackground>
             </View>
         );

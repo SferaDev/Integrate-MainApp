@@ -180,6 +180,31 @@ exports[`renders buscador correctly 1`] = `
         Entra
       </Text>
     </View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "red",
+            "height": "100%",
+            "left": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": "100%",
+          },
+          Object {
+            "display": "none",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+      >
+        Toaast
+      </Text>
+    </View>
   </View>
 </View>
 `;
