@@ -12,8 +12,18 @@ import {
 export default class RestoreCredentials extends Component {
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = {value:""};
     }
+
+    updateText(value){
+        this.setState({text: value})
+    }
+
+    buttonPressed() {
+        console.log("Ive been pressed")
+
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -22,12 +32,14 @@ export default class RestoreCredentials extends Component {
                 </Text>
 
                 <TextInput style={styles.basicInput}
+                           value={this.state.text}
                            placeholder="NIE/NIF"
-                           onChangeText={(text) => this.setState({text})}>
+                           onChangeText={this.updateText.bind(this)}>
                 </TextInput>
 
                 <TouchableHighlight style={styles.button}
-                                    onPress={()=>{console.log('Ive been pressed')}}>
+                                    onPress={this.buttonPressed.bind(this)}
+                                     >
                     <Text style={{color:'white'}}>OK</Text>
                 </TouchableHighlight>
             </View>
@@ -62,7 +74,6 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderColor: '#0c59cf',
         backgroundColor:'#094671',
-        color:'white',
         width:260,
         height:30,
         borderRadius:4,
