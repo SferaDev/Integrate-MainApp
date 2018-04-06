@@ -12,7 +12,6 @@ it('renders correctly', () => {
         <RestoreCredentials />
     );
 });
-
 configure({ adapter: new Adapter() });
 it('updateText works correctly', () => {
     const wrapper = shallow(<RestoreCredentials/>);
