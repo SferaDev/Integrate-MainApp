@@ -5,7 +5,6 @@ import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import Buscador from './buscador/buscador';
 import App from '../App';
 
-
 const BuscadorStack = StackNavigator({
   buscador: { screen: Buscador },
 }, {
