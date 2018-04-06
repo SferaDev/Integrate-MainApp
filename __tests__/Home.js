@@ -5,7 +5,7 @@ import renderer from 'react-test-renderer';
 //import {configure,shallow} from 'enzyme';
 //import Adapter from 'enzyme-adapter-react-16';
 
-import Home, {
+/*import Home, {
 		BuscadorStack,
 		ValsStack,
 		ProfileStack,
@@ -13,7 +13,7 @@ import Home, {
 		DrawerStack,
 		DrawerNavigation,
 		LoginStack
-} from '../components/home';
+} from '../components/home';*/
 
 /*test('renders correctly', () => {
   const navigation = { navigate: jest.fn() };
