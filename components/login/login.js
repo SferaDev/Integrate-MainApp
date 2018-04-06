@@ -40,6 +40,7 @@ export default class LogIn extends Component {
 
 
     render() {
+        let emptyfields = (this.state.nifnie.length == 0 || this.state.password.length == 0);
         return (
             <View style = {styles.container}>
                 <ImageBackground
@@ -62,10 +63,10 @@ export default class LogIn extends Component {
                                onChangeText = {this.updatePassword.bind(this)}>
                     </TextInput>
                     <TouchableHighlight
-                        style = {styles.button}
+                        style = {[styles.button, {backgroundColor: (emptyfields) ? '#CCC' : '#094671'}]}
                         onPress = {this.login.bind(this)}
-                        disabled = {true}>
-                        <Text style = {{alignSelf: 'center', color: 'white'}}>
+                        disabled = {emptyfields}>
+                        <Text style = {{alignSelf: 'center', color: (emptyfields) ? '#666' : 'white', fontWeight: 'bold' }}>
                             Entra
                         </Text>
                     </TouchableHighlight>
@@ -103,7 +104,6 @@ const styles = StyleSheet.create({
     button: {
         borderWidth:1,
         borderColor: '#0c59cf',
-        backgroundColor:'#094671',
         width:260,
         height:30,
         position: 'absolute',

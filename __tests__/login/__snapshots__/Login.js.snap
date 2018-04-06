@@ -144,18 +144,22 @@ exports[`renders buscador correctly 1`] = `
           Object {
             "backgroundColor": "transparent",
           },
-          Object {
-            "backgroundColor": "#094671",
-            "borderColor": "#0c59cf",
-            "borderRadius": 4,
-            "borderWidth": 1,
-            "height": 30,
-            "justifyContent": "center",
-            "margin": 10,
-            "position": "absolute",
-            "top": 477,
-            "width": 260,
-          },
+          Array [
+            Object {
+              "borderColor": "#0c59cf",
+              "borderRadius": 4,
+              "borderWidth": 1,
+              "height": 30,
+              "justifyContent": "center",
+              "margin": 10,
+              "position": "absolute",
+              "top": 477,
+              "width": 260,
+            },
+            Object {
+              "backgroundColor": "#CCC",
+            },
+          ],
         ]
       }
       testID={undefined}
@@ -168,7 +172,8 @@ exports[`renders buscador correctly 1`] = `
         style={
           Object {
             "alignSelf": "center",
-            "color": "white",
+            "color": "#666",
+            "fontWeight": "bold",
           }
         }
       >
