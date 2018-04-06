@@ -17,6 +17,28 @@ export default class LogIn extends Component {
             password: ""
         };
     }
+
+    login() {
+        let nifnie = this.state.nifnie;
+        let password = this.state.password;
+            console.warn(nifnie);
+             console.warn(password);
+       /* if (nifnie == "") {
+
+        }
+        if (password = "") {
+        }*/
+    }
+
+    updateNifNie(value) {
+        this.setState({nifnie: value});
+    }
+
+    updatePassword(value) {
+        this.setState({password: value});
+    }
+
+
     render() {
         return (
             <View style = {styles.container}>
@@ -31,13 +53,18 @@ export default class LogIn extends Component {
                     </Image>
                     <TextInput style = {[styles.basicInput,{top: 386}]}
                                value = {this.state.nifnie}
-                               placeholder = {"Introduir nom NIF/NIE"}>
+                               placeholder = {"Introduir nom NIF/NIE"}
+                               onChangeText = {this.updateNifNie.bind(this)}>
                     </TextInput>
                     <TextInput style = {[styles.basicInput,{top: 428}]}
                                value = {this.state.password}
-                               placeholder = {"Introduir contrasenya"}>
+                               placeholder = {"Introduir contrasenya"}
+                               onChangeText = {this.updatePassword.bind(this)}>
                     </TextInput>
-                    <TouchableHighlight style = {styles.button}>
+                    <TouchableHighlight
+                        style = {styles.button}
+                        onPress = {this.login.bind(this)}
+                        disabled = {true}>
                         <Text style = {{alignSelf: 'center', color: 'white'}}>
                             Entra
                         </Text>
@@ -53,7 +80,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
     },
     imageBackground: {
         width: '100%',

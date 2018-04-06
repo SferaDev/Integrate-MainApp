@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders buscador correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "center",
+        "height": "100%",
+        "width": "100%",
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../Images/bg.jpg",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "height": "100%",
+            "width": "100%",
+          },
+          undefined,
+        ]
+      }
+    />
+    <Image
+      source={
+        Object {
+          "testUri": "../../../Images/ic_launcher.png",
+        }
+      }
+      style={
+        Object {
+          "height": 200,
+          "position": "absolute",
+          "top": 63,
+          "width": 200,
+        }
+      }
+    />
+    <Image
+      source={
+        Object {
+          "testUri": "../../../Images/integrateHeader1.png",
+        }
+      }
+      style={
+        Object {
+          "height": 58,
+          "position": "absolute",
+          "top": 276,
+          "width": 293,
+        }
+      }
+    />
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      placeholder="Introduir nom NIF/NIE"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "white",
+            "borderColor": "#0c59cf",
+            "borderRadius": 2,
+            "borderWidth": 1,
+            "height": 30,
+            "justifyContent": "center",
+            "margin": 10,
+            "paddingLeft": 5,
+            "position": "absolute",
+            "width": 260,
+          },
+          Object {
+            "top": 386,
+          },
+        ]
+      }
+      value=""
+    />
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      placeholder="Introduir contrasenya"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "white",
+            "borderColor": "#0c59cf",
+            "borderRadius": 2,
+            "borderWidth": 1,
+            "height": 30,
+            "justifyContent": "center",
+            "margin": 10,
+            "paddingLeft": 5,
+            "position": "absolute",
+            "width": 260,
+          },
+          Object {
+            "top": 428,
+          },
+        ]
+      }
+      value=""
+    />
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+          },
+          Object {
+            "backgroundColor": "#094671",
+            "borderColor": "#0c59cf",
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "height": 30,
+            "justifyContent": "center",
+            "margin": 10,
+            "position": "absolute",
+            "top": 477,
+            "width": 260,
+          },
+        ]
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "white",
+          }
+        }
+      >
+        Entra
+      </Text>
+    </View>
+  </View>
+</View>
+`;
