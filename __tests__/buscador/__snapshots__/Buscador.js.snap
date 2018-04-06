@@ -67,7 +67,106 @@ exports[`renders buscador correctly 1`] = `
         "width": "100%",
       }
     }
-  />
+  >
+    <View
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
+              "backgroundColor": "red",
+              "borderRadius": 15,
+              "bottom": 15,
+              "height": 30,
+              "left": 15,
+              "position": "absolute",
+              "width": 30,
+            },
+          ]
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          NO
+        </Text>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
+              "backgroundColor": "red",
+              "borderRadius": 22.5,
+              "bottom": 15,
+              "height": 45,
+              "position": "absolute",
+              "right": 15,
+              "width": 45,
+            },
+          ]
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          ME
+        </Text>
+      </View>
+    </View>
+  </View>
   <View
     style={
       Object {
@@ -115,99 +214,14 @@ exports[`renders buscador correctly 1`] = `
     </Text>
     <TextInput
       allowFontScaling={true}
-      placeholder="HELLO"
+      editable={false}
+      placeholder="Search"
       style={
         Object {
           "flex": 18,
         }
       }
     />
-  </View>
-  <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
-    accessible={true}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
-    isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Array [
-        Object {
-          "backgroundColor": "transparent",
-        },
-        Object {
-          "backgroundColor": "red",
-          "borderRadius": 15,
-          "bottom": 115,
-          "height": 30,
-          "left": 15,
-          "position": "absolute",
-          "width": 30,
-        },
-      ]
-    }
-    testID={undefined}
-    tvParallaxProperties={undefined}
-  >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      C
-    </Text>
-  </View>
-  <View
-    accessibilityComponentType={undefined}
-    accessibilityLabel={undefined}
-    accessibilityTraits={undefined}
-    accessible={true}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
-    isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Array [
-        Object {
-          "backgroundColor": "transparent",
-        },
-        Object {
-          "backgroundColor": "red",
-          "borderRadius": 22.5,
-          "bottom": 115,
-          "height": 45,
-          "position": "absolute",
-          "right": 15,
-          "width": 45,
-        },
-      ]
-    }
-    testID={undefined}
-    tvParallaxProperties={undefined}
-  >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      C
-    </Text>
   </View>
 </View>
 `;

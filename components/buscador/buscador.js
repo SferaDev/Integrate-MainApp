@@ -17,7 +17,7 @@ export default class Buscador extends Component {
   }
 
   openMenu(){
-    this.props.navigation.navigate('DrawerOpen')
+    this.props.navigation.navigate('DrawerOpen');
   }
 
   render() {
@@ -38,14 +38,8 @@ export default class Buscador extends Component {
 
         <View style={{position: 'absolute', top: 75, alignSelf: 'center', width: 345, height: 35, backgroundColor: 'white',borderRadius: 5,display: 'flex',flexDirection: 'row'}} >
           <Text style={{flex: 2,textAlign: 'center',alignSelf: 'center'}} >Q</Text>
-          <TextInput style={{flex: 18}} placeholder="HELLO" />
+          <TextInput style={{flex: 18}} placeholder="Search" editable={false} />
         </View>
-        <TouchableHighlight style={{position: 'absolute', bottom: 115, left: 15, height: 30, width: 30, borderRadius: 15, backgroundColor: 'red'}} >
-          <Text>C</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={{position: 'absolute', bottom: 115, right: 15, height: 45, width: 45, borderRadius: 22.5, backgroundColor: 'red'}} >
-          <Text>C</Text>
-        </TouchableHighlight>
       </View>
     );
   }

@@ -17,7 +17,7 @@ test('renders buscador correctly', () => {
 });
 
 configure({ adapter: new Adapter() });
-it('should be handling checkboxChecked', () => {
+it('openMenu is callable and returns nothing', () => {
 	const wrapper = shallow(<Buscador navigation={navigation} />);
 	expect(wrapper.instance().openMenu()).toBe(undefined);
 });
