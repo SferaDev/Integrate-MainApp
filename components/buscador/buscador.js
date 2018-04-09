@@ -15,8 +15,26 @@ export default class Buscador extends Component {
   constructor(props){
     super(props);
     this.state = {
-      isListView: false
+      isListView: false,
+      entities: []
     };
+  }
+
+  componentDidMount(){
+    this.getEntities();
+  }
+
+  getEntities(){
+      let entities = [
+        {coords: {latitude: 0,longitude: 0},id:1},
+        {coords: {latitude: 0,longitude: 0},id:2},
+        {coords: {latitude: 0,longitude: 0},id:3},
+        {coords: {latitude: 0,longitude: 0},id:4},
+        {coords: {latitude: 0,longitude: 0},id:5},
+        {coords: {latitude: 0,longitude: 0},id:6}
+      ];
+      this.setState({entities: entities});
+      return entities;
   }
 
   openMenu(){
@@ -41,9 +59,9 @@ export default class Buscador extends Component {
         <View style={{flex: 8,justifyContent: 'center', alignItems: 'center', backgroundColor: '#F5FCFF',width: '100%',height: '100%'}} >
           {
             this.state.isListView ?
-              <EntityList entities={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]} />
+              <EntityList entities={this.state.entities} />
               :
-              <Maps />
+              <Maps entities={this.state.entities} />
           }
         </View>
         <View style={{height: 100}}>

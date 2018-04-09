@@ -26,3 +26,9 @@ it('switchView is callable and returns nothing', () => {
 	const wrapper = shallow(<Buscador navigation={navigation} />);
 	expect(wrapper.instance().switchView()).toBe(undefined);
 });
+
+it('getEntities is callable and returns an array', () => {
+	const wrapper = shallow(<Buscador navigation={navigation} />);
+	let entities = wrapper.instance().getEntities();
+	expect(typeof entities).toBe("object");
+});

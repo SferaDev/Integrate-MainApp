@@ -11,7 +11,7 @@ import Maps from '../../components/buscador/maps';
 
 jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
 test('renders maps correctly', () => {
-  const tree = renderer.create(<Maps />).toJSON();
+  const tree = renderer.create(<Maps entities={[]} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -26,13 +26,13 @@ it('goToMe is callable and returns nothing', () => {
 	global.navigator = {};
 	global.navigator.geolocation = mockGeolocation;
 
-	const wrapper = shallow(<Maps />);
+	const wrapper = shallow(<Maps entities={[]} />);
 	expect(wrapper.instance().goToMe()).toBe(undefined);
 });
 
 it('mapAnimateToMe is callable and returns nothing', () => {
 
-	const wrapper = shallow(<Maps />);
+	const wrapper = shallow(<Maps entities={[]} />);
 
 	let instance = wrapper.instance();
 	instance.map = { animateToRegion: jest.fn() };
@@ -41,7 +41,7 @@ it('mapAnimateToMe is callable and returns nothing', () => {
 
 it('pointNorth is callable and returns nothing', () => {
 
-	const wrapper = shallow(<Maps />);
+	const wrapper = shallow(<Maps entities={[]} />);
 
 	let instance = wrapper.instance();
 	instance.map = { animateToBearing: jest.fn() };

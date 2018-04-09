@@ -5,7 +5,7 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 
 export default class Maps extends Component {
 
@@ -29,7 +29,14 @@ export default class Maps extends Component {
     navigator.geolocation.getCurrentPosition(this.mapAnimateToMe.bind(this));
   }
 
+  renderMarker(e){
+    return(<Marker key={e.id} identifier={e.id} title="F" tpye="d" coordinate={e.coords} pinColor="red" />);
+  }
+
   render() {
+
+    let entityList = this.props.entities.map(this.renderMarker);
+
     return (
       <View style={{...StyleSheet.absoluteFillObject}} >
         <MapView
@@ -46,7 +53,9 @@ export default class Maps extends Component {
           showsMyLocationButton={false}
           showsCompass={false}
           style={{...StyleSheet.absoluteFillObject,paddingTop: 100}}
-        />
+        >
+          {entityList}
+        </MapView>
         <TouchableHighlight 
           underlayColor="rgba(0,0,0,0.3)"
           style={styles.pointNorth} 

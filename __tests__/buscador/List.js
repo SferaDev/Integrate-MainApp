@@ -16,5 +16,5 @@ configure({ adapter: new Adapter() });
 it('renderEntity renders an entity correctly', () => {
 
 	const wrapper = shallow(<EntityList entities={[]} />);
-	expect(wrapper.instance().renderEntity(1)).toMatchSnapshot();
+	expect(wrapper.instance().renderEntity({item: {id: 1}})).toMatchSnapshot();
 });
