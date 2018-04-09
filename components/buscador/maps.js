@@ -48,12 +48,14 @@ export default class Maps extends Component {
           style={{...StyleSheet.absoluteFillObject,paddingTop: 100}}
         />
         <TouchableHighlight 
+          underlayColor="rgba(0,0,0,0.3)"
           style={styles.pointNorth} 
           onPress={this.pointNorth.bind(this)}
         >
           <Text>NO</Text>
         </TouchableHighlight>
         <TouchableHighlight 
+          underlayColor="rgba(0,0,0,0.3)"
           style={styles.goToMeButton} 
           onPress={this.goToMe.bind(this)}
         >
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
     height: 30, 
     width: 30, 
     borderRadius: 15, 
-    backgroundColor: 'red'
+    backgroundColor: 'red',
   },
   goToMeButton:{
     position: 'absolute', 

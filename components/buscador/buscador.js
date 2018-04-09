@@ -8,16 +8,25 @@ import {
   TouchableHighlight
 } from 'react-native';
 import Maps from './maps';
+import EntityList from './list';
 
 export default class Buscador extends Component {
 
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {
+      isListView: false
+    };
   }
 
   openMenu(){
     this.props.navigation.navigate('DrawerOpen');
+  }
+
+  switchView(){
+    let isListView = this.state.isListView;
+    isListView = !isListView;
+    this.setState({isListView: isListView});
   }
 
   render() {
@@ -27,16 +36,21 @@ export default class Buscador extends Component {
       <View style={styles.container}>
         <View style={styles.header}>
           <Text onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} >MENU</Text>
-          <Text style={styles.headerRightIco} >LIST</Text>
+          <Text onPress={this.switchView.bind(this)}  style={styles.headerRightIco} >LIST</Text>
         </View>
         <View style={{flex: 8,justifyContent: 'center', alignItems: 'center', backgroundColor: '#F5FCFF',width: '100%',height: '100%'}} >
-          <Maps />
+          {
+            this.state.isListView ?
+              <EntityList entities={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]} />
+              :
+              <Maps />
+          }
         </View>
         <View style={{height: 100}}>
           <Text onPress={this.openMenu.bind(this)}>Menu</Text>
         </View>
 
-        <View style={{position: 'absolute', top: 75, alignSelf: 'center', width: 345, height: 35, backgroundColor: 'white',borderRadius: 5,display: 'flex',flexDirection: 'row'}} >
+        <View style={styles.searchBox} >
           <Text style={{flex: 2,textAlign: 'center',alignSelf: 'center'}} >Q</Text>
           <TextInput style={{flex: 18}} placeholder="Search" editable={false} />
         </View>
@@ -72,5 +86,19 @@ const styles = StyleSheet.create({
    paddingRight: 20, 
    textAlign: 'right', 
    color: 'white' 
+  },
+  searchBox:{
+    position: 'absolute', 
+    top: 75, 
+    alignSelf: 'center', 
+    width: 345, 
+    height: 37, 
+    backgroundColor: 'white',
+    borderRadius: 5,
+    borderColor: '#ccc', 
+    borderStyle:"solid",
+    borderWidth:1,
+    display: 'flex',
+    flexDirection: 'row',
   }
 });

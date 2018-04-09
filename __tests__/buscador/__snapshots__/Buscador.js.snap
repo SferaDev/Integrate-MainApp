@@ -43,6 +43,7 @@ exports[`renders buscador correctly 1`] = `
       accessible={true}
       allowFontScaling={true}
       ellipsizeMode="tail"
+      onPress={[Function]}
       style={
         Object {
           "alignSelf": "center",
@@ -188,10 +189,13 @@ exports[`renders buscador correctly 1`] = `
       Object {
         "alignSelf": "center",
         "backgroundColor": "white",
+        "borderColor": "#ccc",
         "borderRadius": 5,
+        "borderStyle": "solid",
+        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
-        "height": 35,
+        "height": 37,
         "position": "absolute",
         "top": 75,
         "width": 345,

@@ -21,3 +21,8 @@ it('openMenu is callable and returns nothing', () => {
 	const wrapper = shallow(<Buscador navigation={navigation} />);
 	expect(wrapper.instance().openMenu()).toBe(undefined);
 });
+
+it('switchView is callable and returns nothing', () => {
+	const wrapper = shallow(<Buscador navigation={navigation} />);
+	expect(wrapper.instance().switchView()).toBe(undefined);
+});
