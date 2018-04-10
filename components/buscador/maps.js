@@ -28,6 +28,7 @@ export default class Maps extends Component {
   mapAnimateToMe(loc){
 
     this.setState({location: {lat: loc.coords.latitude, long: loc.coords.longitude}});
+    this.map.animateToRegion({latitude: loc.coords.latitude, longitude: loc.coords.longitude, latitudeDelta: 0.01,longitudeDelta: 0.01});
   }
 
   pointNorth(e){
@@ -35,8 +36,8 @@ export default class Maps extends Component {
     this.map.animateToBearing(0);
   }
 
-  goToMe(e){
-    navigator.geolocation.getCurrentPosition(this.mapAnimateToMe.bind(this));
+  goToMe(){
+    navigator.geolocation.getCurrentPosition(this.mapAnimateToMe.bind(this),()=>{});
   }
 
   renderMarker(e){
