@@ -26,11 +26,13 @@ export default class Maps extends Component {
   }
 
   goToMe(e){
+    
     navigator.geolocation.getCurrentPosition(this.mapAnimateToMe.bind(this));
   }
 
   renderMarker(e){
-    return(<Marker key={e.id} identifier={e.id} title="F" tpye="d" coordinate={e.coords} pinColor="red" />);
+
+    return(<Marker key={e.id} identifier={''+e.id+''} title="F" tpye="d" coordinate={e.coords} pinColor="red" />);
   }
 
   render() {
