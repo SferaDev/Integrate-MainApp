@@ -7,7 +7,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import LogIn from '../../components/login/login';
 
-test('renders buscador correctly', () => {
+test('renders Login correctly', () => {
     const tree = renderer.create(<LogIn/>).toJSON();
     expect(tree).toMatchSnapshot();
 });
@@ -35,7 +35,6 @@ it('updateError() is callable and returns nothing', () => {
 });
 
 describe("isEmpty() tests",() => {
-
     const wrapper = shallow(<LogIn/>);
     let instance = wrapper.instance();
 
@@ -62,5 +61,19 @@ describe("isEmpty() tests",() => {
         instance.state.password = 'QWERTY1234';
         expect(wrapper.instance().isEmpty()).toBe(false);
     });
+});
 
+it('moveUp() is callable and returns nothing', () => {
+    const wrapper = shallow(<LogIn/>);
+    expect(wrapper.instance().moveUp()).toBe(undefined);
+});
+
+it('moveDown() is callable and returns nothing', () => {
+    const wrapper = shallow(<LogIn/>);
+    expect(wrapper.instance().moveDown()).toBe(undefined);
+});
+
+it('componentWillUnmount() is callable and returns nothing', () => {
+    const wrapper = shallow(<LogIn/>);
+    expect(wrapper.instance().componentWillUnmount()).toBe(undefined);
 });

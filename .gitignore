@@ -57,3 +57,6 @@ coverage/
 
 # TESTS Snaps
 __tests__/**/__snapshots__/
+
+#IOS
+ios/

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders buscador correctly 1`] = `
+exports[`renders Login correctly 1`] = `
 <View
   style={
     Object {
@@ -16,6 +16,7 @@ exports[`renders buscador correctly 1`] = `
         "alignItems": "center",
         "alignSelf": "center",
         "height": "100%",
+        "paddingTop": 63,
         "width": "100%",
       }
     }
@@ -43,142 +44,153 @@ exports[`renders buscador correctly 1`] = `
         ]
       }
     />
-    <Image
-      source={
-        Object {
-          "testUri": "../../../Images/ic_launcher.png",
-        }
-      }
-      style={
-        Object {
-          "height": 200,
-          "position": "absolute",
-          "top": 63,
-          "width": 200,
-        }
-      }
-    />
-    <Image
-      source={
-        Object {
-          "testUri": "../../../Images/integrateHeader1.png",
-        }
-      }
-      style={
-        Object {
-          "height": 58,
-          "position": "absolute",
-          "top": 276,
-          "width": 293,
-        }
-      }
-    />
-    <TextInput
-      allowFontScaling={true}
-      onChangeText={[Function]}
-      placeholder="Introduir nom NIF/NIE"
-      style={
-        Array [
-          Object {
-            "backgroundColor": "white",
-            "borderColor": "#0c59cf",
-            "borderRadius": 2,
-            "borderWidth": 1,
-            "height": 30,
-            "justifyContent": "center",
-            "margin": 10,
-            "paddingLeft": 5,
-            "position": "absolute",
-            "width": 260,
-          },
-          Object {
-            "top": 386,
-          },
-        ]
-      }
-      value=""
-    />
-    <TextInput
-      allowFontScaling={true}
-      onChangeText={[Function]}
-      placeholder="Introduir contrasenya"
-      style={
-        Array [
-          Object {
-            "backgroundColor": "white",
-            "borderColor": "#0c59cf",
-            "borderRadius": 2,
-            "borderWidth": 1,
-            "height": 30,
-            "justifyContent": "center",
-            "margin": 10,
-            "paddingLeft": 5,
-            "position": "absolute",
-            "width": 260,
-          },
-          Object {
-            "top": 428,
-          },
-        ]
-      }
-      value=""
-    />
     <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
-      accessible={true}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      nativeID={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-          },
-          Array [
-            Object {
-              "borderColor": "#0c59cf",
-              "borderRadius": 4,
-              "borderWidth": 1,
-              "height": 30,
-              "justifyContent": "center",
-              "margin": 10,
-              "position": "absolute",
-              "top": 477,
-              "width": 260,
-            },
-            Object {
-              "backgroundColor": "#CCC",
-            },
-          ],
-        ]
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+        }
       }
-      testID={undefined}
-      tvParallaxProperties={undefined}
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
+      <Image
+        source={
           Object {
-            "alignSelf": "center",
-            "color": "#666",
-            "fontWeight": "bold",
+            "testUri": "../../../Images/ic_launcher.png",
           }
         }
+        style={
+          Object {
+            "height": 200,
+            "width": 200,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../Images/integrateHeader1.png",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "height": 58,
+              "width": 293,
+            },
+            Object {
+              "marginBottom": 20,
+              "marginTop": 10,
+            },
+          ]
+        }
+      />
+      <TextInput
+        allowFontScaling={true}
+        onChangeText={[Function]}
+        placeholder="Introduir nom NIF/NIE"
+        style={
+          Array [
+            Object {
+              "backgroundColor": "white",
+              "borderColor": "#0c59cf",
+              "borderRadius": 2,
+              "borderWidth": 1,
+              "height": 35,
+              "justifyContent": "center",
+              "margin": 10,
+              "paddingLeft": 5,
+              "width": 260,
+            },
+          ]
+        }
+        value=""
+      />
+      <TextInput
+        allowFontScaling={true}
+        onChangeText={[Function]}
+        placeholder="Introduir contrasenya"
+        secureTextEntry={true}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "white",
+              "borderColor": "#0c59cf",
+              "borderRadius": 2,
+              "borderWidth": 1,
+              "height": 35,
+              "justifyContent": "center",
+              "margin": 10,
+              "paddingLeft": 5,
+              "width": 260,
+            },
+          ]
+        }
+        value=""
+      />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+            },
+            Array [
+              Object {
+                "borderColor": "#0c59cf",
+                "borderRadius": 4,
+                "borderWidth": 1,
+                "height": 30,
+                "justifyContent": "center",
+                "margin": 10,
+                "width": 260,
+              },
+              Object {
+                "backgroundColor": "#CCC",
+              },
+            ],
+          ]
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
       >
-        Entra
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#666",
+              "fontWeight": "bold",
+            }
+          }
+        >
+          Entra
+        </Text>
+      </View>
     </View>
     <View
       style={
@@ -194,7 +206,7 @@ exports[`renders buscador correctly 1`] = `
             "top": 0,
           },
           Object {
-            "display": "flex",
+            "display": "none",
           },
         ]
       }
