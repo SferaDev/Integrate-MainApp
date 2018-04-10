@@ -15,10 +15,9 @@ export default class EntityList extends Component {
     this.state = {};
   }
 
-  renderEntity(e){
-    e = e.item;
+  renderEntity({item}){
     return(
-      <View key={e.id} style={styles.entityView} >
+      <View key={item.id} style={styles.entityView} >
         <Text style={styles.entityName} >Forn de Pa el Fornet</Text>
         <Text style={styles.entityDescription} >Pastisseria Les Corts</Text>
         <Text style={styles.entityAddress} >C/ Joan Güell, 25</Text>
@@ -30,11 +29,8 @@ export default class EntityList extends Component {
     );
   }
 
-  render() {
-
-    //const entityList = this.props.entities.map(this.renderEntity);
-
-    return (
+  render() { 
+   return (
       <View style={[{...StyleSheet.absoluteFillObject},{paddingTop: 60,backgroundColor: 'white'}]} >
         <FlatList  
           data={this.props.entities}

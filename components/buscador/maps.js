@@ -12,12 +12,22 @@ export default class Maps extends Component {
   constructor(props){
     super(props);
 
-    this.state = {};
+    this.state = {
+      location: {
+        lat: 0,
+        long: 0
+      },
+    };
+  }
+
+  componentDidMount(){
+
+    this.goToMe();
   }
 
   mapAnimateToMe(loc){
 
-    this.map.animateToRegion({latitude: loc.coords.latitude, longitude: loc.coords.longitude, latitudeDelta: 0.01,longitudeDelta: 0.01});
+    this.setState({location: {lat: loc.coords.latitude, long: loc.coords.longitude}});
   }
 
   pointNorth(e){
@@ -26,13 +36,11 @@ export default class Maps extends Component {
   }
 
   goToMe(e){
-    
     navigator.geolocation.getCurrentPosition(this.mapAnimateToMe.bind(this));
   }
 
   renderMarker(e){
-
-    return(<Marker key={e.id} identifier={''+e.id+''} title="F" tpye="d" coordinate={e.coords} pinColor="red" />);
+    return(<Marker key={e.id} identifier={''+e.id+''} coordinate={e.coords} pinColor="red" />);
   }
 
   render() {
@@ -44,8 +52,8 @@ export default class Maps extends Component {
         <MapView
           ref={ map => this.map = map }
           initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
+            latitude: this.state.location.lat,
+            longitude: this.state.location.long,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}

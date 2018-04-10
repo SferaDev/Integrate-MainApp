@@ -18,13 +18,7 @@ test('renders maps correctly', () => {
 configure({ adapter: new Adapter() });
 it('goToMe is callable and returns nothing', () => {
 
-	const mockGeolocation = {
-	  getCurrentPosition: jest.fn(),
-	  watchPosition: jest.fn()
-	};
-
-	global.navigator = {};
-	global.navigator.geolocation = mockGeolocation;
+	
 
 	const wrapper = shallow(<Maps entities={[]} />);
 	expect(wrapper.instance().goToMe()).toBe(undefined);
