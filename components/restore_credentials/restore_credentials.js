@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {
-    Platform,
     StyleSheet,
     Text,
     View,
-    Button,
     TextInput,
-    TouchableHighlight
+    TouchableHighlight,
+    ImageBackground
 } from 'react-native';
 
 export default class RestoreCredentials extends Component {
@@ -27,37 +26,36 @@ export default class RestoreCredentials extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.basicText}>
-                    Recuperar credencials:
-                </Text>
+                <ImageBackground
+                    style={styles.imageBackground}
+                    source={require('../../Images/bg.jpg')}>
 
-                <TextInput style={styles.basicInput}
-                           value={this.state.text}
-                           placeholder="NIE/NIF"
-                           onChangeText={this.updateText.bind(this)}>
-                </TextInput>
+                    <Text style={styles.basicText}>
+                        Recuperar credencials:
+                    </Text>
 
-                <TouchableHighlight style={styles.button}
-                                    onPress={this.buttonPressed.bind(this)}
-                                     >
-                    <Text style={{color:'white'}}>OK</Text>
-                </TouchableHighlight>
+                    <TextInput style={styles.basicInput}
+                               value={this.state.text}
+                               placeholder="NIE/NIF"
+                               onChangeText={this.updateText.bind(this)}>
+                    </TextInput>
+
+                    <TouchableHighlight style={styles.buttonStyle}
+                                        onPress={this.buttonPressed.bind(this)}>
+                        <Text style={{color:'white'}}>OK</Text>
+                    </TouchableHighlight>
+                </ImageBackground>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
+    imageBackground: {
+        width: '100%',
+        height: '100%',
+        alignSelf: 'center',
         alignItems: 'center',
-        backgroundColor: '#F4F3F2',
-    },
-    basicText: {
-        fontFamily: 'Helvetica',
-        fontSize: 20,
-        margin: 10,
     },
     basicInput: {
         borderWidth:1,
@@ -70,15 +68,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 10,
     },
-    button: {
+    buttonStyle: {
         borderWidth:1,
         borderColor: '#0c59cf',
-        backgroundColor:'#094671',
+        backgroundColor: '#094671',
         width:260,
         height:30,
         borderRadius:4,
         justifyContent: 'center',
         alignItems: 'center',
         margin:10,
+    },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F4F3F2',
+    },
+    basicText: {
+        fontFamily: 'Helvetica',
+        fontSize: 20,
+        margin: 10,
     }
 });
