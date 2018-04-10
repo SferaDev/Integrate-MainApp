@@ -18,7 +18,7 @@ export default class LogIn extends Component {
         this.state = {
             nifnie: "",
             password: "",
-            error: false,
+            error: true,
         };
     }
 
@@ -27,6 +27,7 @@ export default class LogIn extends Component {
         let password = this.state.password;
             console.warn(nifnie);
             console.warn(password);
+        this.setState({error: true})
     }
 
     updateNifNie(value) {
@@ -37,9 +38,17 @@ export default class LogIn extends Component {
         this.setState({password: value});
     }
 
+    updateError() {
+        this.setState({error: false})
+    }
+
+    isEmpty() {
+        return (this.state.nifnie.length == 0 || this.state.password.length == 0)
+    }
+
 
     render() {
-        let emptyfields = (this.state.nifnie.length == 0 || this.state.password.length == 0);
+        
         return (
             <View style = {styles.container}>
                 <ImageBackground
@@ -62,14 +71,15 @@ export default class LogIn extends Component {
                                onChangeText = {this.updatePassword.bind(this)}>
                     </TextInput>
                     <TouchableHighlight
-                        style = {[styles.button, {backgroundColor: (emptyfields) ? '#CCC' : '#094671'}]}
+                        style = {[styles.button, {backgroundColor: (this.isEmpty.bind(this)) ? '#CCC' : '#094671'}]}
                         onPress = {this.login.bind(this)}
-                        disabled = {emptyfields}>
-                        <Text style = {{alignSelf: 'center', color: (emptyfields) ? '#666' : 'white', fontWeight: 'bold' }}>
+                        disabled = {this.isEmpty.bind(this) ? true : false}>
+                        <Text style = {{alignSelf: 'center', color: (this.isEmpty.bind(this)) ? '#666' : 'white', fontWeight: 'bold' }}>
                             Entra
                         </Text>
                     </TouchableHighlight>
-                    <Toast visible = {this.state.error}/>
+                    <Toast visible = {this.state.error}
+                        onClose = {this.updateError.bind(this)}/>
 
                 </ImageBackground>
             </View>

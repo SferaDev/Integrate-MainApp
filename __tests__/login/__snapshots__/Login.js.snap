@@ -184,26 +184,102 @@ exports[`renders buscador correctly 1`] = `
       style={
         Array [
           Object {
-            "backgroundColor": "red",
-            "height": "100%",
+            "backgroundColor": "rgba(0,0,0,0.40)",
+            "bottom": 0,
+            "justifyContent": "center",
             "left": 0,
+            "padding": 20,
             "position": "absolute",
+            "right": 0,
             "top": 0,
-            "width": "100%",
           },
           Object {
-            "display": "none",
+            "display": "flex",
           },
         ]
       }
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
+      <View
+        style={
+          Object {
+            "backgroundColor": "white",
+            "padding": 10,
+          }
+        }
       >
-        Toaast
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "fontWeight": "bold",
+              "textAlign": "center",
+            }
+          }
+        >
+          El Nie / Nif o la contrasenya són incorrectes
+        </Text>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "#67ACB1",
+                "borderColor": "#094671",
+                "borderRadius": 4,
+                "borderWidth": 3,
+                "display": "flex",
+                "flexDirection": "column",
+                "height": 40,
+                "justifyContent": "center",
+                "margin": 10,
+                "width": 100,
+              },
+            ]
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "fontWeight": "bold",
+                  "textAlign": "center",
+                },
+                Object {
+                  "color": "#094671",
+                  "fontWeight": "bold",
+                },
+              ]
+            }
+          >
+            CLOSE
+          </Text>
+        </View>
+      </View>
     </View>
   </View>
 </View>
