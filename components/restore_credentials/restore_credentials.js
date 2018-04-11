@@ -15,34 +15,39 @@ export default class RestoreCredentials extends Component {
     }
 
     updateText(value){
-        this.setState({text: value})
+        this.setState({nifnie: value})
     }
 
     buttonPressed() {
-        console.log("Ive been pressed")
-
+        let nifnie = this.state.nifnie;
+        console.log(nifnie);
     }
 
     render() {
+        let emptyfield = (this.state.nifnie.length == 0);
         return (
             <View style={styles.container}>
                 <ImageBackground
                     style={styles.imageBackground}
                     source={require('../../Images/bg.jpg')}>
 
-                    <Text style={styles.basicText}>
+                    <Text style={styles.basicTitle}>
                         Recuperar credencials:
                     </Text>
 
                     <TextInput style={styles.basicInput}
-                               value={this.state.text}
                                placeholder="NIE/NIF"
+                               value={this.state.nifNie}
                                onChangeText={this.updateText.bind(this)}>
                     </TextInput>
 
-                    <TouchableHighlight style={styles.buttonStyle}
-                                        onPress={this.buttonPressed.bind(this)}>
-                        <Text style={{color:'white'}}>OK</Text>
+                    <TouchableHighlight style={[styles.buttonStyle, {backgroundColor: (emptyfield) ? '#CCC' : '#094671'}]}
+                                        onPress={this.buttonPressed.bind(this)}
+                                        disabled = {emptyfield}>
+
+                        <Text style={{alignSelf: 'center', color: (emptyfield) ? '#666' : 'white', fontWeight: 'bold' }}>
+                            Sol·licitar
+                        </Text>
                     </TouchableHighlight>
                 </ImageBackground>
             </View>
@@ -62,7 +67,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
     },
-    basicText: {
+    basicTitle: {
         fontFamily: 'Helvetica',
         fontSize: 20,
         margin: 10,
@@ -88,7 +93,6 @@ const styles = StyleSheet.create({
     buttonStyle: {
         borderWidth:1,
         borderColor: '#0c59cf',
-        backgroundColor: '#094671',
         width: 260,
         height: 30,
         borderRadius:4,
