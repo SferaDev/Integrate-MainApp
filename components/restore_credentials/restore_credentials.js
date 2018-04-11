@@ -11,7 +11,7 @@ import {
 export default class RestoreCredentials extends Component {
     constructor(props){
         super(props);
-        this.state = {value:""};
+        this.state = {nifnie:""};
     }
 
     updateText(value){
@@ -51,43 +51,51 @@ export default class RestoreCredentials extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     imageBackground: {
         width: '100%',
         height: '100%',
         alignSelf: 'center',
         alignItems: 'center',
     },
+    basicText: {
+        fontFamily: 'Helvetica',
+        fontSize: 20,
+        margin: 10,
+        top: 230,
+        backgroundColor:'transparent',
+        textAlign:'center',
+        fontWeight: 'bold',
+    },
     basicInput: {
         borderWidth:1,
         borderColor: '#0c59cf',
         backgroundColor:'white',
-        height: 30,
         width: 260,
+        height: 30,
         borderRadius:2,
         justifyContent: 'center',
-        alignItems: 'center',
+        position: 'absolute',
         margin: 10,
+        alignItems:'center',
+        paddingLeft:5,
+        top: 290,
     },
     buttonStyle: {
         borderWidth:1,
         borderColor: '#0c59cf',
         backgroundColor: '#094671',
-        width:260,
-        height:30,
+        width: 260,
+        height: 30,
         borderRadius:4,
         justifyContent: 'center',
-        alignItems: 'center',
+        position: 'absolute',
         margin:10,
-    },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F4F3F2',
+        top: 340,
     },
-    basicText: {
-        fontFamily: 'Helvetica',
-        fontSize: 20,
-        margin: 10,
-    }
 });
