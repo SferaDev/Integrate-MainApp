@@ -23,3 +23,24 @@ it('buttonPressed works correctly', () => {
     const wrapper = shallow(<RestoreCredentials/>);
     expect(wrapper.instance().buttonPressed()).toBe(undefined);
 });
+
+it('updateError() is callable and returns nothing', () => {
+    const wrapper = shallow(<RestoreCredentials/>);
+    expect(wrapper.instance().updateError()).toBe(undefined);
+});
+
+describe("isEmpty() tests",() => {
+
+    const wrapper = shallow(<RestoreCredentials/>);
+    let instance = wrapper.instance();
+
+    it('isEmpty() when NifNie is empty then returns true', () => {
+        instance.state.nifnie = '';
+        expect(wrapper.instance().isEmpty()).toBe(true);
+    });
+
+    it('isEmpty() when NifNie is filled then returns false', () => {
+        instance.state.nifnie = '123456789';
+        expect(wrapper.instance().isEmpty()).toBe(false);
+    });
+});
