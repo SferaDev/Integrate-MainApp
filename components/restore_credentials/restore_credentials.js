@@ -26,10 +26,18 @@ export default class RestoreCredentials extends Component {
     buttonPressed() {
         let nifnie = this.state.nifnie;
         console.log(nifnie);
+        this.setState({error: true})
+    }
+
+    updateError() {
+        this.setState({error: false})
+    }
+
+    isEmpty() {
+        return (this.state.nifnie.length == 0)
     }
 
     render() {
-        let emptyfield = (this.state.nifnie.length == 0);
         return (
             <View style={styles.container}>
                 <ImageBackground
@@ -46,15 +54,16 @@ export default class RestoreCredentials extends Component {
                                onChangeText={this.updateText.bind(this)}>
                     </TextInput>
 
-                    <TouchableHighlight style={[styles.buttonStyle, {backgroundColor: (emptyfield) ? '#CCC' : '#094671'}]}
+                    <TouchableHighlight style={[styles.buttonStyle, {backgroundColor: (this.state.nifnie.length == 0) ? '#CCC' : '#094671'}]}
                                         onPress={this.buttonPressed.bind(this)}
-                                        disabled = {emptyfield}>
+                                        disabled = {this.state.nifnie.length == 0 ? true : false}>
 
-                        <Text style={{alignSelf: 'center', color: (emptyfield) ? '#666' : 'white', fontWeight: 'bold' }}>
+                        <Text style={{alignSelf: 'center', color: (this.state.nifnie.length == 0) ? '#666' : 'white', fontWeight: 'bold' }}>
                             Sol·licitar
                         </Text>
                     </TouchableHighlight>
-                    <Toast visible = {this.state.error}/>
+                    <Toast visible = {this.state.error}
+                           onClose = {this.updateError.bind(this)}/>
                 </ImageBackground>
             </View>
         );
