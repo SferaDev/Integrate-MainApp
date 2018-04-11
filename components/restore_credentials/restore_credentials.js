@@ -8,10 +8,15 @@ import {
     ImageBackground
 } from 'react-native';
 
+import Toast from './toast';
+
 export default class RestoreCredentials extends Component {
     constructor(props){
         super(props);
-        this.state = {nifnie:""};
+        this.state = {
+            nifnie: "",
+            error: false,
+        };
     }
 
     updateText(value){
@@ -49,6 +54,7 @@ export default class RestoreCredentials extends Component {
                             Sol·licitar
                         </Text>
                     </TouchableHighlight>
+                    <Toast visible = {this.state.error}/>
                 </ImageBackground>
             </View>
         );
