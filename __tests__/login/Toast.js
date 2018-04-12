@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import Toast from '../../components/login/login';
 import {shallow} from "enzyme/build/index";
 
-test('renders Login correctly', () => {
+test('renders Toast correctly', () => {
     const tree = renderer.create(<Toast visible = {true} onClose={jest.fn()} />).toJSON();
     expect(tree).toMatchSnapshot();
 });

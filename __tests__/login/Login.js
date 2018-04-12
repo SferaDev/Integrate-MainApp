@@ -77,3 +77,9 @@ it('componentWillUnmount() is callable and returns nothing', () => {
     const wrapper = shallow(<LogIn/>);
     expect(wrapper.instance().componentWillUnmount()).toBe(undefined);
 });
+
+it('restorePassword() is callable and returns nothing', () => {
+    const wrapper = shallow(<LogIn/>);
+    expect(wrapper.instance().restorePassword()).toBe(undefined);
+});
+

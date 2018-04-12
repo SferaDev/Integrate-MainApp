@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import Toast from './toast';
+import API from '../api';
 
 export default class LogIn extends Component {
     constructor(props) {
@@ -35,9 +36,8 @@ export default class LogIn extends Component {
     login() {
         let nifnie = this.state.nifnie;
         let password = this.state.password;
-            //console.warn(nifnie);
-            //console.warn(password);
-        this.setState({error: true})
+        let that = this;
+        API.login(nifnie, password).then((s) => {console.warn(s)}).catch(() => {that.setState({error: true})});
     }
 
     updateNifNie(value) {
@@ -62,6 +62,10 @@ export default class LogIn extends Component {
 
     moveDown(){
         this.setState({isFieldFocused: false});
+    }
+
+    restorePassword() {
+        console.warn('Recuperar Contrasenya')
     }
 
     render() {
@@ -93,6 +97,10 @@ export default class LogIn extends Component {
                                    placeholder = {"Introduir contrasenya"}
                                    onChangeText = {this.updatePassword.bind(this)}>
                         </TextInput>
+                        <Text style = {styles.recuperarContrasenyaText}
+                                onPress = {this.restorePassword.bind(this)}>
+                                He oblidat la contrasenya?
+                        </Text>
                         <TouchableHighlight
                             style = {[styles.button, {backgroundColor: (ie) ? '#CCC' : '#094671'}]}
                             onPress = {this.login.bind(this)}
@@ -152,4 +160,8 @@ const styles = StyleSheet.create({
         width:293,
         height:58,
     },
+    recuperarContrasenyaText: {
+        textDecorationLine: 'underline',
+        backgroundColor: 'transparent'
+    }
 });
