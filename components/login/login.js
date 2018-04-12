@@ -19,7 +19,8 @@ export default class LogIn extends Component {
             nifnie: "",
             password: "",
             error: false,
-            isFieldFocused: false        };
+            isFieldFocused: false
+        };
     }
 
     componentDidMount(){
@@ -34,8 +35,8 @@ export default class LogIn extends Component {
     login() {
         let nifnie = this.state.nifnie;
         let password = this.state.password;
-            console.warn(nifnie);
-            console.warn(password);
+            //console.warn(nifnie);
+            //console.warn(password);
         this.setState({error: true})
     }
 
@@ -83,7 +84,7 @@ export default class LogIn extends Component {
                         </Image>
                         <TextInput style = {[styles.basicInput]}
                                    value = {this.state.nifnie}
-                                   placeholder = {"Introduir nom NIF/NIE"}
+                                   placeholder = {"Introduir NIF/NIE"}
                                    onChangeText = {this.updateNifNie.bind(this)}>
                         </TextInput>
                         <TextInput style = {[styles.basicInput]}
@@ -102,6 +103,7 @@ export default class LogIn extends Component {
                         </TouchableHighlight>
                     </View>
                     <Toast
+                        visible = {this.state.error}
                         onClose = {this.updateError.bind(this)}/>
                 </ImageBackground>
             </View>
