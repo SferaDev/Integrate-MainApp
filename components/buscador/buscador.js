@@ -5,10 +5,12 @@ import {
   View,
   Button,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  BackHandler
 } from 'react-native';
 import Maps from './maps';
 import EntityList from './list';
+import API from '../api';
 
 export default class Buscador extends Component {
 
@@ -22,20 +24,22 @@ export default class Buscador extends Component {
 
   componentDidMount(){
     this.getEntities();
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton(){
+    return true;
   }
 
   getEntities(){
-      let entities = [
-        {coords: {latitude: 0,longitude: 0},id:1},
-        {coords: {latitude: 0,longitude: 0},id:2},
-        {coords: {latitude: 0,longitude: 0},id:3},
-        {coords: {latitude: 0,longitude: 0},id:4},
-        {coords: {latitude: 0,longitude: 0},id:5},
-        {coords: {latitude: 0,longitude: 0},id:6}
-      ];
-      this.setState({entities: entities});
-      return entities;
+
+    let that = this;
+    API.getEntities().then( (entities) => { that.setState({entities: entities}); } ).catch( () => {} )
   }
+
+  /*showEntityInfo(ent){
+
+  }*/
 
   openMenu(){
     this.props.navigation.navigate('DrawerOpen');

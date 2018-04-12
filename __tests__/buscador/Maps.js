@@ -5,39 +5,74 @@ import renderer from 'react-test-renderer';
 import {configure,shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import mockMaps from '../../__mocks__/react-native-maps';
-
+import MapView, { Marker } from '../../__mocks__/react-native-maps';
 import Maps from '../../components/buscador/maps';
 
-jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
-test('renders maps correctly', () => {
-  const tree = renderer.create(<Maps entities={[]} />).toJSON();
-  expect(tree).toMatchSnapshot();
-});
+let wrapper;
+let instance;
 
-configure({ adapter: new Adapter() });
-it('goToMe is callable and returns nothing', () => {
+describe('Test group for Maps', function() {
 
-	
+	beforeAll(() => {
 
-	const wrapper = shallow(<Maps entities={[]} />);
-	expect(wrapper.instance().goToMe()).toBe(undefined);
-});
+		jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
+		configure({ adapter: new Adapter() });
+	});
 
-it('mapAnimateToMe is callable and returns nothing', () => {
+	beforeEach(function () {
+        // Before each: Shallows the Maps component
+        wrapper = shallow(<Maps entities={[]} />);
+        instance = wrapper.instance();
+    });
 
-	const wrapper = shallow(<Maps entities={[]} />);
+    afterEach(function () {
+        // After each: Clears the wrapper
+        wrapper = null;
+        instance = null;
+	});
 
-	let instance = wrapper.instance();
-	instance.map = { animateToRegion: jest.fn() };
-	expect(instance.mapAnimateToMe({coords: {latitude: 0,longitude:0,latitudeDelta:0,longitudeDelta:0}})).toBe(undefined);
-});
 
-it('pointNorth is callable and returns nothing', () => {
+    test('goToMe is callable and returns nothing', () => {
 
-	const wrapper = shallow(<Maps entities={[]} />);
+		const tree = renderer.create(<Maps entities={[]} />).toJSON();
+  		expect(tree).toMatchSnapshot();
+	});
 
-	let instance = wrapper.instance();
-	instance.map = { animateToBearing: jest.fn() };
-	expect(instance.pointNorth({coords: {latitude: 0,longitude:0,latitudeDelta:0,longitudeDelta:0}})).toBe(undefined);
+	test('goToMe is callable and returns nothing', () => {
+
+		expect(instance.goToMe()).toBe(undefined);
+	});
+
+	test('mapAnimateToMe is callable and returns nothing', () => {
+
+		instance.map = { animateToRegion: jest.fn() };
+		expect(instance.mapAnimateToMe({coords: {latitude: 0,longitude:0,latitudeDelta:0,longitudeDelta:0}})).toBe(undefined);
+	});
+
+	test('pointNorth is callable and returns nothing', () => {
+
+		instance.map = { animateToBearing: jest.fn() };
+		expect(instance.pointNorth({coords: {latitude: 0,longitude:0,latitudeDelta:0,longitudeDelta:0}})).toBe(undefined);
+	});
+
+	/*test('renderMarker returns a Marker well-rendered', () => {
+
+		let e = {	
+		        	id: 1,
+					nif: '12345678A',
+					salesmanFirstName: 'John',
+					salesmanLastName: 'Doe',
+					email: 'email@email.com',
+					name: 'UPC',
+					description: 'Universitat Politecnica de Catalunya',
+					addressName: 'C/ Jordi Girona',
+					addressLatitude: 41.391501,
+					addressLongitude: 2.113283,
+					phone: '963852741',
+					picture: ''
+				};
+
+		let marker = instance.renderMarker(e);
+		console.log(marker);
+	});*/
 });

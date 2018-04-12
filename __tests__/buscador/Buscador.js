@@ -7,28 +7,54 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import mockMaps from '../../__mocks__/react-native-maps';
 import Buscador from '../../components/buscador/buscador';
-
-jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
+import API from '../../__mocks__/api';
 
 const navigation = { navigate: jest.fn() };
-test('renders buscador correctly', () => {
-	const tree = renderer.create(<Buscador navigation={navigation} />).toJSON();
-	expect(tree).toMatchSnapshot();
-});
+let wrapper;
+let instance;
 
-configure({ adapter: new Adapter() });
-it('openMenu is callable and returns nothing', () => {
-	const wrapper = shallow(<Buscador navigation={navigation} />);
-	expect(wrapper.instance().openMenu()).toBe(undefined);
-});
+describe('Test group for EntityList', function() {
 
-it('switchView is callable and returns nothing', () => {
-	const wrapper = shallow(<Buscador navigation={navigation} />);
-	expect(wrapper.instance().switchView()).toBe(undefined);
-});
+	beforeAll(() => {
 
-it('getEntities is callable and returns an array', () => {
-	const wrapper = shallow(<Buscador navigation={navigation} />);
-	let entities = wrapper.instance().getEntities();
-	expect(typeof entities).toBe("object");
+		jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
+		configure({ adapter: new Adapter() });
+	});
+
+	beforeEach(function () {
+        // Before each: Shallows the EntityList component
+        wrapper = shallow(<Buscador navigation={navigation} />);
+        instance = wrapper.instance();
+    });
+
+    afterEach(function () {
+        // After each: Clears the wrapper
+        wrapper = null;
+        instance = null;
+	});
+
+    test('renders buscador correctly', () => {
+		const tree = renderer.create(<Buscador navigation={navigation} />).toJSON();
+		expect(tree).toMatchSnapshot();
+	});
+
+	test('openMenu is callable and returns nothing', () => {
+
+		expect(instance.openMenu()).toBe(undefined);
+	});
+
+	test('switchView is callable and returns nothing', () => {
+
+		expect(instance.switchView()).toBe(undefined);
+	});
+
+	test('getEntities is callable and returns an array', () => {
+
+		expect(instance.getEntities()).toBe(undefined);
+	});
+
+	test('handleBackButton is callable and returns true', () => {
+
+		expect(instance.handleBackButton()).toBe(true);
+	});
 });

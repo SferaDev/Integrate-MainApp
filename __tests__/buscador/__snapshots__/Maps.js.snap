@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders maps correctly 1`] = `
+exports[`Test group for Maps goToMe is callable and returns nothing 1`] = `
 <View
   style={
     Object {
@@ -12,6 +12,31 @@ exports[`renders maps correctly 1`] = `
     }
   }
 >
+  <View
+    followsUserLocation={true}
+    initialRegion={
+      Object {
+        "latitude": 0,
+        "latitudeDelta": 0.0922,
+        "longitude": 0,
+        "longitudeDelta": 0.0421,
+      }
+    }
+    showsCompass={false}
+    showsMyLocationButton={false}
+    showsPointsOfInterest={false}
+    showsUserLocation={true}
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "paddingTop": 100,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
   <View
     accessibilityComponentType={undefined}
     accessibilityLabel={undefined}

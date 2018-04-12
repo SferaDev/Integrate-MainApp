@@ -18,11 +18,11 @@ export default class EntityList extends Component {
   renderEntity({item}){
     return(
       <View key={item.id} style={styles.entityView} >
-        <Text style={styles.entityName} >Forn de Pa el Fornet</Text>
-        <Text style={styles.entityDescription} >Pastisseria Les Corts</Text>
-        <Text style={styles.entityAddress} >C/ Joan Güell, 25</Text>
+        <Text style={styles.entityName} >{item.name}</Text>
+        <Text style={styles.entityDescription} >{item.description}</Text>
+        <Text style={styles.entityAddress} >{item.addressName}</Text>
         <View style={styles.entityLikes} >
-          <Text>100</Text>
+          <Text>0</Text>
           <Text>TH</Text>
         </View>
       </View>

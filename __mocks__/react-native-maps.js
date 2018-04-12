@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View
+  View,Text
 } from 'react-native';
 
 const mockGeolocation = {
@@ -11,11 +11,20 @@ const mockGeolocation = {
 global.navigator = {};
 global.navigator.geolocation = mockGeolocation;
 
-export default class MapView extends React.Component {
+const Marker = class Marker extends React.Component {
 
-  static Marker = '';
+	render(){
+		return React.createElement(Text, this.props, this.props.children);
+	}
+}
+
+class MapView extends React.Component {
+
+  //static Marker = '';
 
   render() {
-    return (null);
+    return React.createElement(View, this.props, this.props.children);
   }
 }
+
+export default MapView;

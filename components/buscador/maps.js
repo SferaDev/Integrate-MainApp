@@ -41,7 +41,8 @@ export default class Maps extends Component {
   }
 
   renderMarker(e){
-    return(<Marker key={e.id} identifier={''+e.id+''} coordinate={e.coords} pinColor="red" />);
+    let coords = {latitude: e.addressLatitude, longitude: e.addressLongitude, latitudeDelta: 0.01,longitudeDelta: 0.01};
+    return (<Marker key={e.id} identifier={''+e.id+''} coordinate={coords} pinColor="red" />);
   }
 
   render() {
