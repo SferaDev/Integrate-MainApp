@@ -2,7 +2,7 @@ import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {configure,shallow} from 'enzyme';
+import {configure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import Home from '../components/home';
@@ -15,8 +15,8 @@ import Home from '../components/home';
 });*/
 jest.mock('react-navigation', () => require.requireActual('../__mocks__/react-navigation').default);
 
-configure({ adapter: new Adapter() });
+configure({adapter: new Adapter()});
 it('openMenu is callable and returns nothing', () => {
-	const tree = renderer.create(<Home />).toJSON();
-	expect(tree).toMatchSnapshot();
+    const tree = renderer.create(<Home/>).toJSON();
+    expect(tree).toMatchSnapshot();
 });

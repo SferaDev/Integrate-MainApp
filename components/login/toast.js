@@ -1,28 +1,22 @@
-import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    TouchableHighlight,
-    View
-} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 
 export default class Toast extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
 
     render() {
         return (
-            <View style = {[styles.toastback, {display: (this.props.visible) ? 'flex' : 'none'}]}>
-                <View style = {styles.toastcontent}>
-                    <Text style = {styles.text}>
+            <View style={[styles.toastback, {display: (this.props.visible) ? 'flex' : 'none'}]}>
+                <View style={styles.toastcontent}>
+                    <Text style={styles.text}>
                         El Nie / Nif o la contrasenya són incorrectes
                     </Text>
-                    <TouchableHighlight style = {styles.closeButton}
-                        onPress = {this.props.onClose}>
-                        <Text style = {[styles.text, {color: '#094671', fontWeight: 'bold'}]}>
+                    <TouchableHighlight style={styles.closeButton}
+                                        onPress={this.props.onClose}>
+                        <Text style={[styles.text, {color: '#094671', fontWeight: 'bold'}]}>
                             CLOSE
                         </Text>
                     </TouchableHighlight>
@@ -52,14 +46,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     closeButton: {
-        borderWidth:3,
+        borderWidth: 3,
         //borderColor: '#67ACB1',
         borderColor: '#094671',
-        width:100,
-        height:40,
-        borderRadius:4,
+        width: 100,
+        height: 40,
+        borderRadius: 4,
         alignSelf: 'center',
-        margin:10,
+        margin: 10,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

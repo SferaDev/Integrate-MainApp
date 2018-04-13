@@ -2,7 +2,7 @@ import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {configure,shallow} from 'enzyme';
+import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import EntityList from '../../components/buscador/list';
@@ -10,16 +10,16 @@ import EntityList from '../../components/buscador/list';
 let wrapper;
 let instance;
 
-describe('Test group for EntityList', function() {
+describe('Test group for EntityList', function () {
 
-	beforeAll(() => {
+    beforeAll(() => {
 
-		configure({ adapter: new Adapter() });
-	});
+        configure({adapter: new Adapter()});
+    });
 
-	beforeEach(function () {
+    beforeEach(function () {
         // Before each: Shallows the EntityList component
-        wrapper = shallow(<EntityList entities={[]} />);
+        wrapper = shallow(<EntityList entities={[]}/>);
         instance = wrapper.instance();
     });
 
@@ -27,16 +27,16 @@ describe('Test group for EntityList', function() {
         // After each: Clears the wrapper
         wrapper = null;
         instance = null;
-	});
+    });
 
     test('renders list correctly', () => {
-		const tree = renderer.create(<EntityList entities={[]} />).toJSON();
-		expect(tree).toMatchSnapshot();
-	});
+        const tree = renderer.create(<EntityList entities={[]}/>).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
 
-	test('renderEntity renders an entity correctly', () => {
+    test('renderEntity renders an entity correctly', () => {
 
-		expect(instance.renderEntity({item: {id: 1}})).toMatchSnapshot();
-	});
+        expect(instance.renderEntity({item: {id: 1}})).toMatchSnapshot();
+    });
 });
 
