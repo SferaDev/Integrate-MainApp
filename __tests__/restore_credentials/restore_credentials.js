@@ -3,6 +3,7 @@ import React from 'react';
 import RestoreCredentials from '../../components/restore_credentials/restore_credentials';
 import {configure,shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import API from '../../__mocks__/api';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
@@ -27,6 +28,11 @@ it('buttonPressed works correctly', () => {
 it('updateError() is callable and returns nothing', () => {
     const wrapper = shallow(<RestoreCredentials/>);
     expect(wrapper.instance().updateError()).toBe(undefined);
+});
+
+it('goToLogIn() is callable and returns nothing', () => {
+    const wrapper = shallow(<RestoreCredentials/>);
+    expect(wrapper.instance().goToLogIn()).toBe(undefined);
 });
 
 describe("isEmpty() tests",() => {

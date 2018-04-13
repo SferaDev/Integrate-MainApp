@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import Toast from './toast';
+import API from "../api";
 
 export default class RestoreCredentials extends Component {
     constructor(props){
@@ -27,6 +28,7 @@ export default class RestoreCredentials extends Component {
         let nifnie = this.state.nifnie;
         console.log(nifnie);
         this.setState({error: true})
+        API.Function().then( (string) => {console.warn(string)} );
     }
 
     updateError() {
@@ -37,31 +39,40 @@ export default class RestoreCredentials extends Component {
         return (this.state.nifnie.length == 0)
     }
 
+    goToLogIn() {
+        console.warn("Anem a la vista anterior");
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <ImageBackground
                     style={styles.imageBackground}
                     source={require('../../Images/bg.jpg')}>
-
-                    <Text style={styles.basicTitle}>
-                        Recuperar credencials:
-                    </Text>
-
-                    <TextInput style={styles.basicInput}
-                               placeholder="NIE/NIF"
-                               value={this.state.nifNie}
-                               onChangeText={this.updateText.bind(this)}>
-                    </TextInput>
-
-                    <TouchableHighlight style={[styles.buttonStyle, {backgroundColor: (this.state.nifnie.length == 0) ? '#CCC' : '#094671'}]}
-                                        onPress={this.buttonPressed.bind(this)}
-                                        disabled = {this.state.nifnie.length == 0 ? true : false}>
-
-                        <Text style={{alignSelf: 'center', color: (this.state.nifnie.length == 0) ? '#666' : 'white', fontWeight: 'bold' }}>
-                            Sol·licitar
+                    <View style={{display:'flex',alignItems: 'center'}} >
+                        <Text style={styles.basicTitle}>
+                            Recuperar credencials:
                         </Text>
-                    </TouchableHighlight>
+
+                        <TextInput style={styles.basicInput}
+                                   placeholder="NIE/NIF"
+                                   value={this.state.nifNie}
+                                   onChangeText={this.updateText.bind(this)}>
+                        </TextInput>
+
+                        <TouchableHighlight style={[styles.buttonStyle, {backgroundColor: (this.state.nifnie.length == 0) ? '#CCC' : '#094671'}]}
+                                            onPress={this.buttonPressed.bind(this)}
+                                            disabled = {this.state.nifnie.length == 0 ? true : false}>
+
+                            <Text style={{alignSelf: 'center', color: (this.state.nifnie.length == 0) ? '#666' : 'white', fontWeight: 'bold' }}>
+                                Sol·licitar
+                            </Text>
+                        </TouchableHighlight>
+                        <Text style = {styles.textGoToLogIn}
+                                onPress = {this.goToLogIn.bind(this)}>
+                                Enrera
+                        </Text>
+                    </View>
                     <Toast visible = {this.state.error}
                            onClose = {this.updateError.bind(this)}/>
                 </ImageBackground>
@@ -90,6 +101,7 @@ const styles = StyleSheet.create({
         backgroundColor:'transparent',
         textAlign:'center',
         fontWeight: 'bold',
+        justifyContent: 'center',
     },
     basicInput: {
         borderWidth:1,
@@ -117,4 +129,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         top: 340,
     },
+    textGoToLogIn: {
+        textDecorationLine: 'underline',
+        backgroundColor: 'transparent',
+        top: 360,
+    }
 });
