@@ -9,15 +9,15 @@ it('mock', () => {
 });
 
 configure({ adapter: new Adapter() });
-/*it('openMenu is callable and returns nothing', () => {
-	const wrapper = shallow(API);
-	expect(wrapper.instance().getEntities()).toBe(new Promise());
-});*/
-
 
 test('the data is peanut butter', () => {
-
   API.getEntities().then(data => {
     expect(typeof data).toBe('object');
   });
+});
+
+it('login() is callable and returns nothing', () => {
+    API.login('12334', '1234').then((s) => {
+        expect(typeof s).toBe('string');
+    });
 });
