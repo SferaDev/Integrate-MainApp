@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test group for Maps goToMe is callable and returns nothing 1`] = `
+exports[`Test group for Maps renders maps correctly 1`] = `
 <View
   style={
     Object {

@@ -24,7 +24,6 @@ export default class Buscador extends Component {
     }
 
     getEntities() {
-
         let that = this;
         API.getEntities().then((entities) => {
             that.setState({entities: entities});

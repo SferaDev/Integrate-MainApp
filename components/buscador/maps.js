@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
+import MarkerList from './marker_list';
 
 export default class Maps extends Component {
 
@@ -41,56 +42,43 @@ export default class Maps extends Component {
         });
     }
 
-    renderMarker(e) {
-        let coords = {
-            latitude: e.addressLatitude,
-            longitude: e.addressLongitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01
-        };
-        return (<Marker key={e.id} identifier={'' + e.id + ''} coordinate={coords} pinColor="red"/>);
-    }
-
-    render() {
-
-        let entityList = this.props.entities.map(this.renderMarker);
-
-        return (
-            <View style={{...StyleSheet.absoluteFillObject}}>
-                <MapView
-                    ref={map => this.map = map}
-                    initialRegion={{
-                        latitude: this.state.location.lat,
-                        longitude: this.state.location.long,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }}
-                    showsUserLocation={true}
-                    followsUserLocation={true}
-                    showsPointsOfInterest={false}
-                    showsMyLocationButton={false}
-                    showsCompass={false}
-                    style={{...StyleSheet.absoluteFillObject, paddingTop: 100}}
-                >
-                    {entityList}
-                </MapView>
-                <TouchableHighlight
-                    underlayColor="rgba(0,0,0,0.3)"
-                    style={styles.pointNorth}
-                    onPress={this.pointNorth.bind(this)}
-                >
-                    <Text>NO</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                    underlayColor="rgba(0,0,0,0.3)"
-                    style={styles.goToMeButton}
-                    onPress={this.goToMe.bind(this)}
-                >
-                    <Text>ME</Text>
-                </TouchableHighlight>
-            </View>
-        );
-    }
+  render() {
+    return (
+      <View style={{...StyleSheet.absoluteFillObject}} >
+        <MapView
+          ref={ map => this.map = map }
+          initialRegion={{
+            latitude: this.state.location.lat,
+            longitude: this.state.location.long,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+          showsUserLocation={true}
+          followsUserLocation={true}
+          showsPointsOfInterest={false}
+          showsMyLocationButton={false}
+          showsCompass={false}
+          style={{...StyleSheet.absoluteFillObject,paddingTop: 100}}
+        >
+          <MarkerList items={this.props.entities} />
+        </MapView>
+        <TouchableHighlight 
+          underlayColor="rgba(0,0,0,0.3)"
+          style={styles.pointNorth} 
+          onPress={this.pointNorth.bind(this)}
+        >
+          <Text>NO</Text>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          underlayColor="rgba(0,0,0,0.3)"
+          style={styles.goToMeButton} 
+          onPress={this.goToMe.bind(this)}
+        >
+          <Text>ME</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
