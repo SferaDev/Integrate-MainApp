@@ -35,12 +35,12 @@ export default class RestoreCredentials extends Component {
         this.setState({error: false})
     }
 
-    isEmpty() {
-        return (this.state.nifnie.length == 0)
-    }
-
     goToLogIn() {
         console.warn("Anem a la vista anterior");
+    }
+
+    isEmpty() {
+        return (this.state.nifnie.length == 0)
     }
 
     render() {
