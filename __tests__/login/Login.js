@@ -2,7 +2,7 @@ import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {configure,shallow} from 'enzyme';
+import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import LogIn from '../../components/login/login';
@@ -12,7 +12,7 @@ test('renders Login correctly', () => {
     expect(tree).toMatchSnapshot();
 });
 
-configure({ adapter: new Adapter() });
+configure({adapter: new Adapter()});
 
 it('login() is callable and returns nothing', () => {
     const wrapper = shallow(<LogIn/>);
@@ -34,7 +34,7 @@ it('updateError() is callable and returns nothing', () => {
     expect(wrapper.instance().updateError()).toBe(undefined);
 });
 
-describe("isEmpty() tests",() => {
+describe("isEmpty() tests", () => {
     const wrapper = shallow(<LogIn/>);
     let instance = wrapper.instance();
 
