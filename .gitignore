@@ -52,5 +52,11 @@ buck-out/
 */fastlane/Preview.html
 */fastlane/screenshots
 
-# JEST COVERAGe
+# JEST COVERAGE
 coverage/
+
+# TESTS Snaps
+__tests__/**/__snapshots__/
+
+#IOS
+ios/
