@@ -70,7 +70,7 @@ export default class Buscador extends Component {
                     }
                 </View>
                 <View style={{height: 100}}>
-                    <Text onPress={this.openMenu.bind(this)}>Menu</Text>
+                    
                 </View>
 
                 <View style={styles.searchBox}>

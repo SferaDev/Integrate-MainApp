@@ -39,7 +39,7 @@ export default class LogIn extends Component {
         let password = this.state.password;
         let that = this;
         API.login(nifnie, password).then((s) => {
-            console.warn(s)
+            this.props.navigation.navigate('DrawerNavigation');
         }).catch(() => {
             that.setState({error: true})
         });
