@@ -199,16 +199,7 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
         "height": 100,
       }
     }
-  >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      onPress={[Function]}
-    >
-      Menu
-    </Text>
-  </View>
+  />
   <View
     style={
       Object {

@@ -1,6 +1,7 @@
 import React from 'react';
 import {DrawerNavigator, StackNavigator} from 'react-navigation';
 
+import Login from './login/login';
 import Buscador from './buscador/buscador';
 import App from '../App';
 
@@ -29,9 +30,7 @@ const ConfigStack = StackNavigator({
 });
 
 const DrawerStack = DrawerNavigator({
-    screen1: {screen: BuscadorStack},
-    screen2: {screen: ValsStack},
-    screen3: {screen: BuscadorStack},
+    Buscador: {screen: BuscadorStack}
 });
 
 
@@ -42,7 +41,7 @@ const DrawerNavigation = StackNavigator({
 });
 
 const LoginStack = StackNavigator({
-    App: {screen: App}
+    Login: {screen: Login}
 }, {
     headerMode: 'none',
 });

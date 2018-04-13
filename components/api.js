@@ -9,8 +9,13 @@ const API = {
             else {
                 fetch(BASEURL + '/login?email=' + nifnie + '&password=' + password).then((response) => {
                     //Resolve
-                    AsyncStorage.setItem('token', JSON.parse(response._bodyText).token)
-                    resolve(JSON.parse(response._bodyText).token);
+                    if( response.status === 401 ){
+                        reject();
+                    }else if( response.status === 200 ){
+                        AsyncStorage.setItem('token', JSON.parse(response._bodyText).token)
+                        resolve(JSON.parse(response._bodyText).token);
+                    }
+                    
                 }).catch(() => {
                     //Reject
                     reject();
@@ -22,30 +27,25 @@ const API = {
 
         return new Promise(function (resolve, reject) {
 
-            let entities = [
-                {
-                    id: 1,
-                    nif: '12345678A',
-                    salesmanFirstName: 'John',
-                    salesmanLastName: 'Doe',
-                    email: 'email@email.com',
-                    name: 'UPC',
-                    description: 'Universitat Politecnica de Catalunya',
-                    addressName: 'C/ Jordi Girona',
-                    addressLatitude: 41.391501,
-                    addressLongitude: 2.113283,
-                    phone: '963852741',
-                    picture: ''
-                }
-            ];
+            AsyncStorage.getItem('token').then( (token) => {
 
-            fetch('http://localhost:8081')
-                .then(function (response) {
-                    resolve(entities);
-                })
-                .catch(function (myJson) {
+                if(token){
+                    fetch(BASEURL+'/me/entities?token='+token)
+                        .then(function (response) {
+                            if( response.status === 404 ){
+                                reject();
+                            }else if( response.status === 200 ){
+                                resolve( JSON.parse(response._bodyText) );
+                            }
+                        })
+                        .catch(function (myJson) {
+                            reject();
+                        });
+                }else{
                     reject();
-                });
+                }
+
+            } );
         });
     }
 };
