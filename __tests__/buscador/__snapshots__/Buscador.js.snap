@@ -1,0 +1,247 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test group for EntityList renders buscador correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#F5FCFF",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#094671",
+        "display": "flex",
+        "flexDirection": "row",
+        "height": 60,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "white",
+          "flex": 1,
+          "paddingLeft": 20,
+          "textAlign": "left",
+        }
+      }
+    >
+      MENU
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "alignSelf": "center",
+          "color": "white",
+          "flex": 1,
+          "paddingRight": 20,
+          "textAlign": "right",
+        }
+      }
+    >
+      LIST
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#F5FCFF",
+        "flex": 8,
+        "height": "100%",
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        followsUserLocation={true}
+        initialRegion={
+          Object {
+            "latitude": 0,
+            "latitudeDelta": 0.0922,
+            "longitude": 0,
+            "longitudeDelta": 0.0421,
+          }
+        }
+        showsCompass={false}
+        showsMyLocationButton={false}
+        showsPointsOfInterest={false}
+        showsUserLocation={true}
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "paddingTop": 100,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
+              "backgroundColor": "red",
+              "borderRadius": 15,
+              "bottom": 15,
+              "height": 30,
+              "left": 15,
+              "position": "absolute",
+              "width": 30,
+            },
+          ]
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          NO
+        </Text>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
+              "backgroundColor": "red",
+              "borderRadius": 22.5,
+              "bottom": 15,
+              "height": 45,
+              "position": "absolute",
+              "right": 15,
+              "width": 45,
+            },
+          ]
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          ME
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "height": 100,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "white",
+        "borderColor": "#ccc",
+        "borderRadius": 5,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "row",
+        "height": 37,
+        "position": "absolute",
+        "top": 75,
+        "width": 345,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "alignSelf": "center",
+          "flex": 2,
+          "textAlign": "center",
+        }
+      }
+    >
+      Q
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      editable={false}
+      placeholder="Search"
+      style={
+        Object {
+          "flex": 18,
+        }
+      }
+    />
+  </View>
+</View>
+`;
