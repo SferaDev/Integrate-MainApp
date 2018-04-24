@@ -4,6 +4,8 @@ import Maps from './maps';
 import EntityList from './list';
 import API from '../api';
 
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 export default class Buscador extends Component {
 
     constructor(props) {
@@ -51,8 +53,8 @@ export default class Buscador extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text onPress={this.openMenu.bind(this)} style={styles.headerLeftIco}>MENU</Text>
-                    <Text onPress={this.switchView.bind(this)} style={styles.headerRightIco}>LIST</Text>
+                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30} />
+                    <Icon onPress={this.switchView.bind(this)} style={styles.headerRightIco} name="format-list-bulleted" size={30} />
                 </View>
                 <View style={{
                     flex: 8,
@@ -69,7 +71,7 @@ export default class Buscador extends Component {
                             <Maps entities={this.state.entities}/>
                     }
                 </View>
-                <View style={{height: 100}}>
+                <View style={{height: this.state.isListView ? 0 : 100}}>
                     
                 </View>
 
