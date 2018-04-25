@@ -234,7 +234,7 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
     </Text>
     <TextInput
       allowFontScaling={true}
-      editable={false}
+      onFocus={[Function]}
       placeholder="Search"
       style={
         Object {

@@ -54,4 +54,9 @@ describe('Test group for EntityList', function () {
 
         expect(instance.handleBackButton()).toBe(true);
     });
+
+    test('showListView is callable and returns nothing', () => {
+
+        expect(instance.showListView()).toBe(undefined);
+    });
 });

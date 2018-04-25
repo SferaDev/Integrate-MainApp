@@ -45,6 +45,10 @@ export default class Buscador extends Component {
         this.setState({isListView: isListView});
     }
 
+    showListView() {
+        this.setState({isListView: true});
+    }
+
     render() {
         const that = this;
 
@@ -75,7 +79,11 @@ export default class Buscador extends Component {
 
                 <View style={styles.searchBox}>
                     <Text style={{flex: 2, textAlign: 'center', alignSelf: 'center'}}>Q</Text>
-                    <TextInput style={{flex: 18}} placeholder="Search" editable={false}/>
+                    <TextInput
+                        style={{flex: 18}}
+                        placeholder="Search"
+                        onFocus = {this.showListView.bind(this)}
+                    />
                 </View>
             </View>
         );
