@@ -62,7 +62,7 @@ export default class Maps extends Component {
           showsCompass={false}
           style={{...StyleSheet.absoluteFillObject,paddingTop: 100}}
         >
-          <MarkerList items={this.props.entities} />
+          <MarkerList items={this.props.entities} onMarkerClick={this.props.onMarkerClick}  />
         </MapView>
         <TouchableHighlight 
           underlayColor="rgba(0,0,0,0.3)"

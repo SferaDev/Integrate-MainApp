@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {BackHandler, StyleSheet, Text, TextInput, View} from 'react-native';
 import Maps from './maps';
 import EntityList from './list';
+import Entity from './entity';
 import API from '../api';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -12,7 +13,8 @@ export default class Buscador extends Component {
         super(props);
         this.state = {
             isListView: false,
-            entities: []
+            entities: [],
+            selectedEntity: null,
         };
     }
 
@@ -30,12 +32,14 @@ export default class Buscador extends Component {
         API.getEntities().then((entities) => {
             that.setState({entities: entities});
         }).catch(() => {
+            console.warn('ERROR');
         })
     }
 
-    /*showEntityInfo(ent){
-
-    }*/
+    showEntityInfo(ent){
+        let selEntity = this.state.entities[ent];
+        this.setState({selectedEntity: selEntity});
+    }
 
     openMenu() {
         this.props.navigation.navigate('DrawerOpen');
@@ -68,11 +72,15 @@ export default class Buscador extends Component {
                         this.state.isListView ?
                             <EntityList entities={this.state.entities}/>
                             :
-                            <Maps entities={this.state.entities}/>
+                            <Maps entities={this.state.entities} onMarkerClick={this.showEntityInfo.bind(this)} />
                     }
                 </View>
-                <View style={{height: this.state.isListView ? 0 : 100}}>
-                    
+                <View style={{height: this.state.isListView ? 0 : 100,width: '100%'}}>
+                    { this.state.selectedEntity != null ?
+                        <Entity item={this.state.selectedEntity} />
+                        :
+                        null
+                    }
                 </View>
 
                 <View style={styles.searchBox}>

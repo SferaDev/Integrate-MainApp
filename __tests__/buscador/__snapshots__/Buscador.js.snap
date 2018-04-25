@@ -257,6 +257,7 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
     style={
       Object {
         "height": 100,
+        "width": "100%",
       }
     }
   />
