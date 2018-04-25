@@ -29,11 +29,11 @@ export default class Buscador extends Component {
 
     getEntities() {
         let that = this;
-        API.getEntities().then((entities) => {
-            that.setState({entities: entities});
-        }).catch(() => {
-            console.warn('ERROR');
-        })
+        API.getEntities().then(this.setEntities.bind(this)).catch(() => {});
+    }
+
+    setEntities(entities){
+        this.setState({entities: entities});
     }
 
     showEntityInfo(ent){

@@ -54,4 +54,14 @@ describe('Test group for EntityList', function () {
 
         expect(instance.handleBackButton()).toBe(true);
     });
+
+    test('showEntityInfo is callable and returns nothing', () => {
+
+        expect(instance.showEntityInfo()).toBe(undefined);
+    });
+
+    test('setEntities is callable and returns nothing', () => {
+
+        expect(instance.setEntities()).toBe(undefined);
+    });
 });
