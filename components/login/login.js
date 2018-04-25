@@ -70,7 +70,7 @@ export default class LogIn extends Component {
     }
 
     restorePassword() {
-        console.warn('Recuperar Contrasenya')
+        //console.warn('Recuperar Contrasenya')
     }
 
     render() {
