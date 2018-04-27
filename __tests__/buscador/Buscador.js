@@ -59,4 +59,9 @@ describe('Test group for EntityList', function () {
 
         expect(instance.showListView()).toBe(undefined);
     });
+
+    test('updateSearchText is callable and returns nothing', () => {
+
+        expect(instance.updateSearchText()).toBe(undefined);
+    });
 });

@@ -28,7 +28,7 @@ export default class Buscador extends Component {
     getEntities() {
         let that = this;
         API.getEntities().then((entities) => {
-            that.setState({entities: entities, entities_shown: entities});
+            that.setState({entities: entities});
         }).catch(() => {
         })
     }
@@ -54,11 +54,17 @@ export default class Buscador extends Component {
     updateSearchText(value) {
         this.setState({searchText: value});
         clearTimeout(this.searchTimeout);
-        this.searchTimeout = setTimeout(this.filterEntities, 3000);
+        this.searchTimeout = setTimeout(this.filterEntities, 500);
     }
 
     filterEntities() {
-        console.warn("Suuuuuu");
+        let searchText = this.state.searchText;
+        let entities = this.state.entities;
+        for(let i in entities){
+            if (entities[i].name.contains(searchText)) {
+                this.state.entities_shown[i] = entities[i];
+            }
+        }
     }
 
     render() {

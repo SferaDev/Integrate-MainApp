@@ -234,6 +234,7 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
     </Text>
     <TextInput
       allowFontScaling={true}
+      onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Search"
       style={
@@ -241,6 +242,7 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
           "flex": 18,
         }
       }
+      value=""
     />
   </View>
 </View>
