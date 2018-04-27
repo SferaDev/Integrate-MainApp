@@ -10,7 +10,9 @@ export default class Buscador extends Component {
         super(props);
         this.state = {
             isListView: false,
-            entities: []
+            entities: [],
+            entities_shown:[],
+            searchText: ""
         };
     }
 
@@ -26,7 +28,7 @@ export default class Buscador extends Component {
     getEntities() {
         let that = this;
         API.getEntities().then((entities) => {
-            that.setState({entities: entities});
+            that.setState({entities: entities, entities_shown: entities});
         }).catch(() => {
         })
     }
@@ -49,6 +51,16 @@ export default class Buscador extends Component {
         this.setState({isListView: true});
     }
 
+    updateSearchText(value) {
+        this.setState({searchText: value});
+        clearTimeout(this.searchTimeout);
+        this.searchTimeout = setTimeout(this.filterEntities, 3000);
+    }
+
+    filterEntities() {
+        console.warn("Suuuuuu");
+    }
+
     render() {
         const that = this;
 
@@ -68,7 +80,7 @@ export default class Buscador extends Component {
                 }}>
                     {
                         this.state.isListView ?
-                            <EntityList entities={this.state.entities}/>
+                            <EntityList entities={this.state.entities_shown}/>
                             :
                             <Maps entities={this.state.entities}/>
                     }
@@ -81,8 +93,10 @@ export default class Buscador extends Component {
                     <Text style={{flex: 2, textAlign: 'center', alignSelf: 'center'}}>Q</Text>
                     <TextInput
                         style={{flex: 18}}
+                        value={this.state.searchText}
                         placeholder="Search"
                         onFocus = {this.showListView.bind(this)}
+                        onChangeText={this.updateSearchText.bind(this)}
                     />
                 </View>
             </View>
