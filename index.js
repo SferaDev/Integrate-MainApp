@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './components/restore_credentials/restore_credentials';
+import App from './components/home';
 
 AppRegistry.registerComponent('Integrate', () => App);
