@@ -9,6 +9,7 @@ import {
     ImageBackground,
     Keyboard
 } from 'react-native';
+import {AsyncStorage} from 'react-native';
 
 import Toast from './toast';
 import API from '../api';
@@ -27,6 +28,13 @@ export default class LogIn extends Component {
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
+
+        let that = this;
+        AsyncStorage.getItem('token').then( (token) => {
+            if(token !== null || token !== undefined){
+                that.navigateHome();
+            }
+        } );
     }
 
     componentWillUnmount() {
@@ -38,11 +46,7 @@ export default class LogIn extends Component {
         let nifnie = this.state.nifnie;
         let password = this.state.password;
         let that = this;
-        API.login(nifnie, password).then((s) => {
-            this.props.navigation.navigate('DrawerNavigation');
-        }).catch(() => {
-            that.setState({error: true})
-        });
+        API.login(nifnie, password).then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
     }
 
     updateNifNie(value) {
@@ -53,8 +57,12 @@ export default class LogIn extends Component {
         this.setState({password: value});
     }
 
+    showError() {
+        this.setState({error: true});
+    }
+
     updateError() {
-        this.setState({error: false})
+        this.setState({error: false});
     }
 
     isEmpty() {
@@ -67,6 +75,10 @@ export default class LogIn extends Component {
 
     moveDown() {
         this.setState({isFieldFocused: false});
+    }
+
+    navigateHome() {
+        this.props.navigation.navigate('DrawerNavigation');    
     }
 
     restorePassword() {
@@ -96,13 +108,17 @@ export default class LogIn extends Component {
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.nifnie}
                                    placeholder={"Introduir NIF/NIE"}
-                                   onChangeText={this.updateNifNie.bind(this)}>
+                                   onChangeText={this.updateNifNie.bind(this)}
+                                   underlineColorAndroid='rgba(0,0,0,0)'
+                        >
                         </TextInput>
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.password}
                                    secureTextEntry={true}
                                    placeholder={"Introduir contrasenya"}
-                                   onChangeText={this.updatePassword.bind(this)}>
+                                   onChangeText={this.updatePassword.bind(this)}
+                                   underlineColorAndroid='rgba(0,0,0,0)'
+                        >
                         </TextInput>
                         <Text style={styles.recuperarContrasenyaText}
                               onPress={this.restorePassword.bind(this)}>
@@ -148,6 +164,7 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         justifyContent: 'center',
         margin: 10,
+        padding: 0,
         paddingLeft: 5,
     },
     button: {

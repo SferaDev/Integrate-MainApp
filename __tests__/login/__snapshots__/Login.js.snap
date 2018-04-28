@@ -107,11 +107,13 @@ exports[`renders Login correctly 1`] = `
               "height": 35,
               "justifyContent": "center",
               "margin": 10,
+              "padding": 0,
               "paddingLeft": 5,
               "width": 260,
             },
           ]
         }
+        underlineColorAndroid="rgba(0,0,0,0)"
         value=""
       />
       <TextInput
@@ -129,11 +131,13 @@ exports[`renders Login correctly 1`] = `
               "height": 35,
               "justifyContent": "center",
               "margin": 10,
+              "padding": 0,
               "paddingLeft": 5,
               "width": 260,
             },
           ]
         }
+        underlineColorAndroid="rgba(0,0,0,0)"
         value=""
       />
       <Text

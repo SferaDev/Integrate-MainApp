@@ -45,6 +45,7 @@ const API = {
                     reject();
                 }
 
+            } ).catch( () => {
             } );
         });
     }
