@@ -6,7 +6,6 @@ import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Buscador extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -35,10 +34,6 @@ export default class Buscador extends Component {
 
     }
 
-    /*showEntityInfo(ent){
-
-    }*/
-
     openMenu() {
         this.props.navigation.navigate('DrawerOpen');
     }
@@ -63,9 +58,7 @@ export default class Buscador extends Component {
         let searchText = this.state.searchText;
         let entities = this.state.entities;
         let entities_shown = [];
-        if (!searchText) {
-            entities_shown = entities;
-        }
+        if (!searchText) entities_shown = entities;
         else {
             for (let i in entities) {
                 if (entities[i].name.toLowerCase().includes(searchText.toLowerCase())) {
