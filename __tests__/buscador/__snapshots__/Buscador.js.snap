@@ -220,27 +220,41 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
   >
     <Text
       accessible={true}
-      allowFontScaling={true}
+      allowFontScaling={false}
       ellipsizeMode="tail"
       style={
-        Object {
-          "alignSelf": "center",
-          "flex": 2,
-          "textAlign": "center",
-        }
+        Array [
+          Object {
+            "color": undefined,
+            "fontSize": 20,
+          },
+          Object {
+            "alignSelf": "center",
+            "flex": 2,
+            "textAlign": "center",
+          },
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
       }
     >
-      Q
+      
     </Text>
     <TextInput
       allowFontScaling={true}
-      editable={false}
+      autoComplete={false}
+      onChangeText={[Function]}
+      onFocus={[Function]}
       placeholder="Search"
       style={
         Object {
           "flex": 18,
         }
       }
+      value=""
     />
   </View>
 </View>

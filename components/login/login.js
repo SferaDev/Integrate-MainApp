@@ -12,6 +12,7 @@ import {
 
 import Toast from './toast';
 import API from '../api';
+import {AsyncStorage} from 'react-native';
 
 export default class LogIn extends Component {
     constructor(props) {
@@ -27,6 +28,13 @@ export default class LogIn extends Component {
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
+
+        let that = this;
+        AsyncStorage.getItem('token').then( (token) => {
+            if(token !== null || token !== undefined){
+                that.props.navigation.navigate('DrawerNavigation');
+            }
+        } );
     }
 
     componentWillUnmount() {
