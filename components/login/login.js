@@ -29,12 +29,7 @@ export default class LogIn extends Component {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
 
-        let that = this;
-        AsyncStorage.getItem('token').then( (token) => {
-            if(token !== null || token !== undefined){
-                that.navigateHome();
-            }
-        } );
+        AsyncStorage.getItem('token').then(this.autologin.bind(this));
     }
 
     componentWillUnmount() {
@@ -47,6 +42,12 @@ export default class LogIn extends Component {
         let password = this.state.password;
         let that = this;
         API.login(nifnie, password).then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
+    }
+
+    autologin(token){
+        if(token !== null){
+            this.navigateHome();
+        }
     }
 
     updateNifNie(value) {

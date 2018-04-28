@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders Login correctly 1`] = `
+exports[`Test group for EntityList renders Login correctly 1`] = `
 <View
   style={
     Object {
