@@ -1,7 +1,7 @@
 import {configure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import API from '../__mocks__/api';
+import API from '../components/api';
 
 configure({adapter: new Adapter()});
 
