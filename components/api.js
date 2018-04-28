@@ -7,7 +7,7 @@ const API = {
         return new Promise((resolve, reject) => {
             if (nifnie.length == 0 || password.length == 0) reject();
             else {
-                fetch(BASEURL + '/login?email=' + nifnie + '&password=' + password).then((response) => {
+                fetch(BASEURL + '/login?nif=' + nifnie + '&password=' + password).then((response) => {
                     //Resolve
                     if( response.status === 401 ){
                         reject();
