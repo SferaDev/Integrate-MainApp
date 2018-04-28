@@ -50,6 +50,11 @@ describe('Test group for EntityList', function () {
         expect(instance.getEntities()).toBe(undefined);
     });
 
+    test('setEntities is callable and returns an array', () => {
+
+        expect(instance.setEntities()).toBe(undefined);
+    });
+
     test('handleBackButton is callable and returns true', () => {
 
         expect(instance.handleBackButton()).toBe(true);
@@ -63,5 +68,23 @@ describe('Test group for EntityList', function () {
     test('updateSearchText is callable and returns nothing', () => {
 
         expect(instance.updateSearchText()).toBe(undefined);
+    });
+
+    test('filterEntities is callable and returns nothing', () => {
+
+        expect(instance.filterEntities()).toBe(undefined);
+    });
+
+    test('filterEntities where searchText is UPC is callable and returns nothing', () => {
+
+        instance.state.searchText = "UPC";
+        expect(instance.filterEntities()).toBe(undefined);
+    });
+
+    test('filterEntities where entities are UPC and Patates Jordi is callable and returns nothing', () => {
+
+        instance.state.searchText = "UP";
+        instance.state.entities = [{name : "UPC"}, {name : "Patates Jordi"}];
+        expect(instance.filterEntities()).toBe(undefined);
     });
 });
