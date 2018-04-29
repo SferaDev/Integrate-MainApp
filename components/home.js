@@ -4,6 +4,7 @@ import {DrawerNavigator, StackNavigator} from 'react-navigation';
 import Login from './login/login';
 import Buscador from './buscador/buscador';
 import App from '../App';
+import Logout from "./login/logout";
 
 const BuscadorStack = StackNavigator({
     buscador: {screen: Buscador},
@@ -30,7 +31,8 @@ const ConfigStack = StackNavigator({
 });
 
 const DrawerStack = DrawerNavigator({
-    Buscador: {screen: BuscadorStack}
+    Buscador: {screen: BuscadorStack},
+    Logout: {screen: Logout}
 });
 
 
