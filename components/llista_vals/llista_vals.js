@@ -18,12 +18,31 @@ export default class LlistaVals extends Component {
         };
     }
 
+    componentDidMount() {
+        this.getGoods();
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    handleBackButton() {
+        return true;
+    }
+
+    getGoods(loc) {
+        let category = this.state.category;
+        let order = this.state.order;
+        API.getGoods(category, order, loc).then(this.setGoods.bind(this));
+    }
+
+    setGoods(goods) {
+        this.setState({goods: goods, goods_shown: goods});
+    }
+
     openMenu() {
         this.props.navigation.navigate('DrawerOpen');
     }
 
     selectFilterOrder(selection, row) {
-
+        //Seleccio filtre per categoria i metode d'ordenacio
         if(selection == 0){
             this.setState({
                 category: row,
@@ -37,10 +56,20 @@ export default class LlistaVals extends Component {
                 selection: selection,
                 row: row
             });
-
         }
+        //Crida a la api
+        if (selection == 1 && row == 2) {
+            navigator.geolocation.getCurrentPosition(this.getGoods.bind(this), () => {});
+        }
+        else {
+            this.getGoods();
+        }
+    }
 
-
+    renderGood({item}) {
+        return (
+            <Text>{JSON.stringify(item)}</Text>
+        );
     }
 
     render() {
@@ -60,14 +89,10 @@ export default class LlistaVals extends Component {
                 }}>
                     <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 60, backgroundColor: 'white'}]}>
                         <FlatList
-                            data={this.props.goods}
-                            renderItem={this.renderEntity}
+                            data={this.state.goods}
+                            renderItem={this.renderGood}
                         />
                     </View>
-                    <Text>{this.data[0][this.state.category]}</Text>
-                    <Text>{this.data[1][this.state.order]}</Text>
-                    <Text>{this.state.selection}</Text>
-                    <Text>{this.state.row}</Text>
                 </View>
                 <View style={{height: 100}}>
 
