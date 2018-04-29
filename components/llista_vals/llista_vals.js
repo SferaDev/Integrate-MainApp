@@ -2,16 +2,19 @@ import React, {Component} from 'react';
 import {BackHandler, StyleSheet, Text, TextInput, View, FlatList} from 'react-native';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import DropdownMenu from "react-native-dropdown-menu";
 
 export default class LlistaVals extends Component {
 
     constructor(props) {
         super(props);
+        this.data = [["Totes", "Alimentació", "Cultura", "Formació", "Mobilitat", "Tecnologia", "Salut", "Esports", "Lleure", "Altres"], ["Recents", "Popularitat", "Proximitat"]];
         this.state = {
             isListView: false,
-            entities: [],
-            entities_shown:[],
-            searchText: ""
+            goods: [],
+            goods_shown:[],
+            category: 0,
+            order: 0
         };
     }
 
@@ -19,8 +22,28 @@ export default class LlistaVals extends Component {
         this.props.navigation.navigate('DrawerOpen');
     }
 
+    selectFilterOrder(selection, row) {
+
+        if(selection == 0){
+            this.setState({
+                category: row,
+                selection: selection,
+                row: row
+            });
+        }
+        else if (selection == 1) {
+            this.setState({
+                order: row,
+                selection: selection,
+                row: row
+            });
+
+        }
+
+
+    }
+
     render() {
-        const that = this;
 
         return (
             <View style={styles.container}>
@@ -37,17 +60,36 @@ export default class LlistaVals extends Component {
                 }}>
                     <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 60, backgroundColor: 'white'}]}>
                         <FlatList
-                            data={this.props.entities}
+                            data={this.props.goods}
                             renderItem={this.renderEntity}
                         />
                     </View>
+                    <Text>{this.data[0][this.state.category]}</Text>
+                    <Text>{this.data[1][this.state.order]}</Text>
+                    <Text>{this.state.selection}</Text>
+                    <Text>{this.state.row}</Text>
                 </View>
                 <View style={{height: 100}}>
 
                 </View>
 
-                <View style={styles.searchBox}>
-
+                <View style={styles.filterGoods}>
+                    <Text>{"Categoria: "}</Text>
+                    <Text>{"Ordenació: "}</Text>
+                    <DropdownMenu
+                        style={{flex: 1}}
+                        bgColor={'#F5FCFF'}
+                        tintColor={'#666666'}
+                        activityTintColor={'orange'}
+                        // arrowImg={}
+                        // checkImage={}
+                        // optionTextStyle={{color: '#333333'}}
+                        // titleStyle={{color: '#333333'}}
+                        // maxHeight={300}
+                        handler={this.selectFilterOrder.bind(this)}
+                        data={this.data}
+                    >
+                    </DropdownMenu>
                 </View>
             </View>
         );
@@ -82,13 +124,12 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         color: 'white'
     },
-    searchBox: {
+    filterGoods: {
         position: 'absolute',
-        top: 75,
+        top: 60,
         alignSelf: 'center',
-        width: 345,
-        height: 37,
-        backgroundColor: 'white',
+        width: '100%',
+        backgroundColor: '#F5FCFF',
         borderRadius: 5,
         borderColor: '#ccc',
         borderStyle: "solid",

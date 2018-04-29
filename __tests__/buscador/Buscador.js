@@ -70,9 +70,9 @@ describe('Test group for EntityList', function () {
         expect(instance.filterEntities()).toBe(undefined);
     });
 
-    test('filterEntities where entities are UPC and Patates Jordi is callable and returns nothing', () => {
+    test('filterEntities where goods are UPC and Patates Jordi is callable and returns nothing', () => {
         instance.state.searchText = "UP";
-        instance.state.entities = [{name : "UPC"}, {name : "Patates Jordi"}];
+        instance.state.goods = [{name : "UPC"}, {name : "Patates Jordi"}];
         expect(instance.filterEntities()).toBe(undefined);
     });
 });

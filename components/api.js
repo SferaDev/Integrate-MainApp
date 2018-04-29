@@ -30,7 +30,7 @@ const API = {
             AsyncStorage.getItem('token').then( (token) => {
 
                 if(token){
-                    fetch(BASEURL+'/me/entities?token='+token)
+                    fetch(BASEURL+'/me/goods?token='+token)
                         .then(function (response) {
                             if( response.status === 404 ){
                                 reject();
