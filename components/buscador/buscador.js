@@ -18,6 +18,13 @@ export default class Buscador extends Component {
         };
     }
 
+    static navigationOptions = {
+        drawerLabel: 'Buscador',
+        drawerIcon: () => (
+          <Icon name="home" size={25} />
+        ),
+    };
+
     componentDidMount() {
         this.getEntities();
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
