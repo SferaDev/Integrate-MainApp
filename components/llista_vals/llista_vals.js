@@ -87,34 +87,33 @@ export default class LlistaVals extends Component {
                     width: '100%',
                     height: '100%'
                 }}>
-                    <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 60, backgroundColor: 'white'}]}>
+                    <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 80, backgroundColor: 'white'}]}>
                         <FlatList
                             data={this.state.goods}
                             renderItem={this.renderGood}
                         />
                     </View>
                 </View>
-                <View style={{height: 100}}>
-
-                </View>
-
                 <View style={styles.filterGoods}>
-                    <Text>{"Categoria: "}</Text>
-                    <Text>{"Ordenació: "}</Text>
-                    <DropdownMenu
-                        style={{flex: 1}}
-                        bgColor={'#F5FCFF'}
-                        tintColor={'#666666'}
-                        activityTintColor={'orange'}
-                        // arrowImg={}
-                        // checkImage={}
-                        // optionTextStyle={{color: '#333333'}}
-                        // titleStyle={{color: '#333333'}}
-                        // maxHeight={300}
-                        handler={this.selectFilterOrder.bind(this)}
-                        data={this.data}
-                    >
-                    </DropdownMenu>
+                    <View style={{display: 'flex', flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+                        <Text style={{flex: 1, textAlign: 'center',color: '#666'}}>{"Categoria: "}</Text>
+                        <Text style={{flex: 1, textAlign: 'center',color: '#666'}}>{"Ordenació: "}</Text>
+                    </View>
+                    <View style={{display: 'flex', flex: 1}}>
+                        <DropdownMenu
+                            style={{flex: 1, padding: 0}}
+                            bgColor={'#F5FCFF'}
+                            tintColor={'#666666'}
+                            activityTintColor={'orange'}
+                            // arrowImg={}
+                            // checkImage={}
+                            // optionTextStyle={{color: '#333333'}}
+                            // titleStyle={{color: '#333333'}}
+                            // maxHeight={300}
+                            handler={this.selectFilterOrder.bind(this)}
+                            data={this.data}>
+                        </DropdownMenu>
+                    </View>
                 </View>
             </View>
         );
@@ -154,12 +153,13 @@ const styles = StyleSheet.create({
         top: 60,
         alignSelf: 'center',
         width: '100%',
+        height: 40,
         backgroundColor: '#F5FCFF',
         borderRadius: 5,
         borderColor: '#ccc',
         borderStyle: "solid",
         borderWidth: 1,
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
     }
 });

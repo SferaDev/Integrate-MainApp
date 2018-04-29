@@ -80,21 +80,4 @@ describe('Test group for llista_vals', function () {
         expect(instance.renderGood({item: {id: 1}})).toMatchSnapshot();
     });
 
-
-
-
-
-
-
-
-    /*test('filterEntities where searchText is UPC is callable and returns nothing', () => {
-        instance.state.searchText = "UPC";
-        expect(instance.filterEntities()).toBe(undefined);
-    });
-
-    test('filterEntities where entities are UPC and Patates Jordi is callable and returns nothing', () => {
-        instance.state.searchText = "UP";
-        instance.state.entities = [{name : "UPC"}, {name : "Patates Jordi"}];
-        expect(instance.filterEntities()).toBe(undefined);
-    });*/
 });
