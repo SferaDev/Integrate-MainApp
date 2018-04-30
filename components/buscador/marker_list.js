@@ -4,9 +4,7 @@ import MapView from 'react-native-maps';
 import MarkerImage from '../../Images/marker60.png';
 
 const renderMarkers = (props) => {
-
 	const renderMarker = (e,i) => {
-
 		return(
 			<MapView.Marker 
 				key={e.id} 
@@ -18,7 +16,6 @@ const renderMarkers = (props) => {
 			/>
 		);
 	}
-	
 	return props.items.map(renderMarker);
 }
 
