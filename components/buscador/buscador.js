@@ -114,12 +114,13 @@ export default class Buscador extends Component {
                 <View style={styles.searchBox}>
                     <Icon name="magnify" size={20} style={{flex: 2, textAlign: 'center', alignSelf: 'center'}} />
                     <TextInput
-                        style={{flex: 18}}
+                        style={{flex: 18,padding: 0,paddingLeft: 5}}
                         value={this.state.searchText}
                         placeholder="Search"
                         onFocus = {this.showListView.bind(this)}
                         onChangeText={this.updateSearchText.bind(this)}
                         autoComplete={false}
+                        underlineColorAndroid='rgba(0,0,0,0)'
                     />
                 </View>
             </View>
