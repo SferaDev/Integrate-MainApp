@@ -256,14 +256,6 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
   <View
     style={
       Object {
-        "height": 100,
-        "width": "100%",
-      }
-    }
-  />
-  <View
-    style={
-      Object {
         "alignSelf": "center",
         "backgroundColor": "white",
         "borderColor": "#ccc",
