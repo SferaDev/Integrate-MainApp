@@ -31,7 +31,7 @@ export default class LogIn extends Component {
 
         let that = this;
         AsyncStorage.getItem('token').then( (token) => {
-            if(token !== null || token !== undefined){
+            if(token !== null){
                 that.props.navigation.navigate('DrawerNavigation');
             }
         } );
