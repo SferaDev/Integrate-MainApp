@@ -13,6 +13,7 @@ import {AsyncStorage} from 'react-native';
 
 import Toast from './toast';
 import API from '../api';
+import {AsyncStorage} from 'react-native';
 
 export default class LogIn extends Component {
     constructor(props) {
