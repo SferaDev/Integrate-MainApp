@@ -1,33 +1,46 @@
 import React, {Component} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
+import Entity from './entity';
 
 export default class EntityList extends Component {
-
     constructor(props) {
         super(props);
+        this.state = {
+            loc: null,
+            entities: [],
+        };
+    }
 
-        this.state = {};
+    componentDidMount(){
+        navigator.geolocation.getCurrentPosition(this.sortEntities.bind(this), () => {});
     }
 
     renderEntity({item}) {
         return (
-            <View key={item.id} style={styles.entityView}>
-                <Text style={styles.entityName}>{item.name}</Text>
-                <Text style={styles.entityDescription}>{item.description}</Text>
-                <Text style={styles.entityAddress}>{item.addressName}</Text>
-                <View style={styles.entityLikes}>
-                    <Text>0</Text>
-                    <Text>TH</Text>
-                </View>
-            </View>
+            <Entity item={item} />
         );
+    }
+
+    calcDistance(latitude,longitude){
+        return Math.sqrt( Math.pow(this.coords.latitude-latitude,2)+Math.pow(this.coords.longitude-longitude,2) );
+    }
+
+    sortByCoords(a,b){
+        return (this.calcDistance(a.addressLatitude,a.addressLongitude) > this.calcDistance(b.addressLatitude,b.addressLongitude)) ? 1 : -1;
+    }
+
+    sortEntities(loc){
+        this.coords = loc.coords;
+        let unsortedEntities = this.props.entities;
+        let sortedEntities = unsortedEntities.sort(this.sortByCoords.bind(this));
+        this.setState({entities: sortedEntities});
     }
 
     render() {
         return (
             <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 60, backgroundColor: 'white'}]}>
                 <FlatList
-                    data={this.props.entities}
+                    data={this.state.entities}
                     renderItem={this.renderEntity}
                 />
             </View>
