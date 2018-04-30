@@ -31,7 +31,6 @@ export default class Buscador extends Component {
 
     setEntities(entities) {
         this.setState({entities: entities, entities_shown: entities});
-
     }
 
     openMenu() {
