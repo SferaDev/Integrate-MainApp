@@ -12,9 +12,7 @@ let wrapper;
 let instance;
 
 describe('Test group for EntityList', function () {
-
     beforeAll(() => {
-
         jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
         configure({adapter: new Adapter()});
     });
@@ -37,42 +35,34 @@ describe('Test group for EntityList', function () {
     });
 
     it('login() is callable and returns nothing', () => {
-        
         expect(instance.login()).toBe(undefined);
     });
 
     it('autologin() when token is null is callable and returns nothing', () => {
-        
         expect(instance.autologin(null)).toBe(undefined);
     });
 
     it('autologin() when token is not null is callable and returns nothing', () => {
-        
         expect(instance.autologin("MI_TOKEN")).toBe(undefined);
     });
 
     it('updateNifNie() is callable and returns nothing', () => {
-        
         expect(instance.updateNifNie('')).toBe(undefined);
     });
 
     it('updatePassword() is callable and returns nothing', () => {
-        
         expect(instance.updatePassword('')).toBe(undefined);
     });
 
     it('showError() is callable and returns nothing', () => {
-
         expect(instance.showError()).toBe(undefined);
     });
 
     it('updateError() is callable and returns nothing', () => {
-
         expect(instance.updateError()).toBe(undefined);
     });
 
     describe("isEmpty() tests", () => {
-
         it('isEmpty() when NifNie and Password are empty then returns true', () => {
             instance.state.nifnie = '';
             instance.state.password = '';
@@ -99,27 +89,22 @@ describe('Test group for EntityList', function () {
     });
 
     it('moveUp() is callable and returns nothing', () => {
-        
         expect(instance.moveUp()).toBe(undefined);
     });
 
     it('moveDown() is callable and returns nothing', () => {
-        
         expect(instance.moveDown()).toBe(undefined);
     });
 
     it('componentWillUnmount() is callable and returns nothing', () => {
-        
         expect(instance.componentWillUnmount()).toBe(undefined);
     });
 
     it('restorePassword() is callable and returns nothing', () => {
-        
         expect(instance.restorePassword()).toBe(undefined);
     });
 
     it('navigateHome() is callable and returns nothing', () => {
-        
         expect(instance.navigateHome()).toBe(undefined);
     });    
 });
