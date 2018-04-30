@@ -12,9 +12,7 @@ let instance;
 let entity;
 
 describe('Test group for EntityList', function () {
-
     beforeAll(() => {
-
         configure({adapter: new Adapter()});
         entity = {
             id: 1,
