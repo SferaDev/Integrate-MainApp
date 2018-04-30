@@ -6,8 +6,6 @@ import Entity from './entity';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 export default class Buscador extends Component {
     constructor(props) {
         super(props);
