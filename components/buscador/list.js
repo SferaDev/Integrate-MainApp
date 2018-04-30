@@ -3,10 +3,8 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Entity from './entity';
 
 export default class EntityList extends Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
             loc: null,
             entities: [],
@@ -28,13 +26,11 @@ export default class EntityList extends Component {
     }
 
     sortByCoords(a,b){
-
         return (this.calcDistance(a.addressLatitude,a.addressLongitude) > this.calcDistance(b.addressLatitude,b.addressLongitude)) ? 1 : -1;
     }
 
     sortEntities(loc){
         this.coords = loc.coords;
-
         let unsortedEntities = this.props.entities;
         let sortedEntities = unsortedEntities.sort(this.sortByCoords.bind(this));
         this.setState({entities: sortedEntities});
