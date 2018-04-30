@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {BackHandler, StyleSheet, Text, TextInput, View, FlatList} from 'react-native';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import DropdownMenu from "react-native-dropdown-menu";
 import { Dropdown } from 'react-native-material-dropdown';
 
 export default class LlistaVals extends Component {
@@ -81,7 +80,7 @@ export default class LlistaVals extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text onPress={this.openMenu.bind(this)} style={styles.headerLeftIco}>MENU</Text>
+                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30} />
                 </View>
                 <View style={styles.filterGoods}>
                     <View style={{flex: 1}} >
