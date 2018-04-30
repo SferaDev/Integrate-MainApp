@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import {AsyncStorage} from 'react-native';
 
-
 export default class Logout extends Component {
     constructor(props) {
         super(props);
