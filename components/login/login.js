@@ -44,8 +44,8 @@ export default class LogIn extends Component {
         API.login(nifnie, password).then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
     }
 
-    autologin(token){
-        if(token !== null){
+    autologin(token) {
+        if (token !== null) {
             this.navigateHome();
         }
     }
