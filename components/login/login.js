@@ -9,7 +9,6 @@ import {
     ImageBackground,
     Keyboard
 } from 'react-native';
-import {AsyncStorage} from 'react-native';
 
 import Toast from './toast';
 import API from '../api';
