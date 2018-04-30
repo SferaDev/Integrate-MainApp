@@ -19,9 +19,7 @@ const mockNavigator = {
 global.navigator = mockNavigator;
 
 describe('Test group for EntityList', function () {
-
     beforeAll(() => {
-
         configure({adapter: new Adapter()});
     });
 
@@ -43,12 +41,10 @@ describe('Test group for EntityList', function () {
     });
 
     test('renderEntity renders an entity correctly', () => {
-
         expect(instance.renderEntity({item: {id: 1}})).toMatchSnapshot();
     });
 
     test('calcDistance computes the euclidian distance between two coordinates', () => {
-
         let latitude = 4;
         let longitude = 3;
         instance.coords = {
@@ -59,7 +55,6 @@ describe('Test group for EntityList', function () {
     });
 
     test('sortByCoords two entities by its distance when a is closer', () => {
-
         let a = {
             addressLatitude: 4,
             addressLongitude: 4
@@ -76,7 +71,6 @@ describe('Test group for EntityList', function () {
     });
 
     test('sortByCoords two entities by its distance when b is closer', () => {
-
         let a = {
             addressLatitude: 4,
             addressLongitude: 4
@@ -93,7 +87,6 @@ describe('Test group for EntityList', function () {
     });
 
     test('sortEntities sorts the entities by proximity', () => {
-
         let loc = {
             coords: {
                 latitude: 0,
