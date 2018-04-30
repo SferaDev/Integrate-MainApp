@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {BackHandler, StyleSheet, Text, TextInput, View} from 'react-native';
 import Maps from './maps';
 import EntityList from './list';
+import Entity from './entity';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -11,10 +12,16 @@ export default class Buscador extends Component {
         this.state = {
             isListView: false,
             entities: [],
+            selectedEntity: null,
             entities_shown:[],
             searchText: ""
         };
     }
+
+    static navigationOptions = {
+        drawerLabel: 'Buscador',
+        drawerIcon:  <Icon name="home" size={25} />,
+    };
 
     componentDidMount() {
         this.getEntities();
@@ -27,6 +34,11 @@ export default class Buscador extends Component {
 
     getEntities() {
         API.getEntities().then(this.setEntities.bind(this));
+    }
+
+    showEntityInfo(ent){
+        let selEntity = this.state.entities[ent];
+        this.setState({selectedEntity: selEntity});
     }
 
     setEntities(entities) {
@@ -74,8 +86,8 @@ export default class Buscador extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text onPress={this.openMenu.bind(this)} style={styles.headerLeftIco}>MENU</Text>
-                    <Text onPress={this.switchView.bind(this)} style={styles.headerRightIco}>LIST</Text>
+                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30} />
+                    <Icon onPress={this.switchView.bind(this)} style={styles.headerRightIco} name="format-list-bulleted" size={30} />
                 </View>
                 <View style={{
                     flex: 8,
@@ -89,11 +101,15 @@ export default class Buscador extends Component {
                         this.state.isListView ?
                             <EntityList entities={this.state.entities_shown}/>
                             :
-                            <Maps entities={this.state.entities_shown}/>
+                            <Maps entities={this.state.entities_shown} onMarkerClick={this.showEntityInfo.bind(this)} />
                     }
                 </View>
-                <View style={{height: 100}}>
-                    
+                <View style={{height: this.state.isListView ? 0 : 100,width: '100%'}}>
+                    { this.state.selectedEntity != null ?
+                        <Entity item={this.state.selectedEntity} />
+                        :
+                        null
+                    }
                 </View>
 
                 <View style={styles.searchBox}>

@@ -3,6 +3,8 @@ import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import MarkerList from './marker_list';
 
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 export default class Maps extends Component {
 
     constructor(props) {
@@ -59,21 +61,21 @@ export default class Maps extends Component {
           showsCompass={false}
           style={{...StyleSheet.absoluteFillObject,paddingTop: 100}}
         >
-          <MarkerList items={this.props.entities} />
+          <MarkerList items={this.props.entities} onMarkerClick={this.props.onMarkerClick}  />
         </MapView>
         <TouchableHighlight 
           underlayColor="rgba(0,0,0,0.3)"
           style={styles.pointNorth} 
           onPress={this.pointNorth.bind(this)}
         >
-          <Text>NO</Text>
+          <Icon name="compass-outline" size={20} style={{alignSelf: 'center',color: '#67ACB1'}} />
         </TouchableHighlight>
         <TouchableHighlight 
           underlayColor="rgba(0,0,0,0.3)"
           style={styles.goToMeButton} 
           onPress={this.goToMe.bind(this)}
         >
-          <Text>ME</Text>
+          <Icon name="crosshairs-gps" size={20} style={{alignSelf: 'center', color: '#67ACB1'}} />
         </TouchableHighlight>
       </View>
     );
@@ -88,7 +90,9 @@ const styles = StyleSheet.create({
         height: 30,
         width: 30,
         borderRadius: 15,
-        backgroundColor: 'red',
+        backgroundColor: 'white',
+        display: 'flex',
+        justifyContent: 'center'
     },
     goToMeButton: {
         position: 'absolute',
@@ -97,6 +101,8 @@ const styles = StyleSheet.create({
         height: 45,
         width: 45,
         borderRadius: 22.5,
-        backgroundColor: 'red'
+        backgroundColor: 'white',
+        display: 'flex',
+        justifyContent: 'center'
     }
 });

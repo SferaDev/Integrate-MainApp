@@ -24,37 +24,59 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
   >
     <Text
       accessible={true}
-      allowFontScaling={true}
+      allowFontScaling={false}
       ellipsizeMode="tail"
       onPress={[Function]}
       style={
-        Object {
-          "alignSelf": "center",
-          "color": "white",
-          "flex": 1,
-          "paddingLeft": 20,
-          "textAlign": "left",
-        }
+        Array [
+          Object {
+            "color": undefined,
+            "fontSize": 30,
+          },
+          Object {
+            "alignSelf": "center",
+            "color": "white",
+            "flex": 1,
+            "paddingLeft": 20,
+            "textAlign": "left",
+          },
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
       }
     >
-      MENU
+      
     </Text>
     <Text
       accessible={true}
-      allowFontScaling={true}
+      allowFontScaling={false}
       ellipsizeMode="tail"
       onPress={[Function]}
       style={
-        Object {
-          "alignSelf": "center",
-          "color": "white",
-          "flex": 1,
-          "paddingRight": 20,
-          "textAlign": "right",
-        }
+        Array [
+          Object {
+            "color": undefined,
+            "fontSize": 30,
+          },
+          Object {
+            "alignSelf": "center",
+            "color": "white",
+            "flex": 1,
+            "paddingRight": 20,
+            "textAlign": "right",
+          },
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
       }
     >
-      LIST
+      
     </Text>
   </View>
   <View
@@ -127,10 +149,12 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
               "backgroundColor": "transparent",
             },
             Object {
-              "backgroundColor": "red",
+              "backgroundColor": "white",
               "borderRadius": 15,
               "bottom": 15,
+              "display": "flex",
               "height": 30,
+              "justifyContent": "center",
               "left": 15,
               "position": "absolute",
               "width": 30,
@@ -142,10 +166,27 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
       >
         <Text
           accessible={true}
-          allowFontScaling={true}
+          allowFontScaling={false}
           ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 20,
+              },
+              Object {
+                "alignSelf": "center",
+                "color": "#67ACB1",
+              },
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+            ]
+          }
         >
-          NO
+          
         </Text>
       </View>
       <View
@@ -170,10 +211,12 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
               "backgroundColor": "transparent",
             },
             Object {
-              "backgroundColor": "red",
+              "backgroundColor": "white",
               "borderRadius": 22.5,
               "bottom": 15,
+              "display": "flex",
               "height": 45,
+              "justifyContent": "center",
               "position": "absolute",
               "right": 15,
               "width": 45,
@@ -185,10 +228,27 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
       >
         <Text
           accessible={true}
-          allowFontScaling={true}
+          allowFontScaling={false}
           ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 20,
+              },
+              Object {
+                "alignSelf": "center",
+                "color": "#67ACB1",
+              },
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+            ]
+          }
         >
-          ME
+          
         </Text>
       </View>
     </View>
@@ -197,6 +257,7 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
     style={
       Object {
         "height": 100,
+        "width": "100%",
       }
     }
   />
