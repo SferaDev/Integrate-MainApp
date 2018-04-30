@@ -5,6 +5,7 @@ import Login from './login/login';
 import Buscador from './buscador/buscador';
 import LlistaVals from './llista_vals/llista_vals';
 import App from '../App';
+import Logout from "./login/logout";
 
 const BuscadorStack = StackNavigator({
     buscador: {screen: Buscador},
@@ -33,6 +34,7 @@ const ConfigStack = StackNavigator({
 const DrawerStack = DrawerNavigator({
     Vals: {screen: ValsStack},
     Buscador: {screen: BuscadorStack},
+    Logout: {screen: Logout}
 });
 
 
