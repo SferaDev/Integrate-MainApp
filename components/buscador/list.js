@@ -15,6 +15,13 @@ export default class EntityList extends Component {
         navigator.geolocation.getCurrentPosition(this.sortEntities.bind(this), () => {});
     }
 
+    componentDidUpdate(prevProps,prevState){
+
+        if(this.props.entities != prevProps.entities){
+            this.setState({entities: this.props.entities});
+        }
+    }
+
     renderEntity({item}) {
         return (
             <Entity item={item} />

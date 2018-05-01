@@ -59,6 +59,7 @@ export default class Maps extends Component {
           showsPointsOfInterest={false}
           showsMyLocationButton={false}
           showsCompass={false}
+          toolbarEnabled={false}
           style={{...StyleSheet.absoluteFillObject,paddingTop: 100}}
         >
           <MarkerList items={this.props.entities} onMarkerClick={this.props.onMarkerClick}  />

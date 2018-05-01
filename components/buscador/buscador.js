@@ -104,23 +104,23 @@ export default class Buscador extends Component {
                             <Maps entities={this.state.entities_shown} onMarkerClick={this.showEntityInfo.bind(this)} />
                     }
                 </View>
-                <View style={{height: this.state.isListView ? 0 : 100,width: '100%'}}>
-                    { this.state.selectedEntity != null ?
-                        <Entity item={this.state.selectedEntity} />
-                        :
-                        null
-                    }
-                </View>
+                { this.state.selectedEntity != null ?
+                    <View style={{height: this.state.isListView ? 0 : 100,width: '100%'}}>
+                            <Entity item={this.state.selectedEntity} />
+                    </View>
+                    : null
+                }
 
                 <View style={styles.searchBox}>
                     <Icon name="magnify" size={20} style={{flex: 2, textAlign: 'center', alignSelf: 'center'}} />
                     <TextInput
-                        style={{flex: 18}}
+                        style={{flex: 18,padding: 0,paddingLeft: 5}}
                         value={this.state.searchText}
                         placeholder="Search"
                         onFocus = {this.showListView.bind(this)}
                         onChangeText={this.updateSearchText.bind(this)}
                         autoComplete={false}
+                        underlineColorAndroid='rgba(0,0,0,0)'
                     />
                 </View>
             </View>

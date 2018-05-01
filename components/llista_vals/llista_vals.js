@@ -2,13 +2,16 @@ import React, {Component} from 'react';
 import {BackHandler, StyleSheet, Text, TextInput, View, FlatList} from 'react-native';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import DropdownMenu from "react-native-dropdown-menu";
+import { Dropdown } from 'react-native-material-dropdown';
 
 export default class LlistaVals extends Component {
 
     constructor(props) {
         super(props);
-        this.data = [["Totes", "Alimentació", "Cultura", "Formació", "Mobilitat", "Tecnologia", "Salut", "Esports", "Lleure", "Altres"], ["Recents", "Popularitat", "Proximitat"]];
+        
+        this.categories = [{value: "Totes"},{value: "Alimentació"},{value: "Cultura"},{value: "Formació"},{value: "Mobilitat"},{value: "Tecnologia"},{value: "Salut"},{value: "Esports"},{value: "Lleure"},{value: "Altres"}];
+        this.orders = [{value: "Recents"},{value: "Popularitat"},{value: "Proximitat"}];
+
         this.state = {
             isListView: false,
             goods: [],
@@ -22,6 +25,11 @@ export default class LlistaVals extends Component {
         this.getGoods();
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     }
+
+    static navigationOptions = {
+        drawerLabel: 'Vals',
+        drawerIcon:  <Icon name="ticket-percent" size={25} />,
+    };
 
     handleBackButton() {
         return true;
@@ -41,24 +49,20 @@ export default class LlistaVals extends Component {
         this.props.navigation.navigate('DrawerOpen');
     }
 
-    selectFilterOrder(selection, row) {
-        //Seleccio filtre per categoria i metode d'ordenacio
-        if(selection == 0){
-            this.setState({
-                category: row,
-                selection: selection,
-                row: row
-            });
-        }
-        else if (selection == 1) {
-            this.setState({
-                order: row,
-                selection: selection,
-                row: row
-            });
-        }
+    selectFilter(value,index) {
+        //Seleccio filtre per categoria
+        this.setState({category: index});
+
         //Crida a la api
-        if (selection == 1 && row == 2) {
+        this.getGoods();
+    }
+
+    selectOrder(value,index) {
+        //Seleccio filtre per metode d'ordenacio
+        this.setState({order: index});
+
+        //Crida a la api
+        if (index === 2) {
             navigator.geolocation.getCurrentPosition(this.getGoods.bind(this), () => {});
         }
         else {
@@ -73,46 +77,37 @@ export default class LlistaVals extends Component {
     }
 
     render() {
-
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text onPress={this.openMenu.bind(this)} style={styles.headerLeftIco}>MENU</Text>
+                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30} />
                 </View>
-                <View style={{
-                    flex: 8,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#F5FCFF',
-                    width: '100%',
-                    height: '100%'
-                }}>
-                    <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 80, backgroundColor: 'white'}]}>
+                <View style={styles.filterGoods}>
+                    <View style={{flex: 1}} >
+                        <Dropdown
+                            label='Categoria'
+                            data={this.categories}
+                            onChangeText={this.selectFilter.bind(this)}
+                            itemCount={10}
+                            dropdownPosition={0}
+                          />
+                    </View> 
+                    <View style={{flex: 1}} >
+                        <Dropdown
+                            label='Filtre'
+                            data={this.orders}
+                            onChangeText={this.selectOrder.bind(this)}
+                            itemCount={3}
+                            dropdownPosition={0}
+                          />
+                    </View>    
+                </View>
+                <View style={styles.body}>
+                    <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>
                         <FlatList
                             data={this.state.goods}
                             renderItem={this.renderGood}
                         />
-                    </View>
-                </View>
-                <View style={styles.filterGoods}>
-                    <View style={{display: 'flex', flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-                        <Text style={{flex: 1, textAlign: 'center',color: '#666'}}>{"Categoria: "}</Text>
-                        <Text style={{flex: 1, textAlign: 'center',color: '#666'}}>{"Ordenació: "}</Text>
-                    </View>
-                    <View style={{display: 'flex', flex: 1}}>
-                        <DropdownMenu
-                            style={{flex: 1, padding: 0}}
-                            bgColor={'#F5FCFF'}
-                            tintColor={'#666666'}
-                            activityTintColor={'orange'}
-                            // arrowImg={}
-                            // checkImage={}
-                            // optionTextStyle={{color: '#333333'}}
-                            // titleStyle={{color: '#333333'}}
-                            // maxHeight={300}
-                            handler={this.selectFilterOrder.bind(this)}
-                            data={this.data}>
-                        </DropdownMenu>
                     </View>
                 </View>
             </View>
@@ -149,17 +144,19 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     filterGoods: {
-        position: 'absolute',
-        top: 60,
-        alignSelf: 'center',
-        width: '100%',
-        height: 40,
-        backgroundColor: '#F5FCFF',
-        borderRadius: 5,
-        borderColor: '#ccc',
-        borderStyle: "solid",
-        borderWidth: 1,
+        height: 60,
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
+        padding: 0,
+        paddingLeft: 5,
+        paddingRight: 5
+    },
+    body: {
+        flex: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+        width: '100%',
+        height: '100%'
     }
 });
