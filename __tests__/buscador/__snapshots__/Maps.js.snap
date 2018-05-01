@@ -36,6 +36,7 @@ exports[`Test group for Maps renders maps correctly 1`] = `
         "top": 0,
       }
     }
+    toolbarEnabled={false}
   />
   <View
     accessibilityComponentType={undefined}

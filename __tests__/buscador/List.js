@@ -44,6 +44,11 @@ describe('Test group for EntityList', function () {
         expect(instance.renderEntity({item: {id: 1}})).toMatchSnapshot();
     });
 
+    test('componentDidUpdate is callable and returns nothing', () => {
+        
+        expect(instance.componentDidUpdate({},{})).toBe(undefined);
+    });
+
     test('calcDistance computes the euclidian distance between two coordinates', () => {
         let latitude = 4;
         let longitude = 3;

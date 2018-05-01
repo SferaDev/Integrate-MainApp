@@ -56,22 +56,18 @@ describe('Test group for llista_vals', function () {
         expect(instance.handleBackButton()).toBe(true);
     });
 
-    describe("selectFilterOrder() tests", () => {
+    test('selectFilter is callable and returns nothing', () => {
+        expect(instance.selectFilter(0,0)).toBe(undefined);
+    });
 
-        test('selectFilterOrder is callable and returns nothing', () => {
-            expect(instance.selectFilterOrder()).toBe(undefined);
+    describe("selectOrder() tests", () => {
+
+        test('selectOrder is callable and returns nothing', () => {
+            expect(instance.selectOrder(0,0)).toBe(undefined);
         });
 
-        test('selectFilterOrder is callable and returns nothing', () => {
-            expect(instance.selectFilterOrder(0)).toBe(undefined);
-        });
-
-        test('selectFilterOrder is callable and returns nothing', () => {
-            expect(instance.selectFilterOrder(1)).toBe(undefined);
-        });
-
-        test('selectFilterOrder is callable and returns nothing', () => {
-            expect(instance.selectFilterOrder(1, 2)).toBe(undefined);
+        test('selectOrder is callable and returns nothing', () => {
+            expect(instance.selectOrder(0,2)).toBe(undefined);
         });
     });
 

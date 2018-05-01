@@ -126,6 +126,7 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
             "top": 0,
           }
         }
+        toolbarEnabled={false}
       />
       <View
         accessibilityComponentType={undefined}
@@ -256,14 +257,6 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
   <View
     style={
       Object {
-        "height": 100,
-        "width": "100%",
-      }
-    }
-  />
-  <View
-    style={
-      Object {
         "alignSelf": "center",
         "backgroundColor": "white",
         "borderColor": "#ccc",
@@ -313,8 +306,11 @@ exports[`Test group for EntityList renders buscador correctly 1`] = `
       style={
         Object {
           "flex": 18,
+          "padding": 0,
+          "paddingLeft": 5,
         }
       }
+      underlineColorAndroid="rgba(0,0,0,0)"
       value=""
     />
   </View>

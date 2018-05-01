@@ -4,6 +4,7 @@ import {
     View
 } from 'react-native';
 import {AsyncStorage} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Logout extends Component {
     constructor(props) {
@@ -11,6 +12,11 @@ export default class Logout extends Component {
         this.state = {
         };
     }
+
+    static navigationOptions = {
+        drawerLabel: 'Log Out',
+        drawerIcon:  <Icon name="logout-variant" size={25} />,
+    };
 
     componentDidMount() {
         AsyncStorage.removeItem('token');
