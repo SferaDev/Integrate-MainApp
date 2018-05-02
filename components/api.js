@@ -47,22 +47,20 @@ const API = {
         return new Promise(function (resolve, reject) {
             AsyncStorage.getItem('token').then( (token) => {
                 if (token) {
-                    let url = BASEURL+'/me/goods?token='+token+'&category='+category+'&order='+order;
-                    if (loc !== null) {
-                        url += '&latitude='+loc.coords.latitude+'&longitude='+loc.coords.longitude;
+                    let url = 'me/goods';
+                    let params = [ {key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}];
+                    if (loc != null) {
+                        params.push({key: 'latitude', value: loc.coords.latitude});
+                        params.push({key: 'longitude', value: loc.coords.longitude});
                     }
-                    /*fetch(url)
-                        .then(function (response) {
-                            if( response.status === 404 ){
-                                reject();
-                            }else if( response.status === 200 ){
-                                resolve( JSON.parse(response._bodyText) );
-                            }
-                        })
-                        .catch(function (myJson) {
+                    let success = (response) => {
+                        if( response.status === 404 ){
                             reject();
-                        });*/
-                    resolve([{name: 'good1'},{name: 'good2'}]);
+                        }else if( response.status === 200 ){
+                            resolve( JSON.parse(response._bodyText) );
+                        }
+                    }
+                    httpHelper.callApi(url,params,success,reject);
                 } else {
                     reject();
                 }
