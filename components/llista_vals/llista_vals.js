@@ -3,6 +3,7 @@ import {BackHandler, StyleSheet, Text, TextInput, View, FlatList} from 'react-na
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dropdown } from 'react-native-material-dropdown';
+import Good from './good';
 
 export default class LlistaVals extends Component {
 
@@ -25,11 +26,6 @@ export default class LlistaVals extends Component {
         this.getGoods();
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     }
-
-    static navigationOptions = {
-        drawerLabel: 'Vals',
-        drawerIcon:  <Icon name="ticket-percent" size={25} />,
-    };
 
     handleBackButton() {
         return true;
@@ -72,7 +68,9 @@ export default class LlistaVals extends Component {
 
     renderGood({item}) {
         return (
-            <Text>{JSON.stringify(item)}</Text>
+            <Good
+                item = {item}
+            />
         );
     }
 
@@ -105,7 +103,7 @@ export default class LlistaVals extends Component {
                 <View style={styles.body}>
                     <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>
                         <FlatList
-                            data={this.state.goods}
+                            data={this.state.goods_shown}
                             renderItem={this.renderGood}
                         />
                     </View>
