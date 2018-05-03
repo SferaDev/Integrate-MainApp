@@ -16,3 +16,15 @@ it('login() is callable and returns nothing', () => {
         expect(typeof s).toBe('string');
     });
 });
+
+it('getEntities() is callable and returns nothing', () => {
+    API.getEntities().then((s) => {
+        expect(typeof s).toBe('string');
+    });
+});
+
+it('getGoods() is callable and returns nothing', () => {
+    API.getGoods(0,0,null).then((s) => {
+        expect(typeof s).toBe('string');
+    });
+});

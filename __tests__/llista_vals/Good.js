@@ -38,4 +38,8 @@ describe('Test group for good', function () {
         const tree = renderer.create(<Good item={good}/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
+
+    it('addFavourites() when token is null is callable and returns nothing', () => {
+        expect(instance.addFavourites(null)).toBe(undefined);
+    });
 });
