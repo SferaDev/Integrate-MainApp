@@ -106,5 +106,33 @@ describe('Test group for EntityList', function () {
 
     it('navigateHome() is callable and returns nothing', () => {
         expect(instance.navigateHome()).toBe(undefined);
-    });    
+    });
+
+    describe("getButtonBackground() and getButtonColor() tests", () => {
+
+        it('getButtonBackground() is callable and returns a color code', () => {
+            
+            expect(typeof instance.getButtonBackground()).toBe("string");
+        });
+
+        it('getButtonBackground() is callable and returns a color code', () => {
+            
+            instance.state.nifnie = '123456789';
+            instance.state.password = 'QWERTY1234';
+            expect(typeof instance.getButtonBackground()).toBe("string");
+        });
+
+        it('getButtonColor() is callable and returns a color code', () => {
+
+            expect(typeof instance.getButtonColor()).toBe("string");
+        });
+
+        it('getButtonColor() is callable and returns a color code', () => {
+
+            instance.state.nifnie = '123456789';
+            instance.state.password = 'QWERTY1234';
+            expect(typeof instance.getButtonColor()).toBe("string");
+        });
+
+    });
 });

@@ -86,8 +86,15 @@ export default class LogIn extends Component {
         //console.warn('Recuperar Contrasenya')
     }
 
+    getButtonBackground(){
+        return (this.isEmpty() ? '#CCC' : '#094671');
+    }
+
+    getButtonColor(){
+        return (this.isEmpty() ? '#666' : 'white');
+    }
+
     render() {
-        let ie = this.isEmpty();
 
         return (
             <View style={styles.container}>
@@ -126,10 +133,10 @@ export default class LogIn extends Component {
                             He oblidat la contrasenya?
                         </Text>
                         <TouchableHighlight
-                            style={[styles.button, {backgroundColor: (ie) ? '#CCC' : '#094671'}]}
+                            style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.login.bind(this)}
-                            disabled={ie}>
-                            <Text style={{alignSelf: 'center', color: (ie) ? '#666' : 'white', fontWeight: 'bold'}}>
+                            disabled={this.isEmpty()}>
+                            <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
                                 Entra
                             </Text>
                         </TouchableHighlight>
