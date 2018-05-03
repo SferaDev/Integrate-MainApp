@@ -5,21 +5,6 @@ import Entity from './entity';
 export default class EntityList extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            loc: null,
-            entities: [],
-        };
-    }
-
-    componentDidMount(){
-        navigator.geolocation.getCurrentPosition(this.sortEntities.bind(this), () => {});
-    }
-
-    componentDidUpdate(prevProps,prevState){
-
-        if(this.props.entities != prevProps.entities){
-            this.setState({entities: this.props.entities});
-        }
     }
 
     renderEntity({item}) {
@@ -28,26 +13,11 @@ export default class EntityList extends Component {
         );
     }
 
-    calcDistance(latitude,longitude){
-        return Math.sqrt( Math.pow(this.coords.latitude-latitude,2)+Math.pow(this.coords.longitude-longitude,2) );
-    }
-
-    sortByCoords(a,b){
-        return (this.calcDistance(a.addressLatitude,a.addressLongitude) > this.calcDistance(b.addressLatitude,b.addressLongitude)) ? 1 : -1;
-    }
-
-    sortEntities(loc){
-        this.coords = loc.coords;
-        let unsortedEntities = this.props.entities;
-        let sortedEntities = unsortedEntities.sort(this.sortByCoords.bind(this));
-        this.setState({entities: sortedEntities});
-    }
-
     render() {
         return (
             <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 60, backgroundColor: 'white'}]}>
                 <FlatList
-                    data={this.state.entities}
+                    data={this.props.entities}
                     renderItem={this.renderEntity}
                 />
             </View>
