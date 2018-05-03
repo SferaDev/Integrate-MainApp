@@ -11,7 +11,13 @@ export default class Good extends Component {
         return (
             <View key={this.props.item['_id']} style={styles.entityView}>
                 <Text>
-                    {JSON.stringify(this.props.item)}
+                    Cada {this.props.item.reusePeriod} dies
+                </Text>
+                <Text>
+                    -{this.props.item.discount} {this.props.item.discountType}
+                </Text>
+                <Text>
+                    {this.props.item.productName}
                 </Text>
             </View>
         );
@@ -23,8 +29,9 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderStyle: 'solid',
         borderTopWidth: 1,
+        borderBottomWidth:1,
         padding: 15,
-        paddingRight: 60
+        paddingRight: 60,
     },
     entityName: {
         fontSize: 24,

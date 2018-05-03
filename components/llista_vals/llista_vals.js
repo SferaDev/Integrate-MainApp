@@ -4,6 +4,7 @@ import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dropdown } from 'react-native-material-dropdown';
 import Good from './good';
+import SegmentControl from 'react-native-segment-controller';
 
 export default class LlistaVals extends Component {
 
@@ -18,7 +19,8 @@ export default class LlistaVals extends Component {
             goods: [],
             goods_shown:[],
             category: 0,
-            order: 0
+            order: 0,
+            selectedIndex: 0,
         };
     }
 
@@ -74,12 +76,27 @@ export default class LlistaVals extends Component {
         );
     }
 
+    handleIndexChange = (index) => {
+        this.setState({
+            ...this.state,
+            selectedIndex: index,
+        });
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30} />
                 </View>
+                <SegmentControl
+                    values={['Preferits', 'Tots']}
+                    height={50}
+                    borderRadius={1}
+                    selectedIndex={this.state.selectedIndex}
+                    onTabPress={this.handleIndexChange}
+                />
+
                 <View style={styles.filterGoods}>
                     <View style={{flex: 1}} >
                         <Dropdown
@@ -156,5 +173,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
         width: '100%',
         height: '100%'
-    }
+    },
 });
