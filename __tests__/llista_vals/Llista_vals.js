@@ -44,6 +44,10 @@ describe('Test group for llista_vals', function () {
         expect(instance.openMenu()).toBe(undefined);
     });
 
+    test('openMenu is callable and returns nothing', () => {
+        expect(instance.handleIndexChange(0)).toBe(undefined);
+    });
+
     test('getGoods is callable and returns nothing', () => {
         expect(instance.getGoods()).toBe(undefined);
     });
