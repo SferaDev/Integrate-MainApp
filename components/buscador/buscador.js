@@ -25,16 +25,17 @@ export default class Buscador extends Component {
     };*/
 
     componentDidMount() {
-        this.getEntities();
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+
+        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {});
     }
 
     handleBackButton() {
         return true;
     }
 
-    getEntities() {
-        API.getEntities().then(this.setEntities.bind(this));
+    getEntities(loc) {
+        API.getEntities(loc).then(this.setEntities.bind(this));
     }
 
     showEntityInfo(ent){

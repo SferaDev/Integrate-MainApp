@@ -11,7 +11,7 @@ const renderMarkers = (props) => {
 				identifier={''+e.id+''} 
 				onPress={() => props.onMarkerClick(i)} 
 				image={MarkerImage} 
-				coordinate={ {latitude: e.addressLatitude, longitude: e.addressLongitude, latitudeDelta: 0.01,longitudeDelta: 0.01} } 
+				coordinate={ {latitude: e.coordinates[1], longitude: e.coordinates[0], latitudeDelta: 0.01,longitudeDelta: 0.01} } 
 				pinColor="red" 
 			/>
 		);
