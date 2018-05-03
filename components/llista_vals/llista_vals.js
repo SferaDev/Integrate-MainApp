@@ -20,7 +20,8 @@ export default class LlistaVals extends Component {
             goods_shown:[],
             category: 0,
             order: 0,
-            selectedIndex: 0,
+            selectedIndex: 1,
+            visible: false
         };
     }
 
@@ -83,6 +84,11 @@ export default class LlistaVals extends Component {
         });
     }
 
+    canApplyFilters() {
+        if (this.state.selectedIndex == 0) return true;
+        else return false;
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -97,7 +103,7 @@ export default class LlistaVals extends Component {
                     onTabPress={this.handleIndexChange}
                 />
 
-                <View style={styles.filterGoods}>
+                <View style={[styles.filterGoods, {height: (this.canApplyFilters()) ? 1 : 60}]}>
                     <View style={{flex: 1}} >
                         <Dropdown
                             label='Categoria'
@@ -105,6 +111,7 @@ export default class LlistaVals extends Component {
                             onChangeText={this.selectFilter.bind(this)}
                             itemCount={10}
                             dropdownPosition={0}
+                            disabled={this.canApplyFilters()}
                           />
                     </View> 
                     <View style={{flex: 1}} >
@@ -114,6 +121,7 @@ export default class LlistaVals extends Component {
                             onChangeText={this.selectOrder.bind(this)}
                             itemCount={3}
                             dropdownPosition={0}
+                            disabled={this.canApplyFilters()}
                           />
                     </View>    
                 </View>
@@ -164,7 +172,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 0,
         paddingLeft: 5,
-        paddingRight: 5
+        paddingRight: 5,
     },
     body: {
         flex: 8,
