@@ -45,11 +45,15 @@ describe('Test group for llista_vals', function () {
     });
 
     test('openMenu is callable and returns nothing', () => {
-        expect(instance.handleIndexChange(0)).toBe(undefined);
+        expect(instance.setIndexChange(0)).toBe(undefined);
     });
 
     test('getGoods is callable and returns nothing', () => {
         expect(instance.getGoods()).toBe(undefined);
+    });
+
+    test('getGoodsFav is callable and returns nothing', () => {
+        expect(instance.getGoodsFav()).toBe(undefined);
     });
 
     test('setGoods is callable and returns nothing', () => {
