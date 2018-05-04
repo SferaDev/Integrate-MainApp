@@ -28,3 +28,9 @@ it('getGoods() is callable and returns nothing', () => {
         expect(typeof s).toBe('string');
     });
 });
+
+it('getGoodsFav() is callable and returns nothing', () => {
+    API.getGoodsFav(0,0,null).then((s) => {
+        expect(typeof s).toBe('string');
+    });
+});

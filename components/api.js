@@ -69,6 +69,32 @@ const API = {
 
         });
     },
+    getGoodsFav: (category = 0, order = 0, loc = null) => {
+        return new Promise(function (resolve, reject) {
+            AsyncStorage.getItem('token').then( (token) => {
+                if (token) {
+                    let url = 'me/goods/favourites';
+                    let params = [ {key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}];
+                    if (loc != null) {
+                        params.push({key: 'latitude', value: loc.coords.latitude});
+                        params.push({key: 'longitude', value: loc.coords.longitude});
+                    }
+                    let success = (response) => {
+                        if( response.status === 404 ){
+                            reject();
+                        }else if( response.status === 200 ){
+                            resolve( JSON.parse(response._bodyText) );
+                        }
+                    }
+                    httpHelper.callApi(url,params,success,reject);
+                } else {
+                    reject();
+                }
+
+            } );
+
+        });
+    },
 };
 
 export default API
