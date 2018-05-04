@@ -6,11 +6,24 @@ import API from "../api";
 export default class Good extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            favourite: false,
+            id: this.props.item['_id'],
+        };
+    }
+
+    showError() {
+        console.warn("ERRORACO")
     }
 
     addFavourites() {
-        console.warn("Afegir a fav")
+        if (this.state.favourite == false) {
+            this.setState({favourite: true});
+            API.addGoodFav(this.props.item['_id']).catch(this.showError.bind(this));
+            ;
+        }
+        else this.setState({favourite: false});
+        console.warn("me/goods/favourites/" + this.props.item['_id'])
     }
 
     render() {
@@ -23,7 +36,7 @@ export default class Good extends Component {
                 <Text style={styles.goodSubText}>{this.props.item.category}</Text>
 
                 <Icon style={styles.favProps}
-                    name="star" size={25}
+                      name="star" size={25}
                       onPress={this.addFavourites.bind(this)}/>
             </View>
         );
