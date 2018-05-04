@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    TouchableHighlight,
+    AsyncStorage,
     Image,
     ImageBackground,
-    Keyboard
+    Keyboard,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableHighlight,
+    View
 } from 'react-native';
 
 import Toast from './toast';
 import API from '../api';
-import {AsyncStorage} from 'react-native';
 
 export default class LogIn extends Component {
     constructor(props) {
@@ -79,18 +79,18 @@ export default class LogIn extends Component {
     }
 
     navigateHome() {
-        this.props.navigation.navigate('DrawerNavigation');    
+        this.props.navigation.navigate('DrawerNavigation');
     }
 
     restorePassword() {
         //console.warn('Recuperar Contrasenya')
     }
 
-    getButtonBackground(){
+    getButtonBackground() {
         return (this.isEmpty() ? '#CCC' : '#094671');
     }
 
-    getButtonColor(){
+    getButtonColor() {
         return (this.isEmpty() ? '#666' : 'white');
     }
 

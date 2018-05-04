@@ -8,24 +8,24 @@ import Adapter from 'enzyme-adapter-react-16';
 import Toast from '../../components/login/toast';
 
 describe('Test group for Toast', function () {
-	beforeAll(() => {
+    beforeAll(() => {
         configure({adapter: new Adapter()});
     });
 
     test('renders Toast correctly when visible', () => {
-	    const tree = renderer.create(<Toast visible={true} onClose={jest.fn()}/>).toJSON();
-	    expect(tree).toMatchSnapshot();
-	});
+        const tree = renderer.create(<Toast visible={true} onClose={jest.fn()}/>).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
 
 
     test('renders Toast correctly when hidden', () => {
-	    const tree = renderer.create(<Toast visible={false} onClose={jest.fn()}/>).toJSON();
-	    expect(tree).toMatchSnapshot();
-	});
+        const tree = renderer.create(<Toast visible={false} onClose={jest.fn()}/>).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
 
-	test('isVisible is callable and returns "flex"', () => {
-		let wrapper = shallow(<Toast visible={true} onClose={jest.fn()}/>);
-		let instance = wrapper.instance();
+    test('isVisible is callable and returns "flex"', () => {
+        let wrapper = shallow(<Toast visible={true} onClose={jest.fn()}/>);
+        let instance = wrapper.instance();
         expect(instance.isVisible()).toBe("flex");
     });
 

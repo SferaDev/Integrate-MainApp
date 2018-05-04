@@ -30,7 +30,7 @@ describe('Test group for EntityList', function () {
     });
 
     test('renders Login correctly', () => {
-        const tree = renderer.create(<LogIn />).toJSON();
+        const tree = renderer.create(<LogIn/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
