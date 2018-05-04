@@ -22,12 +22,12 @@ const API = {
             }
         });
     },
-    getEntities: () => {
+    getEntities: (loc = null) => {
         return new Promise((resolve, reject) => {
             AsyncStorage.getItem('token').then( (token) => {
                 if (token) {
                     let url = 'me/entities';
-                    let params = [ {key: 'token', value: token} ];
+                    let params = [ {key: 'token', value: token}, {key: 'latitude',value: loc.coords.latitude}, {key: 'longitude', value: loc.coords.longitude} ];
                     let success = (response) => {
                         if (response.status === 404) {
                             reject();
@@ -39,7 +39,6 @@ const API = {
                 } else {
                     reject();
                 }
-            }).catch(() => {
             });
         });
     },
