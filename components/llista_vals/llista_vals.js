@@ -40,6 +40,12 @@ export default class LlistaVals extends Component {
         API.getGoods(category, order, loc).then(this.setGoods.bind(this));
     }
 
+    getGoodsFav(loc) {
+        let category = this.state.category;
+        let order = this.state.order;
+        API.getGoodsFav(category, order, loc).then(this.setGoods.bind(this));
+    }
+
     setGoods(goods) {
         this.setState({goods: goods, goods_shown: goods});
     }
@@ -77,11 +83,15 @@ export default class LlistaVals extends Component {
         );
     }
 
-    handleIndexChange = (index) => {
-        this.setState({
-            ...this.state,
-            selectedIndex: index,
-        });
+    setIndexChange(index) {
+        this.setState({selectedIndex: index})
+        if (index == 1) {
+            this.getGoods();
+
+        }
+        else if (index == 0) {
+            this.getGoodsFav();
+        }
     }
 
     canApplyFilters() {
@@ -100,7 +110,7 @@ export default class LlistaVals extends Component {
                     height={50}
                     borderRadius={1}
                     selectedIndex={this.state.selectedIndex}
-                    onTabPress={this.handleIndexChange}
+                    onTabPress={this.setIndexChange.bind(this)}
                 />
 
                 <View style={[styles.filterGoods, {height: (this.canApplyFilters()) ? 1 : 60}]}>
