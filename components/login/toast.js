@@ -7,9 +7,17 @@ export default class Toast extends Component {
         this.state = {};
     }
 
+    isVisible() {
+        if (this.props.visible) {
+            return 'flex';
+        } else {
+            return 'none';
+        }
+    }
+
     render() {
         return (
-            <View style={[styles.toastback, {display: (this.props.visible) ? 'flex' : 'none'}]}>
+            <View style={[styles.toastback, {display: this.isVisible()}]}>
                 <View style={styles.toastcontent}>
                     <Text style={styles.text}>
                         El Nie / Nif o la contrasenya són incorrectes

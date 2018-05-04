@@ -1,21 +1,26 @@
 import React, {Component} from 'react';
-import {BackHandler, StyleSheet, Text, TextInput, View, FlatList} from 'react-native';
+import {BackHandler, FlatList, StyleSheet, Text, View} from 'react-native';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Dropdown } from 'react-native-material-dropdown';
+import {Dropdown} from 'react-native-material-dropdown';
 
 export default class LlistaVals extends Component {
 
+    static navigationOptions = {
+        drawerLabel: 'Vals',
+        drawerIcon: <Icon name="ticket-percent" size={25}/>,
+    };
+
     constructor(props) {
         super(props);
-        
-        this.categories = [{value: "Totes"},{value: "Alimentació"},{value: "Cultura"},{value: "Formació"},{value: "Mobilitat"},{value: "Tecnologia"},{value: "Salut"},{value: "Esports"},{value: "Lleure"},{value: "Altres"}];
-        this.orders = [{value: "Recents"},{value: "Popularitat"},{value: "Proximitat"}];
+
+        this.categories = [{value: "Totes"}, {value: "Alimentació"}, {value: "Cultura"}, {value: "Formació"}, {value: "Mobilitat"}, {value: "Tecnologia"}, {value: "Salut"}, {value: "Esports"}, {value: "Lleure"}, {value: "Altres"}];
+        this.orders = [{value: "Recents"}, {value: "Popularitat"}, {value: "Proximitat"}];
 
         this.state = {
             isListView: false,
             goods: [],
-            goods_shown:[],
+            goods_shown: [],
             category: 0,
             order: 0
         };
@@ -25,11 +30,6 @@ export default class LlistaVals extends Component {
         this.getGoods();
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     }
-
-    static navigationOptions = {
-        drawerLabel: 'Vals',
-        drawerIcon:  <Icon name="ticket-percent" size={25} />,
-    };
 
     handleBackButton() {
         return true;
@@ -49,7 +49,7 @@ export default class LlistaVals extends Component {
         this.props.navigation.navigate('DrawerOpen');
     }
 
-    selectFilter(value,index) {
+    selectFilter(value, index) {
         //Seleccio filtre per categoria
         this.setState({category: index});
 
@@ -57,13 +57,14 @@ export default class LlistaVals extends Component {
         this.getGoods();
     }
 
-    selectOrder(value,index) {
+    selectOrder(value, index) {
         //Seleccio filtre per metode d'ordenacio
         this.setState({order: index});
 
         //Crida a la api
         if (index === 2) {
-            navigator.geolocation.getCurrentPosition(this.getGoods.bind(this), () => {});
+            navigator.geolocation.getCurrentPosition(this.getGoods.bind(this), () => {
+            });
         }
         else {
             this.getGoods();
@@ -80,27 +81,27 @@ export default class LlistaVals extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30} />
+                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
                 </View>
                 <View style={styles.filterGoods}>
-                    <View style={{flex: 1}} >
+                    <View style={{flex: 1}}>
                         <Dropdown
                             label='Categoria'
                             data={this.categories}
                             onChangeText={this.selectFilter.bind(this)}
                             itemCount={10}
                             dropdownPosition={0}
-                          />
-                    </View> 
-                    <View style={{flex: 1}} >
+                        />
+                    </View>
+                    <View style={{flex: 1}}>
                         <Dropdown
                             label='Filtre'
                             data={this.orders}
                             onChangeText={this.selectOrder.bind(this)}
                             itemCount={3}
                             dropdownPosition={0}
-                          />
-                    </View>    
+                        />
+                    </View>
                 </View>
                 <View style={styles.body}>
                     <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>

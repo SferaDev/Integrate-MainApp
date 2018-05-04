@@ -57,17 +57,17 @@ describe('Test group for llista_vals', function () {
     });
 
     test('selectFilter is callable and returns nothing', () => {
-        expect(instance.selectFilter(0,0)).toBe(undefined);
+        expect(instance.selectFilter(0, 0)).toBe(undefined);
     });
 
     describe("selectOrder() tests", () => {
 
         test('selectOrder is callable and returns nothing', () => {
-            expect(instance.selectOrder(0,0)).toBe(undefined);
+            expect(instance.selectOrder(0, 0)).toBe(undefined);
         });
 
         test('selectOrder is callable and returns nothing', () => {
-            expect(instance.selectOrder(0,2)).toBe(undefined);
+            expect(instance.selectOrder(0, 2)).toBe(undefined);
         });
     });
 
