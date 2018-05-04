@@ -42,4 +42,8 @@ describe('Test group for good', function () {
     it('addFavourites() when token is null is callable and returns nothing', () => {
         expect(instance.addFavourites(null)).toBe(undefined);
     });
+
+    it('setState() when token is null is callable and returns nothing', () => {
+        expect(instance.setState(null)).toBe(undefined);
+    });
 });
