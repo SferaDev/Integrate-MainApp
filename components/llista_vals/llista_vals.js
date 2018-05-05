@@ -15,8 +15,8 @@ export default class LlistaVals extends Component {
         this.orders = [{value: "Recents"},{value: "Popularitat"},{value: "Proximitat"}];
 
         this.state = {
-            isListView: false,
             goods: [],
+            goodsFav: [],
             goods_shown:[],
             category: 0,
             order: 0,
@@ -26,12 +26,17 @@ export default class LlistaVals extends Component {
     }
 
     componentDidMount() {
-        this.getGoods();
+        this.getAllGoods();
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     handleBackButton() {
         return true;
+    }
+
+    getAllGoods(){
+        this.getGoods();
+        this.getGoodsFav();
     }
 
     getGoods(loc) {
@@ -43,14 +48,21 @@ export default class LlistaVals extends Component {
     getGoodsFav(loc) {
         let category = this.state.category;
         let order = this.state.order;
-        API.getGoodsFav(category, order, loc).then(this.setGoods.bind(this));
+        API.getGoodsFav(category, order, loc).then(this.setGoodsFav.bind(this));
     }
 
     setGoods(goods) {
-        this.setState({goods: goods, goods_shown: goods});
+        this.setState({goods: goods});
+        if(this.state.selectedIndex == 1)this.setState({goods_shown: goods});
+    }
+
+    setGoodsFav(goodsFav) {
+        this.setState({goodsFav: goodsFav});
+        if(this.state.selectedIndex == 0)this.setState({goods_shown: goodsFav});
     }
 
     openMenu() {
+
         this.props.navigation.navigate('DrawerOpen');
     }
 
@@ -75,23 +87,31 @@ export default class LlistaVals extends Component {
         }
     }
 
+    toggleFavourite(id) {
+        if(this.state.selectedIndex == 1) {
+            API.addGoodFav(id).then(this.getAllGoods.bind(this));
+        }
+        else {
+            API.deleteGoodFav(id).then(this.getAllGoods.bind(this));
+        }
+    }
+
     renderGood({item}) {
         return (
             <Good
-                item = {item}
+                id={item._id}
+                item={item}
+                onPress={this.toggleFavourite}
+                context={this}
+                isFav={this.state.selectedIndex == 0}
             />
         );
     }
 
     setIndexChange(index) {
-        this.setState({selectedIndex: index})
-        if (index == 1) {
-            this.getGoods();
 
-        }
-        else if (index == 0) {
-            this.getGoodsFav();
-        }
+        let goods_shown = (index == 1) ? this.state.goods : this.state.goodsFav;
+        this.setState({selectedIndex: index,goods_shown: goods_shown})
     }
 
     canApplyFilters() {
@@ -139,7 +159,7 @@ export default class LlistaVals extends Component {
                     <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>
                         <FlatList
                             data={this.state.goods_shown}
-                            renderItem={this.renderGood}
+                            renderItem={this.renderGood.bind(this)}
                         />
                     </View>
                 </View>

@@ -6,35 +6,21 @@ import API from "../api";
 export default class Good extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            favourite: false,
-            id: this.props.item['_id'],
-        };
-    }
-
-    addFavourites() {
-        if (this.state.favourite == false) {
-            this.setState({favourite: true});
-            API.addGoodFav(this.props.item['_id']);
-        }
-        else {
-            this.setState({favourite: false});
-            API.deleteGoodFav(this.props.item['_id']);
-        }
     }
 
     render() {
         return (
-            <View key={this.props.item['_id']} style={styles.entityView}>
+            <View key={this.props.item._id} style={styles.entityView}>
                 <Text style={styles.goodBasicText}>Cada {this.props.item.reusePeriod} dies</Text>
                 <Text style={styles.goodBasicText}>Preu inicial: {this.props.item.initialPrice} €</Text>
                 <Text style={styles.goodBasicText}>-{this.props.item.discount} {this.props.item.discountType}</Text>
                 <Text style={styles.entityName}>{this.props.item.owner.name}</Text>
                 <Text style={styles.goodBasicText}>{this.props.item.productName}</Text>
 
-                <Icon style={[styles.favProps, {color: (this.state.favourite) ? '#f4eb49' : '#CCC'}]}
+                <Icon style={[styles.favProps, {color: (this.props.isFav) ? '#f4eb49' : '#CCC'}]}
                       name="star" size={25}
-                      onPress={this.addFavourites.bind(this)}
+                      onPress={this.props.onPress.bind(this.props.context,this.props.item._id)}
+                      id={this.props.item._id}
                 />
             </View>
         );
