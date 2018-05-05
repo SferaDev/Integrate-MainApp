@@ -104,13 +104,32 @@ const API = {
                     let success = (response) => {
                         if (response.status === 404) {
                             reject();
-                            console.warn("SOC RESOLVE");
                         } else if (response.status === 200) {
                             resolve(JSON.parse(response._bodyText));
-                            console.warn("SOC RESPONSE");
                         }
                     }
-                    httpHelper.callApi(url, params, success, reject);
+                    httpHelper.callApi(url, params, success, reject, "POST");
+                } else {
+                    reject();
+                }
+            }).catch(() => {
+            });
+        });
+    },
+    deleteGoodFav: (good_id = '') => {
+        return new Promise((resolve, reject) => {
+            AsyncStorage.getItem('token').then((token) => {
+                if (token) {
+                    let url = 'me/goods/favourites/' + good_id;
+                    let params = [{key: 'token', value: token}, {key: 'good_id', value: good_id}];
+                    let success = (response) => {
+                        if (response.status === 404) {
+                            reject();
+                        } else if (response.status === 200) {
+                            resolve(JSON.parse(response._bodyText));
+                        }
+                    }
+                    httpHelper.callApi(url, params, success, reject, "DELETE");
                 } else {
                     reject();
                 }
