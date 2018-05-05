@@ -4,28 +4,27 @@ import renderer from 'react-test-renderer';
 
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import Entity from '../../components/buscador/entity';
 
-import EntityList from '../../components/buscador/list';
-
+const navigation = {navigate: jest.fn()};
 let wrapper;
 let instance;
-
-const mockNavigator = {
-    geolocation: {
-        getCurrentPosition: jest.fn()
-    }
-}
-
-global.navigator = mockNavigator;
+let entity;
 
 describe('Test group for EntityList', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
+        entity = {
+            id: 1,
+            name: 'name',
+            description: 'description',
+            addressName: 'addressName',
+        }
     });
 
     beforeEach(function () {
         // Before each: Shallows the EntityList component
-        wrapper = shallow(<EntityList entities={[]}/>);
+        wrapper = shallow(<Entity item={entity}/>);
         instance = wrapper.instance();
     });
 
@@ -35,13 +34,9 @@ describe('Test group for EntityList', function () {
         instance = null;
     });
 
-    test('renders list correctly', () => {
-        const tree = renderer.create(<EntityList entities={[]}/>).toJSON();
+    test('renders buscador correctly', () => {
+        const tree = renderer.create(<Entity item={entity}/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
-    test('renderEntity renders an entity correctly', () => {
-        expect(instance.renderEntity({item: {id: 1}})).toMatchSnapshot();
-    });
 });
-
