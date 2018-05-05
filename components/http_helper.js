@@ -12,8 +12,8 @@ const buildQuery = (url = '',params = [],base_url = BASEURL) => {
     return query;
 }
 
-const callApi = (url,params,success,error) => {
-    fetch(buildQuery(url,params)).then(success).catch(error);
+const callApi = (url,params,success,error,method="GET") => {
+    fetch(buildQuery(url,params),{method:method}).then(success).catch(error);
 }
 
 const httpHelper = {
