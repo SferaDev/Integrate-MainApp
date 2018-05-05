@@ -46,28 +46,97 @@ const API = {
         return new Promise(function (resolve, reject) {
             AsyncStorage.getItem('token').then( (token) => {
                 if (token) {
-                    let url = BASEURL+'/me/goods?token='+token+'&category='+category+'&order='+order;
-                    if (loc !== null) {
-                        url += '&latitude='+loc.coords.latitude+'&longitude='+loc.coords.longitude;
+                    let url = 'me/goods';
+                    let params = [ {key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}];
+                    if (loc != null) {
+                        params.push({key: 'latitude', value: loc.coords.latitude});
+                        params.push({key: 'longitude', value: loc.coords.longitude});
                     }
-                    /*fetch(url)
-                        .then(function (response) {
-                            if( response.status === 404 ){
-                                reject();
-                            }else if( response.status === 200 ){
-                                resolve( JSON.parse(response._bodyText) );
-                            }
-                        })
-                        .catch(function (myJson) {
+                    let success = (response) => {
+                        if( response.status === 404 ){
                             reject();
-                        });*/
-                    resolve([{name: 'good1'},{name: 'good2'}]);
+                        }else if( response.status === 200 ){
+                            resolve( JSON.parse(response._bodyText) );
+                        }
+                    }
+                    httpHelper.callApi(url,params,success,reject);
+                } else {
+                    reject();
+                }
+            } );
+
+        });
+    },
+    getGoodsFav: (category = 0, order = 0, loc = null) => {
+        return new Promise(function (resolve, reject) {
+            AsyncStorage.getItem('token').then( (token) => {
+                if (token) {
+                    let url = 'me/goods/favourites';
+                    let params = [ {key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}];
+                    if (loc != null) {
+                        params.push({key: 'latitude', value: loc.coords.latitude});
+                        params.push({key: 'longitude', value: loc.coords.longitude});
+                    }
+                    let success = (response) => {
+                        if( response.status === 404 ){
+                            reject();
+                        }else if( response.status === 200 ){
+                            resolve( JSON.parse(response._bodyText) );
+                        }
+                    }
+                    httpHelper.callApi(url,params,success,reject);
                 } else {
                     reject();
                 }
 
             } );
 
+        });
+    },
+    addGoodFav: (good_id = null) => {
+        return new Promise((resolve, reject) => {
+            if(!good_id)reject();
+            else{
+                AsyncStorage.getItem('token').then((token) => {
+                    if (token) {
+                        let url = 'me/goods/favourites/' + good_id;
+                        let params = [{key: 'token', value: token}, {key: 'good_id', value: good_id}];
+                        let success = (response) => {
+                            if (response.status === 404) {
+                                reject();
+                            } else if (response.status === 200) {
+                                resolve(JSON.parse(response._bodyText));
+                            }
+                        }
+                        httpHelper.callApi(url, params, success, reject, "POST");
+                    } else {
+                        reject();
+                    }
+                });
+            }
+        });
+    },
+    deleteGoodFav: (good_id = null) => {
+        return new Promise((resolve, reject) => {
+            if(!good_id)reject();
+            else{
+                AsyncStorage.getItem('token').then((token) => {
+                    if (token) {
+                        let url = 'me/goods/favourites/' + good_id;
+                        let params = [{key: 'token', value: token}, {key: 'good_id', value: good_id}];
+                        let success = (response) => {
+                            if (response.status === 404) {
+                                reject();
+                            } else if (response.status === 200) {
+                                resolve(JSON.parse(response._bodyText));
+                            }
+                        }
+                        httpHelper.callApi(url, params, success, reject, "DELETE");
+                    } else {
+                        reject();
+                    }
+                });
+            }
         });
     },
 };
