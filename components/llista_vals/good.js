@@ -7,7 +7,6 @@ export default class Good extends Component {
         super(props);
 
         this.colors = ["white","red","pink","orange","purple","black","green","blue","yellow","grey"];
-
     }
 
     render() {

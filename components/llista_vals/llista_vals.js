@@ -96,14 +96,22 @@ export default class LlistaVals extends Component {
         }
     }
 
+    isFav(id){
+        for(let good of this.state.goodsFav){
+            if(good._id === id)return true;
+        }
+        return false;
+    }
+
     renderGood({item}) {
+
         return (
             <Good
                 id={item._id}
                 item={item}
                 onPress={this.toggleFavourite}
                 context={this}
-                isFav={this.state.selectedIndex == 0}
+                isFav={this.isFav(item._id)}
             />
         );
     }

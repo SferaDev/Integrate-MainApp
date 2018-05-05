@@ -139,4 +139,39 @@ describe('Test group for llista_vals', function () {
         expect(instance.setIndexChange(1)).toBe(undefined);
     });
 
+    describe("isFav() tests", () => {
+
+        test('isFav to normal good', () => {
+
+            instance.state.goodsFav = [
+                {
+                    _id: 1,
+                    productName: 'name',
+                    initialPrice: 24,
+                    category: 2,
+                    owner: {
+                        name: 'NAME'
+                    }
+                }
+            ];
+            expect(instance.isFav(1)).toBe(true);
+        });
+
+        test('isFav to fav good', () => {
+
+            instance.state.goodsFav = [
+                {
+                    _id: 1,
+                    productName: 'name',
+                    initialPrice: 24,
+                    category: 2,
+                    owner: {
+                        name: 'NAME'
+                    }
+                }
+            ];
+            expect(instance.isFav(2)).toBe(false);
+        });
+    });
+
 });
