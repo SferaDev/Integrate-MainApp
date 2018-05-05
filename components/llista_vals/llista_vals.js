@@ -137,7 +137,7 @@ export default class LlistaVals extends Component {
                 </View>
                 <View style={styles.body}>
                     <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>
-                        <FlatList
+                        <FlatList style={{}}
                             data={this.state.goods_shown}
                             renderItem={this.renderGood}
                         />
