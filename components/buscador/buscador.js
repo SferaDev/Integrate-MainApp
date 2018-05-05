@@ -81,6 +81,14 @@ export default class Buscador extends Component {
         this.setState({entities_shown: entities_shown});
     }
 
+    isAnEntitySelected(){
+        return this.state.selectedEntity !== null ? true : false;
+    }
+
+    isListView(){
+        return this.state.isListView ? 0 : 100;
+    }
+
     render() {
         const that = this;
 
@@ -105,13 +113,14 @@ export default class Buscador extends Component {
                             <Maps entities={this.state.entities_shown} onMarkerClick={this.showEntityInfo.bind(this)} />
                     }
                 </View>
-                { this.state.selectedEntity != null ?
-                    <View style={{height: this.state.isListView ? 0 : 100,width: '100%'}}>
-                            <Entity item={this.state.selectedEntity} />
-                    </View>
-                    : null
+                {   
+                    this.isAnEntitySelected() ?
+                        <View style={{height: this.isListView(),width: '100%'}}>
+                                <Entity item={this.state.selectedEntity} />
+                        </View>
+                        : 
+                        null
                 }
-
                 <View style={styles.searchBox}>
                     <Icon name="magnify" size={20} style={{flex: 2, textAlign: 'center', alignSelf: 'center'}} />
                     <TextInput
