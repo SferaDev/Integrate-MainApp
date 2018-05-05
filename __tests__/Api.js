@@ -1,3 +1,4 @@
+//import {AsyncStorage} from 'react-native';
 import {configure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -6,10 +7,48 @@ import API from '../components/api';
 configure({adapter: new Adapter()});
 //global.sayHello = jest.fn();
 
+const items = {};
 describe("API tests", () => {
 
     beforeAll(() => {
-        //jest.mock('http_helper', () => require.requireActual('../../__mocks__/http_helper').default);
+        jest.mock('react-native', () => ({
+
+            AsyncStorage: {        
+
+                setItem: jest.fn((item, value) => {
+                    return new Promise((resolve, reject) => {        
+                        items[item] = value;
+                        resolve(value);
+                    });
+                }),
+                multiSet:  jest.fn((item, value) => {
+                    return new Promise((resolve, reject) => {
+                        items[item] = value;
+                        resolve(value);
+                    });
+                }),
+                getItem: jest.fn((item, value) => {
+                    return new Promise((resolve, reject) => {
+                        resolve(items[item]);
+                    });
+                }),
+                multiGet: jest.fn((item) => {
+                    return new Promise((resolve, reject) => {
+                        resolve(items[item]);
+                    });
+                }),
+                removeItem: jest.fn((item) => {
+                    return new Promise((resolve, reject) => {
+                        resolve(delete items[item]);
+                    });
+                }),
+                getAllKeys: jest.fn((items) => {
+                    return new Promise((resolve) => {
+                        resolve(items.keys());
+                    });
+                })
+            }
+        }));
     });
 
     beforeEach(function () {
@@ -91,6 +130,20 @@ describe("API tests", () => {
         it('deleteGoodFav() is callable and returns nothing', () => {
             API.deleteGoodFav().catch((s) => {
                 expect(s).toBe(null);
+            });
+        });
+
+        it('deleteGoodFav() when token is not defined',async () => {
+
+            API.deleteGoodFav(0).catch((s) => {
+                expect(s).toBe(null);
+            });
+        });
+
+        it('deleteGoodFav() when token is defined',async () => {
+
+            API.deleteGoodFav(0).then((s) => {
+                expect(typeof s).toBe("string");
             });
         });
     });

@@ -98,8 +98,7 @@ describe('Test group for EntityList', function () {
                 name: 'name',
                 description: 'description',
                 addressName: 'addressName',
-            };
-            console.log(instance);
+            }
             expect(instance.isAnEntitySelected()).toBe(true);
         });
     });
