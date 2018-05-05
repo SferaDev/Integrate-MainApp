@@ -5,12 +5,15 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 export default class Good extends Component {
     constructor(props) {
         super(props);
+
+        this.colors = ["white","red","pink","orange","purple","black","green","blue","yellow","grey"];
+
     }
 
     render() {
         return (
             <View key={this.props.item._id} style={styles.goodView}>
-                <View style={styles.viewBarra}></View>
+                <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
                 <View style={styles.viewInfo}>
                     <View style={styles.view1}>
                         <Text style={styles.goodBasicText}>Cada {this.props.item.reusePeriod} dies</Text>
@@ -55,7 +58,6 @@ const styles = StyleSheet.create({
     },
     viewBarra: {
         width: 25,
-        backgroundColor: 'black'
     },
     viewInfo: {
         flex: 1
