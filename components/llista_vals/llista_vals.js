@@ -87,8 +87,8 @@ export default class LlistaVals extends Component {
         }
     }
 
-    toggleFavourite(id) {
-        if(this.state.selectedIndex == 1) {
+    toggleFavourite(id,isFav) {
+        if(!isFav) {
             API.addGoodFav(id).then(this.getAllGoods.bind(this));
         }
         else {

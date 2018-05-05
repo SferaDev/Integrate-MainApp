@@ -23,7 +23,7 @@ export default class Good extends Component {
                         <Text style={styles.goodNameText}>{this.props.item.productName}</Text>
                         <Icon style={[styles.favProps, {color: (this.props.isFav) ? '#f4eb49' : '#CCC'}]}
                           name="star" size={25}
-                          onPress={this.props.onPress.bind(this.props.context,this.props.item._id)}
+                          onPress={this.props.onPress.bind(this.props.context,this.props.item._id,this.props.isFav)}
                           id={this.props.item._id}/>
                     </View>
                 </View>

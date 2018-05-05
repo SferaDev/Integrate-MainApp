@@ -118,14 +118,12 @@ describe('Test group for llista_vals', function () {
 
         test('toggleFavourite to normal good', () => {
 
-            instance.state.selectedIndex = 0;
-            expect(instance.toggleFavourite(1)).toBe(undefined);
+            expect(instance.toggleFavourite(1,true)).toBe(undefined);
         });
 
         test('toggleFavourite to fav good', () => {
 
-            instance.state.selectedIndex = 1;
-            expect(instance.toggleFavourite(1)).toBe(undefined);
+            expect(instance.toggleFavourite(1,false)).toBe(undefined);
         });
     });
 
