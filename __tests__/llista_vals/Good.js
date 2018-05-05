@@ -19,12 +19,15 @@ describe('Test group for good', function () {
             productName: 'name',
             initialPrice: 24,
             category: 2,
+            owner: {
+                name: 'NAME'
+            }
         }
     });
 
     beforeEach(function () {
         // Before each: Shallows the EntityList component
-        wrapper = shallow(<Good item={good}/>);
+        wrapper = shallow(<Good item={good} onPress={jest.fn()} context={this} id={0} isFav={true} />);
         instance = wrapper.instance();
     });
 
@@ -34,16 +37,14 @@ describe('Test group for good', function () {
         instance = null;
     });
 
-    test('renders good correctly', () => {
-        const tree = renderer.create(<Good item={good}/>).toJSON();
+    test('renders normal good correctly', () => {
+        const tree = renderer.create(<Good item={good} onPress={jest.fn()} context={this} id={0} isFav={false} />).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
-    it('addFavourites() when token is null is callable and returns nothing', () => {
-        expect(instance.addFavourites(null)).toBe(undefined);
+    test('renders fav good correctly', () => {
+        const tree = renderer.create(<Good item={good} onPress={jest.fn()} context={this} id={0} isFav={true} />).toJSON();
+        expect(tree).toMatchSnapshot();
     });
 
-    it('setState() when token is null is callable and returns nothing', () => {
-        expect(instance.setState(null)).toBe(undefined);
-    });
 });

@@ -1,31 +1,15 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import API from "../api";
 
 export default class Good extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            favourite: false,
-            id: this.props.item['_id'],
-        };
-    }
-
-    addFavourites() {
-        if (this.state.favourite == false) {
-            this.setState({favourite: true});
-            API.addGoodFav(this.props.item['_id']);
-        }
-        else {
-            this.setState({favourite: false});
-            API.deleteGoodFav(this.props.item['_id']);
-        }
     }
 
     render() {
         return (
-            <View key={this.props.item['_id']} style={styles.goodView}>
+            <View key={this.props.item._id} style={styles.goodView}>
                 <View style={styles.viewBarra}></View>
                 <View style={styles.viewInfo}>
                     <View style={styles.view1}>
@@ -35,9 +19,10 @@ export default class Good extends Component {
                     <Text style={styles.entityName}>{this.props.item.owner.name}</Text>
                     <View style={styles.view1}>
                         <Text style={styles.goodNameText}>{this.props.item.productName}</Text>
-                        <Icon style={[styles.favProps, {color: (this.state.favourite) ? '#f4eb49' : '#CCC'}]}
+                        <Icon style={[styles.favProps, {color: (this.props.isFav) ? '#f4eb49' : '#CCC'}]}
                           name="star" size={25}
-                          onPress={this.addFavourites.bind(this)}/>
+                          onPress={this.props.onPress.bind(this.props.context,this.props.item._id)}
+                          id={this.props.item._id}/>
                     </View>
                 </View>
             </View>
