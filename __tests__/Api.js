@@ -1,12 +1,16 @@
+import {AsyncStorage} from 'react-native';
 import {configure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import API from '../components/api';
 
+configure({adapter: new Adapter()});
+jest.mock('../components/http_helper');
+
 describe("API tests", () => {
 
     beforeAll(() => {
-        configure({adapter: new Adapter()});
+        
     });
 
     beforeEach(function () {
@@ -88,6 +92,22 @@ describe("API tests", () => {
         it('deleteGoodFav() is callable and returns nothing', () => {
             API.deleteGoodFav().catch((s) => {
                 expect(s).toBe(null);
+            });
+        });
+
+        it('deleteGoodFav() when token is not defined',async () => {
+
+            AsyncStorage.removeItem('token');
+            API.deleteGoodFav(0).catch((s) => {
+                expect(s).toBe(null);
+            });
+        });
+
+        it('deleteGoodFav() when token is defined',async () => {
+
+            AsyncStorage.setItem('token','SOME_TOKEN');
+            API.deleteGoodFav(0).then((s) => {
+                expect(typeof s).toBe("string");
             });
         });
     });

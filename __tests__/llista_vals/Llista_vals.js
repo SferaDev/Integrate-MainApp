@@ -91,6 +91,7 @@ describe('Test group for llista_vals', function () {
     });
 
     test('selectFilter is callable and returns nothing', () => {
+
         expect(instance.selectFilter(0, 0)).toBe(undefined);
     });
 
@@ -113,12 +114,10 @@ describe('Test group for llista_vals', function () {
     describe("toggleFavourite() tests", () => {
 
         test('toggleFavourite to normal good', () => {
-
             expect(instance.toggleFavourite(1,true)).toBe(undefined);
         });
 
         test('toggleFavourite to fav good', () => {
-
             expect(instance.toggleFavourite(1,false)).toBe(undefined);
         });
     });

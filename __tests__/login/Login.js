@@ -30,7 +30,8 @@ describe('Test group for EntityList', function () {
     });
 
     test('renders Login correctly', () => {
-        const tree = renderer.create(<LogIn/>).toJSON();
+
+        const tree = renderer.create(<LogIn />).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
@@ -109,6 +110,7 @@ describe('Test group for EntityList', function () {
     });
 
     describe("getButtonBackground() and getButtonColor() tests", () => {
+
         it('getButtonBackground() is callable and returns a color code', () => {
             expect(typeof instance.getButtonBackground()).toBe("string");
         });

@@ -1,7 +1,7 @@
-
 const BASEURL = 'http://integrate-backend-staging.herokuapp.com';
 
 const buildQuery = (url = '', params = [], base_url = BASEURL) => {
+
     let query = base_url + '/' + url;
     let keys = Object.keys(params);
 
@@ -13,8 +13,8 @@ const buildQuery = (url = '', params = [], base_url = BASEURL) => {
     return query;
 }
 
-const callApi = (url, params, success, error, method = 'GET') => {
-    fetch(buildQuery(url, params), { method: method }).then(success).catch(error);
+const callApi = async (url, params, method = 'GET') => {
+    return await fetch(buildQuery(url, params), { method: method });
 }
 
 const httpHelper = {

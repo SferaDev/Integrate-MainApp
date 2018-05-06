@@ -17,7 +17,7 @@ export default class Logout extends Component {
         this.props.navigation.navigate('LoginStack');
     }
 
-    render() {
-        return (<View><Text>!!!</Text></View>);
+    render(){
+        return(<View><Text>!!!</Text></View>);
     }
 }
