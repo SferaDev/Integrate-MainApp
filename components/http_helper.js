@@ -1,6 +1,8 @@
 const BASE_URL = 'http://integrate-backend-staging.herokuapp.com';
 
+
 const buildQuery = (url = '', params = [], base_url = BASE_URL) => {
+
     let query = base_url + '/' + url;
     let keys = Object.keys(params);
 

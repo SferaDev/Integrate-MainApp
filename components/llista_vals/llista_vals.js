@@ -1,18 +1,24 @@
 import React, {Component} from 'react';
-import {BackHandler, StyleSheet, Text, TextInput, View, FlatList} from 'react-native';
+import {BackHandler, FlatList, StyleSheet, Text, View} from 'react-native';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dropdown } from 'react-native-material-dropdown';
 import Good from './good';
 import SegmentControl from 'react-native-segment-controller';
 
+
 export default class LlistaVals extends Component {
+
+    static navigationOptions = {
+        drawerLabel: 'Vals',
+        drawerIcon: <Icon name="ticket-percent" size={25}/>,
+    };
 
     constructor(props) {
         super(props);
-        
-        this.categories = [{value: "Totes"},{value: "Alimentació"},{value: "Cultura"},{value: "Formació"},{value: "Mobilitat"},{value: "Tecnologia"},{value: "Salut"},{value: "Esports"},{value: "Lleure"},{value: "Altres"}];
-        this.orders = [{value: "Recents"},{value: "Popularitat"},{value: "Proximitat"}];
+
+        this.categories = [{value: "Totes"}, {value: "Alimentació"}, {value: "Cultura"}, {value: "Formació"}, {value: "Mobilitat"}, {value: "Tecnologia"}, {value: "Salut"}, {value: "Esports"}, {value: "Lleure"}, {value: "Altres"}];
+        this.orders = [{value: "Recents"}, {value: "Popularitat"}, {value: "Proximitat"}];
 
         this.state = {
             goods: [],
@@ -66,7 +72,7 @@ export default class LlistaVals extends Component {
         this.props.navigation.navigate('DrawerOpen');
     }
 
-    selectFilter(value,index) {
+    selectFilter(value, index) {
         //Seleccio filtre per categoria
         this.setState({category: index});
 
@@ -74,13 +80,14 @@ export default class LlistaVals extends Component {
         this.getGoods();
     }
 
-    selectOrder(value,index) {
+    selectOrder(value, index) {
         //Seleccio filtre per metode d'ordenacio
         this.setState({order: index});
 
         //Crida a la api
         if (index === 2) {
-            navigator.geolocation.getCurrentPosition(this.getGoods.bind(this), () => {});
+            navigator.geolocation.getCurrentPosition(this.getGoods.bind(this), () => {
+            });
         }
         else {
             this.getGoods();
@@ -131,9 +138,9 @@ export default class LlistaVals extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30} />
+                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
                 </View>
-                <SegmentControl
+                  <SegmentControl
                     values={['Preferits', 'Tots']}
                     height={50}
                     borderRadius={1}
