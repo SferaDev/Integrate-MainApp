@@ -3,13 +3,10 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import API from '../components/api';
 
-configure({adapter: new Adapter()});
-//global.sayHello = jest.fn();
-
 describe("API tests", () => {
 
     beforeAll(() => {
-        //jest.mock('http_helper', () => require.requireActual('../../__mocks__/http_helper').default);
+        configure({adapter: new Adapter()});
     });
 
     beforeEach(function () {

@@ -45,9 +45,4 @@ describe('Test group for EntityList', function () {
         expect(HttpHelper.callApi()).toBe(undefined);
     });
 
-    /*test('login() is callable and returns nothing', () => {
-        HttpHelper.login('12334', '1234').then((s) => {
-            expect(typeof s).toBe('string');
-        });
-    });*/
 });
