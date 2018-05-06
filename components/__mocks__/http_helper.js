@@ -12,8 +12,14 @@ const buildQuery = (url = '', params = [], base_url = BASE_URL) => {
     return query;
 }
 
-const callApi = async (url, params, success, error, method = 'GET') => {
-    return await fetch(buildQuery(url, params), { method: method }); //.then(success).catch(error);
+const callApi = (url, params, success, error, method = 'GET') => {
+    //fetch(buildQuery(url, params), { method: method }).then(success).catch(error);
+    new Promise( (resolve) => {
+        resolve({
+            status: 200,
+            _bodyText: JSON.stringify( {something: 'Hello World'} )
+        });
+    } );
 }
 
 const httpHelper = {

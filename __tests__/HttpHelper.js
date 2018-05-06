@@ -4,9 +4,9 @@ import Adapter from 'enzyme-adapter-react-16';
 import HttpHelper from '../components/http_helper';
 
 const fetchPolifill = require('whatwg-fetch')
-global.fetch = fetchPolifill.fetch
+global.fetch = () => { return new Promise((resolve) => {resolve()}) }
 
-describe('Test group for EntityList', function () {
+describe('Test group for HttpHelper', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
     });
@@ -33,8 +33,8 @@ describe('Test group for EntityList', function () {
 		});
 	});
 
-	test('callApi() is callable and returns nothing', () => {
-	    expect(HttpHelper.callApi()).toBe(undefined);
+	test('callApi() is callable and returns nothing',async () => {
+	    expect(await HttpHelper.callApi()).toBe(undefined);
 	});
 
 	/*test('login() is callable and returns nothing', () => {
