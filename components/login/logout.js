@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-import {AsyncStorage, Text, View} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+    Text,
+    View
+} from 'react-native';
+import {AsyncStorage} from 'react-native';
 
 export default class Logout extends Component {
-    static navigationOptions = {
-        drawerLabel: 'Log Out',
-        drawerIcon: <Icon name="logout-variant" size={25}/>,
-    };
-
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+        };
     }
 
     componentDidMount() {

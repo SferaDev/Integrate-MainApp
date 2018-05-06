@@ -44,12 +44,46 @@ describe('Test group for llista_vals', function () {
         expect(instance.openMenu()).toBe(undefined);
     });
 
-    test('getGoods is callable and returns nothing', () => {
-        expect(instance.getGoods()).toBe(undefined);
+    test('getAllGoods is callable and returns nothing', () => {
+        expect(instance.getAllGoods()).toBe(undefined);
     });
 
-    test('setGoods is callable and returns nothing', () => {
-        expect(instance.setGoods()).toBe(undefined);
+    describe("getGoods() and setGoods() tests", () => {
+
+        test('getGoods is callable and returns nothing', () => {
+            expect(instance.getGoods()).toBe(undefined);
+        });
+
+        test('setGoods when fav goods are displayed', () => {
+
+            instance.state.selectedIndex = 0;
+            expect(instance.setGoods()).toBe(undefined);
+        });
+
+        test('setGoods when normal goods are displayed', () => {
+
+            instance.state.selectedIndex = 1;
+            expect(instance.setGoods()).toBe(undefined);
+        });
+    });
+
+    describe("getGoodsFav() and setGoods() tests", () => {
+
+        test('getGoodsFav is callable and returns nothing', () => {
+            expect(instance.getGoodsFav()).toBe(undefined);
+        });
+
+        test('setGoodsFav when fav goods are displayed', () => {
+
+            instance.state.selectedIndex = 0;
+            expect(instance.setGoodsFav()).toBe(undefined);
+        });
+
+        test('setGoodsFav when normal goods are displayed', () => {
+
+            instance.state.selectedIndex = 1;
+            expect(instance.setGoodsFav()).toBe(undefined);
+        });
     });
 
     test('handleBackButton is callable and returns true', () => {
@@ -76,4 +110,61 @@ describe('Test group for llista_vals', function () {
         expect(instance.renderGood({item: {id: 1}})).toMatchSnapshot();
     });
 
+    describe("toggleFavourite() tests", () => {
+
+        test('toggleFavourite to normal good', () => {
+
+            expect(instance.toggleFavourite(1,true)).toBe(undefined);
+        });
+
+        test('toggleFavourite to fav good', () => {
+
+            expect(instance.toggleFavourite(1,false)).toBe(undefined);
+        });
+    });
+
+    test('setIndexChange select fav goods', () => {
+
+        expect(instance.setIndexChange(0)).toBe(undefined);
+    });
+
+    test('setIndexChange select normal goods', () => {
+
+        expect(instance.setIndexChange(1)).toBe(undefined);
+    });
+
+    describe("isFav() tests", () => {
+
+        test('isFav to normal good', () => {
+
+            instance.state.goodsFav = [
+                {
+                    _id: 1,
+                    productName: 'name',
+                    initialPrice: 24,
+                    category: 2,
+                    owner: {
+                        name: 'NAME'
+                    }
+                }
+            ];
+            expect(instance.isFav(1)).toBe(true);
+        });
+
+        test('isFav to fav good', () => {
+
+            instance.state.goodsFav = [
+                {
+                    _id: 1,
+                    productName: 'name',
+                    initialPrice: 24,
+                    category: 2,
+                    owner: {
+                        name: 'NAME'
+                    }
+                }
+            ];
+            expect(instance.isFav(2)).toBe(false);
+        });
+    });
 });
