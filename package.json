@@ -8,20 +8,23 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
-    "react": "16.2.0",
+    "react": "16.3.2",
     "react-dom": "^16.3.1",
     "react-native": "0.51.0",
     "react-native-maps": "^0.20.0",
+    "react-native-material-dropdown": "^0.11.1",
+    "react-native-segment-controller": "^1.0.0",
+    "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^1.5.9"
   },
   "devDependencies": {
-    "babel-jest": "22.2.2",
+    "babel-jest": "22.4.3",
     "babel-preset-react-native": "4.0.0",
     "coveralls": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "jest": "^22.4.2",
-    "react-test-renderer": "16.2.0"
+    "react-test-renderer": "16.3.2"
   },
   "jest": {
     "preset": "react-native",

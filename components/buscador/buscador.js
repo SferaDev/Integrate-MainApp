@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {BackHandler, StyleSheet, Text, TextInput, View} from 'react-native';
+import {BackHandler, StyleSheet, TextInput, View} from 'react-native';
 import Maps from './maps';
 import EntityList from './list';
+import Entity from './entity';
 import API from '../api';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Buscador extends Component {
 
@@ -10,30 +12,37 @@ export default class Buscador extends Component {
         super(props);
         this.state = {
             isListView: false,
-            entities: []
+            entities: [],
+            selectedEntity: null,
+            entities_shown: [],
+            searchText: ""
         };
     }
 
     componentDidMount() {
-        this.getEntities();
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+
+        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {
+        });
     }
 
     handleBackButton() {
         return true;
     }
 
-    getEntities() {
-        let that = this;
-        API.getEntities().then((entities) => {
-            that.setState({entities: entities});
-        }).catch(() => {
-        })
+    getEntities(loc) {
+        API.getEntities(loc).then(this.setEntities.bind(this));
     }
 
-    /*showEntityInfo(ent){
+    showEntityInfo(ent) {
 
-    }*/
+        let selEntity = this.state.entities[ent];
+        this.setState({selectedEntity: selEntity});
+    }
+
+    setEntities(entities) {
+        this.setState({entities: entities, entities_shown: entities});
+    }
 
     openMenu() {
         this.props.navigation.navigate('DrawerOpen');
@@ -45,14 +54,49 @@ export default class Buscador extends Component {
         this.setState({isListView: isListView});
     }
 
+    showListView() {
+        this.setState({isListView: true});
+    }
+
+    updateSearchText(value) {
+        this.setState({searchText: value});
+        clearTimeout(this.searchTimeout);
+        this.searchTimeout = setTimeout(this.filterEntities.bind(this), 250);
+    }
+
+    filterEntities() {
+        let searchText = this.state.searchText;
+        let entities = this.state.entities;
+        let entities_shown = [];
+        if (!searchText) entities_shown = entities;
+        else {
+            for (let i in entities) {
+                if (entities[i].name.toLowerCase().includes(searchText.toLowerCase())) {
+                    entities_shown.push(entities[i]);
+                }
+            }
+        }
+        this.setState({entities_shown: entities_shown});
+    }
+
+
+    isAnEntitySelected() {
+        return this.state.selectedEntity !== null ? true : false;
+    }
+
+    isListView() {
+        return this.state.isListView ? 0 : 100;
+    }
+
     render() {
         const that = this;
 
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text onPress={this.openMenu.bind(this)} style={styles.headerLeftIco}>MENU</Text>
-                    <Text onPress={this.switchView.bind(this)} style={styles.headerRightIco}>LIST</Text>
+                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
+                    <Icon onPress={this.switchView.bind(this)} style={styles.headerRightIco} name="format-list-bulleted"
+                          size={30}/>
                 </View>
                 <View style={{
                     flex: 8,
@@ -64,18 +108,30 @@ export default class Buscador extends Component {
                 }}>
                     {
                         this.state.isListView ?
-                            <EntityList entities={this.state.entities}/>
+                            <EntityList entities={this.state.entities_shown}/>
                             :
-                            <Maps entities={this.state.entities}/>
+                            <Maps entities={this.state.entities_shown} onMarkerClick={this.showEntityInfo.bind(this)}/>
                     }
                 </View>
-                <View style={{height: 100}}>
-                    
-                </View>
-
+                {
+                    this.isAnEntitySelected() ?
+                        <View style={{height: this.isListView(), width: '100%'}}>
+                            <Entity item={this.state.selectedEntity}/>
+                        </View>
+                        :
+                        null
+                }
                 <View style={styles.searchBox}>
-                    <Text style={{flex: 2, textAlign: 'center', alignSelf: 'center'}}>Q</Text>
-                    <TextInput style={{flex: 18}} placeholder="Search" editable={false}/>
+                    <Icon name="magnify" size={20} style={{flex: 2, textAlign: 'center', alignSelf: 'center'}}/>
+                    <TextInput
+                        style={{flex: 18, padding: 0, paddingLeft: 5}}
+                        value={this.state.searchText}
+                        placeholder="Search"
+                        onFocus={this.showListView.bind(this)}
+                        onChangeText={this.updateSearchText.bind(this)}
+                        autoComplete={false}
+                        underlineColorAndroid='rgba(0,0,0,0)'
+                    />
                 </View>
             </View>
         );

@@ -36,6 +36,7 @@ exports[`Test group for Maps renders maps correctly 1`] = `
         "top": 0,
       }
     }
+    toolbarEnabled={false}
   />
   <View
     accessibilityComponentType={undefined}
@@ -59,10 +60,12 @@ exports[`Test group for Maps renders maps correctly 1`] = `
           "backgroundColor": "transparent",
         },
         Object {
-          "backgroundColor": "red",
+          "backgroundColor": "white",
           "borderRadius": 15,
           "bottom": 15,
+          "display": "flex",
           "height": 30,
+          "justifyContent": "center",
           "left": 15,
           "position": "absolute",
           "width": 30,
@@ -74,10 +77,27 @@ exports[`Test group for Maps renders maps correctly 1`] = `
   >
     <Text
       accessible={true}
-      allowFontScaling={true}
+      allowFontScaling={false}
       ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": undefined,
+            "fontSize": 20,
+          },
+          Object {
+            "alignSelf": "center",
+            "color": "#67ACB1",
+          },
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
     >
-      NO
+      
     </Text>
   </View>
   <View
@@ -102,10 +122,12 @@ exports[`Test group for Maps renders maps correctly 1`] = `
           "backgroundColor": "transparent",
         },
         Object {
-          "backgroundColor": "red",
+          "backgroundColor": "white",
           "borderRadius": 22.5,
           "bottom": 15,
+          "display": "flex",
           "height": 45,
+          "justifyContent": "center",
           "position": "absolute",
           "right": 15,
           "width": 45,
@@ -117,10 +139,27 @@ exports[`Test group for Maps renders maps correctly 1`] = `
   >
     <Text
       accessible={true}
-      allowFontScaling={true}
+      allowFontScaling={false}
       ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": undefined,
+            "fontSize": 20,
+          },
+          Object {
+            "alignSelf": "center",
+            "color": "#67ACB1",
+          },
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
     >
-      ME
+      
     </Text>
   </View>
 </View>

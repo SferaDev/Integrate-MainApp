@@ -14,7 +14,7 @@ const Marker = class Marker extends React.Component {
     render() {
         return React.createElement(Text, this.props, this.props.children);
     }
-}
+};
 
 class MapView extends React.Component {
 

@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    TouchableHighlight,
+    AsyncStorage,
     Image,
     ImageBackground,
-    Keyboard
+    Keyboard,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableHighlight,
+    View
 } from 'react-native';
 
 import Toast from './toast';
@@ -27,6 +28,8 @@ export default class LogIn extends Component {
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
+
+        AsyncStorage.getItem('token').then(this.autologin.bind(this));
     }
 
     componentWillUnmount() {
@@ -38,11 +41,13 @@ export default class LogIn extends Component {
         let nifnie = this.state.nifnie;
         let password = this.state.password;
         let that = this;
-        API.login(nifnie, password).then((s) => {
-            this.props.navigation.navigate('DrawerNavigation');
-        }).catch(() => {
-            that.setState({error: true})
-        });
+        API.login(nifnie, password).then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
+    }
+
+    autologin(token) {
+        if (token !== null) {
+            this.navigateHome();
+        }
     }
 
     updateNifNie(value) {
@@ -53,8 +58,12 @@ export default class LogIn extends Component {
         this.setState({password: value});
     }
 
+    showError() {
+        this.setState({error: true});
+    }
+
     updateError() {
-        this.setState({error: false})
+        this.setState({error: false});
     }
 
     isEmpty() {
@@ -69,12 +78,23 @@ export default class LogIn extends Component {
         this.setState({isFieldFocused: false});
     }
 
+    navigateHome() {
+        this.props.navigation.navigate('DrawerNavigation');
+    }
+
     restorePassword() {
-        console.warn('Recuperar Contrasenya')
+        //console.warn('Recuperar Contrasenya')
+    }
+
+    getButtonBackground() {
+        return (this.isEmpty() ? '#CCC' : '#094671');
+    }
+
+    getButtonColor() {
+        return (this.isEmpty() ? '#666' : 'white');
     }
 
     render() {
-        let ie = this.isEmpty();
 
         return (
             <View style={styles.container}>
@@ -96,23 +116,27 @@ export default class LogIn extends Component {
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.nifnie}
                                    placeholder={"Introduir NIF/NIE"}
-                                   onChangeText={this.updateNifNie.bind(this)}>
+                                   onChangeText={this.updateNifNie.bind(this)}
+                                   underlineColorAndroid='rgba(0,0,0,0)'
+                        >
                         </TextInput>
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.password}
                                    secureTextEntry={true}
                                    placeholder={"Introduir contrasenya"}
-                                   onChangeText={this.updatePassword.bind(this)}>
+                                   onChangeText={this.updatePassword.bind(this)}
+                                   underlineColorAndroid='rgba(0,0,0,0)'
+                        >
                         </TextInput>
                         <Text style={styles.recuperarContrasenyaText}
                               onPress={this.restorePassword.bind(this)}>
                             He oblidat la contrasenya?
                         </Text>
                         <TouchableHighlight
-                            style={[styles.button, {backgroundColor: (ie) ? '#CCC' : '#094671'}]}
+                            style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.login.bind(this)}
-                            disabled={ie}>
-                            <Text style={{alignSelf: 'center', color: (ie) ? '#666' : 'white', fontWeight: 'bold'}}>
+                            disabled={this.isEmpty()}>
+                            <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
                                 Entra
                             </Text>
                         </TouchableHighlight>
@@ -148,6 +172,7 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         justifyContent: 'center',
         margin: 10,
+        padding: 0,
         paddingLeft: 5,
     },
     button: {

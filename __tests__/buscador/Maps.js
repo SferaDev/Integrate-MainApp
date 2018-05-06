@@ -12,12 +12,10 @@ let wrapper;
 let instance;
 
 describe('Test group for Maps', function () {
-
     beforeAll(() => {
 
-	//jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
-	configure({ adapter: new Adapter() });
-	});
+        configure({adapter: new Adapter()});
+    });
 
     beforeEach(function () {
         // Before each: Shallows the Maps component
@@ -30,7 +28,6 @@ describe('Test group for Maps', function () {
         wrapper = null;
         instance = null;
     });
-
 
     test('renders maps correctly', () => {
         const tree = renderer.create(<Maps entities={[]}/>).toJSON();

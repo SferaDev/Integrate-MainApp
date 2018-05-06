@@ -10,10 +10,16 @@ import EntityList from '../../components/buscador/list';
 let wrapper;
 let instance;
 
+const mockNavigator = {
+    geolocation: {
+        getCurrentPosition: jest.fn()
+    }
+};
+
+global.navigator = mockNavigator;
+
 describe('Test group for EntityList', function () {
-
     beforeAll(() => {
-
         configure({adapter: new Adapter()});
     });
 
@@ -35,7 +41,6 @@ describe('Test group for EntityList', function () {
     });
 
     test('renderEntity renders an entity correctly', () => {
-
         expect(instance.renderEntity({item: {id: 1}})).toMatchSnapshot();
     });
 });
