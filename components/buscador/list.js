@@ -9,7 +9,7 @@ export default class EntityList extends Component {
 
     renderEntity({item}) {
         return (
-            <Entity item={item} />
+            <Entity item={item}/>
         );
     }
 

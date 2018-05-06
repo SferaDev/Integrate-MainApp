@@ -14,7 +14,7 @@ const mockNavigator = {
     geolocation: {
         getCurrentPosition: jest.fn()
     }
-}
+};
 
 global.navigator = mockNavigator;
 
@@ -114,11 +114,11 @@ describe('Test group for llista_vals', function () {
     describe("toggleFavourite() tests", () => {
 
         test('toggleFavourite to normal good', () => {
-            expect(instance.toggleFavourite(1,true)).toBe(undefined);
+            expect(instance.toggleFavourite(1, true)).toBe(undefined);
         });
 
         test('toggleFavourite to fav good', () => {
-            expect(instance.toggleFavourite(1,false)).toBe(undefined);
+            expect(instance.toggleFavourite(1, false)).toBe(undefined);
         });
     });
 

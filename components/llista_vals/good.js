@@ -6,7 +6,7 @@ export default class Good extends Component {
     constructor(props) {
         super(props);
 
-        this.colors = ["white","red","pink","orange","purple","black","green","blue","yellow","grey"];
+        this.colors = ["white", "red", "pink", "orange", "purple", "black", "green", "blue", "yellow", "grey"];
     }
 
     render() {
@@ -16,15 +16,16 @@ export default class Good extends Component {
                 <View style={styles.viewInfo}>
                     <View style={styles.view1}>
                         <Text style={styles.goodBasicText}>Cada {this.props.item.reusePeriod} dies</Text>
-                        <Text style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.item.initialPrice+'€ (-'+this.props.item.discount+''+this.props.item.discountType+')'}</Text>
+                        <Text
+                            style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.item.initialPrice + '€ (-' + this.props.item.discount + '' + this.props.item.discountType + ')'}</Text>
                     </View>
                     <Text style={styles.entityName}>{this.props.item.owner.name}</Text>
                     <View style={styles.view1}>
                         <Text style={styles.goodNameText}>{this.props.item.productName}</Text>
                         <Icon style={[styles.favProps, {color: (this.props.isFav) ? '#f4eb49' : '#CCC'}]}
-                          name="star" size={25}
-                          onPress={this.props.onPress.bind(this.props.context,this.props.item._id,this.props.isFav)}
-                          id={this.props.item._id}/>
+                              name="star" size={25}
+                              onPress={this.props.onPress.bind(this.props.context, this.props.item._id, this.props.isFav)}
+                              id={this.props.item._id}/>
                     </View>
                 </View>
             </View>
@@ -34,7 +35,7 @@ export default class Good extends Component {
 
 const styles = StyleSheet.create({
     favProps: {
-        flexDirection:'row',
+        flexDirection: 'row',
         alignSelf: 'flex-end',
         color: '#f4eb49',
         paddingRight: 5,
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderLeftWidth: 1,
         borderRightWidth: 1,
-        borderBottomWidth:1,
+        borderBottomWidth: 1,
         alignSelf: 'center',
         marginBottom: 7.5,
         width: '90%'

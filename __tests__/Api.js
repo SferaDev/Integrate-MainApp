@@ -10,7 +10,7 @@ jest.mock('../components/http_helper');
 describe("API tests", () => {
 
     beforeAll(() => {
-        
+
     });
 
     beforeEach(function () {
@@ -54,13 +54,13 @@ describe("API tests", () => {
     describe("getGoods() tests", () => {
 
         it('getGoods() is callable and returns nothing', () => {
-            API.getGoods(0,0,null).then((s) => {
+            API.getGoods(0, 0, null).then((s) => {
                 expect(typeof s).toBe('string');
             });
         });
 
         it('getGoodsFav() is callable and returns nothing', () => {
-            API.getGoodsFav(0,0,null).then((s) => {
+            API.getGoodsFav(0, 0, null).then((s) => {
                 expect(typeof s).toBe('string');
             });
         });
@@ -95,7 +95,7 @@ describe("API tests", () => {
             });
         });
 
-        it('deleteGoodFav() when token is not defined',async () => {
+        it('deleteGoodFav() when token is not defined', async () => {
 
             AsyncStorage.removeItem('token');
             API.deleteGoodFav(0).catch((s) => {
@@ -103,9 +103,9 @@ describe("API tests", () => {
             });
         });
 
-        it('deleteGoodFav() when token is defined',async () => {
+        it('deleteGoodFav() when token is defined', async () => {
 
-            AsyncStorage.setItem('token','SOME_TOKEN');
+            AsyncStorage.setItem('token', 'SOME_TOKEN');
             API.deleteGoodFav(0).then((s) => {
                 expect(typeof s).toBe("string");
             });

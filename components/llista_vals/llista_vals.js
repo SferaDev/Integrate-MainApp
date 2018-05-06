@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {BackHandler, FlatList, StyleSheet, Text, View} from 'react-native';
+import {BackHandler, FlatList, StyleSheet, View} from 'react-native';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Dropdown } from 'react-native-material-dropdown';
+import {Dropdown} from 'react-native-material-dropdown';
 import Good from './good';
 import SegmentControl from 'react-native-segment-controller';
 
@@ -10,14 +10,14 @@ export default class LlistaVals extends Component {
 
     constructor(props) {
         super(props);
-        
-        this.categories = [{value: "Totes"},{value: "Alimentació"},{value: "Cultura"},{value: "Formació"},{value: "Mobilitat"},{value: "Tecnologia"},{value: "Salut"},{value: "Esports"},{value: "Lleure"},{value: "Altres"}];
-        this.orders = [{value: "Recents"},{value: "Popularitat"},{value: "Proximitat"}];
+
+        this.categories = [{value: "Totes"}, {value: "Alimentació"}, {value: "Cultura"}, {value: "Formació"}, {value: "Mobilitat"}, {value: "Tecnologia"}, {value: "Salut"}, {value: "Esports"}, {value: "Lleure"}, {value: "Altres"}];
+        this.orders = [{value: "Recents"}, {value: "Popularitat"}, {value: "Proximitat"}];
 
         this.state = {
             goods: [],
             goodsFav: [],
-            goods_shown:[],
+            goods_shown: [],
             category: 0,
             order: 0,
             selectedIndex: 1,
@@ -34,7 +34,7 @@ export default class LlistaVals extends Component {
         return true;
     }
 
-    getAllGoods(){
+    getAllGoods() {
         this.getGoods();
         this.getGoodsFav();
     }
@@ -53,12 +53,12 @@ export default class LlistaVals extends Component {
 
     setGoods(goods) {
         this.setState({goods: goods});
-        if(this.state.selectedIndex == 1)this.setState({goods_shown: goods});
+        if (this.state.selectedIndex == 1) this.setState({goods_shown: goods});
     }
 
     setGoodsFav(goodsFav) {
         this.setState({goodsFav: goodsFav});
-        if(this.state.selectedIndex == 0)this.setState({goods_shown: goodsFav});
+        if (this.state.selectedIndex == 0) this.setState({goods_shown: goodsFav});
     }
 
     openMenu() {
@@ -81,15 +81,16 @@ export default class LlistaVals extends Component {
 
         //Crida a la api
         if (index === 2) {
-            navigator.geolocation.getCurrentPosition(this.getGoods.bind(this), () => {});
+            navigator.geolocation.getCurrentPosition(this.getGoods.bind(this), () => {
+            });
         }
         else {
             this.getGoods();
         }
     }
 
-    toggleFavourite(id,isFav) {
-        if(!isFav) {
+    toggleFavourite(id, isFav) {
+        if (!isFav) {
             API.addGoodFav(id).then(this.getAllGoods.bind(this));
         }
         else {
@@ -97,9 +98,9 @@ export default class LlistaVals extends Component {
         }
     }
 
-    isFav(id){
-        for(let good of this.state.goodsFav){
-            if(good._id === id)return true;
+    isFav(id) {
+        for (let good of this.state.goodsFav) {
+            if (good._id === id) return true;
         }
         return false;
     }
@@ -120,7 +121,7 @@ export default class LlistaVals extends Component {
     setIndexChange(index) {
 
         let goods_shown = (index == 1) ? this.state.goods : this.state.goodsFav;
-        this.setState({selectedIndex: index,goods_shown: goods_shown})
+        this.setState({selectedIndex: index, goods_shown: goods_shown})
     }
 
     canApplyFilters() {
@@ -142,7 +143,7 @@ export default class LlistaVals extends Component {
                     onTabPress={this.setIndexChange.bind(this)}
                 />
                 <View style={[styles.filterGoods, {height: (this.canApplyFilters()) ? 1 : 60}]}>
-                    <View style={{flex: 1}} >
+                    <View style={{flex: 1}}>
                         <Dropdown
                             label='Categoria'
                             data={this.categories}
@@ -150,9 +151,9 @@ export default class LlistaVals extends Component {
                             itemCount={10}
                             dropdownPosition={0}
                             disabled={this.canApplyFilters()}
-                          />
-                    </View> 
-                    <View style={{flex: 1}} >
+                        />
+                    </View>
+                    <View style={{flex: 1}}>
                         <Dropdown
                             label='Filtre'
                             data={this.orders}
@@ -160,8 +161,8 @@ export default class LlistaVals extends Component {
                             itemCount={3}
                             dropdownPosition={0}
                             disabled={this.canApplyFilters()}
-                          />
-                    </View>    
+                        />
+                    </View>
                 </View>
                 <View style={styles.body}>
                     <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>

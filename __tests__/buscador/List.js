@@ -14,7 +14,7 @@ const mockNavigator = {
     geolocation: {
         getCurrentPosition: jest.fn()
     }
-}
+};
 
 global.navigator = mockNavigator;
 

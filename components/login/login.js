@@ -79,18 +79,18 @@ export default class LogIn extends Component {
     }
 
     navigateHome() {
-        this.props.navigation.navigate('DrawerNavigation');    
+        this.props.navigation.navigate('DrawerNavigation');
     }
 
     restorePassword() {
         //console.warn('Recuperar Contrasenya')
     }
 
-    getButtonBackground(){
+    getButtonBackground() {
         return (this.isEmpty() ? '#CCC' : '#094671');
     }
 
-    getButtonColor(){
+    getButtonColor() {
         return (this.isEmpty() ? '#666' : 'white');
     }
 

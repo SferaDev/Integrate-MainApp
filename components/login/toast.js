@@ -8,9 +8,9 @@ export default class Toast extends Component {
     }
 
     isVisible() {
-        if(this.props.visible){
+        if (this.props.visible) {
             return 'flex';
-        }else{
+        } else {
             return 'none';
         }
     }

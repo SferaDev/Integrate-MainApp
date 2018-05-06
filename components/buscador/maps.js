@@ -40,7 +40,8 @@ export default class Maps extends Component {
     }
 
     goToMe() {
-        navigator.geolocation.getCurrentPosition(this.mapAnimateToMe.bind(this), () => {});
+        navigator.geolocation.getCurrentPosition(this.mapAnimateToMe.bind(this), () => {
+        });
     }
 
     render() {

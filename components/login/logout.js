@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
-import {
-    Text,
-    View
-} from 'react-native';
-import {AsyncStorage} from 'react-native';
+import {AsyncStorage, Text, View} from 'react-native';
 
 export default class Logout extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
 
     componentDidMount() {
@@ -17,7 +12,7 @@ export default class Logout extends Component {
         this.props.navigation.navigate('LoginStack');
     }
 
-    render(){
-        return(<View><Text>!!!</Text></View>);
+    render() {
+        return (<View><Text>!!!</Text></View>);
     }
 }

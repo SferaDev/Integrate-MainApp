@@ -11,15 +11,15 @@ const buildQuery = (url = '', params = [], base_url = BASEURL) => {
         query += params[keys[i]].key + '=' + params[keys[i]].value;
     }
     return query;
-}
+};
 
 const callApi = async (url, params, method = 'GET') => {
-    return await fetch(buildQuery(url, params), { method: method });
-}
+    return await fetch(buildQuery(url, params), {method: method});
+};
 
 const httpHelper = {
     buildQuery: buildQuery,
     callApi: callApi
-}
+};
 
 export default httpHelper;

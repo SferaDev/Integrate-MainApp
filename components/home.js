@@ -13,7 +13,7 @@ const BuscadorStack = StackNavigator({
         screen: Buscador,
         navigationOptions: {
             drawerLabel: 'Buscador',
-            drawerIcon:  <Icon name="home" size={25} />,
+            drawerIcon: <Icon name="home" size={25}/>,
             gesturesEnabled: false
         }
     },
@@ -25,9 +25,9 @@ const BuscadorStack = StackNavigator({
 const ValsStack = StackNavigator({
     llista_vals: {
         screen: LlistaVals,
-        navigationOptions : {
+        navigationOptions: {
             drawerLabel: 'Vals',
-            drawerIcon:  <Icon name="ticket-percent" size={25} />,
+            drawerIcon: <Icon name="ticket-percent" size={25}/>,
         }
     },
 }, {
@@ -57,9 +57,9 @@ const DrawerStack = DrawerNavigator({
     Vals: {screen: ValsStack},
     Logout: {
         screen: Logout,
-        navigationOptions : {
+        navigationOptions: {
             drawerLabel: 'Log Out',
-            drawerIcon:  <Icon name="logout-variant" size={25} />,
+            drawerIcon: <Icon name="logout-variant" size={25}/>,
         }
     }
 }, {

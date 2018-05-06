@@ -20,9 +20,9 @@ const renderMarkers = (props) => {
                 pinColor="red"
             />
         );
-    }
+    };
     return props.items.map(renderMarker);
-}
+};
 
 const MarkerList = props => {
     return renderMarkers(props);

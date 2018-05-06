@@ -22,7 +22,8 @@ export default class Buscador extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
 
-        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {});
+        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {
+        });
     }
 
     handleBackButton() {
@@ -79,11 +80,11 @@ export default class Buscador extends Component {
     }
 
 
-    isAnEntitySelected(){
+    isAnEntitySelected() {
         return this.state.selectedEntity !== null ? true : false;
     }
 
-    isListView(){
+    isListView() {
         return this.state.isListView ? 0 : 100;
     }
 
@@ -93,8 +94,9 @@ export default class Buscador extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30} />
-                    <Icon onPress={this.switchView.bind(this)} style={styles.headerRightIco} name="format-list-bulleted" size={30} />
+                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
+                    <Icon onPress={this.switchView.bind(this)} style={styles.headerRightIco} name="format-list-bulleted"
+                          size={30}/>
                 </View>
                 <View style={{
                     flex: 8,
@@ -108,24 +110,24 @@ export default class Buscador extends Component {
                         this.state.isListView ?
                             <EntityList entities={this.state.entities_shown}/>
                             :
-                            <Maps entities={this.state.entities_shown} onMarkerClick={this.showEntityInfo.bind(this)} />
+                            <Maps entities={this.state.entities_shown} onMarkerClick={this.showEntityInfo.bind(this)}/>
                     }
                 </View>
-                {   
+                {
                     this.isAnEntitySelected() ?
-                        <View style={{height: this.isListView(),width: '100%'}}>
-                                <Entity item={this.state.selectedEntity} />
+                        <View style={{height: this.isListView(), width: '100%'}}>
+                            <Entity item={this.state.selectedEntity}/>
                         </View>
-                        : 
+                        :
                         null
                 }
                 <View style={styles.searchBox}>
-                    <Icon name="magnify" size={20} style={{flex: 2, textAlign: 'center', alignSelf: 'center'}} />
+                    <Icon name="magnify" size={20} style={{flex: 2, textAlign: 'center', alignSelf: 'center'}}/>
                     <TextInput
-                        style={{flex: 18,padding: 0,paddingLeft: 5}}
+                        style={{flex: 18, padding: 0, paddingLeft: 5}}
                         value={this.state.searchText}
                         placeholder="Search"
-                        onFocus = {this.showListView.bind(this)}
+                        onFocus={this.showListView.bind(this)}
                         onChangeText={this.updateSearchText.bind(this)}
                         autoComplete={false}
                         underlineColorAndroid='rgba(0,0,0,0)'

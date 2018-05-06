@@ -9,7 +9,7 @@ import Toast from '../../components/login/toast';
 
 describe('Test group for Toast', function () {
 
-	beforeAll(() => {
+    beforeAll(() => {
 
         configure({adapter: new Adapter()});
     });

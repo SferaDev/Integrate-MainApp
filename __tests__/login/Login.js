@@ -31,7 +31,7 @@ describe('Test group for EntityList', function () {
 
     test('renders Login correctly', () => {
 
-        const tree = renderer.create(<LogIn />).toJSON();
+        const tree = renderer.create(<LogIn/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
@@ -72,7 +72,7 @@ describe('Test group for EntityList', function () {
 
         it('isEmpty() when NifNie is empty and Password is filled then returns true', () => {
             instance.state.nifnie = '';
-            instance.state.password = 'QWERTY1234'
+            instance.state.password = 'QWERTY1234';
             expect(instance.isEmpty()).toBe(true);
         });
 
