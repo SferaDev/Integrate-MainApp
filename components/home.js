@@ -75,7 +75,6 @@ const DrawerNavigation = StackNavigator({
     headerMode: 'none',
     disabledBackGesture: true,
     gesturesEnabled: false
-
 });
 
 const LoginStack = StackNavigator({

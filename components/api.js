@@ -68,7 +68,7 @@ const API = {
                 params.push({key: 'longitude', value: loc.coords.longitude});
             }
 
-            let response = await http_helper.callApi(url,params,success,reject);
+            let response = await http_helper.callApi(url,params);
             if( response.status === 404 ){
                 reject();
             }else if( response.status === 200 ){
@@ -85,7 +85,7 @@ const API = {
                 let url = 'me/goods/favourites/' + good_id;
                 let params = [{key: 'token', value: token}, {key: 'good_id', value: good_id}];
                     
-                let response = await http_helper.callApi(url, params, success, reject, "POST");
+                let response = await http_helper.callApi(url, params, "POST");
                 if (response.status === 404) {
                     reject();
                 } else if (response.status === 200) {
@@ -103,7 +103,7 @@ const API = {
                 let url = 'me/goods/favourites/' + good_id;
                 let params = [{key: 'token', value: token}, {key: 'good_id', value: good_id}];
                     
-                let response = await http_helper.callApi(url, params, success, reject, "DELETE");
+                let response = await http_helper.callApi(url, params, "DELETE");
                 if (response.status === 404) {
                     reject();
                 } else if (response.status === 200) {
@@ -111,7 +111,7 @@ const API = {
                 }
             }
         });
-    },
+    }
 };
 
 export default API

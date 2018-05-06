@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BackHandler, StyleSheet, Text, TextInput, View, FlatList} from 'react-native';
+import {BackHandler, FlatList, StyleSheet, Text, View} from 'react-native';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -66,7 +66,8 @@ export default class LlistaVals extends Component {
         this.props.navigation.navigate('DrawerOpen');
     }
 
-    selectFilter(value,index) {
+    selectFilter(value, index) {
+
         //Seleccio filtre per categoria
         this.setState({category: index});
 
@@ -74,7 +75,7 @@ export default class LlistaVals extends Component {
         this.getGoods();
     }
 
-    selectOrder(value,index) {
+    selectOrder(value, index) {
         //Seleccio filtre per metode d'ordenacio
         this.setState({order: index});
 
@@ -87,8 +88,8 @@ export default class LlistaVals extends Component {
         }
     }
 
-    toggleFavourite(id) {
-        if(this.state.selectedIndex == 1) {
+    toggleFavourite(id,isFav) {
+        if(!isFav) {
             API.addGoodFav(id).then(this.getAllGoods.bind(this));
         }
         else {
@@ -96,14 +97,22 @@ export default class LlistaVals extends Component {
         }
     }
 
+    isFav(id){
+        for(let good of this.state.goodsFav){
+            if(good._id === id)return true;
+        }
+        return false;
+    }
+
     renderGood({item}) {
+
         return (
             <Good
                 id={item._id}
                 item={item}
                 onPress={this.toggleFavourite}
                 context={this}
-                isFav={this.state.selectedIndex == 0}
+                isFav={this.isFav(item._id)}
             />
         );
     }
@@ -123,7 +132,7 @@ export default class LlistaVals extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30} />
+                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
                 </View>
                 <SegmentControl
                     values={['Preferits', 'Tots']}
@@ -132,7 +141,6 @@ export default class LlistaVals extends Component {
                     selectedIndex={this.state.selectedIndex}
                     onTabPress={this.setIndexChange.bind(this)}
                 />
-
                 <View style={[styles.filterGoods, {height: (this.canApplyFilters()) ? 1 : 60}]}>
                     <View style={{flex: 1}} >
                         <Dropdown
@@ -202,7 +210,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 0,
         paddingLeft: 5,
-        paddingRight: 5,
+        paddingRight: 5
     },
     body: {
         flex: 8,
@@ -211,5 +219,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
         width: '100%',
         height: '100%'
-    },
+    }
 });

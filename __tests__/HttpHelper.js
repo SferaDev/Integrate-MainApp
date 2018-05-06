@@ -7,6 +7,7 @@ const fetchPolifill = require('whatwg-fetch')
 global.fetch = () => { return new Promise((resolve) => {resolve()}) }
 
 describe('Test group for HttpHelper', function () {
+
     beforeAll(() => {
         configure({adapter: new Adapter()});
     });
@@ -37,9 +38,4 @@ describe('Test group for HttpHelper', function () {
 	    expect(await HttpHelper.callApi()).toBe(undefined);
 	});
 
-	/*test('login() is callable and returns nothing', () => {
-	    HttpHelper.login('12334', '1234').then((s) => {
-	        expect(typeof s).toBe('string');
-	    });
-	});*/
 });

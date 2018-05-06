@@ -1,28 +1,23 @@
 import React, {Component} from 'react';
-import {BackHandler, StyleSheet, Text, TextInput, View} from 'react-native';
+import {BackHandler, StyleSheet, TextInput, View} from 'react-native';
 import Maps from './maps';
 import EntityList from './list';
 import Entity from './entity';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
 export default class Buscador extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             isListView: false,
             entities: [],
             selectedEntity: null,
-            entities_shown:[],
+            entities_shown: [],
             searchText: ""
         };
     }
-
-    /*static navigationOptions = {
-        drawerLabel: 'Buscador',
-        drawerIcon:  <Icon name="home" size={25} />,
-    };*/
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
@@ -38,7 +33,8 @@ export default class Buscador extends Component {
         API.getEntities(loc).then(this.setEntities.bind(this));
     }
 
-    showEntityInfo(ent){
+    showEntityInfo(ent) {
+
         let selEntity = this.state.entities[ent];
         this.setState({selectedEntity: selEntity});
     }
@@ -81,6 +77,7 @@ export default class Buscador extends Component {
         }
         this.setState({entities_shown: entities_shown});
     }
+
 
     isAnEntitySelected(){
         return this.state.selectedEntity !== null ? true : false;

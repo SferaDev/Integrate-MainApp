@@ -44,10 +44,6 @@ describe('Test group for llista_vals', function () {
         expect(instance.openMenu()).toBe(undefined);
     });
 
-    test('openMenu is callable and returns nothing', () => {
-        expect(instance.setIndexChange(0)).toBe(undefined);
-    });
-
     test('getAllGoods is callable and returns nothing', () => {
         expect(instance.getAllGoods()).toBe(undefined);
     });
@@ -95,17 +91,18 @@ describe('Test group for llista_vals', function () {
     });
 
     test('selectFilter is callable and returns nothing', () => {
-        expect(instance.selectFilter(0,0)).toBe(undefined);
+
+        expect(instance.selectFilter(0, 0)).toBe(undefined);
     });
 
     describe("selectOrder() tests", () => {
 
         test('selectOrder is callable and returns nothing', () => {
-            expect(instance.selectOrder(0,0)).toBe(undefined);
+            expect(instance.selectOrder(0, 0)).toBe(undefined);
         });
 
         test('selectOrder is callable and returns nothing', () => {
-            expect(instance.selectOrder(0,2)).toBe(undefined);
+            expect(instance.selectOrder(0, 2)).toBe(undefined);
         });
     });
 
@@ -117,15 +114,11 @@ describe('Test group for llista_vals', function () {
     describe("toggleFavourite() tests", () => {
 
         test('toggleFavourite to normal good', () => {
-
-            instance.state.selectedIndex = 0;
-            expect(instance.toggleFavourite(1)).toBe(undefined);
+            expect(instance.toggleFavourite(1,true)).toBe(undefined);
         });
 
         test('toggleFavourite to fav good', () => {
-
-            instance.state.selectedIndex = 1;
-            expect(instance.toggleFavourite(1)).toBe(undefined);
+            expect(instance.toggleFavourite(1,false)).toBe(undefined);
         });
     });
 
@@ -139,4 +132,38 @@ describe('Test group for llista_vals', function () {
         expect(instance.setIndexChange(1)).toBe(undefined);
     });
 
+    describe("isFav() tests", () => {
+
+        test('isFav to normal good', () => {
+
+            instance.state.goodsFav = [
+                {
+                    _id: 1,
+                    productName: 'name',
+                    initialPrice: 24,
+                    category: 2,
+                    owner: {
+                        name: 'NAME'
+                    }
+                }
+            ];
+            expect(instance.isFav(1)).toBe(true);
+        });
+
+        test('isFav to fav good', () => {
+
+            instance.state.goodsFav = [
+                {
+                    _id: 1,
+                    productName: 'name',
+                    initialPrice: 24,
+                    category: 2,
+                    owner: {
+                        name: 'NAME'
+                    }
+                }
+            ];
+            expect(instance.isFav(2)).toBe(false);
+        });
+    });
 });

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
+import {StyleSheet, TouchableHighlight, View} from 'react-native';
+import MapView from 'react-native-maps';
 import MarkerList from './marker_list';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -43,44 +43,44 @@ export default class Maps extends Component {
         navigator.geolocation.getCurrentPosition(this.mapAnimateToMe.bind(this), () => {});
     }
 
-  render() {
-    return (
-      <View style={{...StyleSheet.absoluteFillObject}} >
-        <MapView
-          ref={ map => this.map = map }
-          initialRegion={{
-            latitude: this.state.location.lat,
-            longitude: this.state.location.long,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-          showsUserLocation={true}
-          followsUserLocation={true}
-          showsPointsOfInterest={false}
-          showsMyLocationButton={false}
-          showsCompass={false}
-          toolbarEnabled={false}
-          style={{...StyleSheet.absoluteFillObject,paddingTop: 100}}
-        >
-          <MarkerList items={this.props.entities} onMarkerClick={this.props.onMarkerClick}  />
-        </MapView>
-        <TouchableHighlight 
-          underlayColor="rgba(0,0,0,0.3)"
-          style={styles.pointNorth} 
-          onPress={this.pointNorth.bind(this)}
-        >
-          <Icon name="compass-outline" size={20} style={{alignSelf: 'center',color: '#67ACB1'}} />
-        </TouchableHighlight>
-        <TouchableHighlight 
-          underlayColor="rgba(0,0,0,0.3)"
-          style={styles.goToMeButton} 
-          onPress={this.goToMe.bind(this)}
-        >
-          <Icon name="crosshairs-gps" size={20} style={{alignSelf: 'center', color: '#67ACB1'}} />
-        </TouchableHighlight>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <View style={{...StyleSheet.absoluteFillObject}}>
+                <MapView
+                    ref={map => this.map = map}
+                    initialRegion={{
+                        latitude: this.state.location.lat,
+                        longitude: this.state.location.long,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                    showsUserLocation={true}
+                    followsUserLocation={true}
+                    showsPointsOfInterest={false}
+                    showsMyLocationButton={false}
+                    showsCompass={false}
+                    toolbarEnabled={false}
+                    style={{...StyleSheet.absoluteFillObject, paddingTop: 100}}
+                >
+                    <MarkerList items={this.props.entities} onMarkerClick={this.props.onMarkerClick}/>
+                </MapView>
+                <TouchableHighlight
+                    underlayColor="rgba(0,0,0,0.3)"
+                    style={styles.pointNorth}
+                    onPress={this.pointNorth.bind(this)}
+                >
+                    <Icon name="compass-outline" size={20} style={{alignSelf: 'center', color: '#67ACB1'}}/>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    underlayColor="rgba(0,0,0,0.3)"
+                    style={styles.goToMeButton}
+                    onPress={this.goToMe.bind(this)}
+                >
+                    <Icon name="crosshairs-gps" size={20} style={{alignSelf: 'center', color: '#67ACB1'}}/>
+                </TouchableHighlight>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
