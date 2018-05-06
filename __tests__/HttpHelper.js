@@ -44,5 +44,4 @@ describe('Test group for EntityList', function () {
     test('callApi() is callable and returns nothing', () => {
         expect(HttpHelper.callApi()).toBe(undefined);
     });
-
 });

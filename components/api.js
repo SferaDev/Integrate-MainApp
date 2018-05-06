@@ -93,7 +93,6 @@ const API = {
                 }
 
             });
-
         });
     },
     addGoodFav: (good_id = null) => {

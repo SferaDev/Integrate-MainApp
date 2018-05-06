@@ -6,7 +6,6 @@ import { Dropdown } from 'react-native-material-dropdown';
 import Good from './good';
 import SegmentControl from 'react-native-segment-controller';
 
-
 export default class LlistaVals extends Component {
 
     static navigationOptions = {
@@ -68,7 +67,6 @@ export default class LlistaVals extends Component {
     }
 
     openMenu() {
-
         this.props.navigation.navigate('DrawerOpen');
     }
 
@@ -217,7 +215,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 0,
         paddingLeft: 5,
-        paddingRight: 5,
+        paddingRight: 5
     },
     body: {
         flex: 8,
@@ -226,5 +224,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
         width: '100%',
         height: '100%'
-    },
+    }
 });

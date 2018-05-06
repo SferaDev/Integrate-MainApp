@@ -6,13 +6,8 @@ import Entity from './entity';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
 export default class Buscador extends Component {
-    static navigationOptions = {
-        drawerLabel: 'Buscador',
-        drawerIcon: <Icon name="home" size={25}/>,
-    };
-
+    
     constructor(props) {
         super(props);
         this.state = {

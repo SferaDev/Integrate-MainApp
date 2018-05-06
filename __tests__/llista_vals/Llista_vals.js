@@ -44,10 +44,6 @@ describe('Test group for llista_vals', function () {
         expect(instance.openMenu()).toBe(undefined);
     });
 
-    test('openMenu is callable and returns nothing', () => {
-        expect(instance.setIndexChange(0)).toBe(undefined);
-    });
-
     test('getAllGoods is callable and returns nothing', () => {
         expect(instance.getAllGoods()).toBe(undefined);
     });
@@ -171,5 +167,4 @@ describe('Test group for llista_vals', function () {
             expect(instance.isFav(2)).toBe(false);
         });
     });
-
 });
