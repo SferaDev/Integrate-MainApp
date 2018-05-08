@@ -83,7 +83,7 @@ export default class LogIn extends Component {
     }
 
     restorePassword() {
-        //console.warn('Recuperar Contrasenya')
+        this.props.navigation.navigate('RestoreCredentialsStack');
     }
 
     getButtonBackground() {

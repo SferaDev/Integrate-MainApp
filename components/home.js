@@ -7,6 +7,7 @@ import Buscador from './buscador/buscador';
 import LlistaVals from './llista_vals/llista_vals';
 import App from '../App';
 import Logout from "./login/logout";
+import RestoreCredentials from "./restore_credentials/restore_credentials";
 
 const BuscadorStack = StackNavigator({
     buscador: {
@@ -85,10 +86,19 @@ const LoginStack = StackNavigator({
     gesturesEnabled: false
 });
 
+const RestoreCredentialsStack = StackNavigator({
+    RestoreCredentials: {screen: RestoreCredentials}
+}, {
+    headerMode: 'none',
+    disabledBackGesture: true,
+    gesturesEnabled: false
+});
+
 // Manifest of possible screens
 const Home = StackNavigator({
     LoginStack: {screen: LoginStack},
-    DrawerNavigation: {screen: DrawerNavigation}
+    DrawerNavigation: {screen: DrawerNavigation},
+    RestoreCredentialsStack: {screen: RestoreCredentialsStack}
 }, {
     // Default config for all screens
     headerMode: 'none',

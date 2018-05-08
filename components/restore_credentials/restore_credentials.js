@@ -5,7 +5,7 @@ import {
     View,
     TextInput,
     TouchableHighlight,
-    ImageBackground
+    ImageBackground, Keyboard, AsyncStorage
 } from 'react-native';
 
 import Toast from './toast';
@@ -17,18 +17,36 @@ export default class RestoreCredentials extends Component {
         this.state = {
             nifnie: "",
             error: false,
+            isFieldFocused: false
         };
+    }
+
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
+    }
+
+    moveUp() {
+        this.setState({isFieldFocused: true});
+    }
+
+    moveDown() {
+        this.setState({isFieldFocused: false});
+    }
+
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
     }
 
     updateText(value){
         this.setState({nifnie: value})
     }
 
-    buttonPressed() {
+    restoreCredentials() {
         let nifnie = this.state.nifnie;
-        console.log(nifnie);
-        this.setState({error: true})
-        API.Function().then( (string) => {console.warn(string)} );
+        //this.setState({error: true})
+        //API.Function().then( (string) => {console.warn(string)} );
     }
 
     updateError() {
@@ -36,18 +54,29 @@ export default class RestoreCredentials extends Component {
     }
 
     goToLogIn() {
-        console.warn("Anem a la vista anterior");
+        this.props.navigation.navigate('LoginStack');
     }
 
     isEmpty() {
-        return (this.state.nifnie.length == 0)
+        return (this.state.nifnie.length == 0);
+    }
+
+    getButtonBackground() {
+        return (this.isEmpty() ? '#CCC' : '#094671');
+    }
+
+    getButtonColor() {
+        return (this.isEmpty() ? '#666' : 'white');
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <ImageBackground
-                    style={styles.imageBackground}
+                    style={[styles.imageBackground, {
+                        marginBottom: this.state.isFieldFocused ? 145 : 100,
+                        marginTop: this.state.isFieldFocused ? 20 : 100
+                    }]}
                     source={require('../../Images/bg.jpg')}>
                     <View style={{display:'flex',alignItems: 'center'}} >
                         <Text style={styles.basicTitle}>
@@ -60,11 +89,11 @@ export default class RestoreCredentials extends Component {
                                    onChangeText={this.updateText.bind(this)}>
                         </TextInput>
 
-                        <TouchableHighlight style={[styles.buttonStyle, {backgroundColor: (this.state.nifnie.length == 0) ? '#CCC' : '#094671'}]}
-                                            onPress={this.buttonPressed.bind(this)}
-                                            disabled = {this.state.nifnie.length == 0 ? true : false}>
+                        <TouchableHighlight style={[styles.buttonStyle, {backgroundColor: this.getButtonBackground()}]}
+                                            onPress={this.restoreCredentials.bind(this)}
+                                            disabled = {this.isEmpty()}>
 
-                            <Text style={{alignSelf: 'center', color: (this.state.nifnie.length == 0) ? '#666' : 'white', fontWeight: 'bold' }}>
+                            <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold' }}>
                                 Sol·licitar
                             </Text>
                         </TouchableHighlight>
