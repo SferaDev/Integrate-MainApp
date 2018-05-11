@@ -81,6 +81,21 @@ describe("API tests", () => {
         });
     });
 
+    describe("restoreCredentials() tests", () => {
+
+        it('restoreCredentials() is callable and returns nothing', () => {
+            API.restoreCredentials(0).then((s) => {
+                expect(typeof s).toBe('string');
+            });
+        });
+
+        it('restoreCredentials() is callable and returns nothing', () => {
+            API.restoreCredentials().catch((s) => {
+                expect(s).toBe(null);
+            });
+        });
+    });
+
     describe("deleteGoodFav() tests", () => {
 
         it('deleteGoodFav() is callable and returns nothing', () => {
