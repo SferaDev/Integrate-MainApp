@@ -14,8 +14,8 @@ export default class Entity extends Component {
                 <Text style={styles.entityDescription}>{this.props.item.description}</Text>
                 <Text style={styles.entityAddress}>{this.props.item.addressName}</Text>
                 <View style={styles.entityLikes}>
-                    <Text>0</Text>
-                    <Text>TH</Text>
+                    <Text></Text>
+                    <Text></Text>
                 </View>
             </View>
         );

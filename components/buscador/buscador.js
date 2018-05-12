@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BackHandler, StyleSheet, TextInput, View} from 'react-native';
+import {BackHandler, StyleSheet, TextInput, View, TouchableHighlight} from 'react-native';
 import Maps from './maps';
 import EntityList from './list';
 import Entity from './entity';
@@ -34,14 +34,17 @@ export default class Buscador extends Component {
         API.getEntities(loc).then(this.setEntities.bind(this));
     }
 
-    showEntityInfo(ent) {
+    setEntities(entities) {
+        this.setState({entities: entities, entities_shown: entities});
+    }
 
+    showEntityInfo(ent) {
         let selEntity = this.state.entities[ent];
         this.setState({selectedEntity: selEntity});
     }
 
-    setEntities(entities) {
-        this.setState({entities: entities, entities_shown: entities});
+    showEntity(){
+        this.props.navigation.navigate('detalls_entitat',{selectedEntity: this.state.selectedEntity});
     }
 
     openMenu() {
@@ -115,9 +118,11 @@ export default class Buscador extends Component {
                 </View>
                 {
                     this.isAnEntitySelected() ?
-                        <View style={{height: this.isListView(), width: '100%'}}>
-                            <Entity item={this.state.selectedEntity}/>
-                        </View>
+                        <TouchableHighlight style={{height: this.isListView(), width: '100%'}} onPress={this.showEntity.bind(this)} underlayColor='transparent' >
+                            <View>
+                                <Entity item={this.state.selectedEntity}/>
+                            </View>
+                        </TouchableHighlight>
                         :
                         null
                 }
