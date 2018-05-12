@@ -26,11 +26,22 @@ export default class Validar extends Component {
         return (this.isEmpty() ? '#666' : 'white');
     }
 
+    isVisible() {
+        if (true || this.props.visible) {
+            return 'flex';
+        } else {
+            return 'none';
+        }
+    }
+
     render() {
         return (
-            <View style={styles.validarView}>
+            <View style={[styles.validarView, {display: this.isVisible()}]}>
                 <View style={styles.toastcontent}>
-                    <Icon name="close" size={25} style={styles.closeIcon}/>
+                    <Icon   name="close"
+                            size={25}
+                            style={styles.closeIcon}
+                            onPress={this.props.onClose}/>
                     <View style={styles.inputView}>
                         <Text style={styles.text}>
                             Introduir codi de validació:
@@ -67,13 +78,14 @@ const styles = StyleSheet.create({
         right: 0,
         backgroundColor: 'rgba(0,0,0,0.30)',
         padding: 20,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     toastcontent: {
         backgroundColor: 'white',
         padding: 10,
         alignItems: 'center',
-        paddingTop: 25
+        paddingTop: 25,
+        marginBottom: 100
     },
     text: {
         textAlign: 'left',
