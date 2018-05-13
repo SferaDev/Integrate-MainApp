@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, TouchableHighlight, Text, Linking} from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import API from '../api';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Entity from '../buscador/entity';
 import MapView, {Marker} from 'react-native-maps';
 import MarkerImage from '../../Images/marker60.png';
 import call from 'react-native-phone-call';
+
+import API from '../api';
+import Entity from '../buscador/entity';
+import ValsEntitat from './vals_entitat';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class DetallsEntitat extends Component<{}> {
 
@@ -48,18 +50,20 @@ export default class DetallsEntitat extends Component<{}> {
                         <Entity item={this.props.navigation.state.params.selectedEntity}/>
                     </View>
                     <View style={{flex: 1,backgroundColor: '#e8eaf6',flexDirection: 'row'}} >
+                        { this.props.navigation.state.params.selectedEntity.phone != undefined ?
                         <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent' >
                             <View style={{flex: 1,flexDirection: 'row',alignItems: 'center'}} >
                                 <Icon style={styles.phoneIcon} name="phone" size={35}/>    
                                 <Text style={{flex: 1,color: '#67ACB1'}} >{this.props.navigation.state.params.selectedEntity.phone}</Text>
                             </View>
-                        </TouchableHighlight>
+                        </TouchableHighlight> : null }
+                        { this.props.navigation.state.params.selectedEntity.email != undefined ?
                         <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent' >
                             <View style={{flex: 1,flexDirection: 'row',alignItems: 'center'}} >
                                 <Icon style={styles.phoneIcon} name="email-outline" size={35}/>
-                                <Text style={{flex: 1,color: '#aaaaaa'}} >email</Text>
+                                <Text style={{flex: 1,color: '#aaaaaa'}} >{this.props.navigation.state.params.selectedEntity.email}</Text>
                             </View>
-                        </TouchableHighlight>
+                        </TouchableHighlight> : null }
                     </View>
                     <View style={{flex: 3,backgroundColor: 'green'}} >
                         <MapView
@@ -99,7 +103,7 @@ export default class DetallsEntitat extends Component<{}> {
                         </MapView>
                     </View>
                     <View style={{flex: 4,backgroundColor: '#F4F3F2'}} >
-                        <Text>{JSON.stringify(this.props.navigation.state.params.selectedEntity)}</Text>
+                        <ValsEntitat />
                     </View>
                 </View>
             </View>
