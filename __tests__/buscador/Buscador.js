@@ -57,8 +57,8 @@ describe('Test group for EntityList', function () {
         expect(instance.showEntityInfo()).toBe(undefined);
     });
 
-    test('setEntities is callable and returns nothing', () => {
-        expect(instance.setEntities()).toBe(undefined);
+    test('showEntity is callable and returns nothing', () => {
+        expect(instance.showEntity()).toBe(undefined);
     });
 
     test('showListView is callable and returns nothing', () => {

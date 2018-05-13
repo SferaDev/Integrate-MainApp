@@ -9,20 +9,17 @@ export default class DetallsEntitat extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
     }
 
-    openMenu() {
-        this.props.navigation.dispatch(NavigationActions.back({key: null}));
+    goBack() {
+        this.props.navigation.goBack();
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
+                    <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
                 </View>
                 <View style={{
                     flex: 8,
@@ -34,15 +31,14 @@ export default class DetallsEntitat extends Component {
                 }}>
                     <View style={{flex: 2}} >
                         <Entity item={this.props.navigation.state.params.selectedEntity}/>
-                        
                     </View>
-                    <View style={{flex: 1,backgroundColor: 'blue'}} >
+                    <View style={{flex: 1,backgroundColor: '#e8eaf6'}} >
                         
                     </View>
                     <View style={{flex: 3,backgroundColor: 'green'}} >
                         
                     </View>
-                    <View style={{flex: 4,backgroundColor: 'yellow'}} >
+                    <View style={{flex: 4,backgroundColor: '#F4F3F2'}} >
                         
                     </View>
                 </View>
