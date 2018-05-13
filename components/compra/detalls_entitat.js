@@ -37,6 +37,7 @@ export default class DetallsEntitat extends Component<{}> {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
+                    <Icon style={styles.headerRightIco} name="basket" size={30}/>
                 </View>
                 <View style={{
                     flex: 8,
