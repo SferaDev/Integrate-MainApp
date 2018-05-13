@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Entity extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+    }
+
+    showEntityInfo(){
+        this.props.onDetailsShow(this.props.item);
     }
 
     render() {
@@ -17,6 +22,7 @@ export default class Entity extends Component {
                     <Text></Text>
                     <Text></Text>
                 </View>
+                <Icon onPress={this.showEntityInfo.bind(this)} style={{position: 'absolute',bottom: 10,right: 10}} name="information-outline" size={25}/>
             </View>
         );
     }

@@ -43,8 +43,8 @@ export default class Buscador extends Component {
         this.setState({selectedEntity: selEntity});
     }
 
-    showEntity(){
-        this.props.navigation.navigate('detalls_entitat',{selectedEntity: this.state.selectedEntity});
+    showEntity(selEntity){
+        this.props.navigation.navigate('detalls_entitat',{selectedEntity: selEntity});
     }
 
     openMenu() {
@@ -82,7 +82,6 @@ export default class Buscador extends Component {
         this.setState({entities_shown: entities_shown});
     }
 
-
     isAnEntitySelected() {
         return this.state.selectedEntity !== null ? true : false;
     }
@@ -111,14 +110,14 @@ export default class Buscador extends Component {
                 }}>
                     {
                         this.state.isListView ?
-                            <EntityList entities={this.state.entities_shown}/>
+                            <EntityList entities={this.state.entities_shown} onDetailsShow={this.showEntity.bind(this)} />
                             :
                             <Maps entities={this.state.entities_shown} onMarkerClick={this.showEntityInfo.bind(this)}/>
                     }
                 </View>
                 {
                     this.isAnEntitySelected() ?
-                        <TouchableHighlight style={{height: this.isListView(), width: '100%'}} onPress={this.showEntity.bind(this)} underlayColor='transparent' >
+                        <TouchableHighlight style={{height: this.isListView(), width: '100%'}} onPress={this.showEntity.bind(this,this.state.selectedEntity)} underlayColor='transparent' >
                             <View>
                                 <Entity item={this.state.selectedEntity}/>
                             </View>

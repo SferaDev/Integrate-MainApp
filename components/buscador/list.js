@@ -9,7 +9,7 @@ export default class EntityList extends Component {
 
     renderEntity({item}) {
         return (
-            <Entity item={item}/>
+            <Entity item={item} onDetailsShow={this.props.onDetailsShow} />
         );
     }
 
@@ -18,7 +18,7 @@ export default class EntityList extends Component {
             <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 60, backgroundColor: 'white'}]}>
                 <FlatList
                     data={this.props.entities}
-                    renderItem={this.renderEntity}
+                    renderItem={this.renderEntity.bind(this)}
                 />
             </View>
         );
