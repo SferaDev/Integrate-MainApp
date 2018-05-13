@@ -10,7 +10,7 @@ import Entity from '../buscador/entity';
 import ValsEntitat from './vals_entitat';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default class DetallsEntitat extends Component<{}> {
+export default class DetallsEntitat extends Component{
 
     constructor(props) {
         super(props);
@@ -88,8 +88,7 @@ export default class DetallsEntitat extends Component<{}> {
                             style={{...StyleSheet.absoluteFillObject}}
                         >
                             <Marker
-                                key={this.props.navigation.state.params.selectedEntity._id}
-                                identifier={'' + this.props.navigation.state.params.selectedEntity._id + ''}
+                                identifier={this.props.navigation.state.params.selectedEntity._id}
                                 image={MarkerImage}
                                 coordinate={{
                                     latitude: this.props.navigation.state.params.selectedEntity.coordinates[1],
@@ -98,8 +97,6 @@ export default class DetallsEntitat extends Component<{}> {
                                     longitudeDelta: 0.01
                                 }}
                                 pinColor="red"
-                                title=""
-                                description=""
                             />
                         </MapView>
                     </View>
