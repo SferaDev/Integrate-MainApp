@@ -27,10 +27,10 @@ export default class ValsEntitat extends Component {
 
     toggleFavourite(id, isFav) {
         if (!isFav) {
-            API.addGoodFav(id).then(this.getAllGoods.bind(this));
+            API.addGoodFav(id).then(this.getGoods.bind(this));
         }
         else {
-            API.deleteGoodFav(id).then(this.getAllGoods.bind(this));
+            API.deleteGoodFav(id).then(this.getGoods.bind(this));
         }
     }
 
