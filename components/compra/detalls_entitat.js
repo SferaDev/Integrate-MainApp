@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {BackHandler, StyleSheet, TextInput, View, Text} from 'react-native';
+import {StyleSheet, View, TouchableHighlight, Text, Linking} from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entity from '../buscador/entity';
 import MapView, {Marker} from 'react-native-maps';
 import MarkerImage from '../../Images/marker60.png';
+import call from 'react-native-phone-call';
 
 export default class DetallsEntitat extends Component<{}> {
 
@@ -15,6 +16,18 @@ export default class DetallsEntitat extends Component<{}> {
 
     goBack() {
         this.props.navigation.goBack();
+    }
+
+    sendMail(){
+        Linking.openURL('mailto:aleix.sanfeliu@gmail.com');
+    }
+
+    callTo(){
+        const args = {
+          number: '617167362', // String value with the number to call
+          prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
+        }
+        call(args);
     }
 
     render() {
@@ -35,14 +48,18 @@ export default class DetallsEntitat extends Component<{}> {
                         <Entity item={this.props.navigation.state.params.selectedEntity}/>
                     </View>
                     <View style={{flex: 1,backgroundColor: '#e8eaf6',flexDirection: 'row'}} >
-                        <View style={{flex: 1,flexDirection: 'row',alignItems: 'center'}} >
-                            <Icon style={styles.phoneIcon} name="phone" size={35}/>    
-                            <Text style={{flex: 1,color: '#67ACB1'}} >{this.props.navigation.state.params.selectedEntity.phone}</Text>
-                        </View>
-                        <View style={{flex: 1,flexDirection: 'row',alignItems: 'center'}} >
-                            <Icon style={styles.phoneIcon} name="email-outline" size={35}/>
-                            <Text style={{flex: 1,color: '#aaaaaa'}} >email</Text>
-                        </View>
+                        <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent' >
+                            <View style={{flex: 1,flexDirection: 'row',alignItems: 'center'}} >
+                                <Icon style={styles.phoneIcon} name="phone" size={35}/>    
+                                <Text style={{flex: 1,color: '#67ACB1'}} >{this.props.navigation.state.params.selectedEntity.phone}</Text>
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent' >
+                            <View style={{flex: 1,flexDirection: 'row',alignItems: 'center'}} >
+                                <Icon style={styles.phoneIcon} name="email-outline" size={35}/>
+                                <Text style={{flex: 1,color: '#aaaaaa'}} >email</Text>
+                            </View>
+                        </TouchableHighlight>
                     </View>
                     <View style={{flex: 3,backgroundColor: 'green'}} >
                         <MapView

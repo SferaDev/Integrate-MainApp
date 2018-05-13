@@ -47,4 +47,12 @@ describe('Test group for EntityList', function () {
         expect(instance.goBack()).toBe(undefined);
     });
 
+    test('sendMail is callable and returns nothing', () => {
+        expect(instance.sendMail()).toBe(undefined);
+    });
+
+    test('callTo is callable and returns nothing', () => {
+        expect(instance.callTo()).toBe(undefined);
+    });
+
 });
