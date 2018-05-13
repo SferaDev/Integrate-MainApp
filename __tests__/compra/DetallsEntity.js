@@ -11,10 +11,13 @@ const navigation = {
     state: {
         params:{
             selectedEntity: {
-                id: 1,
+                _id: 0,
                 name: 'name',
                 description: 'description',
                 addressName: 'addressName',
+                phone: '000000',
+                email: 'aaa@bbb.com',
+                coordinates: [0, 0]
             }
         }
     },
@@ -38,11 +41,6 @@ describe('Test group for EntityList', function () {
         // After each: Clears the wrapper
         wrapper = null;
         instance = null;
-    });
-
-    test('renders buscador correctly', () => {
-        const tree = renderer.create(<DetallsEntity navigation={navigation}/>).toJSON();
-        expect(tree).toMatchSnapshot();
     });
 
     test('goBack is callable and returns nothing', () => {
