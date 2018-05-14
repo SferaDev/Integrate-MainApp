@@ -13,7 +13,7 @@ const buildQuery = (url = '', params = [], base_url = BASEURL) => {
     return query;
 };
 
-const buildBodyParams = (params) => {
+const buildBodyParams = (params = []) => {
 
     let bodyParams = {};
     let keys = Object.keys(params);

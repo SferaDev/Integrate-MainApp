@@ -59,8 +59,14 @@ describe('Test group for HttpHelper', function () {
         });
     });
 
-    test('callApi() is callable and returns nothing', async () => {
-        expect(await HttpHelper.callApi()).toBe(undefined);
+    describe("callApi() tests", () => {
+        test('callApi() is callable and returns nothing', async () => {
+            expect(await HttpHelper.callApi()).toBe(undefined);
+        });
+
+        test('callApi() is callable and returns nothing', async () => {
+            expect(await HttpHelper.callApi(undefined, undefined, undefined, true)).toBe(undefined);
+        });
     });
 
 });
