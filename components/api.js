@@ -125,10 +125,9 @@ const API = {
         return new Promise(async (resolve, reject) => {
             if (!nifnie) reject();
             else {
-                const token = await AsyncStorage.getItem('token');
 
-                let url = 'me/register/reset' + nifnie;
-                let params = [{key: 'token', value: token}, {key: 'nifnie', value: nifnie}];
+                let url = 'register/reset';
+                let params = [{key: 'nif', value: nifnie}];
 
                 let response = await http_helper.callApi(url, params, "POST");
                 if (response.status === 404) {

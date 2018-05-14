@@ -43,6 +43,10 @@ describe('Test group for RestoreCredentials', function () {
         expect(instance.updateText('')).toBe(undefined);
     });
 
+    it('showError() is callable and returns nothing', () => {
+        expect(instance.showError()).toBe(undefined);
+    });
+
     it('updateError() is callable and returns nothing', () => {
         expect(instance.updateError()).toBe(undefined);
     });

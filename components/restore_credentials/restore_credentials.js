@@ -45,8 +45,11 @@ export default class RestoreCredentials extends Component {
 
     restoreCredentials() {
         let nifnie = this.state.nifnie;
-        //this.setState({error: true})
-        //API.Function().then( (string) => {console.warn(string)} );
+        API.restoreCredentials(nifnie).catch(this.showError.bind(this));
+    }
+
+    showError() {
+        this.setState({error: true});
     }
 
     updateError() {
@@ -72,38 +75,43 @@ export default class RestoreCredentials extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground
-                    style={[styles.imageBackground, {
-                        marginBottom: this.state.isFieldFocused ? 145 : 100,
-                        marginTop: this.state.isFieldFocused ? 20 : 100
-                    }]}
-                    source={require('../../Images/bg.jpg')}>
-                    <View style={{display:'flex',alignItems: 'center'}} >
-                        <Text style={styles.basicTitle}>
-                            Recuperar credencials:
-                        </Text>
+                <ImageBackground style={styles.imageBackground} source={require('../../Images/bg.jpg')}>
 
-                        <TextInput style={styles.basicInput}
-                                   placeholder="NIE/NIF"
-                                   value={this.state.nifNie}
-                                   onChangeText={this.updateText.bind(this)}>
-                        </TextInput>
-
-                        <TouchableHighlight style={[styles.buttonStyle, {backgroundColor: this.getButtonBackground()}]}
-                                            onPress={this.restoreCredentials.bind(this)}
-                                            disabled = {this.isEmpty()}>
-
-                            <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold' }}>
-                                Sol·licitar
-                            </Text>
-                        </TouchableHighlight>
-                        <Text style = {styles.textGoToLogIn}
-                                onPress = {this.goToLogIn.bind(this)}>
-                                Enrera
-                        </Text>
+                    <View style={{display:'flex',justifyContent: 'center',height: '100%',width: '100%'}} >
+                        <View style={{display: 'flex',alignItems: 'center',width: '100%', height: 300}} >
+                            <View style={{flex: 40,justifyContent: 'flex-end'}} >
+                                <Text style={styles.basicTitle}>
+                                    Recuperar credencials:
+                                </Text>
+                            </View>
+                            <View style={{flex: 20}} >
+                                <TextInput style={styles.basicInput}
+                                           placeholder="NIE/NIF"
+                                           value={this.state.nifNie}
+                                           onChangeText={this.updateText.bind(this)}
+                                           underlineColorAndroid='rgba(0,0,0,0)'>
+                                </TextInput>
+                            </View>
+                            <View style={{flex: 20}} >
+                                <TouchableHighlight 
+                                    style={[styles.buttonStyle, {backgroundColor: this.getButtonBackground()}]}
+                                    onPress={this.restoreCredentials.bind(this)}
+                                    disabled = {this.isEmpty()}
+                                >
+                                    <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold' }}>
+                                        Sol·licitar
+                                    </Text>
+                                </TouchableHighlight>
+                            </View>
+                            <View style={{flex: 40}} >
+                                <Text style = {styles.textGoToLogIn} onPress = {this.goToLogIn.bind(this)}>
+                                    Enrera
+                                </Text>
+                            </View>
+                        </View>
                     </View>
-                    <Toast visible = {this.state.error}
-                           onClose = {this.updateError.bind(this)}/>
+                    <Toast visible = {this.state.error} onClose = {this.updateError.bind(this)}/>
+
                 </ImageBackground>
             </View>
         );
@@ -114,37 +122,32 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     imageBackground: {
         width: '100%',
         height: '100%',
         alignSelf: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     basicTitle: {
         fontFamily: 'Helvetica',
         fontSize: 20,
         margin: 10,
-        top: 230,
-        backgroundColor:'transparent',
         textAlign:'center',
-        fontWeight: 'bold',
-        justifyContent: 'center',
+        fontWeight: 'bold'
     },
     basicInput: {
         borderWidth:1,
         borderColor: '#0c59cf',
         backgroundColor:'white',
         width: 260,
-        height: 30,
+        height: 35,
         borderRadius:2,
-        justifyContent: 'center',
-        position: 'absolute',
         margin: 10,
         alignItems:'center',
-        paddingLeft:5,
-        top: 290,
+        padding: 0,
+        paddingLeft:5
     },
     buttonStyle: {
         borderWidth:1,
@@ -152,15 +155,13 @@ const styles = StyleSheet.create({
         width: 260,
         height: 30,
         borderRadius:4,
-        justifyContent: 'center',
-        position: 'absolute',
         margin:10,
-        alignItems: 'center',
-        top: 340,
+        justifyContent: 'center'
     },
     textGoToLogIn: {
         textDecorationLine: 'underline',
         backgroundColor: 'transparent',
-        top: 360,
+        fontWeight: 'bold',
+        fontSize: 16
     }
 });
