@@ -92,8 +92,7 @@ const LoginStack = StackNavigator({
 // Manifest of possible screens
 const Home = StackNavigator({
     LoginStack: {screen: LoginStack},
-    DrawerNavigation: {screen: DrawerNavigation},
-    RestoreCredentialsStack: {screen: RestoreCredentialsStack}
+    DrawerNavigation: {screen: DrawerNavigation}
 }, {
     // Default config for all screens
     headerMode: 'none',
