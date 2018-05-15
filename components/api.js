@@ -120,7 +120,24 @@ const API = {
                 }
             }
         });
-    }
+    },
+    restoreCredentials: (nifnie = null) => {
+        return new Promise(async (resolve, reject) => {
+            if (!nifnie) reject();
+            else {
+
+                let url = 'register/reset';
+                let params = [{key: 'nif', value: nifnie}];
+
+                let response = await http_helper.callApi(url, params, "POST");
+                if (response.status === 404) {
+                    reject();
+                } else if (response.status === 200) {
+                    resolve(JSON.parse(response._bodyText));
+                }
+            }
+        });
+    },
 };
 
 export default API

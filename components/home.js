@@ -7,6 +7,7 @@ import Buscador from './buscador/buscador';
 import LlistaVals from './llista_vals/llista_vals';
 import App from '../App';
 import Logout from "./login/logout";
+import RestoreCredentials from "./restore_credentials/restore_credentials";
 import Validar from './compra/validar';
 
 const BuscadorStack = StackNavigator({
@@ -80,7 +81,8 @@ const DrawerNavigation = StackNavigator({
 });
 
 const LoginStack = StackNavigator({
-    Login: {screen: Login}
+    Login: {screen: Login},
+    RestoreCredentials: {screen: RestoreCredentials}
 }, {
     headerMode: 'none',
     disabledBackGesture: true,

@@ -22,7 +22,6 @@ describe("API tests", () => {
     });
 
     describe("getEntities() tests", () => {
-
         test('getEntities() returns entities', () => {
             API.getEntities().then(data => {
                 expect(typeof data).toBe('object');
@@ -31,7 +30,6 @@ describe("API tests", () => {
     });
 
     describe("getEntities() tests", () => {
-
         it('login() return a token', () => {
             API.login('12334', '1234').then((s) => {
                 expect(typeof s).toBe('string');
@@ -47,6 +45,20 @@ describe("API tests", () => {
         it('login() when password is missing', () => {
             API.login('12334', '').catch((s) => {
                 expect(typeof s).toBe('string');
+            });
+        });
+    });
+    
+    describe("restoreCredentials() tests", () => {
+        it('restoreCredentials() is callable and returns nothing', () => {
+            API.restoreCredentials(0).then((s) => {
+                expect(typeof s).toBe('string');
+            });
+        });
+
+        it('restoreCredentials() is callable and returns nothing', () => {
+            API.restoreCredentials().catch((s) => {
+                expect(s).toBe(null);
             });
         });
     });
@@ -67,7 +79,6 @@ describe("API tests", () => {
     });
 
     describe("addGoodFav() tests", () => {
-
         it('addGoodFav() is callable and returns nothing', () => {
             API.addGoodFav(0).then((s) => {
                 expect(typeof s).toBe('string');
@@ -82,7 +93,6 @@ describe("API tests", () => {
     });
 
     describe("deleteGoodFav() tests", () => {
-
         it('deleteGoodFav() is callable and returns nothing', () => {
             API.addGoodFav(0).then((s) => {
                 expect(typeof s).toBe('string');
@@ -111,5 +121,4 @@ describe("API tests", () => {
             });
         });
     });
-
 });
