@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
         borderRightWidth: 1,
         borderBottomWidth: 1,
         alignSelf: 'center',
-        marginBottom: 7.5,
-        width: '90%'
+        marginBottom: 5,
+        width: '97.5%'
     },
     viewBarra: {
         width: 25,
