@@ -8,6 +8,7 @@ import LlistaVals from './llista_vals/llista_vals';
 import DetallsEntitat from './compra/detalls_entitat';
 import App from '../App';
 import Logout from "./login/logout";
+import Validar from './compra/validar';
 
 const BuscadorStack = StackNavigator({
     buscador: {
@@ -65,7 +66,8 @@ const DrawerStack = DrawerNavigator({
             drawerLabel: 'Log Out',
             drawerIcon: <Icon name="logout-variant" size={25}/>,
         }
-    }
+    },
+    Validar: {screen: Validar},
 }, {
     headerMode: 'none',
     disabledBackGesture: true,
