@@ -11,7 +11,6 @@ let wrapper;
 let instance;
 
 describe('Test group for Validar', function () {
-
     beforeAll(() => {
         configure({adapter: new Adapter()});
     });
