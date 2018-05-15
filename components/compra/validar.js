@@ -27,11 +27,7 @@ export default class Validar extends Component {
     }
 
     isVisible() {
-        if (true || this.props.visible) {
-            return 'flex';
-        } else {
-            return 'none';
-        }
+        return (true || this.props.visible) ? 'flex' : 'none';
     }
 
     render() {
