@@ -21,8 +21,8 @@ const buildBody = (params = []) => {
     return bodyParams;
 }
 
-const callApi = async (url, params, method = 'GET') => {
-    if (method === 'POST') return await fetch(BASEURL + '/' + url , {method: method, body: JSON.stringify(buildBody(params))});
+const callApi = async (url, params, method = 'GET',isBody = false) => {
+    if (isBody) return await fetch(BASEURL + '/' + url , {method: method, body: JSON.stringify(buildBody(params))});
     else return await fetch(buildQuery(url, params) , {method: method});
 };
 

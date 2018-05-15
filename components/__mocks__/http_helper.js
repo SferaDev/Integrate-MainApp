@@ -12,14 +12,23 @@ const buildQuery = (url = '', params = [], base_url = BASE_URL) => {
     return query;
 };
 
-const callApi = (url, params, success, error, method = 'GET') => {
+const callApi = (url, params, method = 'GET') => {
     //fetch(buildQuery(url, params), { method: method }).then(success).catch(error);
-    new Promise((resolve) => {
-        resolve({
-            status: 200,
-            _bodyText: JSON.stringify({something: 'Hello World'})
+    if( url.split('/')[url.split('/').length - 1] == "null" ){
+        return new Promise((resolve,reject) => {
+            reject({
+                status: url === 'login' ? 401 : 404,
+                _bodyText: JSON.stringify({something: 'Not found'})
+            });
         });
-    });
+    }else{
+        return new Promise((resolve) => {
+            resolve({
+                status: 200,
+                _bodyText: JSON.stringify({something: 'Hello World'})
+            });
+        });
+    }
 };
 
 const httpHelper = {
