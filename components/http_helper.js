@@ -15,15 +15,14 @@ const buildQuery = (url = '', params = [], base_url = BASEURL) => {
 const buildBodyParams = (params = []) => {
     let bodyParams = {};
     let keys = Object.keys(params);
-    for(let i in keys){
-
+    for(let i in keys) {
         bodyParams[ params[keys[i]].key ] = params[ keys[i] ].value;
     }
     return bodyParams;
 }
 
 const callApi = async (url, params, method = 'GET') => {
-    if (method === 'POST') return await fetch( BASEURL+'/'+url , {method: method, body: JSON.stringify(buildBodyParams(params))});
+    if (method === 'POST') return await fetch( BASEURL + '/' + url , {method: method, body: JSON.stringify(buildBodyParams(params))});
     else return await fetch( buildQuery(url, params) , {method: method});
 };
 
