@@ -14,7 +14,7 @@ export default class Entity extends Component {
 
     render() {
         return (
-            <View key={this.props.item.id} style={styles.entityView}>
+            <View key={this.props.item._id} style={styles.entityView}>
                 <Text style={styles.entityName}>{this.props.item.name}</Text>
                 <Text style={styles.entityDescription}>{this.props.item.description}</Text>
                 <Text style={styles.entityAddress}>{this.props.item.addressName}</Text>

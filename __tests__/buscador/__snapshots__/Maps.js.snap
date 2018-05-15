@@ -37,7 +37,29 @@ exports[`Test group for Maps renders maps correctly 1`] = `
       }
     }
     toolbarEnabled={false}
-  />
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      coordinate={
+        Object {
+          "latitude": 0,
+          "latitudeDelta": 0.01,
+          "longitude": 0,
+          "longitudeDelta": 0.01,
+        }
+      }
+      ellipsizeMode="tail"
+      identifier="0"
+      image={
+        Object {
+          "testUri": "../../../Images/marker60.png",
+        }
+      }
+      onPress={[Function]}
+      pinColor="red"
+    />
+  </View>
   <View
     accessibilityComponentType={undefined}
     accessibilityLabel={undefined}

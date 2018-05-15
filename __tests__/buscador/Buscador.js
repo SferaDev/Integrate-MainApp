@@ -2,6 +2,8 @@ import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
+
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Buscador from '../../components/buscador/buscador';
@@ -12,7 +14,6 @@ let instance;
 
 describe('Test group for EntityList', function () {
     beforeAll(() => {
-        jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
         configure({adapter: new Adapter()});
     });
 
