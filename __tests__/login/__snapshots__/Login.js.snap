@@ -100,7 +100,7 @@ exports[`Test group for EntityList renders Login correctly 1`] = `
         style={
           Array [
             Object {
-              "backgroundColor": "white",
+              "backgroundColor": "rgba(255,255,255,0.85)",
               "borderColor": "#0c59cf",
               "borderRadius": 2,
               "borderWidth": 1,
@@ -124,7 +124,7 @@ exports[`Test group for EntityList renders Login correctly 1`] = `
         style={
           Array [
             Object {
-              "backgroundColor": "white",
+              "backgroundColor": "rgba(255,255,255,0.85)",
               "borderColor": "#0c59cf",
               "borderRadius": 2,
               "borderWidth": 1,
