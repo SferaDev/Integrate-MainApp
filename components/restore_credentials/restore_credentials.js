@@ -46,6 +46,7 @@ export default class RestoreCredentials extends Component {
     restoreCredentials() {
         let nifnie = this.state.nifnie;
         API.restoreCredentials(nifnie).catch(this.showError.bind(this));
+        this.props.navigation.navigate('LoginStack');
     }
 
     showError() {
@@ -135,12 +136,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         margin: 10,
         textAlign:'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        backgroundColor: 'transparent'
     },
     basicInput: {
         borderWidth:1,
         borderColor: '#0c59cf',
-        backgroundColor:'white',
+        backgroundColor: 'rgba(255,255,255,0.85)',
         width: 260,
         height: 35,
         borderRadius:2,

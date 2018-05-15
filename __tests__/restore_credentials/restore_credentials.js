@@ -106,4 +106,8 @@ describe('Test group for RestoreCredentials', function () {
         });
     });
 
+    it('updateError() is callable and returns nothing', () => {
+        expect(instance.showError()).toBe(undefined);
+    });
+
 });

@@ -26,7 +26,7 @@ const buildBodyParams = (params = []) => {
 
 const callApi = async (url, params, method = 'GET', isBodyData = false) => {
 
-    if (isBodyData) return await fetch( BASEURL+'/'+url , {method: method, body: JSON.stringify( buildBodyParams(params) )});
+    if (isBodyData) return await fetch( BASEURL+'/'+url , {method: method, body: JSON.stringify(buildBodyParams(params))});
     else return await fetch( buildQuery(url, params) , {method: method});
 };
 
