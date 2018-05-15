@@ -81,14 +81,7 @@ const DrawerNavigation = StackNavigator({
 });
 
 const LoginStack = StackNavigator({
-    Login: {screen: Login}
-}, {
-    headerMode: 'none',
-    disabledBackGesture: true,
-    gesturesEnabled: false
-});
-
-const RestoreCredentialsStack = StackNavigator({
+    Login: {screen: Login},
     RestoreCredentials: {screen: RestoreCredentials}
 }, {
     headerMode: 'none',
