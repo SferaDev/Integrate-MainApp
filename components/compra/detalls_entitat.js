@@ -1,19 +1,71 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, TouchableHighlight, Text, Linking} from 'react-native';
-import { NavigationActions } from 'react-navigation';
+import {StyleSheet, View, TouchableHighlight, Text, Linking, ScrollView} from 'react-native';
+import NavigationActions from 'react-navigation';
 import MapView, {Marker} from 'react-native-maps';
 import MarkerImage from '../../Images/marker60.png';
 import call from 'react-native-phone-call';
 
 import API from '../api';
 import Entity from '../buscador/entity';
-import ValsEntitat from './vals_entitat';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Good from '../llista_vals/good';
 
 export default class DetallsEntitat extends Component{
 
     constructor(props) {
         super(props);
+        this.state = {
+            entity: {
+                _id: 0,
+                name: '',
+                description: '',
+                addressName: '',
+                email: '',
+                phone: '',
+                coordinates: [0, 0],
+                goods: []
+            }
+        }
+    }
+
+    componentDidMount() {
+        this.getEntity();
+    }
+
+    getEntity(){
+        API.getEntity(this.props.navigation.state.params.selectedEntity._id).then(this.setEntity.bind(this))
+    }
+
+    setEntity(entity) {
+        this.setState({entity: entity});
+        this.map.animateToRegion({
+            latitude: entity.coordinates[1],
+            longitude: entity.coordinates[0],
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01
+        });
+    }
+
+    toggleFavourite(id, isFav) {
+        /*if (!isFav) {
+            API.addGoodFav(id).then(this.getGoods.bind(this));
+        }
+        else {
+            API.deleteGoodFav(id).then(this.getGoods.bind(this));
+        }*/
+    }
+
+    renderGood(item) {
+        return (
+            <Good
+                key={item._id}
+                id={item._id}
+                item={item}
+                onPress={this.toggleFavourite}
+                context={this}
+                isFav={false}
+            />
+        );
     }
 
     goBack() {
@@ -39,38 +91,37 @@ export default class DetallsEntitat extends Component{
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
                     <Icon style={styles.headerRightIco} name="basket" size={30}/>
                 </View>
-                <View style={{
+                <ScrollView style={{
                     flex: 8,
-                    justifyContent: 'center',
                     backgroundColor: '#F5FCFF',
                     width: '100%',
-                    height: '100%',
-                    display: 'flex'
+                    height: '100%'
                 }}>
-                    <View style={{flex: 2}} >
-                        <Entity item={this.props.navigation.state.params.selectedEntity}/>
+                    <View key="alpha" >
+                        <Entity item={this.state.entity}/>
                     </View>
-                    <View style={{flex: 1,backgroundColor: '#e8eaf6',flexDirection: 'row'}} >
-                        { this.props.navigation.state.params.selectedEntity.phone != undefined ?
+                    <View key="beta" style={{height: 50,backgroundColor: '#e8eaf6',flexDirection: 'row'}} >
+                        { this.state.entity.phone != undefined ?
                         <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent' >
                             <View style={{flex: 1,flexDirection: 'row',alignItems: 'center'}} >
                                 <Icon style={styles.phoneIcon} name="phone" size={35}/>    
-                                <Text style={{flex: 1,color: '#67ACB1'}} >{this.props.navigation.state.params.selectedEntity.phone}</Text>
+                                <Text style={{flex: 1,color: '#67ACB1'}} >{this.state.entity.phone}</Text>
                             </View>
                         </TouchableHighlight> : null }
-                        { this.props.navigation.state.params.selectedEntity.email != undefined ?
+                        { this.state.entity.email != undefined ?
                         <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent' >
                             <View style={{flex: 1,flexDirection: 'row',alignItems: 'center'}} >
                                 <Icon style={styles.phoneIcon} name="email-outline" size={35}/>
-                                <Text style={{flex: 1,color: '#aaaaaa'}} >{this.props.navigation.state.params.selectedEntity.email}</Text>
+                                <Text style={{flex: 1,color: '#aaaaaa'}} >{this.state.entity.email}</Text>
                             </View>
                         </TouchableHighlight> : null }
                     </View>
-                    <View style={{flex: 3,backgroundColor: 'green'}} >
+                    <View key="delta" style={{height: 200,marginBottom: 5}} >
                         <MapView
+                            ref={map => this.map = map}
                             initialRegion={{
-                                latitude: this.props.navigation.state.params.selectedEntity.coordinates[1],
-                                longitude: this.props.navigation.state.params.selectedEntity.coordinates[0],
+                                latitude: this.state.entity.coordinates[1],
+                                longitude: this.state.entity.coordinates[0],
                                 latitudeDelta: 0.01,
                                 longitudeDelta: 0.005,
                             }}
@@ -88,11 +139,10 @@ export default class DetallsEntitat extends Component{
                             style={{...StyleSheet.absoluteFillObject}}
                         >
                             <Marker
-                                identifier={this.props.navigation.state.params.selectedEntity._id}
                                 image={MarkerImage}
                                 coordinate={{
-                                    latitude: this.props.navigation.state.params.selectedEntity.coordinates[1],
-                                    longitude: this.props.navigation.state.params.selectedEntity.coordinates[0],
+                                    latitude: this.state.entity.coordinates[1],
+                                    longitude: this.state.entity.coordinates[0],
                                     latitudeDelta: 0.01,
                                     longitudeDelta: 0.01
                                 }}
@@ -100,10 +150,8 @@ export default class DetallsEntitat extends Component{
                             />
                         </MapView>
                     </View>
-                    <View style={{flex: 4,backgroundColor: '#F4F3F2'}} >
-                        <ValsEntitat />
-                    </View>
-                </View>
+                    {this.state.entity.goods.map(this.renderGood.bind(this))}
+                </ScrollView>
             </View>
         );
     }

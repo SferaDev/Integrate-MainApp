@@ -23,6 +23,21 @@ const API = {
             }
         });
     },
+    getEntity: (id = null) => {
+        return new Promise(async (resolve, reject) => {
+            const token = await AsyncStorage.getItem('token');
+
+            let url = 'me/entity/'+id;
+            let params = [{key: 'token', value: token}];
+
+            let response = await http_helper.callApi(url, params);
+            if (response.status === 404) {
+                reject();
+            } else if (response.status === 200) {
+                resolve(JSON.parse(response._bodyText));
+            }
+        });
+    },
     getEntities: (loc = null) => {
         return new Promise(async (resolve, reject) => {
             const token = await AsyncStorage.getItem('token');

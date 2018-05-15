@@ -2,6 +2,8 @@ import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
+
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import DetallsEntity from '../../components/compra/detalls_entitat';
@@ -11,13 +13,7 @@ const navigation = {
     state: {
         params:{
             selectedEntity: {
-                _id: 0,
-                name: 'name',
-                description: 'description',
-                addressName: 'addressName',
-                phone: '000000',
-                email: 'aaa@bbb.com',
-                coordinates: [0, 0]
+                _id: 0
             }
         }
     },
@@ -25,6 +21,16 @@ const navigation = {
 };
 let wrapper;
 let instance;
+let entity = {
+            _id: 0,
+            name: 'name',
+            description: 'description',
+            addressName: 'addressName',
+            phone: '000000',
+            email: 'aaa@bbb.com',
+            coordinates: [0, 0],
+            goods: []
+        }
 
 describe('Test group for EntityList', function () {
     beforeAll(() => {
@@ -35,12 +41,31 @@ describe('Test group for EntityList', function () {
         // Before each: Shallows the EntityList component
         wrapper = shallow(<DetallsEntity navigation={navigation}/>);
         instance = wrapper.instance();
+        instance.state.entity = {
+            _id: 0,
+            name: 'name',
+            description: 'description',
+            addressName: 'addressName',
+            phone: '000000',
+            email: 'aaa@bbb.com',
+            coordinates: [0, 0],
+            goods: []
+        }
+        instance.map = {
+            animateToRegion: jest.fn()
+        }
     });
 
     afterEach(function () {
         // After each: Clears the wrapper
         wrapper = null;
         instance = null;
+    });
+
+    test('renders detalls_entitat correctly', () => {
+        let component = renderer.create(<DetallsEntity navigation={navigation}/>);
+        const tree = component.toJSON();
+        expect(tree).toMatchSnapshot();
     });
 
     test('goBack is callable and returns nothing', () => {
@@ -53,6 +78,30 @@ describe('Test group for EntityList', function () {
 
     test('callTo is callable and returns nothing', () => {
         expect(instance.callTo()).toBe(undefined);
+    });
+
+    test('getEntity is callable and returns nothing', () => {
+        expect(instance.getEntity()).toBe(undefined);
+    });
+
+    test('setEntity is callable and returns nothing', () => {
+        expect(instance.setEntity(entity)).toBe(undefined);
+    });
+
+    describe("toggleFavourite() tests", () => {
+
+        test('toggleFavourite to normal good', () => {
+            expect(instance.toggleFavourite(1, true)).toBe(undefined);
+        });
+
+        test('toggleFavourite to fav good', () => {
+            expect(instance.toggleFavourite(1, false)).toBe(undefined);
+        });
+    });
+
+    test('renderGood renders an entity correctly', () => {
+
+        expect(instance.renderGood({id: 1})).toMatchSnapshot();
     });
 
 });
