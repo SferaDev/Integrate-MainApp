@@ -91,30 +91,28 @@ export default class DetallsEntitat extends Component{
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
                     <Icon style={styles.headerRightIco} name="basket" size={30}/>
                 </View>
-                <ScrollView style={{
-                    flex: 8,
-                    backgroundColor: '#F5FCFF',
-                    width: '100%',
-                    height: '100%'
-                }}>
+                <ScrollView style={styles.scrollView}>
                     <View key="alpha" >
                         <Entity item={this.state.entity}/>
                     </View>
-                    <View key="beta" style={{height: 50,backgroundColor: '#e8eaf6',flexDirection: 'row'}} >
+                    <View key="beta" style={styles.contactArea} >
+
                         { this.state.entity.phone != undefined ?
                         <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent' >
-                            <View style={{flex: 1,flexDirection: 'row',alignItems: 'center'}} >
-                                <Icon style={styles.phoneIcon} name="phone" size={35}/>    
-                                <Text style={{flex: 1,color: '#67ACB1'}} >{this.state.entity.phone}</Text>
+                            <View style={styles.contactItem} >
+                                <Icon style={styles.contactIcon} name="phone" size={35}/>    
+                                <Text style={styles.contactInfo} >{this.state.entity.phone}</Text>
                             </View>
                         </TouchableHighlight> : null }
+
                         { this.state.entity.email != undefined ?
                         <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent' >
-                            <View style={{flex: 1,flexDirection: 'row',alignItems: 'center'}} >
-                                <Icon style={styles.phoneIcon} name="email-outline" size={35}/>
-                                <Text style={{flex: 1,color: '#aaaaaa'}} >{this.state.entity.email}</Text>
+                            <View style={styles.contactItem} >
+                                <Icon style={styles.contactIcon} name="email-outline" size={35}/>
+                                <Text style={styles.contactInfo} >{this.state.entity.email}</Text>
                             </View>
                         </TouchableHighlight> : null }
+
                     </View>
                     <View key="delta" style={{height: 200,marginBottom: 5}} >
                         <MapView
@@ -185,10 +183,33 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         color: 'white'
     },
-    phoneIcon:{
+    scrollView: {
+        flex: 8,
+        backgroundColor: '#F5FCFF',
+        width: '100%',
+        height: '100%'
+    },
+    contactArea: {
+        height: 50,
+        backgroundColor: '#e8eaf6',
+        flexDirection: 'row',
+        paddingLeft: 5,
+        paddingRight: 5
+    },
+    contactItem: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    contactIcon:{
         color: '#094671',
         alignSelf: 'center',
         marginLeft: 15,
         marginRight: 15
+    },
+    contactInfo:{
+        flex: 1,
+        color: '#67ACB1',
+        fontSize: 12
     }
 });
