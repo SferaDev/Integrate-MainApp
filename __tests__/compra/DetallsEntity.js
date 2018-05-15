@@ -104,4 +104,42 @@ describe('Test group for EntityList', function () {
         expect(instance.renderGood({id: 1})).toMatchSnapshot();
     });
 
+    describe("displayPhoneInfo() tests", () => {
+
+        test('displayPhoneInfo to normal good', () => {
+            let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
+            let instance = wrapper.instance();
+            instance.state.entity = {
+                phone: '000000',
+            }
+            expect(instance.displayPhoneInfo()).toMatchSnapshot();
+        });
+
+        test('displayPhoneInfo to normal good', () => {
+            let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
+            let instance = wrapper.instance();
+            instance.state.entity = {}
+            expect(instance.displayPhoneInfo()).toBe(undefined);
+        });
+    });
+
+    describe("displayMailInfo() tests", () => {
+
+        test('displayMailInfo to normal good', () => {
+            let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
+            let instance = wrapper.instance();
+            instance.state.entity = {
+                email: 'ofhdfkzn',
+            }
+            expect(instance.displayMailInfo()).toMatchSnapshot();
+        });
+
+        test('displayMailInfo to normal good', () => {
+            let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
+            let instance = wrapper.instance();
+            instance.state.entity = {}
+            expect(instance.displayMailInfo()).toBe(undefined);
+        });
+    });
+
 });

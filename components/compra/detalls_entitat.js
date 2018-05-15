@@ -84,6 +84,32 @@ export default class DetallsEntitat extends Component{
         call(args);
     }
 
+    displayPhoneInfo(){
+        if(this.state.entity.phone != undefined){
+            return(
+                <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent' >
+                    <View style={styles.contactItem} >
+                        <Icon style={styles.contactIcon} name="phone" size={35}/>    
+                        <Text style={styles.contactInfo} >{this.state.entity.phone}</Text>
+                    </View>
+                </TouchableHighlight>
+            );
+        }
+    }
+
+    displayMailInfo(){
+        if(this.state.entity.email != undefined){
+            return(
+                <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent' >
+                    <View style={styles.contactItem} >
+                        <Icon style={styles.contactIcon} name="email-outline" size={35}/>
+                        <Text style={styles.contactInfo} >{this.state.entity.email}</Text>
+                    </View>
+                </TouchableHighlight> 
+            );
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -97,21 +123,9 @@ export default class DetallsEntitat extends Component{
                     </View>
                     <View key="beta" style={styles.contactArea} >
 
-                        { this.state.entity.phone != undefined ?
-                        <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent' >
-                            <View style={styles.contactItem} >
-                                <Icon style={styles.contactIcon} name="phone" size={35}/>    
-                                <Text style={styles.contactInfo} >{this.state.entity.phone}</Text>
-                            </View>
-                        </TouchableHighlight> : null }
+                        { this.displayPhoneInfo() }
 
-                        { this.state.entity.email != undefined ?
-                        <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent' >
-                            <View style={styles.contactItem} >
-                                <Icon style={styles.contactIcon} name="email-outline" size={35}/>
-                                <Text style={styles.contactInfo} >{this.state.entity.email}</Text>
-                            </View>
-                        </TouchableHighlight> : null }
+                        { this.displayMailInfo() }
 
                     </View>
                     <View key="delta" style={{height: 200,marginBottom: 5}} >
