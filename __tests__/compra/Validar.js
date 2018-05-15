@@ -13,7 +13,6 @@ let instance;
 describe('Test group for Validar', function () {
 
     beforeAll(() => {
-
         configure({adapter: new Adapter()});
     });
 
@@ -55,7 +54,6 @@ describe('Test group for Validar', function () {
     });
 
     describe("getButtonBackground() and getButtonColor() tests", () => {
-
         test('getButtonBackground() is callable and returns a color code', () => {
             expect(typeof instance.getButtonBackground()).toBe("string");
         });
@@ -76,7 +74,6 @@ describe('Test group for Validar', function () {
     });
 
     /*describe("isVisible() tests", () => {
-
         test('isVisible is callable and returns "flex"', () => {
             let wrapper = shallow(<Validar visible={true} onClose={jest.fn()}/>);
             let instance = wrapper.instance();
