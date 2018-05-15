@@ -51,7 +51,7 @@ describe('Test group for HttpHelper', function () {
             expect( JSON.stringify(HttpHelper.buildBody({})) ).toBe('{}');
         });
 
-        test('buildBodyParams() when params are set', () => {
+        test('buildBody() when params are set', () => {
             expect( JSON.stringify(HttpHelper.buildBody([{
                 key: 'param1',
                 value: 'value1'
