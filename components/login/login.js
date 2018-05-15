@@ -83,7 +83,7 @@ export default class LogIn extends Component {
     }
 
     restorePassword() {
-        //console.warn('Recuperar Contrasenya')
+        this.props.navigation.navigate('RestoreCredentialsStack');
     }
 
     getButtonBackground() {
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     basicInput: {
         borderWidth: 1,
         borderColor: '#0c59cf',
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(255,255,255,0.85)',
         width: 260,
         height: 35,
         borderRadius: 2,
