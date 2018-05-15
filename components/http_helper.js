@@ -1,7 +1,6 @@
 const BASEURL = 'http://integrate-backend-staging.herokuapp.com';
 
 const buildQuery = (url = '', params = [], base_url = BASEURL) => {
-
     let query = base_url + '/' + url;
     let keys = Object.keys(params);
 
@@ -14,7 +13,6 @@ const buildQuery = (url = '', params = [], base_url = BASEURL) => {
 };
 
 const buildBodyParams = (params = []) => {
-
     let bodyParams = {};
     let keys = Object.keys(params);
     for(let i in keys){
@@ -24,9 +22,8 @@ const buildBodyParams = (params = []) => {
     return bodyParams;
 }
 
-const callApi = async (url, params, method = 'GET', isBodyData = false) => {
-
-    if (isBodyData) return await fetch( BASEURL+'/'+url , {method: method, body: JSON.stringify(buildBodyParams(params))});
+const callApi = async (url, params, method = 'GET') => {
+    if (method === 'POST') return await fetch( BASEURL+'/'+url , {method: method, body: JSON.stringify(buildBodyParams(params))});
     else return await fetch( buildQuery(url, params) , {method: method});
 };
 
