@@ -62,6 +62,5 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         backgroundColor: '#67ACB1'
-
     }
 });
