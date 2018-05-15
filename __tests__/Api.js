@@ -48,6 +48,20 @@ describe("API tests", () => {
             });
         });
     });
+    
+    describe("restoreCredentials() tests", () => {
+        it('restoreCredentials() is callable and returns nothing', () => {
+            API.restoreCredentials(0).then((s) => {
+                expect(typeof s).toBe('string');
+            });
+        });
+
+        it('restoreCredentials() is callable and returns nothing', () => {
+            API.restoreCredentials().catch((s) => {
+                expect(s).toBe(null);
+            });
+        });
+    });
 
     describe("getGoods() tests", () => {
 
@@ -73,20 +87,6 @@ describe("API tests", () => {
 
         it('addGoodFav() is callable and returns nothing', () => {
             API.addGoodFav().catch((s) => {
-                expect(s).toBe(null);
-            });
-        });
-    });
-
-    describe("restoreCredentials() tests", () => {
-        it('restoreCredentials() is callable and returns nothing', () => {
-            API.restoreCredentials(0).then((s) => {
-                expect(typeof s).toBe('string');
-            });
-        });
-
-        it('restoreCredentials() is callable and returns nothing', () => {
-            API.restoreCredentials().catch((s) => {
                 expect(s).toBe(null);
             });
         });
