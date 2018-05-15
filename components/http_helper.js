@@ -12,7 +12,7 @@ const buildQuery = (url = '', params = [], base_url = BASEURL) => {
     return query;
 };
 
-const buildBodyParams = (params = []) => {
+const buildBody = (params = []) => {
     let bodyParams = {};
     let keys = Object.keys(params);
     for(let i in keys) {
@@ -22,13 +22,13 @@ const buildBodyParams = (params = []) => {
 }
 
 const callApi = async (url, params, method = 'GET') => {
-    if (method === 'POST') return await fetch( BASEURL + '/' + url , {method: method, body: JSON.stringify(buildBodyParams(params))});
-    else return await fetch( buildQuery(url, params) , {method: method});
+    if (method === 'POST') return await fetch(BASEURL + '/' + url , {method: method, body: JSON.stringify(buildBody(params))});
+    else return await fetch(buildQuery(url, params) , {method: method});
 };
 
 const httpHelper = {
     buildQuery: buildQuery,
-    buildBodyParams: buildBodyParams,
+    buildBody: buildBody,
     callApi: callApi
 };
 
