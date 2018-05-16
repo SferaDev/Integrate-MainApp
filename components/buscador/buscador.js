@@ -30,12 +30,11 @@ export default class Buscador extends Component {
         return true;
     }
 
-    getEntities(loc) {
-        API.getEntities(loc).then(this.setEntities.bind(this));
-    }
-
-    setEntities(entities) {
-        this.setState({entities: entities, entities_shown: entities});
+    async getEntities(loc) {
+        let entities = await API.getEntities(loc);
+        if(entities != null){
+            this.setState({entities: entities, entities_shown: entities});
+        }
     }
 
     showEntityInfo(ent) {

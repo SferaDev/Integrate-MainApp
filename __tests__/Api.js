@@ -97,6 +97,12 @@ describe("API tests", () => {
             expect( JSON.stringify(r) ).toBe('{"something":"Hello World"}');
         });
 
+        test('getGoods() is callable and returns nothing', async () => {
+            
+            let r = await API.getGoods(null,null);
+            expect( r ).toBe(null);
+        });
+
         test('getGoodsFav() is callable and returns nothing', async () => {
             
             let r = await API.getGoodsFav(0,0,{coords: {latitude: 0,longitude: 0}});
@@ -107,6 +113,12 @@ describe("API tests", () => {
             
             let r = await API.getGoodsFav(0,0);
             expect( JSON.stringify(r) ).toBe('{"something":"Hello World"}');
+        });
+
+        test('getGoodsFav() is callable and returns nothing', async () => {
+            
+            let r = await API.getGoodsFav(null,null);
+            expect( r ).toBe(null);
         });
     });
 

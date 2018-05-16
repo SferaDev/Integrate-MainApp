@@ -48,20 +48,19 @@ const API = {
             }
         });
     },
-    getEntities: (loc = null) => {
-        return new Promise(async (resolve, reject) => {
-            const token = await AsyncStorage.getItem('token');
+    getEntities: async (loc = null) => {
 
-            let url = 'me/entities';
-            let params = [{key: 'token', value: token}, {key: 'latitude', value: loc.coords.latitude}, {key: 'longitude', value: loc.coords.longitude}];
+        const token = await AsyncStorage.getItem('token');
 
-            let response = await http_helper.callApi(url, params);
-            if (response.status === 404) {
-                reject();
-            } else if (response.status === 200) {
-                resolve(JSON.parse(response._bodyText));
-            }
-        });
+        let url = 'me/entities';
+        let params = [{key: 'token', value: token}];
+        params.push({key: 'latitude', value: (loc && loc.coords) ? loc.coords.latitude : null});
+        params.push({key: 'longitude', value: (loc && loc.coords) ? loc.coords.longitude : null});
+
+        let response = await http_helper.callApi(url, params);
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
     },
     getGoods: async (category = 0, order = 0, loc = null) => {
 

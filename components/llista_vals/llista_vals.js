@@ -42,10 +42,12 @@ export default class LlistaVals extends Component {
         let goods = await API.getGoods(category, order, loc);
         let goodsFav = await API.getGoodsFav(category, order, loc);
 
-        if (this.state.selectedIndex == 1){
-            this.setState({goods_shown: goods,goods: goods, goodsFav: goodsFav});
-        } else{
-            this.setState({goods_shown: goodsFav,goods: goods, goodsFav: goodsFav});
+        if( goods != null && goodsFav != null ){
+            if (this.state.selectedIndex == 1){
+                this.setState({goods_shown: goods,goods: goods, goodsFav: goodsFav});
+            } else{
+                this.setState({goods_shown: goodsFav,goods: goods, goodsFav: goodsFav});
+            }
         }
     }
 
