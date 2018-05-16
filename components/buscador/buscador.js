@@ -39,7 +39,7 @@ export default class Buscador extends Component {
     }
 
     showEntityInfo(ent) {
-        let selEntity = this.state.entities[ent];
+        let selEntity = this.state.entities_shown[ent];
         this.setState({selectedEntity: selEntity});
     }
 
