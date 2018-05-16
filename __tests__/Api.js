@@ -7,7 +7,6 @@ import API from '../components/api';
 
 configure({adapter: new Adapter()});
 
-
 describe("API tests", () => {
 
     describe("login() tests", () => {
@@ -86,120 +85,58 @@ describe("API tests", () => {
 
     describe("getGoods() tests", () => {
 
-        it('getGoods() is callable and returns nothing', () => {
-            API.getGoods(0, 0, null).then((s) => {
-                expect(typeof s).toBe('string');
-            });
+        test('getGoods() is callable and returns nothing', async () => {
+            
+            let r = await API.getGoods(0,0,{coords: {latitude: 0,longitude: 0}});
+            expect( JSON.stringify(r) ).toBe('{"something":"Hello World"}');
         });
 
-        it('getGoods() is callable and returns nothing', () => {
-            API.getGoods(0, 0, {coords: {latitude: 0, longitude: 0}}).then((s) => {
-                expect(typeof s).toBe('string');
-            });
+        test('getGoods() is callable and returns nothing', async () => {
+            
+            let r = await API.getGoods(0,0);
+            expect( JSON.stringify(r) ).toBe('{"something":"Hello World"}');
         });
 
-        it('getGoodsFav() is callable and returns nothing', () => {
-            API.getGoodsFav(0, 0, null).then((s) => {
-                expect(typeof s).toBe('string');
-            });
+        test('getGoodsFav() is callable and returns nothing', async () => {
+            
+            let r = await API.getGoodsFav(0,0,{coords: {latitude: 0,longitude: 0}});
+            expect( JSON.stringify(r) ).toBe('{"something":"Hello World"}');
         });
 
-        it('getGoodsFav() is callable and returns nothing', () => {
-            API.getGoodsFav(0, 0, {coords: {latitude: 0, longitude: 0}}).then((s) => {
-                expect(typeof s).toBe('string');
-            });
-        });
-
-        it('getGoods() when token is not defined', async () => {
-
-            await AsyncStorage.removeItem('token');
-            API.getGoods(0, 0, null).catch((s) => {
-                expect(s).toBe(null);
-            });
-        });
-
-        it('getGoods() when token is defined', async () => {
-
-            await AsyncStorage.setItem('token', 'SOME_TOKEN');
-            API.getGoods(0, 0, null).then((s) => {
-                expect(typeof s).toBe("string");
-            });
-        });
-
-        it('getGoodsFav() when token is not defined', async () => {
-
-            await AsyncStorage.removeItem('token');
-            API.getGoodsFav(0, 0, null).catch((s) => {
-                expect(s).toBe(null);
-            });
-        });
-
-        it('getGoodsFav() when token is defined', async () => {
-
-            await AsyncStorage.setItem('token', 'SOME_TOKEN');
-            API.getGoodsFav(0, 0, null).then((s) => {
-                expect(typeof s).toBe("string");
-            });
+        test('getGoodsFav() is callable and returns nothing', async () => {
+            
+            let r = await API.getGoodsFav(0,0);
+            expect( JSON.stringify(r) ).toBe('{"something":"Hello World"}');
         });
     });
 
     describe("addGoodFav() tests", () => {
-        it('addGoodFav() is callable and returns nothing', () => {
-            API.addGoodFav(0).then((s) => {
-                expect(typeof s).toBe('string');
-            });
+
+        test('addGoodFav() is callable and returns nothing', async () => {
+            
+            let r = await API.addGoodFav(undefined);
+            expect( r ).toBe(null);
         });
 
-        it('addGoodFav() is callable and returns nothing', () => {
-            API.addGoodFav().catch((s) => {
-                expect(s).toBe(null);
-            });
-        });
-
-        it('addGoodFav() when token is not defined', async () => {
-
-            await AsyncStorage.removeItem('token');
-            API.addGoodFav(0, 0, null).catch((s) => {
-                expect(s).toBe(null);
-            });
-        });
-
-        it('addGoodFav() when token is defined', async () => {
-
-            await AsyncStorage.setItem('token', 'SOME_TOKEN');
-            API.addGoodFav(0, 0, null).then((s) => {
-                expect(typeof s).toBe("string");
-            });
+        test('addGoodFav() is callable and returns nothing', async () => {
+            
+            let r = await API.addGoodFav(5);
+            expect( JSON.stringify(r) ).toEqual('{"something":"Hello World"}');
         });
     });
 
     describe("deleteGoodFav() tests", () => {
-        it('deleteGoodFav() is callable and returns nothing', () => {
-            API.deleteGoodFav(0).then((s) => {
-                expect(typeof s).toBe('string');
-            });
+
+        test('deleteGoodFav() is callable and returns nothing', async () => {
+            
+            let r = await API.deleteGoodFav(undefined);
+            expect( r ).toBe(null);
         });
 
-        it('deleteGoodFav() is callable and returns nothing', () => {
-            API.deleteGoodFav().catch((s) => {
-                expect(s).toBe(null);
-            });
-        });
-
-        it('deleteGoodFav() when token is not defined', async () => {
-
-            await AsyncStorage.removeItem('token');
-            API.deleteGoodFav(0).catch((s) => {
-                expect(s).toBe(null);
-            });
-        });
-
-        it('deleteGoodFav() when token is defined', async () => {
-
-            await AsyncStorage.setItem('token', 'SOME_TOKEN');
-            API.deleteGoodFav(0).then((s) => {
-                expect(typeof s).toBe("string");
-            });
+        test('deleteGoodFav() is callable and returns nothing', async () => {
+            
+            let r = await API.deleteGoodFav(5);
+            expect( JSON.stringify(r) ).toEqual('{"something":"Hello World"}');
         });
     });
 });

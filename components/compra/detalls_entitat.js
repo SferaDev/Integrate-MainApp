@@ -33,7 +33,7 @@ export default class DetallsEntitat extends Component{
     }
 
     getEntity(){
-        API.getEntity(this.props.navigation.state.params.selectedEntity._id).then(this.setEntity.bind(this))
+        API.getEntity(this.props.navigation.state.params.selectedEntity._id).then(this.setEntity.bind(this)).catch(err => console.warn(err))
     }
 
     setEntity(entity) {

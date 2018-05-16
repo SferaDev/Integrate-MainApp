@@ -34,31 +34,19 @@ export default class LlistaVals extends Component {
         return true;
     }
 
-    getAllGoods() {
-        this.getGoods();
-        this.getGoodsFav();
-    }
+    async getAllGoods(loc) {
 
-    getGoods(loc) {
         let category = this.state.category;
         let order = this.state.order;
-        API.getGoods(category, order, loc).then(this.setGoods.bind(this));
-    }
 
-    getGoodsFav(loc) {
-        let category = this.state.category;
-        let order = this.state.order;
-        API.getGoodsFav(category, order, loc).then(this.setGoodsFav.bind(this));
-    }
+        let goods = await API.getGoods(category, order, loc);
+        let goodsFav = await API.getGoodsFav(category, order, loc);
 
-    setGoods(goods) {
-        this.setState({goods: goods});
-        if (this.state.selectedIndex == 1) this.setState({goods_shown: goods});
-    }
-
-    setGoodsFav(goodsFav) {
-        this.setState({goodsFav: goodsFav});
-        if (this.state.selectedIndex == 0) this.setState({goods_shown: goodsFav});
+        if (this.state.selectedIndex == 1){
+            this.setState({goods_shown: goods,goods: goods, goodsFav: goodsFav});
+        } else{
+            this.setState({goods_shown: goodsFav,goods: goods, goodsFav: goodsFav});
+        }
     }
 
     openMenu() {
@@ -68,34 +56,23 @@ export default class LlistaVals extends Component {
 
     selectFilter(value, index) {
 
-        //Seleccio filtre per categoria
         this.setState({category: index});
-
-        //Crida a la api
-        this.getGoods();
+        this.getAllGoods();
     }
 
     selectOrder(value, index) {
-        //Seleccio filtre per metode d'ordenacio
+
         this.setState({order: index});
 
-        //Crida a la api
-        if (index === 2) {
-            navigator.geolocation.getCurrentPosition(this.getGoods.bind(this), () => {
-            });
-        }
-        else {
-            this.getGoods();
-        }
+        if (index === 2) navigator.geolocation.getCurrentPosition(this.getAllGoods.bind(this), () => {});
+        else this.getAllGoods();
     }
 
-    toggleFavourite(id, isFav) {
-        if (!isFav) {
-            API.addGoodFav(id).then(this.getAllGoods.bind(this));
-        }
-        else {
-            API.deleteGoodFav(id).then(this.getAllGoods.bind(this));
-        }
+    async toggleFavourite(id, isFav) {
+
+        if (!isFav) await API.addGoodFav(id);
+        else  await API.deleteGoodFav(id);
+        this.getAllGoods();
     }
 
     isFav(id) {
