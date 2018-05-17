@@ -138,4 +138,24 @@ describe('Test group for EntityList', function () {
             expect(instance.isEmpty()).toBe(false);
         });
     });
+
+    it('moveUp() is callable and returns nothing', () => {
+        expect(instance.moveUp()).toBe(undefined);
+    });
+
+    it('moveDown() is callable and returns nothing', () => {
+        expect(instance.moveDown()).toBe(undefined);
+    });
+
+    it('componentWillUnmount() is callable and returns nothing', () => {
+        expect(instance.componentWillUnmount()).toBe(undefined);
+    });
+
+    it('showError() is callable and returns nothing', () => {
+        expect(instance.showError()).toBe(undefined);
+    });
+
+    it('updateError() is callable and returns nothing', () => {
+        expect(instance.updateError()).toBe(undefined);
+    });
 });

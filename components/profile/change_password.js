@@ -4,10 +4,11 @@ import {
     View,
     TextInput,
     TouchableHighlight,
-    Text
+    Text, Keyboard, AsyncStorage
 } from 'react-native';
 
 import API from '../api';
+import Toast from '../login/toast';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class ChangePassword extends Component {
@@ -18,6 +19,8 @@ export default class ChangePassword extends Component {
             password: "",
             new_password1: "",
             new_password2: "",
+            isFieldFocused: false,
+            error: false
         };
     }
 
@@ -53,12 +56,42 @@ export default class ChangePassword extends Component {
         return (this.isEmpty() ? '#CCC' : '#094671');
     }
 
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
+    }
+
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
+    }
+
+    moveUp() {
+        this.setState({isFieldFocused: true});
+    }
+
+    moveDown() {
+        this.setState({isFieldFocused: false});
+    }
+
+    showError() {
+        this.setState({error: true});
+    }
+
+    updateError() {
+        this.setState({error: false});
+    }
+
     changePassword() {
         let password = this.state.password;
         let new_password1 = this.state.new_password1;
         let new_password2 = this.state.new_password2;
 
-        //TO DO: Comprovar que new_password1 == new_password2. Si són iguals => crida a api, altrament mostrar missatge
+        if(new_password1 != new_password2) this.showError();
+        //TO DO: Canviar el text del toast fent que el text que es mostra sigui un paràmetre que se li passa
+
+        //else {crida a la api passant password1 o password2 i el password antic}
+
     }
 
     render() {
@@ -67,8 +100,8 @@ export default class ChangePassword extends Component {
                 <View style={styles.header}>
                     <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
                 </View>
-                <View style={styles.body}>
-                    <Text style={styles.basicTitle}>
+                <View style={[styles.body, {marginBottom: this.state.isFieldFocused ? 260 : 0}]}>
+                    <Text style={[styles.basicTitle, {paddingBottom: 25}]}>
                         Canvi de contrasenya
                     </Text>
                     <Text style={styles.basicText}>
@@ -109,6 +142,9 @@ export default class ChangePassword extends Component {
                             Guardar contrasenya
                         </Text>
                     </TouchableHighlight>
+                    <Toast
+                        visible={this.state.error}
+                        onClose={this.updateError.bind(this)}/>
                 </View>
             </View>
         );
@@ -120,7 +156,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F4F3F2',
     },
     header: {
         height: 60,
@@ -140,7 +176,7 @@ const styles = StyleSheet.create({
         flex: 8,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F4F3F2',
         width: '100%',
         height: '100%'
     },
@@ -167,7 +203,7 @@ const styles = StyleSheet.create({
     },
     basicTitle: {
         fontFamily: 'Helvetica',
-        fontSize: 20,
+        fontSize: 24,
         margin: 10,
         textAlign:'center',
         fontWeight: 'bold',
@@ -175,7 +211,7 @@ const styles = StyleSheet.create({
     },
     basicText: {
         fontFamily: 'Helvetica',
-        fontSize: 15,
+        fontSize: 19,
         margin: 10,
         textAlign:'center',
         backgroundColor: 'transparent'
