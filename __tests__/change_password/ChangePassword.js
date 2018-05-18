@@ -36,6 +36,12 @@ describe('Test group for EntityList', function () {
         expect(instance.changePassword()).toBe(undefined);
     });
 
+    it('changePassword() is callable and returns nothing', () => {
+        instance.state.new_password1 = 'A';
+        instance.state.new_password2 = 'B';
+        expect(instance.changePassword()).toBe(undefined);
+    });
+
     it('updatePassword() is callable and returns nothing', () => {
         expect(instance.updatePassword('')).toBe(undefined);
     });
