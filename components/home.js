@@ -10,6 +10,7 @@ import App from '../App';
 import Logout from "./login/logout";
 import RestoreCredentials from "./restore_credentials/restore_credentials";
 import Validar from './compra/validar';
+import ChangePassword from "./profile/change_password";
 
 const BuscadorStack = StackNavigator({
     buscador: {
@@ -43,7 +44,13 @@ const ValsStack = StackNavigator({
 });
 
 const ProfileStack = StackNavigator({
-    app: {screen: App},
+    change_password: {
+        screen: ChangePassword,
+        navigationOptions: {
+            drawerLabel: 'Change password',
+            drawerIcon: <Icon name="settings" size={25}/>,
+        }
+    },
 }, {
     headerMode: 'none',
     disabledBackGesture: true,
@@ -69,6 +76,7 @@ const DrawerStack = DrawerNavigator({
         }
     },
     Validar: {screen: Validar},
+    Profile: {screen: ProfileStack}
 }, {
     headerMode: 'none',
     disabledBackGesture: true,
