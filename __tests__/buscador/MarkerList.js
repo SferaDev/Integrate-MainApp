@@ -13,8 +13,6 @@ let instance;
 describe('Test group for MarkerList', function () {
 
     beforeAll(() => {
-
-        //jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
         configure({adapter: new Adapter()});
     });
 
@@ -33,6 +31,20 @@ describe('Test group for MarkerList', function () {
     test('renders marker_list correctly', () => {
 
         const tree = renderer.create(<MarkerList items={[]}/>).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    test('renders marker_list correctly', () => {
+
+        const tree = renderer.create(<MarkerList items={[{
+            _id: 0,
+            name: 'name',
+            description: 'description',
+            addressName: 'addressName',
+            phone: '000000',
+            email: 'aaa@bbb.com',
+            coordinates: [0, 0]
+        }]}/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
 });

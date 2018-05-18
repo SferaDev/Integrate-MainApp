@@ -46,8 +46,27 @@ describe('Test group for HttpHelper', function () {
         });
     });
 
-    test('callApi() is callable and returns nothing', async () => {
-        expect(await HttpHelper.callApi()).toBe(undefined);
+    describe("buildBody() tests", () => {
+        test('buildBody() when params are blank', () => {
+            expect( JSON.stringify(HttpHelper.buildBody({})) ).toBe('{}');
+        });
+
+        test('buildBody() when params are set', () => {
+            expect( JSON.stringify(HttpHelper.buildBody([{
+                key: 'param1',
+                value: 'value1'
+            }])) ).toBe('{"param1":"value1"}');
+        });
+    });
+
+    describe("callApi() tests", () => {
+        test('callApi() is callable and returns nothing', async () => {
+            expect(await HttpHelper.callApi()).toBe(undefined);
+        });
+
+        test('callApi() is callable and returns nothing', async () => {
+            expect(await HttpHelper.callApi(undefined, undefined, 'POST')).toBe(undefined);
+        });
     });
 
 });

@@ -6,7 +6,7 @@ export default class Good extends Component {
     constructor(props) {
         super(props);
 
-        this.colors = ["white", "red", "pink", "orange", "purple", "black", "green", "blue", "yellow", "grey"];
+        this.colors = ["white", "#b22222", "pink", "#ff8c00", "#9400d3", "black", "green", "#4169e1", "#ffd700", "grey"];
     }
 
     render() {
@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         flex: 1,
-        borderColor: 'black',
+        borderColor: '#888888',
+        borderRadius: 2,
         borderStyle: 'solid',
         backgroundColor: 'white',
         borderTopWidth: 1,
@@ -53,8 +54,8 @@ const styles = StyleSheet.create({
         borderRightWidth: 1,
         borderBottomWidth: 1,
         alignSelf: 'center',
-        marginBottom: 7.5,
-        width: '90%'
+        marginBottom: 5,
+        width: '97.5%'
     },
     viewBarra: {
         width: 25,
