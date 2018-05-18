@@ -7,8 +7,8 @@ const renderMarkers = (props) => {
     const renderMarker = (e, i) => {
         return (
             <MapView.Marker
-                key={e.id}
-                identifier={'' + e.id + ''}
+                key={e._id}
+                identifier={'' + e._id + ''}
                 onPress={() => props.onMarkerClick(i)}
                 image={MarkerImage}
                 coordinate={{

@@ -2,6 +2,8 @@ import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+jest.mock('../../components/http_helper');
+
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import LlistaVals from '../../components/llista_vals/llista_vals';
@@ -44,46 +46,20 @@ describe('Test group for llista_vals', function () {
         expect(instance.openMenu()).toBe(undefined);
     });
 
-    test('getAllGoods is callable and returns nothing', () => {
-        expect(instance.getAllGoods()).toBe(undefined);
-    });
+    describe("getAllGoods() tests", () => {
 
-    describe("getGoods() and setGoods() tests", () => {
-
-        test('getGoods is callable and returns nothing', () => {
-            expect(instance.getGoods()).toBe(undefined);
-        });
-
-        test('setGoods when fav goods are displayed', () => {
+        test('getAllGoods is callable and returns nothing', async () => {
 
             instance.state.selectedIndex = 0;
-            expect(instance.setGoods()).toBe(undefined);
+            expect(await instance.getAllGoods()).toBe(undefined);
         });
 
-        test('setGoods when normal goods are displayed', () => {
+        test('getAllGoods is callable and returns nothing', async () => {
 
             instance.state.selectedIndex = 1;
-            expect(instance.setGoods()).toBe(undefined);
-        });
-    });
-
-    describe("getGoodsFav() and setGoods() tests", () => {
-
-        test('getGoodsFav is callable and returns nothing', () => {
-            expect(instance.getGoodsFav()).toBe(undefined);
+            expect(await instance.getAllGoods()).toBe(undefined);
         });
 
-        test('setGoodsFav when fav goods are displayed', () => {
-
-            instance.state.selectedIndex = 0;
-            expect(instance.setGoodsFav()).toBe(undefined);
-        });
-
-        test('setGoodsFav when normal goods are displayed', () => {
-
-            instance.state.selectedIndex = 1;
-            expect(instance.setGoodsFav()).toBe(undefined);
-        });
     });
 
     test('handleBackButton is callable and returns true', () => {
@@ -113,12 +89,12 @@ describe('Test group for llista_vals', function () {
 
     describe("toggleFavourite() tests", () => {
 
-        test('toggleFavourite to normal good', () => {
-            expect(instance.toggleFavourite(1, true)).toBe(undefined);
+        test('toggleFavourite to normal good', async () => {
+            expect(await instance.toggleFavourite(1, true)).toBe(undefined);
         });
 
-        test('toggleFavourite to fav good', () => {
-            expect(instance.toggleFavourite(1, false)).toBe(undefined);
+        test('toggleFavourite to fav good', async () => {
+            expect(await instance.toggleFavourite(1, false)).toBe(undefined);
         });
     });
 

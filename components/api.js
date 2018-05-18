@@ -1,10 +1,6 @@
 import {AsyncStorage} from 'react-native';
 import http_helper from './http_helper';
 
-const getToken = async () => {
-    return await AsyncStorage.getItem('token');
-};
-
 const API = {
     login: (nifnie = '', password = '') => {
         return new Promise(async (resolve, reject) => {
@@ -23,120 +19,105 @@ const API = {
             }
         });
     },
-    getEntities: (loc = null) => {
-        return new Promise(async (resolve, reject) => {
-            const token = await AsyncStorage.getItem('token');
-
-            let url = 'me/entities';
-            let params = [{key: 'token', value: token}, {
-                key: 'latitude',
-                value: loc.coords.latitude
-            }, {key: 'longitude', value: loc.coords.longitude}];
-
-            let response = await http_helper.callApi(url, params);
-            if (response.status === 404) {
-                reject();
-            } else if (response.status === 200) {
-                resolve(JSON.parse(response._bodyText));
-            }
-        });
-    },
-    getGoods: (category = 0, order = 0, loc = null) => {
-        return new Promise(async (resolve, reject) => {
-            const token = await AsyncStorage.getItem('token');
-
-            let url = 'me/goods';
-            let params = [{key: 'token', value: token}, {key: 'category', value: category}, {
-                key: 'order',
-                value: order
-            }];
-            if (loc != null) {
-                params.push({key: 'latitude', value: loc.coords.latitude});
-                params.push({key: 'longitude', value: loc.coords.longitude});
-            }
-
-            let response = await http_helper.callApi(url, params);
-            if (response.status === 404) {
-                reject();
-            } else if (response.status === 200) {
-                resolve(JSON.parse(response._bodyText));
-            }
-        });
-    },
-    getGoodsFav: (category = 0, order = 0, loc = null) => {
-        return new Promise(async (resolve, reject) => {
-            const token = await AsyncStorage.getItem('token');
-
-            let url = 'me/goods/favourites';
-            let params = [{key: 'token', value: token}, {key: 'category', value: category}, {
-                key: 'order',
-                value: order
-            }];
-            if (loc != null) {
-                params.push({key: 'latitude', value: loc.coords.latitude});
-                params.push({key: 'longitude', value: loc.coords.longitude});
-            }
-
-            let response = await http_helper.callApi(url, params);
-            if (response.status === 404) {
-                reject();
-            } else if (response.status === 200) {
-                resolve(JSON.parse(response._bodyText));
-            }
-        });
-    },
-    addGoodFav: (good_id = null) => {
-        return new Promise(async (resolve, reject) => {
-            if (!good_id) reject();
-            else {
-                const token = await AsyncStorage.getItem('token');
-
-                let url = 'me/goods/favourites/' + good_id;
-                let params = [{key: 'token', value: token}, {key: 'good_id', value: good_id}];
-
-                let response = await http_helper.callApi(url, params, "POST");
-                if (response.status === 404) {
-                    reject();
-                } else if (response.status === 200) {
-                    resolve(JSON.parse(response._bodyText));
-                }
-            }
-        });
-    },
-    deleteGoodFav: (good_id = null) => {
-        return new Promise(async (resolve, reject) => {
-            if (!good_id) reject();
-            else {
-                const token = await getToken();
-
-                let url = 'me/goods/favourites/' + good_id;
-                let params = [{key: 'token', value: token}, {key: 'good_id', value: good_id}];
-
-                let response = await http_helper.callApi(url, params, "DELETE");
-                if (response.status === 404) {
-                    reject();
-                } else if (response.status === 200) {
-                    resolve(JSON.parse(response._bodyText));
-                }
-            }
-        });
-    },
     restoreCredentials: (nifnie = null) => {
         return new Promise(async (resolve, reject) => {
-            if (!nifnie) reject();
-            else {
+            
+            let url = 'register/reset';
+            let params = [{key: 'nif', value: nifnie}];
 
-                let url = 'register/reset';
-                let params = [{key: 'nif', value: nifnie}];
-
-                let response = await http_helper.callApi(url, params, "POST");
-                if (response.status === 404) {
-                    reject();
-                } else if (response.status === 200) {
-                    resolve(JSON.parse(response._bodyText));
-                }
+            let response = await http_helper.callApi(url, params, "POST",true);
+            if (response.status === 404) {
+                reject();
+            } else if (response.status === 200) {
+                resolve(JSON.parse(response._bodyText));
             }
         });
+    },
+    getEntity: (id = null) => {
+        return new Promise(async (resolve, reject) => {
+            const token = await AsyncStorage.getItem('token');
+
+            let url = 'me/entity/'+id;
+            let params = [{key: 'token', value: token}];
+
+            let response = await http_helper.callApi(url, params);
+            if (response.status === 404) {
+                reject();
+            } else if (response.status === 200) {
+                resolve(JSON.parse(response._bodyText));
+            }
+        });
+    },
+    getEntities: async (loc = null) => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/entities';
+        let params = [{key: 'token', value: token}];
+        params.push({key: 'latitude', value: (loc && loc.coords) ? loc.coords.latitude : null});
+        params.push({key: 'longitude', value: (loc && loc.coords) ? loc.coords.longitude : null});
+
+        let response = await http_helper.callApi(url, params);
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
+    },
+    getGoods: async (category = 0, order = 0, loc = null) => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/goods';
+        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order',value: order}];
+
+        if (loc != null) {
+            params.push({key: 'latitude', value: loc.coords.latitude});
+            params.push({key: 'longitude', value: loc.coords.longitude});
+        }
+
+        let response = await http_helper.callApi(url, params);
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
+    },
+    getGoodsFav: async (category = 0, order = 0, loc = null) => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/goods/favourites';
+        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order',value: order}];
+
+        if (loc != null) {
+            params.push({key: 'latitude', value: loc.coords.latitude});
+            params.push({key: 'longitude', value: loc.coords.longitude});
+        }
+
+        let response = await http_helper.callApi(url, params);
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
+    },
+    addGoodFav: async (good_id = null) => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/goods/favourites/' + good_id;
+        let params = [{key: 'token', value: token}];
+
+        let response = await http_helper.callApi(url, params, "POST");
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
+    },
+    deleteGoodFav: async (good_id = null) => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/goods/favourites/' + good_id;
+        let params = [{key: 'token', value: token}];
+
+        let response = await http_helper.callApi(url, params, "DELETE");
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
     },
 };
 
