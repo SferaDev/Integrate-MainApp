@@ -1,13 +1,32 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {BackHandler, FlatList, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import API from "../api";
+import GoodValidar from "../compra/good_validar";
 
 export default class Validar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            code: ""
+            code: "",
+            // TODO cridar api per calcular total.
+            total: 0,
+            goods_shown: [],
         };
+    }
+
+    componentDidMount() {
+        this.getAllGoods();
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    async getAllGoods(loc) {
+
+        let goods = await API.getGoods();
+
+        if( goods != null){
+            this.setState({goods_shown: goods});
+        }
     }
 
     updateCode(value) {
@@ -26,31 +45,56 @@ export default class Validar extends Component {
         return (this.isEmpty() ? '#666' : 'white');
     }
 
-    isVisible() {
-        // TODO: This is enforced to true for now
-        return (true || this.props.visible) ? 'flex' : 'none';
+    goBack() {
+        this.props.navigation.goBack();
+    }
+
+    renderGood({item}) {
+
+        return (
+            <GoodValidar
+                item={item}
+            />
+        );
     }
 
     render() {
         return (
-            <View style={[styles.validarView, {display: this.isVisible()}]}>
-                <View style={styles.toastcontent}>
-                    <Icon   name="close"
-                            size={25}
-                            style={styles.closeIcon}
-                            onPress={this.props.onClose}/>
-                    <View style={styles.inputView}>
-                        <Text style={styles.text}>
-                            Introduir codi de validació:
-                        </Text>
-                        <TextInput style={styles.basicInput}
-                                   value={this.state.code}
-                                   placeholder={"Introduir codi"}
-                                   onChangeText={this.updateCode.bind(this)}
-                                   underlineColorAndroid='rgba(0,0,0,0)'
-                        >
-                        </TextInput>
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
+                </View>
+                <View style={styles.resum}>
+                    <Text style={styles.textResum}>
+                        Resum compra:
+                    </Text>
+                    <View style={styles.body}>
+                        <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15}]}>
+                            <FlatList
+                                data={this.state.goods_shown}
+                                renderItem={this.renderGood.bind(this)}
+                            />
+                        </View>
                     </View>
+                    <View style={styles.viewTotalEstalvi}>
+                        <Text style={styles.text}>
+                            Total
+                        </Text>
+                        <Text style={[styles.text, {textAlign: 'right'}]}>
+                            {this.state.total} €
+                        </Text>
+                    </View>
+                </View>
+                <View style={styles.validateView}>
+                    <Text style={styles.textCodi}>
+                        Introduir codi de validació:
+                    </Text>
+                    <TextInput style={styles.basicInput}
+                               value={this.state.code}
+                               placeholder={"Introduir codi"}
+                               onChangeText={this.updateCode.bind(this)}
+                               underlineColorAndroid='rgba(0,0,0,0)'>
+                    </TextInput>
                     <TouchableHighlight
                         style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                         onPress={()=>{}}
@@ -66,25 +110,52 @@ export default class Validar extends Component {
 }
 
 const styles = StyleSheet.create({
-    validarView: {
-        position: 'absolute',
-        flex:1,
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        backgroundColor: 'rgba(0,0,0,0.30)',
-        padding: 20,
-        justifyContent: 'center',
+    container: {
+        display: 'flex',
+        flex: 1,
+        backgroundColor: '#F5FCFF',
     },
-    toastcontent: {
-        backgroundColor: 'white',
-        padding: 10,
-        alignItems: 'center',
-        paddingTop: 25,
-        marginBottom: 100
+    header: {
+        height: 60,
+        backgroundColor: '#094671',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    headerLeftIco: {
+        flex: 1,
+        alignSelf: 'center',
+        paddingLeft: 20,
+        textAlign: 'left',
+        color: 'white'
+    },
+    resum: {
+        flex: 7,
+        alignSelf: 'flex-start',
+        paddingLeft: 10,
+        paddingRight: 10,
+        width: '100%'
+    },
+    textResum: {
+        fontWeight: 'bold',
+        fontSize: 25
     },
     text: {
+        flex: 1,
+        fontWeight: 'bold',
+        fontSize: 17
+    },
+    viewTotalEstalvi: {
+        display: 'flex',
+        flexDirection: 'row',
+        padding: 5,
+    },
+    validateView: {
+        flex: 2,
+        padding: 10,
+        width: '100%'
+    },
+    textCodi: {
         textAlign: 'left',
         fontWeight: 'bold',
         fontSize: 17
@@ -92,7 +163,7 @@ const styles = StyleSheet.create({
     button: {
         borderWidth: 1,
         borderColor: '#0c59cf',
-        width: 120,
+        width: 200,
         height: 40,
         borderRadius: 4,
         justifyContent: 'center',
@@ -103,21 +174,25 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#0c59cf',
         backgroundColor: 'rgba(255,255,255,0.85)',
-        width: 220,
+        width: '90%',
         height: 35,
         borderRadius: 1,
-        justifyContent: 'center',
         margin: 10,
-        marginLeft: 0,
+        marginLeft: 15,
         padding: 0,
-        paddingLeft: 5,
-    },
-    inputView: {
-        alignSelf: 'center',
+        paddingLeft: 10,
     },
     closeIcon: {
         position: 'absolute',
         top: 5,
         right: 5
+    },
+    body: {
+        flex: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+        width: '100%',
+        height: '100%'
     }
 });
