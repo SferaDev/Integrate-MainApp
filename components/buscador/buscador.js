@@ -22,8 +22,7 @@ export default class Buscador extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
 
-        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {
-        });
+        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {});
     }
 
     handleBackButton() {
@@ -31,6 +30,7 @@ export default class Buscador extends Component {
     }
 
     async getEntities(loc) {
+        
         let entities = await API.getEntities(loc);
         if(entities != null){
             this.setState({entities: entities, entities_shown: entities});
