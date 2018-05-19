@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BackHandler, FlatList, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {BackHandler, FlatList, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from "../api";
 import GoodValidar from "../compra/good_validar";
@@ -12,12 +12,14 @@ export default class Validar extends Component {
             // TODO cridar api per calcular total.
             total: 0,
             goods_shown: [],
+            isFieldFocused: false
         };
     }
 
     componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
         this.getAllGoods();
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     async getAllGoods(loc) {
@@ -49,11 +51,20 @@ export default class Validar extends Component {
         this.props.navigation.goBack();
     }
 
+    moveUp() {
+        this.setState({isFieldFocused: true});
+    }
+
+    moveDown() {
+        this.setState({isFieldFocused: false});
+    }
+
     renderGood({item}) {
 
         return (
             <GoodValidar
                 item={item}
+                key={item._id}
             />
         );
     }
@@ -68,8 +79,9 @@ export default class Validar extends Component {
                     <Text style={styles.textResum}>
                         Resum compra:
                     </Text>
-                    <View style={styles.body}>
-                        <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15}]}>
+                    <View style={[styles.body, {display: this.state.isFieldFocused ? 'none' : 'flex'}]}>
+                        <View style={[{...StyleSheet.absoluteFillObject},
+                            {paddingTop: 15}]}>
                             <FlatList
                                 data={this.state.goods_shown}
                                 renderItem={this.renderGood.bind(this)}
@@ -77,32 +89,32 @@ export default class Validar extends Component {
                         </View>
                     </View>
                     <View style={styles.viewTotalEstalvi}>
-                        <Text style={styles.text}>
-                            Total
+                        <Text style={styles.textDescompte}>
+                            Descompte total
                         </Text>
-                        <Text style={[styles.text, {textAlign: 'right'}]}>
+                        <Text style={[styles.textDescompte, {textAlign: 'right'}]}>
                             {this.state.total} €
                         </Text>
                     </View>
-                </View>
-                <View style={styles.validateView}>
-                    <Text style={styles.textCodi}>
-                        Introduir codi de validació:
-                    </Text>
-                    <TextInput style={styles.basicInput}
-                               value={this.state.code}
-                               placeholder={"Introduir codi"}
-                               onChangeText={this.updateCode.bind(this)}
-                               underlineColorAndroid='rgba(0,0,0,0)'>
-                    </TextInput>
-                    <TouchableHighlight
-                        style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
-                        onPress={()=>{}}
-                        disabled={this.isEmpty()}>
-                        <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold', fontSize: 17}}>
-                            Validar
+                    <View style={styles.validateView}>
+                        <Text style={styles.textCodi}>
+                            Introduir codi de validació:
                         </Text>
-                    </TouchableHighlight>
+                        <TextInput style={styles.basicInput}
+                                   value={this.state.code}
+                                   placeholder={"Introduir codi"}
+                                   onChangeText={this.updateCode.bind(this)}
+                                   underlineColorAndroid='rgba(0,0,0,0)'>
+                        </TextInput>
+                        <TouchableHighlight
+                            style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
+                            onPress={()=>{}}
+                            disabled={this.isEmpty()}>
+                            <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold', fontSize: 17}}>
+                                Validar
+                            </Text>
+                        </TouchableHighlight>
+                    </View>
                 </View>
             </View>
         );
@@ -138,9 +150,10 @@ const styles = StyleSheet.create({
     },
     textResum: {
         fontWeight: 'bold',
-        fontSize: 25
+        fontSize: 25,
+        height: 35
     },
-    text: {
+    textDescompte: {
         flex: 1,
         fontWeight: 'bold',
         fontSize: 17
@@ -149,10 +162,11 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         padding: 5,
+        height: 30,
     },
     validateView: {
-        flex: 2,
-        padding: 10,
+        flex: 5,
+        padding: 5,
         width: '100%'
     },
     textCodi: {
@@ -180,7 +194,7 @@ const styles = StyleSheet.create({
         margin: 10,
         marginLeft: 15,
         padding: 0,
-        paddingLeft: 10,
+        paddingLeft: 5,
     },
     closeIcon: {
         position: 'absolute',
@@ -188,11 +202,11 @@ const styles = StyleSheet.create({
         right: 5
     },
     body: {
-        flex: 8,
+        flex: 15,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
         width: '100%',
-        height: '100%'
+        height: '100%',
     }
 });
