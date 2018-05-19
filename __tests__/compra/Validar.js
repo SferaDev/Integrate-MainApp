@@ -95,8 +95,46 @@ describe('Test group for Validar', function () {
         expect(instance.moveDown()).toBe(undefined);
     });
 
+    describe("onClose()  tests", () => {
+        test('onClose typeError = 0 renders toast correctly', () => {
+            instance.state.typeError = 0;
+            expect(instance.onClose()).toBe(undefined);
+        });
+        test('onClose typeError = 1 renders toast correctly', () => {
+            instance.state.typeError = 1;
+            expect(instance.onClose()).toBe(undefined);
+        });
+        test('onClose typeError = 2 renders toast correctly', () => {
+            instance.state.typeError = 2;
+            expect(instance.onClose()).toBe(undefined);
+        });
+        test('onClose typeError = default renders toast correctly', () => {
+            instance.state.typeError = 9;
+            expect(instance.onClose()).toBe(undefined);
+        });
+    });
+
     test('renderGood renders an entity correctly', () => {
         expect(instance.renderGood({item: {id: 1}})).toMatchSnapshot();
+    });
+
+    describe("displayToastContent() tests", () => {
+        test('displayToastContent typeError = 0 renders toast correctly', () => {
+            instance.state.typeError = 0;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
+        test('displayToastContent typeError = 1 renders toast correctly', () => {
+            instance.state.typeError = 1;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
+        test('displayToastContent typeError = 2 renders toast correctly', () => {
+            instance.state.typeError = 2;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
+        test('displayToastContent typeError = default renders toast correctly', () => {
+            instance.state.typeError = 9;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
     });
 
     /*describe("isVisible() tests", () => {

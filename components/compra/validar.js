@@ -3,16 +3,19 @@ import {BackHandler, FlatList, Keyboard, StyleSheet, Text, TextInput, TouchableH
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from "../api";
 import GoodValidar from "../compra/good_validar";
+import Toast from "../login/toast";
 
 export default class Validar extends Component {
     constructor(props) {
         super(props);
         this.state = {
             code: "",
-            // TODO cridar api per calcular total.
+            //TODO cridar api per calcular total.
             total: 0,
             goods_shown: [],
-            isFieldFocused: false
+            isFieldFocused: false,
+            toast: false,
+            typeError: 1
         };
     }
 
@@ -21,7 +24,7 @@ export default class Validar extends Component {
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
         this.getAllGoods();
     }
-
+    //TODO cridar api per agafar els vals correctes
     async getAllGoods(loc) {
 
         let goods = await API.getGoods();
@@ -59,6 +62,23 @@ export default class Validar extends Component {
         this.setState({isFieldFocused: false});
     }
 
+    onClose() {
+        let typeError = this.state.typeError;
+        switch (typeError) {
+            case 0: //Compra realitzada
+                //TODO afegir navegació a pantalla informació de la entitat
+                break;
+            case 1: //Error Codi Incorrecte
+                this.setState({toast: false});
+                break;
+            case 2: //Error conflicte vals
+                //TODO afegir navegació a pantalla checkouts
+                break;
+            default:
+                break;
+        }
+    }
+
     renderGood({item}) {
 
         return (
@@ -67,6 +87,21 @@ export default class Validar extends Component {
                 key={item._id}
             />
         );
+    }
+
+    displayToastContent(){
+        let typeError = this.state.typeError;
+        switch (typeError) {
+            case 0: //Compra realitzada
+                return(<Text style={{textAlign: 'center'}}>Descompte aplicat correctament</Text>);
+            case 1: //Error Codi Incorrecte
+                return(<Text style={{textAlign: 'center'}}>Codi incorrecte</Text>);
+            case 2: //Error conflicte vals
+                return(<Text style={{textAlign: 'center'}}>Conflicte amb els vals: </Text>);
+                //TODO afegir nom vals en els quals hi ha conflicte
+            default:
+                return(<Text style={{textAlign: 'center'}}>Error</Text>);
+        }
     }
 
     render() {
@@ -116,6 +151,11 @@ export default class Validar extends Component {
                         </TouchableHighlight>
                     </View>
                 </View>
+                <Toast
+                    visible={this.state.toast}
+                    onClose={this.onClose.bind(this)}>
+                    {this.displayToastContent()}
+                </Toast>
             </View>
         );
     }
