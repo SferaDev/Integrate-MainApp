@@ -30,10 +30,20 @@ export default class DetallsEntitat extends Component{
 
     componentDidMount() {
         this.getEntity();
+        this.getGoodsFav();
     }
 
     getEntity(){
-        API.getEntity(this.props.navigation.state.params.selectedEntity._id).then(this.setEntity.bind(this)).catch(err => console.warn(err))
+        API.getEntity(this.props.navigation.state.params.selectedEntity._id).then(this.setEntity.bind(this))
+    }
+
+    async getGoodsFav() {
+
+        let goodsFav = await API.getGoodsFav();
+
+        if( goodsFav != null ){
+            this.setState({goods: goodsFav});
+        }
     }
 
     setEntity(entity) {
@@ -46,13 +56,21 @@ export default class DetallsEntitat extends Component{
         });
     }
 
-    toggleFavourite(id, isFav) {
-        /*if (!isFav) {
-            API.addGoodFav(id).then(this.getGoods.bind(this));
+    async toggleFavourite(id, isFav) {
+
+        if (!isFav) await API.addGoodFav(id);
+        else  await API.deleteGoodFav(id);
+        await this.getGoodsFav();
+    }
+
+    isFav(id) {
+        let goods = this.state.goods || [];
+
+        for(let i = 0; i < goods.length; i++ ){
+            let good = goods[i];
+            if (good._id === id) return true;
         }
-        else {
-            API.deleteGoodFav(id).then(this.getGoods.bind(this));
-        }*/
+        return false;
     }
 
     renderGood(item) {
@@ -63,7 +81,7 @@ export default class DetallsEntitat extends Component{
                 item={item}
                 onPress={this.toggleFavourite}
                 context={this}
-                isFav={false}
+                isFav={this.isFav(item._id)}
             />
         );
     }
