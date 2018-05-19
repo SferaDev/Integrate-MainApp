@@ -90,7 +90,8 @@ export default class LlistaVals extends Component {
             <Good
                 id={item._id}
                 item={item}
-                onPress={this.toggleFavourite}
+                onPress={() => console.warn('onPress')}
+                onToggleFav={this.toggleFavourite}
                 context={this}
                 isFav={this.isFav(item._id)}
             />

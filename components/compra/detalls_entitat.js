@@ -61,9 +61,10 @@ export default class DetallsEntitat extends Component{
                 key={item._id}
                 id={item._id}
                 item={item}
-                onPress={this.toggleFavourite}
+                onToggleFav={this.toggleFavourite}
                 context={this}
                 isFav={false}
+                isEntityDisplay={true}
             />
         );
     }

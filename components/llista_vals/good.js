@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Good extends Component {
@@ -11,24 +11,36 @@ export default class Good extends Component {
 
     render() {
         return (
-            <View key={this.props.item._id} style={styles.goodView}>
-                <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
-                <View style={styles.viewInfo}>
-                    <View style={styles.view1}>
-                        <Text style={styles.goodBasicText}>Cada {this.props.item.reusePeriod} dies</Text>
-                        <Text
-                            style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.item.initialPrice + '€ (-' + this.props.item.discount + '' + this.props.item.discountType + ')'}</Text>
-                    </View>
-                    <Text style={styles.entityName}>{this.props.item.owner.name}</Text>
-                    <View style={styles.view1}>
-                        <Text style={styles.goodNameText}>{this.props.item.productName}</Text>
-                        <Icon style={[styles.favProps, {color: (this.props.isFav) ? '#f4eb49' : '#CCC'}]}
-                              name="star" size={25}
-                              onPress={this.props.onPress.bind(this.props.context, this.props.item._id, this.props.isFav)}
-                              id={this.props.item._id}/>
+            <TouchableHighlight key={this.props.item._id} style={styles.goodView} onPress={this.props.onPress} >
+                <View style={{flex: 1,display: 'flex',flexDirection: 'row'}} >
+                    <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
+                    <View style={styles.viewInfo}>
+                        <View style={styles.view1}>
+                            <Text style={styles.goodBasicText}>Cada {this.props.item.reusePeriod} dies</Text>
+                            <Text
+                                style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.item.initialPrice + '€ (-' + this.props.item.discount + '' + this.props.item.discountType + ')'}</Text>
+                        </View>
+                        <Text style={styles.entityName}>
+                            { this.props.isEntityDisplay ?
+                                this.props.item.productName :
+                                this.props.item.owner.name
+                            }
+                        </Text>
+                        <View style={styles.view1}>
+                            <Text style={styles.goodNameText}>
+                                { this.props.isEntityDisplay ?
+                                    '' :
+                                    this.props.item.productName
+                                }
+                            </Text>
+                            <Icon style={[styles.favProps, {color: (this.props.isFav) ? '#f4eb49' : '#CCC'}]}
+                                  name="star" size={25}
+                                  onPress={this.props.onToggleFav.bind(this.props.context, this.props.item._id, this.props.isFav)}
+                                  id={this.props.item._id}/>
+                        </View>
                     </View>
                 </View>
-            </View>
+            </TouchableHighlight>
         );
     }
 }
@@ -38,12 +50,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'flex-end',
         color: '#f4eb49',
-        paddingRight: 5,
+        paddingRight: 5
     },
 
     goodView: {
-        display: 'flex',
-        flexDirection: 'row',
         flex: 1,
         borderColor: '#888888',
         borderRadius: 2,
