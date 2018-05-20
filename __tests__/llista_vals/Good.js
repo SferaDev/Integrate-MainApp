@@ -27,7 +27,7 @@ describe('Test group for good', function () {
 
     beforeEach(function () {
         // Before each: Shallows the EntityList component
-        wrapper = shallow(<Good item={good} onPress={jest.fn()} context={this} id={0} isFav={true}/>);
+        wrapper = shallow(<Good item={good} onToggleFav={jest.fn()} onPress={jest.fn()} context={this} id={0} isFav={true}/>);
         instance = wrapper.instance();
     });
 
@@ -38,14 +38,20 @@ describe('Test group for good', function () {
     });
 
     test('renders normal good correctly', () => {
-        const tree = renderer.create(<Good item={good} onPress={jest.fn()} context={this} id={0}
+        const tree = renderer.create(<Good item={good} onToggleFav={jest.fn()} onPress={jest.fn()} context={this} id={0}
                                            isFav={false}/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
     test('renders fav good correctly', () => {
-        const tree = renderer.create(<Good item={good} onPress={jest.fn()} context={this} id={0}
+        const tree = renderer.create(<Good item={good} onToggleFav={jest.fn()} onPress={jest.fn()} context={this} id={0}
                                            isFav={true}/>).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    test('renders fav good correctly', () => {
+        const tree = renderer.create(<Good item={good} onToggleFav={jest.fn()} onPress={jest.fn()} context={this} id={0}
+                                           isFav={true} isEntityDisplay={true} />).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
