@@ -90,7 +90,7 @@ export default class DetallsEntitat extends Component{
         this.props.navigation.goBack();
     }
 
-    buy(){
+    goBuy(){
         this.props.navigation.navigate('buy',{selectedEntity: this.state.entity});
     }
 
@@ -137,7 +137,7 @@ export default class DetallsEntitat extends Component{
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
-                    <Icon onPress={this.buy.bind(this)} style={styles.headerRightIco} name="basket" size={30}/>
+                    <Icon onPress={this.goBuy.bind(this)} style={styles.headerRightIco} name="basket" size={30}/>
                 </View>
                 <ScrollView style={styles.scrollView}>
                     <View key="alpha" >

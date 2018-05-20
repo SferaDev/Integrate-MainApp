@@ -27,6 +27,9 @@ const BuscadorStack = StackNavigator({
     },
     buy: {
         screen: Buy
+    },
+    validar: {
+        screen: Validar
     }
 },
 {
@@ -80,7 +83,6 @@ const DrawerStack = DrawerNavigator({
             drawerIcon: <Icon name="logout-variant" size={25}/>,
         }
     },
-    Validar: {screen: Validar},
     Profile: {screen: ProfileStack}
 }, {
     headerMode: 'none',

@@ -31,7 +31,7 @@ let entity = {
             email: 'aaa@bbb.com',
             coordinates: [0, 0],
             goods: []
-        }
+        };
 
 describe('Test group for EntityList', function () {
     beforeAll(() => {
@@ -51,7 +51,7 @@ describe('Test group for EntityList', function () {
             email: 'aaa@bbb.com',
             coordinates: [0, 0],
             goods: [{_id:'555'}]
-        }
+        };
         instance.map = {
             animateToRegion: jest.fn()
         }
@@ -71,6 +71,10 @@ describe('Test group for EntityList', function () {
 
     test('goBack is callable and returns nothing', () => {
         expect(instance.goBack()).toBe(undefined);
+    });
+
+    test('goBuy is callable and returns nothing', () => {
+        expect(instance.goBuy()).toBe(undefined);
     });
 
     test('sendMail is callable and returns nothing', () => {
@@ -151,8 +155,8 @@ describe('Test group for EntityList', function () {
             owner: {
                 name: 'NAME'
             }
-        }
-        instance.state.goods = [{'_id':'1'}]
+        };
+        instance.state.goods = [{'_id':'1'}];
         expect(instance.renderGood(good)).toMatchSnapshot();
     });
 
@@ -166,8 +170,8 @@ describe('Test group for EntityList', function () {
             owner: {
                 name: 'NAME'
             }
-        }
-        instance.state.goods = [{'_id':'2'}]
+        };
+        instance.state.goods = [{'_id':'2'}];
         expect(instance.renderGood(good)).toMatchSnapshot();
     });
 
@@ -178,14 +182,14 @@ describe('Test group for EntityList', function () {
             let instance = wrapper.instance();
             instance.state.entity = {
                 phone: '000000',
-            }
+            };
             expect(instance.displayPhoneInfo()).toMatchSnapshot();
         });
 
         test('displayPhoneInfo to normal good', () => {
             let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
             let instance = wrapper.instance();
-            instance.state.entity = {}
+            instance.state.entity = {};
             expect(instance.displayPhoneInfo()).toBe(undefined);
         });
     });
@@ -197,14 +201,14 @@ describe('Test group for EntityList', function () {
             let instance = wrapper.instance();
             instance.state.entity = {
                 email: 'ofhdfkzn',
-            }
+            };
             expect(instance.displayMailInfo()).toMatchSnapshot();
         });
 
         test('displayMailInfo to normal good', () => {
             let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
             let instance = wrapper.instance();
-            instance.state.entity = {}
+            instance.state.entity = {};
             expect(instance.displayMailInfo()).toBe(undefined);
         });
     });
