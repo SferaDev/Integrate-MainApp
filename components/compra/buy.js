@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, FlatList} from 'react-native';
-import NavigationActions from 'react-navigation';
 
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -62,11 +61,28 @@ export default class Buy extends Component{
         }
     }
 
+     toggleSelected(id) {
+        this.flatList.refreshing = true;
+        let selected_goods = this.state.selected_goods;
+
+        if(!this.state.selected_goods.includes(id)) selected_goods.push(id);
+        else {
+            for (let i = 0; i < selected_goods.length; ++i) {
+                if (selected_goods[i] === id) selected_goods.splice(i, 1);
+            }
+        }
+        this.setState({selected_goods: selected_goods});
+        this.flatList.refreshing = false;
+    }
+
     renderGood({item}) {
         return (
             <GoodCompra
-                item={item}
                 key={item._id}
+                item={item}
+                onPress={this.toggleSelected}
+                context={this}
+                isSelected={this.state.selected_goods.includes(item._id)}
             />
         );
     }
@@ -98,8 +114,12 @@ export default class Buy extends Component{
                     <View style={[{...StyleSheet.absoluteFillObject},
                         {paddingTop: 15}]}>
                         <FlatList
+                            ref={flatList => this.flatList = flatList}
                             data={this.state.entity.goods}
                             renderItem={this.renderGood.bind(this)}
+                            keyExtractor={item => item._id}
+                            refreshing={false}
+                            onRefresh={()=>false}
                         />
                     </View>
                 </View>
