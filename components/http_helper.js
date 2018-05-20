@@ -19,13 +19,11 @@ const buildBody = (params = []) => {
         bodyParams[ params[keys[i]].key ] = params[ keys[i] ].value;
     }
 
-    console.warn(bodyParams);
-    console.warn( JSON.stringify(bodyParams) );
     return bodyParams;
 };
 
 const callApi = async (url, params, method = 'GET',isBody = false) => {
-    if (isBody) return await fetch(BASEURL + '/' + url , {method: method, body: JSON.stringify(buildBody(params))});
+    if (isBody) return await fetch(BASEURL + '/' + url , {method: method, body: JSON.stringify(buildBody(params)), headers:{'Content-Type':'application/json'} });
     else return await fetch(buildQuery(url, params) , {method: method});
 };
 

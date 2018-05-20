@@ -61,7 +61,7 @@ export default class Buy extends Component{
         }
     }
 
-     toggleSelected(id) {
+    toggleSelected(id) {
         this.flatList.refreshing = true;
         let selected_goods = this.state.selected_goods;
 

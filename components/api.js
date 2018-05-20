@@ -120,9 +120,9 @@ const API = {
         return null;
     },
     checkOrder: async (selected_goods = []) => {
-        console.log(selected_goods);
+
         const token = await AsyncStorage.getItem('token');
-        console.log(token);
+
         let url = 'me/orders?token='+token;
         let params = [{key: 'goodIds', value: selected_goods}];
 
