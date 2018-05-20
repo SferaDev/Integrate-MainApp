@@ -102,7 +102,7 @@ export default class DetallsEntitat extends Component{
         const args = {
           number: '617167362', // String value with the number to call
           prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call
-        }
+        };
         call(args);
     }
 

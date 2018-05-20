@@ -59,10 +59,12 @@ export default class Buy extends Component{
 
         let response = await API.checkOrder(this.state.selected_goods);
         this.setState({typeError: response.status});
-
         switch (response.status) {
             case 200: //Navegar a validar
-                this.props.navigation.navigate('validar');
+                this.props.navigation.navigate('validar', {
+                    entity: this.state.entity,
+                    selected_goods: this.state.selected_goods,
+                    total_discount: response.body.totalDiscount});
                 break;
             case 403: //Error conflicte vals
                 this.updateToast();

@@ -10,9 +10,18 @@ export default class Validar extends Component {
         super(props);
         this.state = {
             code: "",
-            //TODO cridar api per calcular total.
-            total: 0,
+            entity: {
+                _id: 0,
+                name: '',
+                description: '',
+                addressName: '',
+                email: '',
+                phone: '',
+                coordinates: [0, 0],
+                goods: []
+            },
             goods_shown: [],
+            total_discount: 0,
             isFieldFocused: false,
             toast: false,
             typeError: 1
@@ -22,16 +31,15 @@ export default class Validar extends Component {
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
-        this.getAllGoods();
+        this.setStateVariables();
     }
-    //TODO cridar api per agafar els vals correctes
-    async getAllGoods(loc) {
 
-        let goods = await API.getGoods();
-
-        if( goods != null){
-            this.setState({goods_shown: goods});
-        }
+    setStateVariables() {
+        this.setState({
+            entity: this.props.navigation.state.params.entity,
+            goods_shown: this.props.navigation.state.params.selected_goods,
+            total_discount: this.props.navigation.state.params.total_discount
+        })
     }
 
     updateCode(value) {
@@ -80,13 +88,15 @@ export default class Validar extends Component {
     }
 
     renderGood({item}) {
-
-        return (
-            <GoodValidar
-                item={item}
-                key={item._id}
-            />
-        );
+        for (let g of this.state.entity.goods) {
+            if (g._id === item) {
+                return (
+                    <GoodValidar
+                        item={g}
+                    />
+                );
+            }
+        }
     }
 
     displayToastContent(){
@@ -102,6 +112,10 @@ export default class Validar extends Component {
             default:
                 return(<Text style={{textAlign: 'center'}}>Error</Text>);
         }
+    }
+
+    extractKey(item) {
+        return item._id
     }
 
     render() {
@@ -120,6 +134,7 @@ export default class Validar extends Component {
                             <FlatList
                                 data={this.state.goods_shown}
                                 renderItem={this.renderGood.bind(this)}
+                                keyExtractor={this.extractKey.bind(this)}
                             />
                         </View>
                     </View>
@@ -128,7 +143,7 @@ export default class Validar extends Component {
                             Descompte total
                         </Text>
                         <Text style={[styles.textDescompte, {textAlign: 'right'}]}>
-                            {this.state.total} €
+                            -{this.state.total_discount} €
                         </Text>
                     </View>
                     <View style={styles.validateView}>
