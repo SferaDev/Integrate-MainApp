@@ -68,7 +68,6 @@ const ConfigStack = StackNavigator({
     gesturesEnabled: false
 });
 
-
 const DrawerNavigation = DrawerNavigator({
     Buscador: {screen: BuscadorStack},
     Vals: {screen: ValsStack},
