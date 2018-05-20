@@ -44,8 +44,9 @@ export default class Buy extends Component{
         this.props.navigation.goBack();
     }
 
-    goValidar() {
-        //TODO crida API enviar selected_goods
+    async goValidar() {
+        let response = await API.checkOrder(this.state.selected_goods);
+        console.warn(response);
         //this.props.navigation.navigate('validar');
     }
 

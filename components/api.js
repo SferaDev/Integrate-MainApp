@@ -119,6 +119,28 @@ const API = {
         if (response.status === 200) return JSON.parse(response._bodyText);
         return null;
     },
+    checkOrder: async (selected_goods = []) => {
+        console.log(selected_goods);
+        const token = await AsyncStorage.getItem('token');
+        console.log(token);
+        let url = 'me/orders?token='+token;
+        let params = [{key: 'goodIds', value: selected_goods}];
+
+        let response = await http_helper.callApi(url, params, "POST",true);
+
+        return {status: response.status, body: JSON.parse(response._bodyText)};
+    },
+    newOrder: async (selected_goods = [], entityId = null, validationCode = null) => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/orders?token='+token;
+        let params = [{key: 'goodIds', value: selected_goods}];
+
+        let response = await http_helper.callApi(url, params, "POST",true);
+
+        return {status: response.status, body: JSON.parse(response._bodyText)};
+    }
 };
 
 export default API
