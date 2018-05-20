@@ -69,7 +69,8 @@ const ConfigStack = StackNavigator({
     gesturesEnabled: false
 });
 
-const DrawerStack = DrawerNavigator({
+
+const DrawerNavigation = DrawerNavigator({
     Buscador: {screen: BuscadorStack},
     Vals: {screen: ValsStack},
     Logout: {
@@ -81,15 +82,6 @@ const DrawerStack = DrawerNavigator({
     },
     Validar: {screen: Validar},
     Profile: {screen: ProfileStack}
-}, {
-    headerMode: 'none',
-    disabledBackGesture: true,
-    gesturesEnabled: false
-});
-
-
-const DrawerNavigation = StackNavigator({
-    DrawerStack: {screen: DrawerStack}
 }, {
     headerMode: 'none',
     disabledBackGesture: true,

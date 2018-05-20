@@ -4,6 +4,7 @@ import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
 import Good from './good';
+import DetallsGood from './detalls_good';
 import SegmentControl from 'react-native-segment-controller';
 
 export default class LlistaVals extends Component {
@@ -21,18 +22,15 @@ export default class LlistaVals extends Component {
             category: 0,
             order: 0,
             selectedIndex: 1,
-            visible: false
+            visible: false,
+            isGoodSelected: false,
+            selectedGood: null
         };
     }
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-
-        this.props.navigation.addListener('didFocus', this.getAllGoods.bind(this,undefined));
-    }
-
-    componentWillUnmount() {
-        this.props.navigation.removeListener('didFocus', this.getAllGoods.bind(this,undefined));
+        this.getAllGoods();
     }
 
     handleBackButton() {
@@ -90,7 +88,11 @@ export default class LlistaVals extends Component {
     }
 
     showGoodDetails(good){
-        this.props.navigation.navigate('detalls_good',{selectedGood: good,isFav: this.isFav(good._id)});
+        this.setState({isGoodSelected: true,selectedGood: good});
+    }
+
+    showGoodsList(){
+        this.setState({isGoodSelected: false,selectedGood: {}});   
     }
 
     renderGood({item}) {
@@ -120,47 +122,52 @@ export default class LlistaVals extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
-                </View>
-                <SegmentControl
-                    values={['Preferits', 'Tots']}
-                    height={50}
-                    borderRadius={1}
-                    selectedIndex={this.state.selectedIndex}
-                    onTabPress={this.setIndexChange.bind(this)}
-                />
-                <View style={[styles.filterGoods, {height: (this.canApplyFilters()) ? 1 : 60}]}>
-                    <View style={{flex: 1}}>
-                        <Dropdown
-                            label='Categoria'
-                            data={this.categories}
-                            onChangeText={this.selectFilter.bind(this)}
-                            itemCount={10}
-                            dropdownPosition={0}
-                            disabled={this.canApplyFilters()}
-                        />
+            <View style={{flex: 1}} >{ !this.state.isGoodSelected ?
+                <View style={styles.container}>
+                    <View style={styles.header}>
+                        <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
                     </View>
-                    <View style={{flex: 1}}>
-                        <Dropdown
-                            label='Filtre'
-                            data={this.orders}
-                            onChangeText={this.selectOrder.bind(this)}
-                            itemCount={3}
-                            dropdownPosition={0}
-                            disabled={this.canApplyFilters()}
-                        />
+                    <SegmentControl
+                        values={['Preferits', 'Tots']}
+                        height={50}
+                        borderRadius={1}
+                        selectedIndex={this.state.selectedIndex}
+                        onTabPress={this.setIndexChange.bind(this)}
+                    />
+                    <View style={[styles.filterGoods, {height: (this.canApplyFilters()) ? 1 : 60}]}>
+                        <View style={{flex: 1}}>
+                            <Dropdown
+                                label='Categoria'
+                                data={this.categories}
+                                onChangeText={this.selectFilter.bind(this)}
+                                itemCount={10}
+                                dropdownPosition={0}
+                                disabled={this.canApplyFilters()}
+                            />
+                        </View>
+                        <View style={{flex: 1}}>
+                            <Dropdown
+                                label='Filtre'
+                                data={this.orders}
+                                onChangeText={this.selectOrder.bind(this)}
+                                itemCount={3}
+                                dropdownPosition={0}
+                                disabled={this.canApplyFilters()}
+                            />
+                        </View>
+                    </View>
+                    <View style={styles.body}>
+                        <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>
+                            <FlatList
+                                data={this.state.goods_shown}
+                                renderItem={this.renderGood.bind(this)}
+                            />
+                        </View>
                     </View>
                 </View>
-                <View style={styles.body}>
-                    <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>
-                        <FlatList
-                            data={this.state.goods_shown}
-                            renderItem={this.renderGood.bind(this)}
-                        />
-                    </View>
-                </View>
+                :
+                <DetallsGood good={this.state.selectedGood} isFav={this.isFav(this.state.selectedGood._id)} showGoodsList={this.showGoodsList.bind(this)} toggleFavourite={this.toggleFavourite} context={this} />
+            }
             </View>
         );
     }

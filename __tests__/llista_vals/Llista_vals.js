@@ -86,6 +86,10 @@ describe('Test group for llista_vals', function () {
         expect(instance.showGoodDetails({_id: 0})).toBe(undefined);
     });
 
+    test('showGoodsList is callable and returns nothing', () => {
+        expect(instance.showGoodsList()).toBe(undefined);
+    });
+
     test('renderGood renders an entity correctly', () => {
 
         expect(instance.renderGood({item: {id: 1}})).toMatchSnapshot();
