@@ -166,7 +166,7 @@ export default class LlistaVals extends Component {
                     </View>
                 </View>
                 :
-                <DetallsGood good={this.state.selectedGood} isFav={this.isFav(this.state.selectedGood._id)} showGoodsList={this.showGoodsList.bind(this)} toggleFavourite={this.toggleFavourite} context={this} />
+                <DetallsGood navigation={this.props.navigation} good={this.state.selectedGood} isFav={this.isFav(this.state.selectedGood._id)} showGoodsList={this.showGoodsList.bind(this)} toggleFavourite={this.toggleFavourite} context={this} />
             }
             </View>
         );

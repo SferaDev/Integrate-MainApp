@@ -11,6 +11,10 @@ export default class DetallsGood extends Component{
         super(props);
     }
 
+    showEntity(){
+        this.props.navigation.navigate('detalls_entitat',{selectedEntity: {_id: this.props.good.owner.id}});
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -37,9 +41,9 @@ export default class DetallsGood extends Component{
                                 <Text style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.good.initialPrice + '€ (-' + this.props.good.discount + '' + this.props.good.discountType + ')'}</Text>
                             </View>
                         </View>
-                        <View style={styles.entityResume}>
+                        <TouchableHighlight style={styles.entityResume} onPress={this.showEntity.bind(this)} >
                             <Text style={styles.entityNameText}>{this.props.good.owner.name}</Text>
-                        </View>
+                        </TouchableHighlight>
                     </View>
                 </View>
             </View>

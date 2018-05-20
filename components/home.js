@@ -13,6 +13,7 @@ import RestoreCredentials from "./restore_credentials/restore_credentials";
 import Validar from './compra/validar';
 import ChangePassword from "./profile/change_password";
 
+
 const BuscadorStack = StackNavigator({
     buscador: {
         screen: Buscador,
@@ -37,6 +38,8 @@ const ValsStack = StackNavigator({
             drawerLabel: 'Vals',
             drawerIcon: <Icon name="ticket-percent" size={25}/>,
         }
+    },detalls_entitat:{
+        screen: DetallsEntitat
     }
 }, {
     headerMode: 'none',
