@@ -11,7 +11,7 @@ export default class Good extends Component {
 
     render() {
         return (
-            <TouchableHighlight key={this.props.item._id} style={styles.goodView} onPress={this.props.onPress} >
+            <TouchableHighlight key={this.props.item._id} style={styles.goodView} onPress={this.props.onPress.bind(this.props.context,this.props.item)} >
                 <View style={{flex: 1,display: 'flex',flexDirection: 'row'}} >
                     <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
                     <View style={styles.viewInfo}>

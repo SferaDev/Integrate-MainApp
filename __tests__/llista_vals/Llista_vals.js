@@ -82,6 +82,10 @@ describe('Test group for llista_vals', function () {
         });
     });
 
+    test('showGoodDetails is callable and returns nothing', () => {
+        expect(instance.showGoodDetails()).toBe(undefined);
+    });
+
     test('renderGood renders an entity correctly', () => {
 
         expect(instance.renderGood({item: {id: 1}})).toMatchSnapshot();

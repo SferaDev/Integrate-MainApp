@@ -84,13 +84,17 @@ export default class LlistaVals extends Component {
         return false;
     }
 
+    showGoodDetails(good){
+        this.props.navigation.navigate('detalls_good',{selectedGood: good});
+    }
+
     renderGood({item}) {
 
         return (
             <Good
                 id={item._id}
                 item={item}
-                onPress={() => console.warn('onPress')}
+                onPress={this.showGoodDetails}
                 onToggleFav={this.toggleFavourite}
                 context={this}
                 isFav={this.isFav(item._id)}
