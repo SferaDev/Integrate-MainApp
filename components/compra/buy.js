@@ -23,8 +23,10 @@ export default class Buy extends Component{
                 goods: []
             },
             toast: false,
-            typeError: 2,
-            selected_goods: []
+            typeError: null,
+            selected_goods: [],
+            soldOutGoods: [],
+            nonUsableGoods: []
         };
     }
 
@@ -44,19 +46,39 @@ export default class Buy extends Component{
         this.props.navigation.goBack();
     }
 
+    updateToast() {
+        this.setState({toast: true});
+    }
+
+    updateErrorState(body) {
+        this.setState({soldOutGoods: this.state.selected_goods, nonUsableGoods: body.nonUsableGoods});
+    }
+
     async goValidar() {
+        if (this.state.selected_goods.length === 0) return;
+
         let response = await API.checkOrder(this.state.selected_goods);
-        console.warn(response);
-        //this.props.navigation.navigate('validar');
+        this.setState({typeError: response.status});
+
+        switch (response.status) {
+            case 200: //Navegar a validar
+                this.props.navigation.navigate('validar');
+                break;
+            case 403: //Error conflicte vals
+                this.updateToast();
+                this.updateErrorState(response.body);
+                break;
+        }
     }
 
     onClose() {
         let typeError = this.state.typeError;
         switch (typeError) {
-            case 2: //Error conflicte vals
+            case 403: //Error conflicte vals retornar a la mateixa vista
                 this.setState({toast: false});
                 break;
             default:
+                this.setState({toast: false});
                 break;
         }
     }
@@ -87,12 +109,32 @@ export default class Buy extends Component{
         );
     }
 
-    displayToastContent(){
+    renderConflictGood(item) {
+        let good = null;
+        for (let g of this.state.entity.goods) {
+            if (g._id === item) good = g;
+        }
+        return (
+            <Text key={item} style={{paddingLeft: 10}}>
+                - {good.productName}
+            </Text>
+        )
+    }
+
+    displayToastContent() {
         let typeError = this.state.typeError;
         switch (typeError) {
-            case 2: //Error conflicte vals
-                return(<Text style={{textAlign: 'center'}}>Conflicte amb els vals: </Text>);
-                //TODO afegir nom vals en els quals hi ha conflicte
+            case 403: //Error conflicte vals
+                let soldOutGoods = this.state.soldOutGoods || [];
+                let nonUsableGoods = this.state.nonUsableGoods || [];
+                let conflictGoods = soldOutGoods.concat(nonUsableGoods);
+                let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
+                return(
+                    <View style={{marginBottom: 10}}>
+                        <Text style={{fontSize: 18}}>Conflicte amb els vals: </Text>
+                        {conflictList}
+                    </View>
+                );
             default:
                 return(<Text style={{textAlign: 'center'}}>Error</Text>);
         }
