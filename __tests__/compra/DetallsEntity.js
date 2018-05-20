@@ -3,6 +3,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
+jest.mock('../../components/http_helper');
 
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -49,7 +50,7 @@ describe('Test group for EntityList', function () {
             phone: '000000',
             email: 'aaa@bbb.com',
             coordinates: [0, 0],
-            goods: []
+            goods: [{_id:'555'}]
         }
         instance.map = {
             animateToRegion: jest.fn()
@@ -90,18 +91,84 @@ describe('Test group for EntityList', function () {
 
     describe("toggleFavourite() tests", () => {
 
-        test('toggleFavourite to normal good', () => {
-            expect(instance.toggleFavourite(1, true)).toBe(undefined);
+        test('toggleFavourite to normal good', async () => {
+            expect(await instance.toggleFavourite(1, true)).toBe(undefined);
         });
 
-        test('toggleFavourite to fav good', () => {
-            expect(instance.toggleFavourite(1, false)).toBe(undefined);
+        test('toggleFavourite to fav good', async () => {
+            expect(await instance.toggleFavourite(1, false)).toBe(undefined);
+        });
+    });
+
+    describe("isFav() tests", () => {
+
+        test('isFav to normal good', () => {
+
+            instance.state.goods = [
+                {
+                    _id: 1,
+                    productName: 'name',
+                    initialPrice: 24,
+                    category: 2,
+                    owner: {
+                        name: 'NAME'
+                    }
+                }
+            ];
+            expect(instance.isFav(1)).toBe(true);
+        });
+
+        test('isFav to fav good', () => {
+
+            instance.state.goods= [
+                {
+                    _id: 1,
+                    productName: 'name',
+                    initialPrice: 24,
+                    category: 2,
+                    owner: {
+                        name: 'NAME'
+                    }
+                }
+            ];
+            expect(instance.isFav(2)).toBe(false);
+        });
+
+        test('isFav to fav good', () => {
+
+            instance.state.goods= null;
+            expect(instance.isFav(2)).toBe(false);
         });
     });
 
     test('renderGood renders an entity correctly', () => {
 
-        expect(instance.renderGood({id: 1})).toMatchSnapshot();
+        let good = {
+            _id: '1',
+            productName: 'name',
+            initialPrice: 24,
+            category: 2,
+            owner: {
+                name: 'NAME'
+            }
+        }
+        instance.state.goods = [{'_id':'1'}]
+        expect(instance.renderGood(good)).toMatchSnapshot();
+    });
+
+    test('renderGood renders an entity correctly', () => {
+
+        let good = {
+            _id: '1',
+            productName: 'name',
+            initialPrice: 24,
+            category: 2,
+            owner: {
+                name: 'NAME'
+            }
+        }
+        instance.state.goods = [{'_id':'2'}]
+        expect(instance.renderGood(good)).toMatchSnapshot();
     });
 
     describe("displayPhoneInfo() tests", () => {
