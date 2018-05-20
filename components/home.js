@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Login from './login/login';
 import Buscador from './buscador/buscador';
 import LlistaVals from './llista_vals/llista_vals';
+import DetallsGood from './llista_vals/detalls_good';
 import DetallsEntitat from './compra/detalls_entitat';
 import App from '../App';
 import Logout from "./login/logout";
@@ -37,6 +38,9 @@ const ValsStack = StackNavigator({
             drawerIcon: <Icon name="ticket-percent" size={25}/>,
         }
     },
+    detalls_good: {
+        screen: DetallsGood
+    }
 }, {
     headerMode: 'none',
     disabledBackGesture: true,

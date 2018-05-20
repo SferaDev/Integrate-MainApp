@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, TouchableHighlight, Text, Linking, ScrollView, Image} from 'react-native';
 import NavigationActions from 'react-navigation';
-import LinearGradient from 'react-native-linear-gradient';
 
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -28,7 +27,6 @@ export default class DetallsGood extends Component{
 
         if (!isFav) await API.addGoodFav(id);
         else  await API.deleteGoodFav(id);
-        await this.getGoodsFav();
     }
 
     isFav(id) {
@@ -50,19 +48,19 @@ export default class DetallsGood extends Component{
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
-                    <Icon   style={[styles.headerRightIco, {color: (this.props.isFav) ? '#f4eb49' : '#CCC'}]}
+                    <Icon   style={[styles.headerRightIco, {color: (this.isFav(this.props.navigation.state.params.selectedGood._id)) ? '#f4eb49' : '#CCC'}]}
                             name="star" size={30}
                             id={this.props.navigation.state.params.selectedGood._id}
                     />
                 </View>
                 <View style={styles.scrollView}>
-                    <View key="alpha">
+                    <View>
                         <Image
                             style={{width: '100%',height: 400}}
                             source={{uri: this.props.navigation.state.params.selectedGood.picture}}
                         />
                     </View>
-                    <View key="alpha" style={{backgroundColor: 'white',flex: 1}} >
+                    <View style={{backgroundColor: 'white',flex: 1}} >
                         <View key="beta" style={styles.contactArea} >
                             <Text style={styles.entityName}>{this.props.navigation.state.params.selectedGood.owner.name}</Text>
                             <Icon style={styles.entityIco} name="eye" size={35}/>

@@ -65,6 +65,7 @@ export default class DetallsEntitat extends Component{
                 context={this}
                 isFav={false}
                 isEntityDisplay={true}
+                onPress={()=>{}}
             />
         );
     }
