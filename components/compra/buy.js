@@ -46,8 +46,7 @@ export default class Buy extends Component{
 
     goValidar() {
         //TODO crida API enviar selected_goods
-        this.props.navigation.navigate('validar');
-
+        //this.props.navigation.navigate('validar');
     }
 
     onClose() {
@@ -98,6 +97,12 @@ export default class Buy extends Component{
         }
     }
 
+    extractKey(item) {
+         return item._id
+    }
+
+    refreshfunction() {return false}
+
     render() {
         return (
             <View style={styles.container}>
@@ -117,9 +122,9 @@ export default class Buy extends Component{
                             ref={flatList => this.flatList = flatList}
                             data={this.state.entity.goods}
                             renderItem={this.renderGood.bind(this)}
-                            keyExtractor={item => item._id}
+                            keyExtractor={this.extractKey.bind(this)}
                             refreshing={false}
-                            onRefresh={()=>false}
+                            onRefresh={this.refreshfunction.bind(this)}
                         />
                     </View>
                 </View>

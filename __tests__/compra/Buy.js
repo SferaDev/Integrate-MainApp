@@ -81,15 +81,21 @@ describe('Test group for EntityList', function () {
         expect(instance.setEntity(entity)).toBe(undefined);
     });
 
-    test('renderGood renders an entity correctly', () => {
+    describe("toggleSelected() tests", () => {
 
-        let good = {
-            _id: '1',
-            productName: 'name',
-            initialPrice: 24,
-            category: 2,
-        };
-        expect(instance.renderGood(good)).toMatchSnapshot();
+        test('toggleSelected to unselected good', () => {
+            instance.flatList = {};
+            instance.state.selected_goods = [1];
+            instance.toggleSelected(1);
+            expect(instance.state.selected_goods.length).toBe(0);
+        });
+
+        test('toggleSelected to selected good', () => {
+            instance.flatList = {};
+            instance.state.selected_goods = [];
+            instance.toggleSelected(1);
+            expect(instance.state.selected_goods.length).toBe(1);
+        });
     });
 
     test('renderGood renders an entity correctly', () => {
@@ -100,7 +106,29 @@ describe('Test group for EntityList', function () {
             initialPrice: 24,
             category: 2,
         };
-        expect(instance.renderGood(good)).toMatchSnapshot();
+        expect(instance.renderGood({item:good})).toMatchSnapshot();
+    });
+
+    test('renderGood renders an entity correctly', () => {
+
+        let good = {
+            _id: '1',
+            productName: 'name',
+            initialPrice: 24,
+            category: 2,
+        };
+        expect(instance.renderGood({item:good})).toMatchSnapshot();
+    });
+
+    test('extractKey is callable and returns item id', () => {
+        let good = {
+            _id: '1'
+        };
+        expect(instance.extractKey(good)).toBe('1');
+    });
+
+    test('refreshfunction is callable and returns false', () => {
+        expect(instance.refreshfunction()).toBe(false);
     });
 
 });
