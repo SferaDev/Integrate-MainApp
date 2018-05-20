@@ -143,7 +143,9 @@ export default class LogIn extends Component {
                     </View>
                     <Toast
                         visible={this.state.error}
-                        onClose={this.updateError.bind(this)}/>
+                        onClose={this.updateError.bind(this)}>
+                        <Text style={{textAlign: 'center'}}>El Nie / Nif o la contrasenya són incorrectes</Text>
+                    </Toast>
                 </ImageBackground>
             </View>
         );
