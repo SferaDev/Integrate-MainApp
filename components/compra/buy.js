@@ -5,6 +5,7 @@ import NavigationActions from 'react-navigation';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import GoodCompra from "./good_compra";
+import Toast from "../login/toast";
 
 
 export default class Buy extends Component{
@@ -21,7 +22,9 @@ export default class Buy extends Component{
                 phone: '',
                 coordinates: [0, 0],
                 goods: []
-            }
+            },
+            toast: true,
+            typeError: 2
         }
     }
 
@@ -41,6 +44,17 @@ export default class Buy extends Component{
         this.props.navigation.goBack();
     }
 
+    onClose() {
+        let typeError = this.state.typeError;
+        switch (typeError) {
+            case 2: //Error conflicte vals
+                this.setState({toast: false});
+                break;
+            default:
+                break;
+        }
+    }
+
     renderGood({item}) {
         return (
             <GoodCompra
@@ -48,6 +62,17 @@ export default class Buy extends Component{
                 key={item._id}
             />
         );
+    }
+
+    displayToastContent(){
+        let typeError = this.state.typeError;
+        switch (typeError) {
+            case 2: //Error conflicte vals
+                return(<Text style={{textAlign: 'center'}}>Conflicte amb els vals: </Text>);
+            //TODO afegir nom vals en els quals hi ha conflicte
+            default:
+                return(<Text style={{textAlign: 'center'}}>Error</Text>);
+        }
     }
 
     render() {
@@ -71,6 +96,11 @@ export default class Buy extends Component{
                         />
                     </View>
                 </View>
+                <Toast
+                    visible={this.state.toast}
+                    onClose={this.onClose.bind(this)}>
+                    {this.displayToastContent()}
+                </Toast>
             </View>
         );
     }
