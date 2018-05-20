@@ -37,9 +37,6 @@ const ValsStack = StackNavigator({
             drawerLabel: 'Vals',
             drawerIcon: <Icon name="ticket-percent" size={25}/>,
         }
-    },
-    detalls_good: {
-        screen: DetallsGood
     }
 }, {
     headerMode: 'none',
