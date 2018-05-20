@@ -13,7 +13,6 @@ import RestoreCredentials from "./restore_credentials/restore_credentials";
 import Validar from './compra/validar';
 import ChangePassword from "./profile/change_password";
 
-
 const BuscadorStack = StackNavigator({
     buscador: {
         screen: Buscador,
