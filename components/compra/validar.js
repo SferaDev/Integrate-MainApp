@@ -1,13 +1,37 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {BackHandler, FlatList, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import API from "../api";
+import GoodValidar from "../compra/good_validar";
+import Toast from "../login/toast";
 
 export default class Validar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            code: ""
+            code: "",
+            //TODO cridar api per calcular total.
+            total: 0,
+            goods_shown: [],
+            isFieldFocused: false,
+            toast: false,
+            typeError: 1
         };
+    }
+
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
+        this.getAllGoods();
+    }
+    //TODO cridar api per agafar els vals correctes
+    async getAllGoods(loc) {
+
+        let goods = await API.getGoods();
+
+        if( goods != null){
+            this.setState({goods_shown: goods});
+        }
     }
 
     updateCode(value) {
@@ -26,65 +50,166 @@ export default class Validar extends Component {
         return (this.isEmpty() ? '#666' : 'white');
     }
 
-    isVisible() {
-        // TODO: This is enforced to true for now
-        return (true || this.props.visible) ? 'flex' : 'none';
+    goBack() {
+        this.props.navigation.goBack();
+    }
+
+    moveUp() {
+        this.setState({isFieldFocused: true});
+    }
+
+    moveDown() {
+        this.setState({isFieldFocused: false});
+    }
+
+    onClose() {
+        let typeError = this.state.typeError;
+        switch (typeError) {
+            case 0: //Compra realitzada
+                //TODO afegir navegació a pantalla informació de la entitat
+                break;
+            case 1: //Error Codi Incorrecte
+                this.setState({toast: false});
+                break;
+            case 2: //Error conflicte vals
+                //TODO afegir navegació a pantalla checkouts
+                break;
+            default:
+                break;
+        }
+    }
+
+    renderGood({item}) {
+
+        return (
+            <GoodValidar
+                item={item}
+                key={item._id}
+            />
+        );
+    }
+
+    displayToastContent(){
+        let typeError = this.state.typeError;
+        switch (typeError) {
+            case 0: //Compra realitzada
+                return(<Text style={{textAlign: 'center'}}>Descompte aplicat correctament</Text>);
+            case 1: //Error Codi Incorrecte
+                return(<Text style={{textAlign: 'center'}}>Codi incorrecte</Text>);
+            case 2: //Error conflicte vals
+                return(<Text style={{textAlign: 'center'}}>Conflicte amb els vals: </Text>);
+                //TODO afegir nom vals en els quals hi ha conflicte
+            default:
+                return(<Text style={{textAlign: 'center'}}>Error</Text>);
+        }
     }
 
     render() {
         return (
-            <View style={[styles.validarView, {display: this.isVisible()}]}>
-                <View style={styles.toastcontent}>
-                    <Icon   name="close"
-                            size={25}
-                            style={styles.closeIcon}
-                            onPress={this.props.onClose}/>
-                    <View style={styles.inputView}>
-                        <Text style={styles.text}>
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
+                </View>
+                <View style={styles.resum}>
+                    <Text style={styles.textResum}>
+                        Resum compra:
+                    </Text>
+                    <View style={[styles.body, {display: this.state.isFieldFocused ? 'none' : 'flex'}]}>
+                        <View style={[{...StyleSheet.absoluteFillObject},
+                            {paddingTop: 15}]}>
+                            <FlatList
+                                data={this.state.goods_shown}
+                                renderItem={this.renderGood.bind(this)}
+                            />
+                        </View>
+                    </View>
+                    <View style={styles.viewTotalEstalvi}>
+                        <Text style={styles.textDescompte}>
+                            Descompte total
+                        </Text>
+                        <Text style={[styles.textDescompte, {textAlign: 'right'}]}>
+                            {this.state.total} €
+                        </Text>
+                    </View>
+                    <View style={styles.validateView}>
+                        <Text style={styles.textCodi}>
                             Introduir codi de validació:
                         </Text>
                         <TextInput style={styles.basicInput}
                                    value={this.state.code}
                                    placeholder={"Introduir codi"}
                                    onChangeText={this.updateCode.bind(this)}
-                                   underlineColorAndroid='rgba(0,0,0,0)'
-                        >
+                                   underlineColorAndroid='rgba(0,0,0,0)'>
                         </TextInput>
+                        <TouchableHighlight
+                            style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
+                            onPress={()=>{}}
+                            disabled={this.isEmpty()}>
+                            <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold', fontSize: 17}}>
+                                Validar
+                            </Text>
+                        </TouchableHighlight>
                     </View>
-                    <TouchableHighlight
-                        style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
-                        onPress={()=>{}}
-                        disabled={this.isEmpty()}>
-                        <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold', fontSize: 17}}>
-                            Validar
-                        </Text>
-                    </TouchableHighlight>
                 </View>
+                <Toast
+                    visible={this.state.toast}
+                    onClose={this.onClose.bind(this)}>
+                    {this.displayToastContent()}
+                </Toast>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    validarView: {
-        position: 'absolute',
-        flex:1,
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        backgroundColor: 'rgba(0,0,0,0.30)',
-        padding: 20,
-        justifyContent: 'center',
+    container: {
+        display: 'flex',
+        flex: 1,
+        backgroundColor: '#F5FCFF',
     },
-    toastcontent: {
-        backgroundColor: 'white',
-        padding: 10,
-        alignItems: 'center',
-        paddingTop: 25,
-        marginBottom: 100
+    header: {
+        height: 60,
+        backgroundColor: '#094671',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row'
     },
-    text: {
+    headerLeftIco: {
+        flex: 1,
+        alignSelf: 'center',
+        paddingLeft: 20,
+        textAlign: 'left',
+        color: 'white'
+    },
+    resum: {
+        flex: 7,
+        alignSelf: 'flex-start',
+        paddingLeft: 10,
+        paddingRight: 10,
+        width: '100%'
+    },
+    textResum: {
+        fontWeight: 'bold',
+        fontSize: 25,
+        height: 35
+    },
+    textDescompte: {
+        flex: 1,
+        fontWeight: 'bold',
+        fontSize: 17
+    },
+    viewTotalEstalvi: {
+        display: 'flex',
+        flexDirection: 'row',
+        padding: 5,
+        height: 30,
+    },
+    validateView: {
+        flex: 5,
+        padding: 5,
+        width: '100%'
+    },
+    textCodi: {
         textAlign: 'left',
         fontWeight: 'bold',
         fontSize: 17
@@ -92,7 +217,7 @@ const styles = StyleSheet.create({
     button: {
         borderWidth: 1,
         borderColor: '#0c59cf',
-        width: 120,
+        width: 200,
         height: 40,
         borderRadius: 4,
         justifyContent: 'center',
@@ -103,21 +228,25 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#0c59cf',
         backgroundColor: 'rgba(255,255,255,0.85)',
-        width: 220,
+        width: '90%',
         height: 35,
         borderRadius: 1,
-        justifyContent: 'center',
         margin: 10,
-        marginLeft: 0,
+        marginLeft: 15,
         padding: 0,
         paddingLeft: 5,
-    },
-    inputView: {
-        alignSelf: 'center',
     },
     closeIcon: {
         position: 'absolute',
         top: 5,
         right: 5
+    },
+    body: {
+        flex: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+        width: '100%',
+        height: '100%',
     }
 });
