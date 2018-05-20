@@ -20,17 +20,12 @@ export default class Good extends Component {
                             <Text
                                 style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.item.initialPrice + '€ (-' + this.props.item.discount + '' + this.props.item.discountType + ')'}</Text>
                         </View>
-                        <Text style={styles.entityName}>
-                            { this.props.isEntityDisplay ?
-                                this.props.item.productName :
-                                this.props.item.owner.name
-                            }
-                        </Text>
+                        <Text style={styles.entityName}>{this.props.item.productName}</Text>
                         <View style={styles.view1}>
                             <Text style={styles.goodNameText}>
                                 { this.props.isEntityDisplay ?
                                     '' :
-                                    this.props.item.productName
+                                    this.props.item.owner.name
                                 }
                             </Text>
                             <Icon style={[styles.favProps, {color: (this.props.isFav) ? '#f4eb49' : '#CCC'}]}

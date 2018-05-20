@@ -26,8 +26,13 @@ export default class LlistaVals extends Component {
     }
 
     componentDidMount() {
-        this.getAllGoods();
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+
+        this.props.navigation.addListener('didFocus', this.getAllGoods.bind(this,undefined));
+    }
+
+    componentWillUnmount() {
+        this.props.navigation.removeListener('didFocus', this.getAllGoods.bind(this,undefined));
     }
 
     handleBackButton() {
@@ -85,7 +90,7 @@ export default class LlistaVals extends Component {
     }
 
     showGoodDetails(good){
-        this.props.navigation.navigate('detalls_good',{selectedGood: good});
+        this.props.navigation.navigate('detalls_good',{selectedGood: good,isFav: this.isFav(good._id)});
     }
 
     renderGood({item}) {

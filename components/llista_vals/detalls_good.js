@@ -10,33 +10,23 @@ export default class DetallsGood extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            entity: {
-                _id: 0,
-                name: '',
-                description: '',
-                addressName: '',
-                email: '',
-                phone: '',
-                coordinates: [0, 0],
-                goods: []
-            }
+            good: this.props.navigation.state.params.selectedGood,
+            isFav: this.props.navigation.state.params.isFav,
         }
     }
 
-    async toggleFavourite(id, isFav) {
+    async toggleFavourite() {
 
-        if (!isFav) await API.addGoodFav(id);
-        else  await API.deleteGoodFav(id);
-    }
+        let id = this.state.good._id;
 
-    isFav(id) {
-        let goods = this.state.goods || [];
-
-        for(let i = 0; i < goods.length; i++ ){
-            let good = goods[i];
-            if (good._id === id) return true;
+        if (!this.state.isFav){
+            await API.addGoodFav(id);
+            this.setState({isFav: true});
         }
-        return false;
+        else{
+            await API.deleteGoodFav(id);
+            this.setState({isFav: false});
+        }
     }
 
     goBack() {
@@ -48,33 +38,29 @@ export default class DetallsGood extends Component{
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
-                    <Icon   style={[styles.headerRightIco, {color: (this.isFav(this.props.navigation.state.params.selectedGood._id)) ? '#f4eb49' : '#CCC'}]}
+                    <Icon   style={[styles.headerRightIco, {color: (this.state.isFav) ? '#f4eb49' : '#CCC'}]}
                             name="star" size={30}
-                            id={this.props.navigation.state.params.selectedGood._id}
+                            id={this.state.good._id}
+                            onPress={this.toggleFavourite.bind(this)}
                     />
                 </View>
-                <View style={styles.scrollView}>
+                <View style={styles.main}>
                     <View>
                         <Image
-                            style={{width: '100%',height: 400}}
-                            source={{uri: this.props.navigation.state.params.selectedGood.picture}}
+                            style={{width: '100%',height: '100%'}}
+                            source={{uri: this.state.good.picture}}
                         />
                     </View>
-                    <View style={{backgroundColor: 'white',flex: 1}} >
-                        <View key="beta" style={styles.contactArea} >
-                            <Text style={styles.entityName}>{this.props.navigation.state.params.selectedGood.owner.name}</Text>
-                            <Icon style={styles.entityIco} name="eye" size={35}/>
+                    <View style={{backgroundColor: 'rgba(255,255,255,0)',position: 'absolute',bottom: 0,width: '100%',height: 125}} >
+                        <View style={styles.goodResume} >
+                            <Text style={styles.productName}>{this.state.good.productName}</Text>
+                            <View style={{flex: 1,display: 'flex',flexDirection: 'row'}} >
+                                <Text style={styles.goodBasicText}>Cada {this.state.good.reusePeriod} dies</Text>
+                                <Text style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.state.good.initialPrice + '€ (-' + this.state.good.discount + '' + this.state.good.discountType + ')'}</Text>
+                            </View>
                         </View>
-                        <View style={styles.view1}>
-                            <Text style={styles.goodBasicText}>Cada {this.props.navigation.state.params.selectedGood.reusePeriod} dies</Text>
-                            <Text
-                                style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.navigation.state.params.selectedGood.initialPrice + '€ (-' + this.props.navigation.state.params.selectedGood.discount + '' + this.props.navigation.state.params.selectedGood.discountType + ')'}</Text>
-                        </View>
-                        <View style={styles.view1}>
-                            <Text style={styles.goodNameText}>
-                                {this.props.navigation.state.params.selectedGood.productName}
-                            </Text>
-                            
+                        <View style={styles.entityResume}>
+                            <Text style={styles.entityNameText}>{this.state.good.owner.name}</Text>
                         </View>
                     </View>
                 </View>
@@ -111,55 +97,43 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         color: 'white'
     },
-    scrollView: {
+    main: {
         flex: 8,
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F5FCFF88',
         width: '100%',
         height: '100%'
     },
-    contactArea: {
-        height: 50,
-        backgroundColor: '#e8eaf6',
-        flexDirection: 'row',
+    goodResume: {
+        height: 75,
+        backgroundColor: '#e8eaf6AA',
+        flexDirection: 'column',
         paddingLeft: 5,
         paddingRight: 5
     },
-    viewInfo: {
-        flex: 1
-    },
-    view1: {
+    entityResume: {
         display: 'flex',
         flexDirection: 'row',
         flex: 1,
-        width: '100%'
+        width: '100%',
+        backgroundColor: '#F5FCFFAA'
     },
-    entityName: {
+    productName: {
         paddingLeft: 15,
         fontSize: 22,
         color: '#232323',
         fontWeight: 'bold',
         lineHeight: 40
     },
-    entityIco: {
-        flex: 1,
-        alignSelf: 'center',
-        paddingRight: 20,
-        textAlign: 'right',
-        color: 'white',
-    },
     goodBasicText: {
-        fontSize: 14,
-        paddingTop: 3,
-        paddingLeft: 5,
-        paddingRight: 5,
+        fontSize: 15,
+        paddingLeft: 15,
+        paddingRight: 15,
         color: '#232323',
         flex: 1
     },
-    goodNameText: {
-        fontSize: 15,
-        paddingTop: 1,
-        paddingLeft: 5,
-        paddingRight: 5,
+    entityNameText: {
+        fontSize: 20,
+        paddingLeft: 15,
         color: '#232323',
         flex: 1
     },

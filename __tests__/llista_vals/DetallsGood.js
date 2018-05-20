@@ -58,51 +58,13 @@ describe('Test group for EntityList', function () {
     describe("toggleFavourite() tests", () => {
 
         test('toggleFavourite to normal good', async () => {
-            expect(await instance.toggleFavourite(1, true)).toBe(undefined);
+            instance.state.isFav = true;
+            expect(await instance.toggleFavourite(1)).toBe(undefined);
         });
 
         test('toggleFavourite to fav good', async () => {
-            expect(await instance.toggleFavourite(1, false)).toBe(undefined);
-        });
-    });
-
-    describe("isFav() tests", () => {
-
-        test('isFav to normal good', () => {
-
-            instance.state.goods = [
-                {
-                    _id: 1,
-                    productName: 'name',
-                    initialPrice: 24,
-                    category: 2,
-                    owner: {
-                        name: 'NAME'
-                    }
-                }
-            ];
-            expect(instance.isFav(1)).toBe(true);
-        });
-
-        test('isFav to fav good', () => {
-
-            instance.state.goods = [
-                {
-                    _id: 1,
-                    productName: 'name',
-                    initialPrice: 24,
-                    category: 2,
-                    owner: {
-                        name: 'NAME'
-                    }
-                }
-            ];
-            expect(instance.isFav(2)).toBe(false);
-        });
-
-        test('isFav when no fav goods', () => {
-
-            expect(instance.isFav(2)).toBe(false);
+            instance.state.isFav = false;
+            expect(await instance.toggleFavourite(1)).toBe(undefined);
         });
     });
 

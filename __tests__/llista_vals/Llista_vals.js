@@ -8,7 +8,7 @@ import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import LlistaVals from '../../components/llista_vals/llista_vals';
 
-const navigation = {navigate: jest.fn()};
+const navigation = {navigate: jest.fn(), addListener: jest.fn(), removeListener: jest.fn()};
 let wrapper;
 let instance;
 
@@ -83,7 +83,7 @@ describe('Test group for llista_vals', function () {
     });
 
     test('showGoodDetails is callable and returns nothing', () => {
-        expect(instance.showGoodDetails()).toBe(undefined);
+        expect(instance.showGoodDetails({_id: 0})).toBe(undefined);
     });
 
     test('renderGood renders an entity correctly', () => {
