@@ -23,9 +23,10 @@ export default class Buy extends Component{
                 coordinates: [0, 0],
                 goods: []
             },
-            toast: true,
-            typeError: 2
-        }
+            toast: false,
+            typeError: 2,
+            selected_goods: []
+        };
     }
 
     componentDidMount() {
@@ -42,6 +43,12 @@ export default class Buy extends Component{
 
     goBack() {
         this.props.navigation.goBack();
+    }
+
+    goValidar() {
+        //TODO crida API enviar selected_goods
+        this.props.navigation.navigate('validar');
+
     }
 
     onClose() {
@@ -69,7 +76,7 @@ export default class Buy extends Component{
         switch (typeError) {
             case 2: //Error conflicte vals
                 return(<Text style={{textAlign: 'center'}}>Conflicte amb els vals: </Text>);
-            //TODO afegir nom vals en els quals hi ha conflicte
+                //TODO afegir nom vals en els quals hi ha conflicte
             default:
                 return(<Text style={{textAlign: 'center'}}>Error</Text>);
         }
@@ -80,7 +87,7 @@ export default class Buy extends Component{
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
-                    <Text style={styles.headerRightIco}>
+                    <Text onPress={this.goValidar.bind(this)} style={styles.headerRightIco}>
                         DONE
                     </Text>
                 </View>

@@ -207,6 +207,7 @@ const styles = StyleSheet.create({
     validateView: {
         flex: 5,
         padding: 5,
+        paddingBottom: 15,
         width: '100%'
     },
     textCodi: {
