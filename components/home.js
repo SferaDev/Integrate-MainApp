@@ -11,6 +11,7 @@ import Logout from "./login/logout";
 import RestoreCredentials from "./restore_credentials/restore_credentials";
 import Validar from './compra/validar';
 import ChangePassword from "./profile/change_password";
+import Information from "./profile/information";
 
 const BuscadorStack = StackNavigator({
     buscador: {
@@ -45,9 +46,9 @@ const ValsStack = StackNavigator({
 
 const ProfileStack = StackNavigator({
     change_password: {
-        screen: ChangePassword,
+        screen: Information,
         navigationOptions: {
-            drawerLabel: 'Change password',
+            drawerLabel: 'Profile settings',
             drawerIcon: <Icon name="settings" size={25}/>,
         }
     },
