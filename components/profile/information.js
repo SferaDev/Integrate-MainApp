@@ -1,15 +1,7 @@
 import React, {Component} from 'react';
-import {
-    StyleSheet,
-    View,
-    TouchableHighlight,
-    Text
-} from 'react-native';
-
-import API from '../api';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
-import ChangePassword from "./change_password";
 
 export default class Information extends Component {
 
@@ -17,7 +9,7 @@ export default class Information extends Component {
         super(props);
 
         this.appLanguages = [{value: "Catala"}, {value: "Castella"}, {value: "Angles"}];
-            this.goodsLanguages = [{value: "Catala"}, {value: "Castella"}, {value: "Angles"}, {value: "Altres"}];
+        this.goodsLanguages = [{value: "Catala"}, {value: "Castella"}, {value: "Angles"}, {value: "Altres"}];
 
         this.state = {
             appLanguage: 0,
@@ -151,7 +143,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Helvetica',
         fontSize: 24,
         margin: 10,
-        textAlign:'center',
+        textAlign: 'center',
         fontWeight: 'bold',
         backgroundColor: 'transparent'
     },
@@ -159,7 +151,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Helvetica',
         fontSize: 19,
         margin: 10,
-        textAlign:'center',
+        textAlign: 'center',
         backgroundColor: 'transparent'
     },
     favProps: {
