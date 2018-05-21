@@ -12,13 +12,16 @@ export default class GoodCompra extends Component {
     render() {
         return (
             <TouchableHighlight
-                    style={styles.selection}
-                    key={this.props.item._id}
-                    onPress={this.props.onPress.bind(this.props.context, this.props.item._id)}
-                    underlayColor="transparent"
+                style={styles.selection}
+                key={this.props.item._id}
+                onPress={this.props.onPress.bind(this.props.context, this.props.item._id)}
+                underlayColor="transparent"
             >
                 <View
-                    style={[styles.container, {borderColor: this.props.isSelected ? '#98B353' : '#888888', borderWidth: this.props.isSelected ? 2 : 1 }]}>
+                    style={[styles.container, {
+                        borderColor: this.props.isSelected ? '#98B353' : '#888888',
+                        borderWidth: this.props.isSelected ? 2 : 1
+                    }]}>
                     <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}/>
                     <View style={styles.viewGoodContent}>
                         <View style={styles.view1}>
@@ -30,9 +33,11 @@ export default class GoodCompra extends Component {
                             <Text style={styles.goodName}>{this.props.item.productName}</Text>
                             {
                                 this.props.isSelected ?
-                                    <Icon style={[styles.CheckBoxProps, styles.selected]} name="checkbox-marked-circle-outline" size={30}/>
+                                    <Icon style={[styles.CheckBoxProps, styles.selected]}
+                                          name="checkbox-marked-circle-outline" size={30}/>
                                     :
-                                    <Icon style={[styles.CheckBoxProps, styles.unselected]} name="checkbox-blank-circle-outline" size={30}/>
+                                    <Icon style={[styles.CheckBoxProps, styles.unselected]}
+                                          name="checkbox-blank-circle-outline" size={30}/>
                             }
                         </View>
                     </View>
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
         paddingTop: 5,
     },
     selected: {
-        color:'#98B353'
+        color: '#98B353'
     },
     unselected: {
         color: '#CCC'

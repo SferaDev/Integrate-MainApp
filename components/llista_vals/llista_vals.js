@@ -45,11 +45,11 @@ export default class LlistaVals extends Component {
         let goods = await API.getGoods(category, order, loc);
         let goodsFav = await API.getGoodsFav(category, order, loc);
 
-        if( goods != null && goodsFav != null ){
-            if (this.state.selectedIndex == 1){
-                this.setState({goods_shown: goods,goods: goods, goodsFav: goodsFav});
-            } else{
-                this.setState({goods_shown: goodsFav,goods: goods, goodsFav: goodsFav});
+        if (goods != null && goodsFav != null) {
+            if (this.state.selectedIndex == 1) {
+                this.setState({goods_shown: goods, goods: goods, goodsFav: goodsFav});
+            } else {
+                this.setState({goods_shown: goodsFav, goods: goods, goodsFav: goodsFav});
             }
         }
     }
@@ -69,14 +69,15 @@ export default class LlistaVals extends Component {
 
         this.setState({order: index});
 
-        if (index === 2) navigator.geolocation.getCurrentPosition(this.getAllGoods.bind(this), () => {});
+        if (index === 2) navigator.geolocation.getCurrentPosition(this.getAllGoods.bind(this), () => {
+        });
         else this.getAllGoods();
     }
 
     async toggleFavourite(id, isFav) {
 
         if (!isFav) await API.addGoodFav(id);
-        else  await API.deleteGoodFav(id);
+        else await API.deleteGoodFav(id);
         this.getAllGoods();
     }
 
@@ -87,12 +88,12 @@ export default class LlistaVals extends Component {
         return false;
     }
 
-    showGoodDetails(good){
-        this.setState({isGoodSelected: true,selectedGood: good});
+    showGoodDetails(good) {
+        this.setState({isGoodSelected: true, selectedGood: good});
     }
 
-    showGoodsList(){
-        this.setState({isGoodSelected: false,selectedGood: {}});   
+    showGoodsList() {
+        this.setState({isGoodSelected: false, selectedGood: {}});
     }
 
     renderGood({item}) {
@@ -122,7 +123,7 @@ export default class LlistaVals extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}} >{ !this.state.isGoodSelected ?
+            <View style={{flex: 1}}>{!this.state.isGoodSelected ?
                 <View style={styles.container}>
                     <View style={styles.header}>
                         <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
@@ -166,7 +167,10 @@ export default class LlistaVals extends Component {
                     </View>
                 </View>
                 :
-                <DetallsGood navigation={this.props.navigation} good={this.state.selectedGood} isFav={this.isFav(this.state.selectedGood._id)} showGoodsList={this.showGoodsList.bind(this)} toggleFavourite={this.toggleFavourite} context={this} />
+                <DetallsGood navigation={this.props.navigation} good={this.state.selectedGood}
+                             isFav={this.isFav(this.state.selectedGood._id)}
+                             showGoodsList={this.showGoodsList.bind(this)} toggleFavourite={this.toggleFavourite}
+                             context={this}/>
             }
             </View>
         );

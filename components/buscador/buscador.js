@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BackHandler, StyleSheet, TextInput, View, TouchableHighlight} from 'react-native';
+import {BackHandler, StyleSheet, TextInput, TouchableHighlight, View} from 'react-native';
 import Maps from './maps';
 import EntityList from './list';
 import Entity from './entity';
@@ -22,7 +22,8 @@ export default class Buscador extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
 
-        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {});
+        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {
+        });
     }
 
     handleBackButton() {
@@ -30,9 +31,9 @@ export default class Buscador extends Component {
     }
 
     async getEntities(loc) {
-        
+
         let entities = await API.getEntities(loc);
-        if(entities != null){
+        if (entities != null) {
             this.setState({entities: entities, entities_shown: entities});
         }
     }
@@ -42,8 +43,8 @@ export default class Buscador extends Component {
         this.setState({selectedEntity: selEntity});
     }
 
-    showEntity(selEntity){
-        this.props.navigation.navigate('detalls_entitat',{selectedEntity: selEntity});
+    showEntity(selEntity) {
+        this.props.navigation.navigate('detalls_entitat', {selectedEntity: selEntity});
     }
 
     openMenu() {
@@ -109,14 +110,17 @@ export default class Buscador extends Component {
                 }}>
                     {
                         this.state.isListView ?
-                            <EntityList entities={this.state.entities_shown} onDetailsShow={this.showEntity.bind(this)} />
+                            <EntityList entities={this.state.entities_shown}
+                                        onDetailsShow={this.showEntity.bind(this)}/>
                             :
                             <Maps entities={this.state.entities_shown} onMarkerClick={this.showEntityInfo.bind(this)}/>
                     }
                 </View>
                 {
                     this.isAnEntitySelected() ?
-                        <TouchableHighlight style={{height: this.isListView(), width: '100%'}} onPress={this.showEntity.bind(this,this.state.selectedEntity)} underlayColor='transparent' >
+                        <TouchableHighlight style={{height: this.isListView(), width: '100%'}}
+                                            onPress={this.showEntity.bind(this, this.state.selectedEntity)}
+                                            underlayColor='transparent'>
                             <View>
                                 <Entity item={this.state.selectedEntity}/>
                             </View>

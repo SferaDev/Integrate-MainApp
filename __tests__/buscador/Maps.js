@@ -11,15 +11,15 @@ import Maps from '../../components/buscador/maps';
 let wrapper;
 let instance;
 let entity = {
-            _id: 0,
-            name: 'name',
-            description: 'description',
-            addressName: 'addressName',
-            phone: '000000',
-            email: 'aaa@bbb.com',
-            coordinates: [0, 0],
-            goods: []
-        }
+    _id: 0,
+    name: 'name',
+    description: 'description',
+    addressName: 'addressName',
+    phone: '000000',
+    email: 'aaa@bbb.com',
+    coordinates: [0, 0],
+    goods: []
+};
 
 describe('Test group for Maps', function () {
     beforeAll(() => {

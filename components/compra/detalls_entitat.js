@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, TouchableHighlight, Text, Linking, ScrollView} from 'react-native';
-import NavigationActions from 'react-navigation';
+import {Linking, ScrollView, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import MarkerImage from '../../Images/marker60.png';
 import call from 'react-native-phone-call';
@@ -10,7 +9,7 @@ import Entity from '../buscador/entity';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Good from '../llista_vals/good';
 
-export default class DetallsEntitat extends Component{
+export default class DetallsEntitat extends Component {
 
     constructor(props) {
         super(props);
@@ -33,7 +32,7 @@ export default class DetallsEntitat extends Component{
         this.getGoodsFav();
     }
 
-    getEntity(){
+    getEntity() {
         API.getEntity(this.props.navigation.state.params.selectedEntity._id).then(this.setEntity.bind(this))
     }
 
@@ -41,7 +40,7 @@ export default class DetallsEntitat extends Component{
 
         let goodsFav = await API.getGoodsFav();
 
-        if( goodsFav != null ){
+        if (goodsFav != null) {
             this.setState({goods: goodsFav});
         }
     }
@@ -59,14 +58,14 @@ export default class DetallsEntitat extends Component{
     async toggleFavourite(id, isFav) {
 
         if (!isFav) await API.addGoodFav(id);
-        else  await API.deleteGoodFav(id);
+        else await API.deleteGoodFav(id);
         await this.getGoodsFav();
     }
 
     isFav(id) {
         let goods = this.state.goods || [];
 
-        for(let i = 0; i < goods.length; i++ ){
+        for (let i = 0; i < goods.length; i++) {
             let good = goods[i];
             if (good._id === id) return true;
         }
@@ -83,7 +82,8 @@ export default class DetallsEntitat extends Component{
                 context={this}
                 isFav={false}
                 isEntityDisplay={true}
-                onPress={()=>{}}
+                onPress={() => {
+                }}
                 isFav={this.isFav(item._id)}
             />
         );
@@ -93,42 +93,42 @@ export default class DetallsEntitat extends Component{
         this.props.navigation.goBack();
     }
 
-    goBuy(){
-        this.props.navigation.navigate('buy',{selectedEntity: this.state.entity});
+    goBuy() {
+        this.props.navigation.navigate('buy', {selectedEntity: this.state.entity});
     }
 
-    sendMail(){
+    sendMail() {
         Linking.openURL('mailto:aleix.sanfeliu@gmail.com');
     }
 
-    callTo(){
+    callTo() {
         const args = {
-          number: '617167362', // String value with the number to call
-          prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call
+            number: '617167362', // String value with the number to call
+            prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call
         };
         call(args);
     }
 
-    displayPhoneInfo(){
-        if(this.state.entity.phone != undefined){
-            return(
-                <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent' >
-                    <View style={styles.contactItem} >
+    displayPhoneInfo() {
+        if (this.state.entity.phone != undefined) {
+            return (
+                <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent'>
+                    <View style={styles.contactItem}>
                         <Icon style={styles.contactIcon} name="phone" size={35}/>
-                        <Text style={styles.contactInfo} >{this.state.entity.phone}</Text>
+                        <Text style={styles.contactInfo}>{this.state.entity.phone}</Text>
                     </View>
                 </TouchableHighlight>
             );
         }
     }
 
-    displayMailInfo(){
-        if(this.state.entity.email != undefined){
-            return(
-                <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent' >
-                    <View style={styles.contactItem} >
+    displayMailInfo() {
+        if (this.state.entity.email != undefined) {
+            return (
+                <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent'>
+                    <View style={styles.contactItem}>
                         <Icon style={styles.contactIcon} name="email-outline" size={35}/>
-                        <Text style={styles.contactInfo} >{this.state.entity.email}</Text>
+                        <Text style={styles.contactInfo}>{this.state.entity.email}</Text>
                     </View>
                 </TouchableHighlight>
             );
@@ -143,17 +143,17 @@ export default class DetallsEntitat extends Component{
                     <Icon onPress={this.goBuy.bind(this)} style={styles.headerRightIco} name="basket" size={30}/>
                 </View>
                 <ScrollView style={styles.scrollView}>
-                    <View key="alpha" >
+                    <View key="alpha">
                         <Entity item={this.state.entity}/>
                     </View>
-                    <View key="beta" style={styles.contactArea} >
+                    <View key="beta" style={styles.contactArea}>
 
-                        { this.displayPhoneInfo() }
+                        {this.displayPhoneInfo()}
 
-                        { this.displayMailInfo() }
+                        {this.displayMailInfo()}
 
                     </View>
-                    <View key="delta" style={{height: 200,marginBottom: 5}} >
+                    <View key="delta" style={{height: 200, marginBottom: 5}}>
                         <MapView
                             ref={map => this.map = map}
                             initialRegion={{
@@ -240,13 +240,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    contactIcon:{
+    contactIcon: {
         color: '#094671',
         alignSelf: 'center',
         marginLeft: 15,
         marginRight: 15
     },
-    contactInfo:{
+    contactInfo: {
         flex: 1,
         color: '#67ACB1',
         fontSize: 12

@@ -1,18 +1,11 @@
-import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    TouchableHighlight,
-    ImageBackground, Keyboard, AsyncStorage
-} from 'react-native';
+import React, {Component} from 'react';
+import {ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 
 import Toast from './toast';
 import API from "../api";
 
 export default class RestoreCredentials extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             nifnie: "",
@@ -39,7 +32,7 @@ export default class RestoreCredentials extends Component {
         this.keyboardDidHideListener.remove();
     }
 
-    updateText(value){
+    updateText(value) {
         this.setState({nifnie: value})
     }
 
@@ -78,14 +71,14 @@ export default class RestoreCredentials extends Component {
             <View style={styles.container}>
                 <ImageBackground style={styles.imageBackground} source={require('../../Images/bg.jpg')}>
 
-                    <View style={{display:'flex',justifyContent: 'center',height: '100%',width: '100%'}} >
-                        <View style={{display: 'flex',alignItems: 'center',width: '100%', height: 300}} >
-                            <View style={{flex: 40,justifyContent: 'flex-end'}} >
+                    <View style={{display: 'flex', justifyContent: 'center', height: '100%', width: '100%'}}>
+                        <View style={{display: 'flex', alignItems: 'center', width: '100%', height: 300}}>
+                            <View style={{flex: 40, justifyContent: 'flex-end'}}>
                                 <Text style={styles.basicTitle}>
                                     Recuperar credencials:
                                 </Text>
                             </View>
-                            <View style={{flex: 20}} >
+                            <View style={{flex: 20}}>
                                 <TextInput style={styles.basicInput}
                                            placeholder="NIE/NIF"
                                            value={this.state.nifNie}
@@ -93,25 +86,26 @@ export default class RestoreCredentials extends Component {
                                            underlineColorAndroid='rgba(0,0,0,0)'>
                                 </TextInput>
                             </View>
-                            <View style={{flex: 20}} >
-                                <TouchableHighlight 
+                            <View style={{flex: 20}}>
+                                <TouchableHighlight
                                     style={[styles.buttonStyle, {backgroundColor: this.getButtonBackground()}]}
                                     onPress={this.restoreCredentials.bind(this)}
-                                    disabled = {this.isEmpty()}
+                                    disabled={this.isEmpty()}
                                 >
-                                    <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold' }}>
+                                    <Text
+                                        style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
                                         Sol·licitar
                                     </Text>
                                 </TouchableHighlight>
                             </View>
-                            <View style={{flex: 40}} >
-                                <Text style = {styles.textGoToLogIn} onPress = {this.goToLogIn.bind(this)}>
+                            <View style={{flex: 40}}>
+                                <Text style={styles.textGoToLogIn} onPress={this.goToLogIn.bind(this)}>
                                     Enrera
                                 </Text>
                             </View>
                         </View>
                     </View>
-                    <Toast visible = {this.state.error} onClose = {this.updateError.bind(this)}/>
+                    <Toast visible={this.state.error} onClose={this.updateError.bind(this)}/>
 
                 </ImageBackground>
             </View>
@@ -135,29 +129,29 @@ const styles = StyleSheet.create({
         fontFamily: 'Helvetica',
         fontSize: 20,
         margin: 10,
-        textAlign:'center',
+        textAlign: 'center',
         fontWeight: 'bold',
         backgroundColor: 'transparent'
     },
     basicInput: {
-        borderWidth:1,
+        borderWidth: 1,
         borderColor: '#0c59cf',
         backgroundColor: 'rgba(255,255,255,0.85)',
         width: 260,
         height: 35,
-        borderRadius:2,
+        borderRadius: 2,
         margin: 10,
-        alignItems:'center',
+        alignItems: 'center',
         padding: 0,
-        paddingLeft:5
+        paddingLeft: 5
     },
     buttonStyle: {
-        borderWidth:1,
+        borderWidth: 1,
         borderColor: '#0c59cf',
         width: 260,
         height: 30,
-        borderRadius:4,
-        margin:10,
+        borderRadius: 4,
+        margin: 10,
         justifyContent: 'center'
     },
     textGoToLogIn: {

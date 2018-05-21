@@ -1,19 +1,18 @@
 import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
-
-jest.mock('../../components/http_helper');
-jest.mock('../../components/api');
-
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import Validar from '../../components/compra/validar';
 
+jest.mock('../../components/http_helper');
+jest.mock('../../components/api');
+
 const navigation = {
     navigate: jest.fn(),
     state: {
-        params:{
+        params: {
             entity: {
                 _id: 0,
                 goods: []
@@ -126,7 +125,7 @@ describe('Test group for Validar', function () {
             const navigation = {
                 navigate: jest.fn(),
                 state: {
-                    params:{
+                    params: {
                         entity: {
                             _id: 0,
                             goods: []
@@ -152,7 +151,7 @@ describe('Test group for Validar', function () {
             const navigation = {
                 navigate: jest.fn(),
                 state: {
-                    params:{
+                    params: {
                         entity: {
                             _id: 0,
                             goods: []
