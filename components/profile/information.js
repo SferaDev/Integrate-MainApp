@@ -9,6 +9,7 @@ import {
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
+import ChangePassword from "./change_password";
 
 export default class Information extends Component {
 
@@ -42,6 +43,7 @@ export default class Information extends Component {
     }
 
     goToChangePassword() {
+        this.props.navigation.navigate('changePassword');
     }
 
     render() {

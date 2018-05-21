@@ -45,13 +45,16 @@ const ValsStack = StackNavigator({
 });
 
 const ProfileStack = StackNavigator({
-    change_password: {
+    settings: {
         screen: Information,
         navigationOptions: {
             drawerLabel: 'Profile settings',
             drawerIcon: <Icon name="settings" size={25}/>,
         }
     },
+    changePassword:{
+        screen: ChangePassword
+    }
 }, {
     headerMode: 'none',
     disabledBackGesture: true,
