@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Login from './login/login';
 import Buscador from './buscador/buscador';
 import LlistaVals from './llista_vals/llista_vals';
+import DetallsGood from './llista_vals/detalls_good';
 import DetallsEntitat from './compra/detalls_entitat';
 import App from '../App';
 import Logout from "./login/logout";
@@ -12,6 +13,7 @@ import RestoreCredentials from "./restore_credentials/restore_credentials";
 import Validar from './compra/validar';
 import ChangePassword from "./profile/change_password";
 import Information from "./profile/information";
+import Buy from "./compra/buy";
 
 const BuscadorStack = StackNavigator({
     buscador: {
@@ -22,10 +24,17 @@ const BuscadorStack = StackNavigator({
             gesturesEnabled: false
         }
     },
-    detalls_entitat:{
+    detalls_entitat: {
         screen: DetallsEntitat
+    },
+    buy: {
+        screen: Buy
+    },
+    validar: {
+        screen: Validar
     }
-}, {
+},
+{
     headerMode: 'none',
     disabledBackGesture: true,
 });
@@ -37,7 +46,9 @@ const ValsStack = StackNavigator({
             drawerLabel: 'Vals',
             drawerIcon: <Icon name="ticket-percent" size={25}/>,
         }
-    },
+    },detalls_entitat:{
+        screen: DetallsEntitat
+    }
 }, {
     headerMode: 'none',
     disabledBackGesture: true,
@@ -52,9 +63,13 @@ const ProfileStack = StackNavigator({
             drawerIcon: <Icon name="settings" size={25}/>,
         }
     },
-    changePassword:{
-        screen: ChangePassword
-    }
+    change_password: {
+        screen: ChangePassword,
+        navigationOptions: {
+            drawerLabel: 'Change password',
+            drawerIcon: <Icon name="settings" size={25}/>,
+        }
+    },
 }, {
     headerMode: 'none',
     disabledBackGesture: true,
@@ -69,7 +84,7 @@ const ConfigStack = StackNavigator({
     gesturesEnabled: false
 });
 
-const DrawerStack = DrawerNavigator({
+const DrawerNavigation = DrawerNavigator({
     Buscador: {screen: BuscadorStack},
     Vals: {screen: ValsStack},
     Logout: {
@@ -81,15 +96,6 @@ const DrawerStack = DrawerNavigator({
     },
     Validar: {screen: Validar},
     Profile: {screen: ProfileStack}
-}, {
-    headerMode: 'none',
-    disabledBackGesture: true,
-    gesturesEnabled: false
-});
-
-
-const DrawerNavigation = StackNavigator({
-    DrawerStack: {screen: DrawerStack}
 }, {
     headerMode: 'none',
     disabledBackGesture: true,

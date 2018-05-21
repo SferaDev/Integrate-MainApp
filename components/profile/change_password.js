@@ -32,6 +32,10 @@ export default class ChangePassword extends Component {
         this.props.navigation.navigate('settings');
     }
 
+    openMenu() {
+        this.props.navigation.navigate('DrawerOpen');
+    }
+
     updatePassword(value) {
         this.setState({password: value});
     }
@@ -98,7 +102,7 @@ export default class ChangePassword extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Icon onPress={this.goSettings.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={30}/>
+                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
                 </View>
                 <View style={[styles.body, {marginBottom: this.state.isFieldFocused ? 260 : 0}]}>
                     <Text style={[styles.basicTitle, {paddingBottom: 25}]}>

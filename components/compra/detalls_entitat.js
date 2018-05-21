@@ -30,10 +30,20 @@ export default class DetallsEntitat extends Component{
 
     componentDidMount() {
         this.getEntity();
+        this.getGoodsFav();
     }
 
     getEntity(){
-        API.getEntity(this.props.navigation.state.params.selectedEntity._id).then(this.setEntity.bind(this)).catch(err => console.warn(err))
+        API.getEntity(this.props.navigation.state.params.selectedEntity._id).then(this.setEntity.bind(this))
+    }
+
+    async getGoodsFav() {
+
+        let goodsFav = await API.getGoodsFav();
+
+        if( goodsFav != null ){
+            this.setState({goods: goodsFav});
+        }
     }
 
     setEntity(entity) {
@@ -46,13 +56,21 @@ export default class DetallsEntitat extends Component{
         });
     }
 
-    toggleFavourite(id, isFav) {
-        /*if (!isFav) {
-            API.addGoodFav(id).then(this.getGoods.bind(this));
+    async toggleFavourite(id, isFav) {
+
+        if (!isFav) await API.addGoodFav(id);
+        else  await API.deleteGoodFav(id);
+        await this.getGoodsFav();
+    }
+
+    isFav(id) {
+        let goods = this.state.goods || [];
+
+        for(let i = 0; i < goods.length; i++ ){
+            let good = goods[i];
+            if (good._id === id) return true;
         }
-        else {
-            API.deleteGoodFav(id).then(this.getGoods.bind(this));
-        }*/
+        return false;
     }
 
     renderGood(item) {
@@ -61,15 +79,22 @@ export default class DetallsEntitat extends Component{
                 key={item._id}
                 id={item._id}
                 item={item}
-                onPress={this.toggleFavourite}
+                onToggleFav={this.toggleFavourite}
                 context={this}
                 isFav={false}
+                isEntityDisplay={true}
+                onPress={()=>{}}
+                isFav={this.isFav(item._id)}
             />
         );
     }
 
     goBack() {
         this.props.navigation.goBack();
+    }
+
+    goBuy(){
+        this.props.navigation.navigate('buy',{selectedEntity: this.state.entity});
     }
 
     sendMail(){
@@ -79,8 +104,8 @@ export default class DetallsEntitat extends Component{
     callTo(){
         const args = {
           number: '617167362', // String value with the number to call
-          prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
-        }
+          prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call
+        };
         call(args);
     }
 
@@ -89,7 +114,7 @@ export default class DetallsEntitat extends Component{
             return(
                 <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent' >
                     <View style={styles.contactItem} >
-                        <Icon style={styles.contactIcon} name="phone" size={35}/>    
+                        <Icon style={styles.contactIcon} name="phone" size={35}/>
                         <Text style={styles.contactInfo} >{this.state.entity.phone}</Text>
                     </View>
                 </TouchableHighlight>
@@ -105,7 +130,7 @@ export default class DetallsEntitat extends Component{
                         <Icon style={styles.contactIcon} name="email-outline" size={35}/>
                         <Text style={styles.contactInfo} >{this.state.entity.email}</Text>
                     </View>
-                </TouchableHighlight> 
+                </TouchableHighlight>
             );
         }
     }
@@ -115,7 +140,7 @@ export default class DetallsEntitat extends Component{
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
-                    <Icon style={styles.headerRightIco} name="basket" size={30}/>
+                    <Icon onPress={this.goBuy.bind(this)} style={styles.headerRightIco} name="basket" size={30}/>
                 </View>
                 <ScrollView style={styles.scrollView}>
                     <View key="alpha" >
