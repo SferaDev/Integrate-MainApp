@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, FlatList} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -7,7 +7,7 @@ import GoodCompra from "./good_compra";
 import Toast from "../login/toast";
 
 
-export default class Buy extends Component{
+export default class Buy extends Component {
 
     constructor(props) {
         super(props);
@@ -34,7 +34,7 @@ export default class Buy extends Component{
         this.getEntity();
     }
 
-    getEntity(){
+    getEntity() {
         API.getEntity(this.props.navigation.state.params.selectedEntity._id).then(this.setEntity.bind(this))
     }
 
@@ -65,7 +65,8 @@ export default class Buy extends Component{
                 this.props.navigation.navigate('validar', {
                     entity: this.state.entity,
                     selected_goods: this.state.selected_goods,
-                    total_discount: response.body.totalDiscount});
+                    total_discount: response.body.totalDiscount
+                });
                 break;
             case 409: //Error conflicte vals
                 this.updateToast();
@@ -90,7 +91,7 @@ export default class Buy extends Component{
         this.flatList.refreshing = true;
         let selected_goods = this.state.selected_goods;
 
-        if(!this.state.selected_goods.includes(id)) selected_goods.push(id);
+        if (!this.state.selected_goods.includes(id)) selected_goods.push(id);
         else {
             for (let i = 0; i < selected_goods.length; ++i) {
                 if (selected_goods[i] === id) selected_goods.splice(i, 1);
@@ -134,22 +135,24 @@ export default class Buy extends Component{
                 let nonUsableGoods = this.state.nonUsableGoods;
                 let conflictGoods = soldOutGoods.concat(nonUsableGoods);
                 let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
-                return(
+                return (
                     <View style={{marginBottom: 10}}>
                         <Text style={{fontSize: 18}}>Conflicte amb els vals: </Text>
                         {conflictList}
                     </View>
                 );
             default:
-                return(<Text style={{textAlign: 'center'}}>Error</Text>);
+                return (<Text style={{textAlign: 'center'}}>Error</Text>);
         }
     }
 
     extractKey(item) {
-         return item._id
+        return item._id
     }
 
-    refreshfunction() {return false}
+    refreshfunction() {
+        return false
+    }
 
     render() {
         return (

@@ -1,10 +1,5 @@
-import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    TouchableHighlight,
-    View
-} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 
 export default class Toast extends Component {
     constructor(props) {
@@ -22,14 +17,14 @@ export default class Toast extends Component {
 
     render() {
         return (
-            <View style = {[styles.toastback, {display: this.isVisible()}]}>
-                <View style = {styles.toastcontent}>
-                    <Text style = {styles.text}>
+            <View style={[styles.toastback, {display: this.isVisible()}]}>
+                <View style={styles.toastcontent}>
+                    <Text style={styles.text}>
                         El Nie / Nif introduït no existeix
                     </Text>
-                    <TouchableHighlight style = {styles.closeButton}
-                                        onPress = {this.props.onClose}>
-                        <Text style = {[styles.text, {color: '#094671', fontWeight: 'bold'}]}>
+                    <TouchableHighlight style={styles.closeButton}
+                                        onPress={this.props.onClose}>
+                        <Text style={[styles.text, {color: '#094671', fontWeight: 'bold'}]}>
                             Tancar
                         </Text>
                     </TouchableHighlight>
@@ -59,13 +54,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     closeButton: {
-        borderWidth:3,
+        borderWidth: 3,
         borderColor: '#094671',
-        width:100,
-        height:40,
-        borderRadius:4,
+        width: 100,
+        height: 40,
+        borderRadius: 4,
         alignSelf: 'center',
-        margin:10,
+        margin: 10,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

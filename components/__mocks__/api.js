@@ -1,5 +1,5 @@
-const GOODS = ['111','222','333','444','555','666','777','888','999'];
-const USED_GOODS = ['111','222','333','777'];
+const GOODS = ['111', '222', '333', '444', '555', '666', '777', '888', '999'];
+const USED_GOODS = ['111', '222', '333', '777'];
 
 const API = {
     getEntity: (id = null) => {
@@ -20,28 +20,28 @@ const API = {
     checkOrder: async (selected_goods = []) => {
 
         let ok = true;
-        for(let sg of selected_goods){
-            if( !GOODS.includes(sg) || USED_GOODS.includes(sg) )ok = false;
+        for (let sg of selected_goods) {
+            if (!GOODS.includes(sg) || USED_GOODS.includes(sg)) ok = false;
         }
 
-        if( ok ){
+        if (ok) {
             return {status: 200, body: {total_discount: 0}};
-        }else{
+        } else {
             return {status: 409, body: {soldOutGoods: [], nonUsableGoods: []}};
         }
     },
     newOrder: async (selected_goods = [], entityId = null, validationCode = null) => {
 
-        if( entityId === null || validationCode === null ) return {status: 403, body: 'Error'};
+        if (entityId === null || validationCode === null) return {status: 403, body: 'Error'};
 
         let ok = true;
-        for(let sg of selected_goods){
-            if( !GOODS.includes(sg) || USED_GOODS.includes(sg) )ok = false;
+        for (let sg of selected_goods) {
+            if (!GOODS.includes(sg) || USED_GOODS.includes(sg)) ok = false;
         }
 
-        if( ok ){
+        if (ok) {
             return {status: 201, body: {total_discount: 0}};
-        }else{
+        } else {
             return {status: 409, body: {soldOutGoods: [], nonUsableGoods: []}};
         }
     }

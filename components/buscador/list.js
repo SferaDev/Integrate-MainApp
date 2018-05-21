@@ -9,7 +9,7 @@ export default class EntityList extends Component {
 
     renderEntity({item}) {
         return (
-            <Entity key={''+item._id+''} item={item} onDetailsShow={this.props.onDetailsShow} />
+            <Entity key={'' + item._id + ''} item={item} onDetailsShow={this.props.onDetailsShow}/>
         );
     }
 

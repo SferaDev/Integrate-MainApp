@@ -48,14 +48,14 @@ describe('Test group for HttpHelper', function () {
 
     describe("buildBody() tests", () => {
         test('buildBody() when params are blank', () => {
-            expect( JSON.stringify(HttpHelper.buildBody({})) ).toBe('{}');
+            expect(JSON.stringify(HttpHelper.buildBody({}))).toBe('{}');
         });
 
         test('buildBody() when params are set', () => {
-            expect( JSON.stringify(HttpHelper.buildBody([{
+            expect(JSON.stringify(HttpHelper.buildBody([{
                 key: 'param1',
                 value: 'value1'
-            }])) ).toBe('{"param1":"value1"}');
+            }]))).toBe('{"param1":"value1"}');
         });
     });
 

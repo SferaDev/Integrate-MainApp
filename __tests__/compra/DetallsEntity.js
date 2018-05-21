@@ -1,18 +1,17 @@
 import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
-
-jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
-jest.mock('../../components/http_helper');
-
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import DetallsEntity from '../../components/compra/detalls_entitat';
 
+jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
+jest.mock('../../components/http_helper');
+
 const navigation = {
     navigate: jest.fn(),
     state: {
-        params:{
+        params: {
             selectedEntity: {
                 _id: 0
             }
@@ -23,15 +22,15 @@ const navigation = {
 let wrapper;
 let instance;
 let entity = {
-            _id: 0,
-            name: 'name',
-            description: 'description',
-            addressName: 'addressName',
-            phone: '000000',
-            email: 'aaa@bbb.com',
-            coordinates: [0, 0],
-            goods: []
-        };
+    _id: 0,
+    name: 'name',
+    description: 'description',
+    addressName: 'addressName',
+    phone: '000000',
+    email: 'aaa@bbb.com',
+    coordinates: [0, 0],
+    goods: []
+};
 
 describe('Test group for EntityList', function () {
     beforeAll(() => {
@@ -50,7 +49,7 @@ describe('Test group for EntityList', function () {
             phone: '000000',
             email: 'aaa@bbb.com',
             coordinates: [0, 0],
-            goods: [{_id:'555'}]
+            goods: [{_id: '555'}]
         };
         instance.map = {
             animateToRegion: jest.fn()
@@ -124,7 +123,7 @@ describe('Test group for EntityList', function () {
 
         test('isFav to fav good', () => {
 
-            instance.state.goods= [
+            instance.state.goods = [
                 {
                     _id: 1,
                     productName: 'name',
@@ -140,7 +139,7 @@ describe('Test group for EntityList', function () {
 
         test('isFav to fav good', () => {
 
-            instance.state.goods= null;
+            instance.state.goods = null;
             expect(instance.isFav(2)).toBe(false);
         });
     });
@@ -156,7 +155,7 @@ describe('Test group for EntityList', function () {
                 name: 'NAME'
             }
         };
-        instance.state.goods = [{'_id':'1'}];
+        instance.state.goods = [{'_id': '1'}];
         expect(instance.renderGood(good)).toMatchSnapshot();
     });
 
@@ -171,7 +170,7 @@ describe('Test group for EntityList', function () {
                 name: 'NAME'
             }
         };
-        instance.state.goods = [{'_id':'2'}];
+        instance.state.goods = [{'_id': '2'}];
         expect(instance.renderGood(good)).toMatchSnapshot();
     });
 

@@ -1,19 +1,18 @@
 import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {configure, shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import Buy from '../../components/compra/buy';
 
 jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
 jest.mock('../../components/http_helper');
 jest.mock('../../components/api');
 
-import {configure, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import Buy from '../../components/compra/buy';
-
 const navigation = {
     navigate: jest.fn(),
     state: {
-        params:{
+        params: {
             selectedEntity: {
                 _id: 0
             }
@@ -51,7 +50,7 @@ describe('Test group for EntityList', function () {
             phone: '000000',
             email: 'aaa@bbb.com',
             coordinates: [0, 0],
-            goods: [{_id:'555'}]
+            goods: [{_id: '555'}]
         };
     });
 
@@ -144,7 +143,7 @@ describe('Test group for EntityList', function () {
             initialPrice: 24,
             category: 2,
         };
-        expect(instance.renderGood({item:good})).toMatchSnapshot();
+        expect(instance.renderGood({item: good})).toMatchSnapshot();
     });
 
     test('renderGood renders an entity correctly', () => {
@@ -155,7 +154,7 @@ describe('Test group for EntityList', function () {
             initialPrice: 24,
             category: 2,
         };
-        expect(instance.renderGood({item:good})).toMatchSnapshot();
+        expect(instance.renderGood({item: good})).toMatchSnapshot();
     });
 
     test('extractKey is callable and returns item id', () => {
