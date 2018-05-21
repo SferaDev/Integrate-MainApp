@@ -93,6 +93,10 @@ export default class DetallsEntitat extends Component{
         this.props.navigation.goBack();
     }
 
+    goBuy(){
+        this.props.navigation.navigate('buy',{selectedEntity: this.state.entity});
+    }
+
     sendMail(){
         Linking.openURL('mailto:aleix.sanfeliu@gmail.com');
     }
@@ -100,8 +104,8 @@ export default class DetallsEntitat extends Component{
     callTo(){
         const args = {
           number: '617167362', // String value with the number to call
-          prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
-        }
+          prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call
+        };
         call(args);
     }
 
@@ -110,7 +114,7 @@ export default class DetallsEntitat extends Component{
             return(
                 <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent' >
                     <View style={styles.contactItem} >
-                        <Icon style={styles.contactIcon} name="phone" size={35}/>    
+                        <Icon style={styles.contactIcon} name="phone" size={35}/>
                         <Text style={styles.contactInfo} >{this.state.entity.phone}</Text>
                     </View>
                 </TouchableHighlight>
@@ -126,7 +130,7 @@ export default class DetallsEntitat extends Component{
                         <Icon style={styles.contactIcon} name="email-outline" size={35}/>
                         <Text style={styles.contactInfo} >{this.state.entity.email}</Text>
                     </View>
-                </TouchableHighlight> 
+                </TouchableHighlight>
             );
         }
     }
@@ -136,7 +140,7 @@ export default class DetallsEntitat extends Component{
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
-                    <Icon style={styles.headerRightIco} name="basket" size={30}/>
+                    <Icon onPress={this.goBuy.bind(this)} style={styles.headerRightIco} name="basket" size={30}/>
                 </View>
                 <ScrollView style={styles.scrollView}>
                     <View key="alpha" >

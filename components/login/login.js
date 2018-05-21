@@ -83,7 +83,7 @@ export default class LogIn extends Component {
     }
 
     restorePassword() {
-        this.props.navigation.navigate('RestoreCredentialsStack');
+        this.props.navigation.navigate('RestoreCredentials');
     }
 
     getButtonBackground() {

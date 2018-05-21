@@ -12,6 +12,7 @@ import Logout from "./login/logout";
 import RestoreCredentials from "./restore_credentials/restore_credentials";
 import Validar from './compra/validar';
 import ChangePassword from "./profile/change_password";
+import Buy from "./compra/buy";
 
 const BuscadorStack = StackNavigator({
     buscador: {
@@ -22,10 +23,17 @@ const BuscadorStack = StackNavigator({
             gesturesEnabled: false
         }
     },
-    detalls_entitat:{
+    detalls_entitat: {
         screen: DetallsEntitat
+    },
+    buy: {
+        screen: Buy
+    },
+    validar: {
+        screen: Validar
     }
-}, {
+},
+{
     headerMode: 'none',
     disabledBackGesture: true,
 });
@@ -78,7 +86,6 @@ const DrawerNavigation = DrawerNavigator({
             drawerIcon: <Icon name="logout-variant" size={25}/>,
         }
     },
-    Validar: {screen: Validar},
     Profile: {screen: ProfileStack}
 }, {
     headerMode: 'none',
