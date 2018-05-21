@@ -233,10 +233,7 @@ describe('Test group for Validar', function () {
     });
 
     test('extractKey is callable and returns item id', () => {
-        let good = {
-            _id: '1'
-        };
-        expect(instance.extractKey(good)).toBe('1');
+        expect(instance.extractKey(1)).toBe(1);
     });
 
 });

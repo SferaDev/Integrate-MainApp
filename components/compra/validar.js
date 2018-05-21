@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BackHandler, FlatList, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {FlatList, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from "../api";
 import GoodValidar from "../compra/good_validar";
@@ -84,7 +84,7 @@ export default class Validar extends Component {
 
         let response = await API.newOrder(this.props.navigation.state.params.selected_goods, this.state.entity._id, this.state.code);
         this.setState({typeError: response.status});
-
+      
         switch (response.status) {
             case 201: //Mostrar toast
                 this.updateToast();
@@ -165,7 +165,7 @@ export default class Validar extends Component {
     }
 
     extractKey(item) {
-        return item._id
+        return item
     }
 
     render() {

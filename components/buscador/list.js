@@ -13,12 +13,17 @@ export default class EntityList extends Component {
         );
     }
 
+    extractKey(item) {
+        return item._id
+    }
+
     render() {
         return (
             <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 60, backgroundColor: 'white'}]}>
                 <FlatList
                     data={this.props.entities}
                     renderItem={this.renderEntity.bind(this)}
+                    keyExtractor={this.extractKey.bind(this)}
                 />
             </View>
         );
