@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Login from './login/login';
 import Buscador from './buscador/buscador';
 import LlistaVals from './llista_vals/llista_vals';
-import DetallsGood from './llista_vals/detalls_good';
 import DetallsEntitat from './compra/detalls_entitat';
 import App from '../App';
 import Logout from "./login/logout";
@@ -16,28 +15,28 @@ import Information from "./profile/information";
 import Buy from "./compra/buy";
 
 const BuscadorStack = StackNavigator({
-    buscador: {
-        screen: Buscador,
-        navigationOptions: {
-            drawerLabel: 'Buscador',
-            drawerIcon: <Icon name="home" size={25}/>,
-            gesturesEnabled: false
+        buscador: {
+            screen: Buscador,
+            navigationOptions: {
+                drawerLabel: 'Buscador',
+                drawerIcon: <Icon name="home" size={25}/>,
+                gesturesEnabled: false
+            }
+        },
+        detalls_entitat: {
+            screen: DetallsEntitat
+        },
+        buy: {
+            screen: Buy
+        },
+        validar: {
+            screen: Validar
         }
     },
-    detalls_entitat: {
-        screen: DetallsEntitat
-    },
-    buy: {
-        screen: Buy
-    },
-    validar: {
-        screen: Validar
-    }
-},
-{
-    headerMode: 'none',
-    disabledBackGesture: true,
-});
+    {
+        headerMode: 'none',
+        disabledBackGesture: true,
+    });
 
 const ValsStack = StackNavigator({
     llista_vals: {
@@ -46,7 +45,7 @@ const ValsStack = StackNavigator({
             drawerLabel: 'Vals',
             drawerIcon: <Icon name="ticket-percent" size={25}/>,
         }
-    },detalls_entitat:{
+    }, detalls_entitat: {
         screen: DetallsEntitat
     }
 }, {

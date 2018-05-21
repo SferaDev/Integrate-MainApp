@@ -16,16 +16,16 @@ const callApi = async (url, params, method = 'GET') => {
     //fetch(buildQuery(url, params), { method: method }).then(success).catch(error);
 
     let isNull = false;
-    for(let p of params){
-        if( p.key != "token" && p.value == null )isNull = true;
+    for (let p of params) {
+        if (p.key != "token" && p.value == null) isNull = true;
     }
 
-    if( url.split('/')[url.split('/').length - 1] == "null" || isNull ){
+    if (url.split('/')[url.split('/').length - 1] == "null" || isNull) {
         return await {
             status: url === 'login' ? 401 : 404,
             _bodyText: JSON.stringify({something: 'Not found'})
         };
-    }else{
+    } else {
         return await {
             status: 200,
             _bodyText: JSON.stringify({something: 'Hello World'})

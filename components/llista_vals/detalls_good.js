@@ -1,47 +1,52 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, TouchableHighlight, Text, Linking, ScrollView, Image} from 'react-native';
-import NavigationActions from 'react-navigation';
-
-import API from '../api';
+import {Image, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default class DetallsGood extends Component{
+export default class DetallsGood extends Component {
 
     constructor(props) {
         super(props);
     }
 
-    showEntity(){
-        this.props.navigation.navigate('detalls_entitat',{selectedEntity: {_id: this.props.good.owner.id}});
+    showEntity() {
+        this.props.navigation.navigate('detalls_entitat', {selectedEntity: {_id: this.props.good.owner.id}});
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Icon onPress={this.props.showGoodsList} style={styles.headerLeftIco} name="chevron-left" size={35}/>
-                    <Icon   style={[styles.headerRightIco, {color: (this.props.isFav) ? '#f4eb49' : '#CCC'}]}
-                            name="star" size={30}
-                            id={this.props.good._id}
-                            onPress={this.props.toggleFavourite.bind(this.props.context,this.props.good._id,this.props.isFav)}
+                    <Icon onPress={this.props.showGoodsList} style={styles.headerLeftIco} name="chevron-left"
+                          size={35}/>
+                    <Icon style={[styles.headerRightIco, {color: (this.props.isFav) ? '#f4eb49' : '#CCC'}]}
+                          name="star" size={30}
+                          id={this.props.good._id}
+                          onPress={this.props.toggleFavourite.bind(this.props.context, this.props.good._id, this.props.isFav)}
                     />
                 </View>
                 <View style={styles.main}>
                     <View>
                         <Image
-                            style={{width: '100%',height: '100%'}}
+                            style={{width: '100%', height: '100%'}}
                             source={{uri: this.props.good.picture}}
                         />
                     </View>
-                    <View style={{backgroundColor: 'rgba(255,255,255,0)',position: 'absolute',bottom: 0,width: '100%',height: 125}} >
-                        <View style={styles.goodResume} >
+                    <View style={{
+                        backgroundColor: 'rgba(255,255,255,0)',
+                        position: 'absolute',
+                        bottom: 0,
+                        width: '100%',
+                        height: 125
+                    }}>
+                        <View style={styles.goodResume}>
                             <Text style={styles.productName}>{this.props.good.productName}</Text>
-                            <View style={{flex: 1,display: 'flex',flexDirection: 'row'}} >
+                            <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
                                 <Text style={styles.goodBasicText}>Cada {this.props.good.reusePeriod} dies</Text>
-                                <Text style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.good.initialPrice + '€ (-' + this.props.good.discount + '' + this.props.good.discountType + ')'}</Text>
+                                <Text
+                                    style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.good.initialPrice + '€ (-' + this.props.good.discount + '' + this.props.good.discountType + ')'}</Text>
                             </View>
                         </View>
-                        <TouchableHighlight style={styles.entityResume} onPress={this.showEntity.bind(this)} >
+                        <TouchableHighlight style={styles.entityResume} onPress={this.showEntity.bind(this)}>
                             <Text style={styles.entityNameText}>{this.props.good.owner.name}</Text>
                         </TouchableHighlight>
                     </View>

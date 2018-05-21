@@ -8,7 +8,7 @@ export default class Entity extends Component {
         this.state = {};
     }
 
-    showEntityInfo(){
+    showEntityInfo() {
         this.props.onDetailsShow(this.props.item);
     }
 
@@ -22,8 +22,9 @@ export default class Entity extends Component {
                     <Text></Text>
                     <Text></Text>
                 </View>
-                { this.props.onDetailsShow ?
-                    <Icon onPress={this.showEntityInfo.bind(this)} style={{position: 'absolute',bottom: 10,right: 10}} name="information-outline" size={25}/>
+                {this.props.onDetailsShow ?
+                    <Icon onPress={this.showEntityInfo.bind(this)} style={{position: 'absolute', bottom: 10, right: 10}}
+                          name="information-outline" size={25}/>
                     : null
                 }
             </View>

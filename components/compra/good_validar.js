@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class GoodValidar extends Component {
     constructor(props) {
@@ -14,10 +13,10 @@ export default class GoodValidar extends Component {
             <View key={this.props.item._id} style={styles.goodView}>
                 <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
                 <View style={styles.viewInfo}>
-                        <Text style={styles.goodNameText}>{this.props.item.productName}</Text>
-                        <Text style={[styles.goodBasicText, {textAlign: 'right'}]}>
-                            {this.props.item.initialPrice + '€ (-' + this.props.item.discount + '' + this.props.item.discountType + ')'}
-                        </Text>
+                    <Text style={styles.goodNameText}>{this.props.item.productName}</Text>
+                    <Text style={[styles.goodBasicText, {textAlign: 'right'}]}>
+                        {this.props.item.initialPrice + '€ (-' + this.props.item.discount + '' + this.props.item.discountType + ')'}
+                    </Text>
                 </View>
             </View>
         );

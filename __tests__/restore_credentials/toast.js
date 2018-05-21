@@ -14,7 +14,7 @@ describe('Test group for Toast', function () {
         configure({adapter: new Adapter()});
     });
 
-	test('renders Toast correctly when visible', () => {
+    test('renders Toast correctly when visible', () => {
         const tree = renderer.create(<Toast visible={true} onClose={jest.fn()}/>).toJSON();
         expect(tree).toMatchSnapshot();
     });

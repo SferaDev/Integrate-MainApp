@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableHighlight} from 'react-native';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Good extends Component {
@@ -11,8 +11,10 @@ export default class Good extends Component {
 
     render() {
         return (
-            <TouchableHighlight key={this.props.item._id} style={styles.goodView} onPress={this.props.onPress.bind(this.props.context,this.props.item)} underlayColor='white' >
-                <View style={{flex: 1,display: 'flex',flexDirection: 'row'}} >
+            <TouchableHighlight key={this.props.item._id} style={styles.goodView}
+                                onPress={this.props.onPress.bind(this.props.context, this.props.item)}
+                                underlayColor='white'>
+                <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
                     <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
                     <View style={styles.viewInfo}>
                         <View style={styles.view1}>
@@ -23,7 +25,7 @@ export default class Good extends Component {
                         <Text style={styles.entityName}>{this.props.item.productName}</Text>
                         <View style={styles.view1}>
                             <Text style={styles.goodNameText}>
-                                { this.props.isEntityDisplay ?
+                                {this.props.isEntityDisplay ?
                                     '' :
                                     this.props.item.owner.name
                                 }

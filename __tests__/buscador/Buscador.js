@@ -1,13 +1,12 @@
 import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
-
-jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
-jest.mock('../../components/http_helper');
-
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Buscador from '../../components/buscador/buscador';
+
+jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
+jest.mock('../../components/http_helper');
 
 const navigation = {navigate: jest.fn()};
 let wrapper;
@@ -48,7 +47,7 @@ describe('Test group for EntityList', function () {
     });
 
     test('getEntities is callable and returns an array', async () => {
-        expect(await instance.getEntities({coords: {longitude: 0,latitude: 0}})).toBe(undefined);
+        expect(await instance.getEntities({coords: {longitude: 0, latitude: 0}})).toBe(undefined);
     });
 
     test('handleBackButton is callable and returns true', () => {
