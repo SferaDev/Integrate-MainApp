@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BackHandler, FlatList, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {FlatList, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from "../api";
 import GoodValidar from "../compra/good_validar";
