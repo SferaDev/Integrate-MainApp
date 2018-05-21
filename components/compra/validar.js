@@ -165,7 +165,7 @@ export default class Validar extends Component {
     }
 
     extractKey(item) {
-        return item._id
+        return item
     }
 
     render() {
