@@ -3,6 +3,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 jest.mock('../../components/http_helper');
+jest.mock('../../components/api');
 
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -17,7 +18,7 @@ const navigation = {
                 _id: 0,
                 goods: []
             },
-            selected_goods: [],
+            selected_goods: ['555'],
             total_discount: 0
         }
     },
@@ -122,17 +123,50 @@ describe('Test group for Validar', function () {
     describe("validar() tests", () => {
 
         test('validar when typeError is 201 ', async () => {
-            instance.state.selected_goods = ['555'];
+            const navigation = {
+                navigate: jest.fn(),
+                state: {
+                    params:{
+                        entity: {
+                            _id: 0,
+                            goods: []
+                        },
+                        selected_goods: ['555'],
+                        total_discount: 0
+                    }
+                },
+                goBack: jest.fn()
+            };
+            let wrapper = shallow(<Validar visible={true} onClose={jest.fn()} navigation={navigation}/>);
+            let instance = wrapper.instance();
             expect(await instance.validar()).toBe(undefined);
         });
 
-        /*test('validar when typeError is 403 ', () => {
-            expect(instance.validar()).toBe(undefined);
-        });*/
+        test('validar when typeError is 403 ', async () => {
+            instance.state.entity._id = undefined;
+            instance.state.code = '';
+            expect(await instance.validar()).toBe(undefined);
+        });
 
-        /*test('validar when typeError is 409 ', () => {
-            expect(instance.validar()).toBe(undefined);
-        });*/
+        test('validar when typeError is 409 ', async () => {
+            const navigation = {
+                navigate: jest.fn(),
+                state: {
+                    params:{
+                        entity: {
+                            _id: 0,
+                            goods: []
+                        },
+                        selected_goods: ['777'],
+                        total_discount: 0
+                    }
+                },
+                goBack: jest.fn()
+            };
+            let wrapper = shallow(<Validar visible={true} onClose={jest.fn()} navigation={navigation}/>);
+            let instance = wrapper.instance();
+            expect(await instance.validar()).toBe(undefined);
+        });
     });
 
     describe("onClose()  tests", () => {
@@ -158,7 +192,6 @@ describe('Test group for Validar', function () {
 
         test('renderGood does not render a good', () => {
             instance.state.entity.goods = [{_id: 2, productName: 'GoodTest'}];
-
             expect(instance.renderGood({item: 1})).toMatchSnapshot();
         });
 

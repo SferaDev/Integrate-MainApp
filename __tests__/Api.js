@@ -151,4 +151,22 @@ describe("API tests", () => {
             expect( JSON.stringify(r) ).toEqual('{"something":"Hello World"}');
         });
     });
+
+    describe("checkOrder() tests", () => {
+
+        test('checkOrder() is callable and returns nothing', async () => {
+            
+            let r = await API.checkOrder(['555']);
+            expect( JSON.stringify(r) ).toBe('{"status":200,"body":{"something":"Hello World"}}');
+        });
+    });
+
+    describe("newOrder() tests", () => {
+
+        test('newOrder() is callable and returns nothing', async () => {
+            
+            let r = await API.newOrder(['555'],1,'5555');
+            expect( JSON.stringify(r) ).toBe('{"status":200,"body":{"something":"Hello World"}}');
+        });
+    });
 });

@@ -4,6 +4,7 @@ import renderer from 'react-test-renderer';
 
 jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
 jest.mock('../../components/http_helper');
+jest.mock('../../components/api');
 
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -99,9 +100,10 @@ describe('Test group for EntityList', function () {
             expect(await instance.goValidar()).toBe(undefined);
         });
 
-        /*test('goValidar when typeError is 409 ', () => {
-            expect(instance.goValidar()).toBe(undefined);
-        });*/
+        test('goValidar when typeError is 409 ', async () => {
+            instance.state.selected_goods = ['777'];
+            expect(await instance.goValidar()).toBe(undefined);
+        });
     });
 
     describe("onClose() tests", () => {
