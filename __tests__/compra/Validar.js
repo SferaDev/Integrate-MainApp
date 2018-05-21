@@ -2,6 +2,8 @@ import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 
+jest.mock('../../components/http_helper');
+
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -11,15 +13,28 @@ const navigation = {
     navigate: jest.fn(),
     state: {
         params:{
-            selectedEntity: {
-                _id: 0
-            }
+            entity: {
+                _id: 0,
+                goods: []
+            },
+            selected_goods: [],
+            total_discount: 0
         }
     },
     goBack: jest.fn()
 };
 let wrapper;
 let instance;
+let entity = {
+    _id: 0,
+    name: 'name',
+    description: 'description',
+    addressName: 'addressName',
+    phone: '000000',
+    email: 'aaa@bbb.com',
+    coordinates: [0, 0],
+    goods: []
+};
 
 describe('Test group for Validar', function () {
     beforeAll(() => {
@@ -39,13 +54,13 @@ describe('Test group for Validar', function () {
     });
 
     test('renders Validar correctly when visible', () => {
-        const tree = renderer.create(<Validar visible={true} onClose={jest.fn()}/>).toJSON();
+        const tree = renderer.create(<Validar visible={true} onClose={jest.fn()} navigation={navigation}/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
 
     test('renders Validar correctly when hidden', () => {
-        const tree = renderer.create(<Validar visible={false} onClose={jest.fn()}/>).toJSON();
+        const tree = renderer.create(<Validar visible={false} onClose={jest.fn()} navigation={navigation}/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
@@ -95,46 +110,100 @@ describe('Test group for Validar', function () {
         expect(instance.moveDown()).toBe(undefined);
     });
 
+    test('updateToast is callable and returns nothing', () => {
+        expect(instance.updateToast()).toBe(undefined);
+    });
+
+    test('updateErrorState is callable and returns nothing', () => {
+        let body = {soldOutGoods: [], nonUsableGoods: []};
+        expect(instance.updateErrorState(body)).toBe(undefined);
+    });
+
+    describe("validar() tests", () => {
+
+        test('validar when typeError is 201 ', async () => {
+            instance.state.selected_goods = ['555'];
+            expect(await instance.validar()).toBe(undefined);
+        });
+
+        /*test('validar when typeError is 403 ', () => {
+            expect(instance.validar()).toBe(undefined);
+        });*/
+
+        /*test('validar when typeError is 409 ', () => {
+            expect(instance.validar()).toBe(undefined);
+        });*/
+    });
+
     describe("onClose()  tests", () => {
-        test('onClose typeError = 0 renders toast correctly', () => {
-            instance.state.typeError = 0;
+        test('onClose typeError = 201 renders toast correctly', () => {
+            instance.state.typeError = 201;
             expect(instance.onClose()).toBe(undefined);
         });
-        test('onClose typeError = 1 renders toast correctly', () => {
-            instance.state.typeError = 1;
+        test('onClose typeError = 403 renders toast correctly', () => {
+            instance.state.typeError = 403;
             expect(instance.onClose()).toBe(undefined);
         });
-        test('onClose typeError = 2 renders toast correctly', () => {
-            instance.state.typeError = 2;
+        test('onClose typeError = 409 renders toast correctly', () => {
+            instance.state.typeError = 409;
             expect(instance.onClose()).toBe(undefined);
         });
-        test('onClose typeError = default renders toast correctly', () => {
-            instance.state.typeError = 9;
+        test('onClose typeError is default renders toast correctly', () => {
+            instance.state.typeError = 500;
             expect(instance.onClose()).toBe(undefined);
         });
     });
 
-    test('renderGood renders an entity correctly', () => {
-        expect(instance.renderGood({item: {id: 1}})).toMatchSnapshot();
+    describe("renderGood() tests", () => {
+
+        test('renderGood does not render a good', () => {
+            instance.state.entity.goods = [{_id: 2, productName: 'GoodTest'}];
+
+            expect(instance.renderGood({item: 1})).toMatchSnapshot();
+        });
+
+        test('renderGood renders a good correctly', () => {
+            instance.state.entity.goods = [{_id: 1, productName: 'GoodTest'}];
+            expect(instance.renderGood({item: 1})).toMatchSnapshot();
+        });
+    });
+
+    describe("renderConflictGood() tests", () => {
+
+        test('renderConflictGood does not render a good', () => {
+            expect(instance.renderConflictGood(1)).toMatchSnapshot();
+        });
+
+        test('renderConflictGood renders a good correctly', () => {
+            instance.state.entity.goods = [{_id: 1, productName: 'GoodTest'}];
+            expect(instance.renderConflictGood(1)).toMatchSnapshot();
+        });
     });
 
     describe("displayToastContent() tests", () => {
-        test('displayToastContent typeError = 0 renders toast correctly', () => {
-            instance.state.typeError = 0;
+        test('displayToastContent typeError = 201 renders toast correctly', () => {
+            instance.state.typeError = 201;
             expect(instance.displayToastContent()).toMatchSnapshot();
         });
-        test('displayToastContent typeError = 1 renders toast correctly', () => {
-            instance.state.typeError = 1;
+        test('displayToastContent typeError = 403 renders toast correctly', () => {
+            instance.state.typeError = 403;
             expect(instance.displayToastContent()).toMatchSnapshot();
         });
-        test('displayToastContent typeError = 2 renders toast correctly', () => {
-            instance.state.typeError = 2;
+        test('displayToastContent typeError = 409 renders toast correctly', () => {
+            instance.state.typeError = 409;
             expect(instance.displayToastContent()).toMatchSnapshot();
         });
         test('displayToastContent typeError = default renders toast correctly', () => {
-            instance.state.typeError = 9;
+            instance.state.typeError = 500;
             expect(instance.displayToastContent()).toMatchSnapshot();
         });
+    });
+
+    test('extractKey is callable and returns item id', () => {
+        let good = {
+            _id: '1'
+        };
+        expect(instance.extractKey(good)).toBe('1');
     });
 
     /*describe("isVisible() tests", () => {

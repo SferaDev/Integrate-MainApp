@@ -51,7 +51,7 @@ export default class Buy extends Component{
     }
 
     updateErrorState(body) {
-        this.setState({soldOutGoods: this.state.selected_goods, nonUsableGoods: body.nonUsableGoods});
+        this.setState({soldOutGoods: body.soldOutGoods, nonUsableGoods: body.nonUsableGoods});
     }
 
     async goValidar() {
@@ -66,7 +66,7 @@ export default class Buy extends Component{
                     selected_goods: this.state.selected_goods,
                     total_discount: response.body.totalDiscount});
                 break;
-            case 403: //Error conflicte vals
+            case 409: //Error conflicte vals
                 this.updateToast();
                 this.updateErrorState(response.body);
                 break;
@@ -76,7 +76,7 @@ export default class Buy extends Component{
     onClose() {
         let typeError = this.state.typeError;
         switch (typeError) {
-            case 403: //Error conflicte vals retornar a la mateixa vista
+            case 409: //Error conflicte vals retornar a la mateixa vista
                 this.setState({toast: false});
                 break;
             default:
@@ -116,17 +116,19 @@ export default class Buy extends Component{
         for (let g of this.state.entity.goods) {
             if (g._id === item) good = g;
         }
-        return (
-            <Text key={item} style={{paddingLeft: 10}}>
-                - {good.productName}
-            </Text>
-        )
+        if (good != null) {
+            return (
+                <Text key={item} style={{paddingLeft: 10}}>
+                    - {good.productName}
+                </Text>
+            )
+        }
     }
 
     displayToastContent() {
         let typeError = this.state.typeError;
         switch (typeError) {
-            case 403: //Error conflicte vals
+            case 409: //Error conflicte vals
                 let soldOutGoods = this.state.soldOutGoods || [];
                 let nonUsableGoods = this.state.nonUsableGoods || [];
                 let conflictGoods = soldOutGoods.concat(nonUsableGoods);

@@ -24,7 +24,9 @@ export default class Validar extends Component {
             total_discount: 0,
             isFieldFocused: false,
             toast: false,
-            typeError: 1
+            typeError: null,
+            soldOutGoods: [],
+            nonUsableGoods: []
         };
     }
 
@@ -39,7 +41,7 @@ export default class Validar extends Component {
             entity: this.props.navigation.state.params.entity,
             goods_shown: this.props.navigation.state.params.selected_goods,
             total_discount: this.props.navigation.state.params.total_discount
-        })
+        });
     }
 
     updateCode(value) {
@@ -47,7 +49,7 @@ export default class Validar extends Component {
     }
 
     isEmpty() {
-        return (this.state.code.length == 0)
+        return (this.state.code.length === 0)
     }
 
     getButtonBackground() {
@@ -70,17 +72,44 @@ export default class Validar extends Component {
         this.setState({isFieldFocused: false});
     }
 
+    updateToast() {
+        this.setState({toast: true});
+    }
+
+    updateErrorState(body) {
+        this.setState({soldOutGoods: body.soldOutGoods, nonUsableGoods: body.nonUsableGoods});
+    }
+
+    async validar() {
+
+        let response = await API.newOrder(this.props.navigation.state.params.selected_goods, this.state.entity._id, this.state.code);
+        console.warn(response);
+        this.setState({typeError: response.status});
+        switch (response.status) {
+            case 201: //Mostrar toast
+                this.updateToast();
+                break;
+            case 403:
+                this.updateToast();
+                break;
+            case 409: //Error conflicte vals
+                this.updateToast();
+                this.updateErrorState(response.body);
+                break;
+        }
+    }
+
     onClose() {
         let typeError = this.state.typeError;
         switch (typeError) {
-            case 0: //Compra realitzada
-                //TODO afegir navegació a pantalla informació de la entitat
+            case 201: //Descompte aplicat correctament
+                this.props.navigation.goBack('detalls_entitat')
                 break;
-            case 1: //Error Codi Incorrecte
+            case 403: //Error Codi Incorrecte
                 this.setState({toast: false});
                 break;
-            case 2: //Error conflicte vals
-                //TODO afegir navegació a pantalla checkouts
+            case 409: //Error conflicte vals
+                this.goBack();
                 break;
             default:
                 break;
@@ -99,16 +128,38 @@ export default class Validar extends Component {
         }
     }
 
+    renderConflictGood(item) {
+        let good = null;
+        for (let g of this.state.entity.goods) {
+            if (g._id === item) good = g;
+        }
+        if (good != null) {
+            return (
+                <Text key={item} style={{paddingLeft: 10}}>
+                    - {good.productName}
+                </Text>
+            )
+        }
+    }
+
     displayToastContent(){
         let typeError = this.state.typeError;
         switch (typeError) {
-            case 0: //Compra realitzada
+            case 201: //Descompte aplicat correctament
                 return(<Text style={{textAlign: 'center'}}>Descompte aplicat correctament</Text>);
-            case 1: //Error Codi Incorrecte
+            case 403: //Error Codi Incorrecte
                 return(<Text style={{textAlign: 'center'}}>Codi incorrecte</Text>);
-            case 2: //Error conflicte vals
-                return(<Text style={{textAlign: 'center'}}>Conflicte amb els vals: </Text>);
-                //TODO afegir nom vals en els quals hi ha conflicte
+            case 409: //Error conflicte vals
+                let soldOutGoods = this.state.soldOutGoods || [];
+                let nonUsableGoods = this.state.nonUsableGoods || [];
+                let conflictGoods = soldOutGoods.concat(nonUsableGoods);
+                let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
+                return(
+                    <View style={{marginBottom: 10}}>
+                        <Text style={{fontSize: 18}}>Conflicte amb els vals: </Text>
+                        {conflictList}
+                    </View>
+                );
             default:
                 return(<Text style={{textAlign: 'center'}}>Error</Text>);
         }
@@ -158,7 +209,7 @@ export default class Validar extends Component {
                         </TextInput>
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
-                            onPress={()=>{}}
+                            onPress={this.validar.bind(this)}
                             disabled={this.isEmpty()}>
                             <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold', fontSize: 17}}>
                                 Validar

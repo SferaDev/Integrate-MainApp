@@ -134,7 +134,7 @@ const API = {
 
         const token = await AsyncStorage.getItem('token');
 
-        let url = 'me/orders?token='+token;
+        let url = 'me/orders?token='+token+'&entityId='+entityId+'&validationCode='+validationCode;
         let params = [{key: 'goodIds', value: selected_goods}];
 
         let response = await http_helper.callApi(url, params, "POST",true);

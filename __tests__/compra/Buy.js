@@ -52,9 +52,6 @@ describe('Test group for EntityList', function () {
             coordinates: [0, 0],
             goods: [{_id:'555'}]
         };
-        instance.map = {
-            animateToRegion: jest.fn()
-        }
     });
 
     afterEach(function () {
@@ -79,6 +76,45 @@ describe('Test group for EntityList', function () {
 
     test('setEntity is callable and returns nothing', () => {
         expect(instance.setEntity(entity)).toBe(undefined);
+    });
+
+    test('updateToast is callable and returns nothing', () => {
+        expect(instance.updateToast()).toBe(undefined);
+    });
+
+    test('updateErrorState is callable and returns nothing', () => {
+        let body = {soldOutGoods: [], nonUsableGoods: []};
+        expect(instance.updateErrorState(body)).toBe(undefined);
+    });
+
+    describe("goValidar() tests", () => {
+
+        test('goValidar when selected_goods length is 0 ', async () => {
+            instance.state.selected_goods = [];
+            expect(await instance.goValidar()).toBe(undefined);
+        });
+
+        test('goValidar when typeError is 200 ', async () => {
+            instance.state.selected_goods = ['555'];
+            expect(await instance.goValidar()).toBe(undefined);
+        });
+
+        /*test('goValidar when typeError is 409 ', () => {
+            expect(instance.goValidar()).toBe(undefined);
+        });*/
+    });
+
+    describe("onClose() tests", () => {
+
+        test('onClose when typeError is 409 ', () => {
+            instance.state.typeError = 409;
+            expect(instance.onClose()).toBe(undefined);
+        });
+
+        test('onClose when typeError is default ', () => {
+            instance.state.typeError = 200;
+            expect(instance.onClose()).toBe(undefined);
+        });
     });
 
     describe("toggleSelected() tests", () => {
@@ -129,6 +165,32 @@ describe('Test group for EntityList', function () {
 
     test('refreshfunction is callable and returns false', () => {
         expect(instance.refreshfunction()).toBe(false);
+    });
+
+    describe("renderConflictGood() tests", () => {
+
+        test('renderConflictGood does not render a good', () => {
+            expect(instance.renderConflictGood(1)).toMatchSnapshot();
+        });
+
+        test('renderConflictGood renders a good correctly', () => {
+            instance.state.entity.goods = [{_id: 1, productName: 'GoodTest'}];
+            expect(instance.renderConflictGood(1)).toMatchSnapshot();
+        });
+    });
+
+
+    describe("displayToastContent() tests", () => {
+
+        test('displayToastContent to unselected good', () => {
+            instance.state.typeError = 409;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
+
+        test('displayToastContent to selected good', () => {
+            instance.state.typeError = 403;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
     });
 
 });
