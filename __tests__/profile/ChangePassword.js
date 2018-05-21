@@ -32,30 +32,30 @@ describe('Test group for EntityList', function () {
         expect(tree).toMatchSnapshot();
     });
 
-    it('changePassword() is callable and returns nothing', () => {
+    test('changePassword() is callable and returns nothing', () => {
         expect(instance.changePassword()).toBe(undefined);
     });
 
-    it('changePassword() is callable and returns nothing', () => {
+    test('changePassword() is callable and returns nothing', () => {
         instance.state.new_password1 = 'A';
         instance.state.new_password2 = 'B';
         expect(instance.changePassword()).toBe(undefined);
     });
 
-    it('updatePassword() is callable and returns nothing', () => {
+    test('updatePassword() is callable and returns nothing', () => {
         expect(instance.updatePassword('')).toBe(undefined);
     });
 
-    it('updateNewPassword1() is callable and returns nothing', () => {
+    test('updateNewPassword1() is callable and returns nothing', () => {
         expect(instance.updateNewPassword1('')).toBe(undefined);
     });
 
-    it('updateNewPassword2() is callable and returns nothing', () => {
+    test('updateNewPassword2() is callable and returns nothing', () => {
         expect(instance.updateNewPassword2('')).toBe(undefined);
     });
 
-    test('openMenu is callable and returns nothing', () => {
-        expect(instance.openMenu()).toBe(undefined);
+    test('goSettings is callable and returns nothing', () => {
+        expect(instance.goSettings()).toBe(undefined);
     });
 
     test('handleBackButton is callable and returns true', () => {
@@ -64,22 +64,22 @@ describe('Test group for EntityList', function () {
 
     describe("getButtonBackground() and getButtonColor() tests", () => {
 
-        it('getButtonBackground() is callable and returns a color code', () => {
+        test('getButtonBackground() is callable and returns a color code', () => {
             expect(typeof instance.getButtonBackground()).toBe("string");
         });
 
-        it('getButtonBackground() is callable and returns a color code', () => {
+        test('getButtonBackground() is callable and returns a color code', () => {
             instance.state.password = '28';
             instance.state.new_password1 = '1234';
             instance.state.new_password2 = '1234';
             expect(typeof instance.getButtonBackground()).toBe("string");
         });
 
-        it('getButtonColor() is callable and returns a color code', () => {
+        test('getButtonColor() is callable and returns a color code', () => {
             expect(typeof instance.getButtonColor()).toBe("string");
         });
 
-        it('getButtonColor() is callable and returns a color code', () => {
+        test('getButtonColor() is callable and returns a color code', () => {
             instance.state.password = '28';
             instance.state.new_password1 = '1234';
             instance.state.new_password2 = '1234';
@@ -88,56 +88,56 @@ describe('Test group for EntityList', function () {
     });
 
     describe("isEmpty() tests", () => {
-        it('isEmpty() when password, new_password1 and new_password2 are empty then returns true', () => {
+        test('isEmpty() when password, new_password1 and new_password2 are empty then returns true', () => {
             instance.state.password = '';
             instance.state.new_password1 = '';
             instance.state.new_password2 = '';
             expect(instance.isEmpty()).toBe(true);
         });
 
-        it('isEmpty() when password, new_password1 are empty and and new_password2 is filled then returns true', () => {
+        test('isEmpty() when password, new_password1 are empty and and new_password2 is filled then returns true', () => {
             instance.state.password = '';
             instance.state.new_password1 = '';
             instance.state.new_password2 = '1234';
             expect(instance.isEmpty()).toBe(true);
         });
 
-        it('isEmpty() when password, new_password2 are empty and and new_password1 is filled then returns true', () => {
+        test('isEmpty() when password, new_password2 are empty and and new_password1 is filled then returns true', () => {
             instance.state.password = '';
             instance.state.new_password1 = '1234';
             instance.state.new_password2 = '';
             expect(instance.isEmpty()).toBe(true);
         });
 
-        it('isEmpty() when new_password1, new_password2 are empty and and password is filled then returns true', () => {
+        test('isEmpty() when new_password1, new_password2 are empty and and password is filled then returns true', () => {
             instance.state.password = '1234';
             instance.state.new_password1 = '';
             instance.state.new_password2 = '';
             expect(instance.isEmpty()).toBe(true);
         });
 
-        it('isEmpty() when password, new_password1 are filled and and new_password2 is empty then returns true', () => {
+        test('isEmpty() when password, new_password1 are filled and and new_password2 is empty then returns true', () => {
             instance.state.password = '28';
             instance.state.new_password1 = '1234';
             instance.state.new_password2 = '';
             expect(instance.isEmpty()).toBe(true);
         });
 
-        it('isEmpty() when password, new_password2 are filled and and new_password1 is empty then returns true', () => {
+        test('isEmpty() when password, new_password2 are filled and and new_password1 is empty then returns true', () => {
             instance.state.password = '28';
             instance.state.new_password1 = '';
             instance.state.new_password2 = '1234';
             expect(instance.isEmpty()).toBe(true);
         });
 
-        it('isEmpty() when new_password1, new_password2 are filled and and password is empty then returns true', () => {
+        test('isEmpty() when new_password1, new_password2 are filled and and password is empty then returns true', () => {
             instance.state.password = '';
             instance.state.new_password1 = '1234';
             instance.state.new_password2 = '1234';
             expect(instance.isEmpty()).toBe(true);
         });
 
-        it('isEmpty() when password, new_password1 and new_password2 are filled then returns false', () => {
+        test('isEmpty() when password, new_password1 and new_password2 are filled then returns false', () => {
             instance.state.password = '28';
             instance.state.new_password1 = '1234';
             instance.state.new_password2 = '1234';
@@ -145,23 +145,23 @@ describe('Test group for EntityList', function () {
         });
     });
 
-    it('moveUp() is callable and returns nothing', () => {
+    test('moveUp() is callable and returns nothing', () => {
         expect(instance.moveUp()).toBe(undefined);
     });
 
-    it('moveDown() is callable and returns nothing', () => {
+    test('moveDown() is callable and returns nothing', () => {
         expect(instance.moveDown()).toBe(undefined);
     });
 
-    it('componentWillUnmount() is callable and returns nothing', () => {
+    test('componentWillUnmount() is callable and returns nothing', () => {
         expect(instance.componentWillUnmount()).toBe(undefined);
     });
 
-    it('showError() is callable and returns nothing', () => {
+    test('showError() is callable and returns nothing', () => {
         expect(instance.showError()).toBe(undefined);
     });
 
-    it('updateError() is callable and returns nothing', () => {
+    test('updateError() is callable and returns nothing', () => {
         expect(instance.updateError()).toBe(undefined);
     });
 });
