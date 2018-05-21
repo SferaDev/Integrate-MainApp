@@ -83,7 +83,6 @@ export default class Validar extends Component {
     async validar() {
 
         let response = await API.newOrder(this.props.navigation.state.params.selected_goods, this.state.entity._id, this.state.code);
-        console.warn(response);
         this.setState({typeError: response.status});
         switch (response.status) {
             case 201: //Mostrar toast

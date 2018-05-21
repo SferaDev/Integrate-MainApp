@@ -206,19 +206,4 @@ describe('Test group for Validar', function () {
         expect(instance.extractKey(good)).toBe('1');
     });
 
-    /*describe("isVisible() tests", () => {
-        test('isVisible is callable and returns "flex"', () => {
-            let wrapper = shallow(<Validar visible={true} onClose={jest.fn()}/>);
-            let instance = wrapper.instance();
-            expect(instance.isVisible()).toBe("flex");
-        });
-
-        test('isVisible is callable and returns "none"', () => {
-
-            let wrapper = shallow(<Validar visible={false} onClose={jest.fn()}/>);
-            let instance = wrapper.instance();
-            expect(instance.isVisible()).toBe("none");
-        });
-    });*/
-
 });
