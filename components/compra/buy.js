@@ -59,6 +59,7 @@ export default class Buy extends Component{
 
         let response = await API.checkOrder(this.state.selected_goods);
         this.setState({typeError: response.status});
+
         switch (response.status) {
             case 200: //Navegar a validar
                 this.props.navigation.navigate('validar', {
@@ -129,8 +130,8 @@ export default class Buy extends Component{
         let typeError = this.state.typeError;
         switch (typeError) {
             case 409: //Error conflicte vals
-                let soldOutGoods = this.state.soldOutGoods || [];
-                let nonUsableGoods = this.state.nonUsableGoods || [];
+                let soldOutGoods = this.state.soldOutGoods;
+                let nonUsableGoods = this.state.nonUsableGoods;
                 let conflictGoods = soldOutGoods.concat(nonUsableGoods);
                 let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
                 return(

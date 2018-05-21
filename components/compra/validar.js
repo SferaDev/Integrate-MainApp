@@ -84,6 +84,7 @@ export default class Validar extends Component {
 
         let response = await API.newOrder(this.props.navigation.state.params.selected_goods, this.state.entity._id, this.state.code);
         this.setState({typeError: response.status});
+      
         switch (response.status) {
             case 201: //Mostrar toast
                 this.updateToast();
@@ -130,14 +131,13 @@ export default class Validar extends Component {
     renderConflictGood(item) {
         let good = null;
         for (let g of this.state.entity.goods) {
-            if (g._id === item) good = g;
-        }
-        if (good != null) {
-            return (
-                <Text key={item} style={{paddingLeft: 10}}>
-                    - {good.productName}
-                </Text>
-            )
+            if (g._id === item){
+                return (
+                    <Text key={g._id} style={{paddingLeft: 10}}>
+                        - {g.productName}
+                    </Text>
+                )
+            }
         }
     }
 
@@ -149,8 +149,8 @@ export default class Validar extends Component {
             case 403: //Error Codi Incorrecte
                 return(<Text style={{textAlign: 'center'}}>Codi incorrecte</Text>);
             case 409: //Error conflicte vals
-                let soldOutGoods = this.state.soldOutGoods || [];
-                let nonUsableGoods = this.state.nonUsableGoods || [];
+                let soldOutGoods = this.state.soldOutGoods;
+                let nonUsableGoods = this.state.nonUsableGoods;
                 let conflictGoods = soldOutGoods.concat(nonUsableGoods);
                 let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
                 return(
