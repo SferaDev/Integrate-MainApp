@@ -1,17 +1,17 @@
 import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
-
-jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
-
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import DetallsEntity from '../../components/compra/detalls_entitat';
 
+jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
+jest.mock('../../components/http_helper');
+
 const navigation = {
     navigate: jest.fn(),
     state: {
-        params:{
+        params: {
             selectedEntity: {
                 _id: 0
             }
@@ -22,15 +22,15 @@ const navigation = {
 let wrapper;
 let instance;
 let entity = {
-            _id: 0,
-            name: 'name',
-            description: 'description',
-            addressName: 'addressName',
-            phone: '000000',
-            email: 'aaa@bbb.com',
-            coordinates: [0, 0],
-            goods: []
-        }
+    _id: 0,
+    name: 'name',
+    description: 'description',
+    addressName: 'addressName',
+    phone: '000000',
+    email: 'aaa@bbb.com',
+    coordinates: [0, 0],
+    goods: []
+};
 
 describe('Test group for EntityList', function () {
     beforeAll(() => {
@@ -49,8 +49,8 @@ describe('Test group for EntityList', function () {
             phone: '000000',
             email: 'aaa@bbb.com',
             coordinates: [0, 0],
-            goods: []
-        }
+            goods: [{_id: '555'}]
+        };
         instance.map = {
             animateToRegion: jest.fn()
         }
@@ -72,6 +72,10 @@ describe('Test group for EntityList', function () {
         expect(instance.goBack()).toBe(undefined);
     });
 
+    test('goBuy is callable and returns nothing', () => {
+        expect(instance.goBuy()).toBe(undefined);
+    });
+
     test('sendMail is callable and returns nothing', () => {
         expect(instance.sendMail()).toBe(undefined);
     });
@@ -90,18 +94,84 @@ describe('Test group for EntityList', function () {
 
     describe("toggleFavourite() tests", () => {
 
-        test('toggleFavourite to normal good', () => {
-            expect(instance.toggleFavourite(1, true)).toBe(undefined);
+        test('toggleFavourite to normal good', async () => {
+            expect(await instance.toggleFavourite(1, true)).toBe(undefined);
         });
 
-        test('toggleFavourite to fav good', () => {
-            expect(instance.toggleFavourite(1, false)).toBe(undefined);
+        test('toggleFavourite to fav good', async () => {
+            expect(await instance.toggleFavourite(1, false)).toBe(undefined);
+        });
+    });
+
+    describe("isFav() tests", () => {
+
+        test('isFav to normal good', () => {
+
+            instance.state.goods = [
+                {
+                    _id: 1,
+                    productName: 'name',
+                    initialPrice: 24,
+                    category: 2,
+                    owner: {
+                        name: 'NAME'
+                    }
+                }
+            ];
+            expect(instance.isFav(1)).toBe(true);
+        });
+
+        test('isFav to fav good', () => {
+
+            instance.state.goods = [
+                {
+                    _id: 1,
+                    productName: 'name',
+                    initialPrice: 24,
+                    category: 2,
+                    owner: {
+                        name: 'NAME'
+                    }
+                }
+            ];
+            expect(instance.isFav(2)).toBe(false);
+        });
+
+        test('isFav to fav good', () => {
+
+            instance.state.goods = null;
+            expect(instance.isFav(2)).toBe(false);
         });
     });
 
     test('renderGood renders an entity correctly', () => {
 
-        expect(instance.renderGood({id: 1})).toMatchSnapshot();
+        let good = {
+            _id: '1',
+            productName: 'name',
+            initialPrice: 24,
+            category: 2,
+            owner: {
+                name: 'NAME'
+            }
+        };
+        instance.state.goods = [{'_id': '1'}];
+        expect(instance.renderGood(good)).toMatchSnapshot();
+    });
+
+    test('renderGood renders an entity correctly', () => {
+
+        let good = {
+            _id: '1',
+            productName: 'name',
+            initialPrice: 24,
+            category: 2,
+            owner: {
+                name: 'NAME'
+            }
+        };
+        instance.state.goods = [{'_id': '2'}];
+        expect(instance.renderGood(good)).toMatchSnapshot();
     });
 
     describe("displayPhoneInfo() tests", () => {
@@ -111,14 +181,14 @@ describe('Test group for EntityList', function () {
             let instance = wrapper.instance();
             instance.state.entity = {
                 phone: '000000',
-            }
+            };
             expect(instance.displayPhoneInfo()).toMatchSnapshot();
         });
 
         test('displayPhoneInfo to normal good', () => {
             let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
             let instance = wrapper.instance();
-            instance.state.entity = {}
+            instance.state.entity = {};
             expect(instance.displayPhoneInfo()).toBe(undefined);
         });
     });
@@ -130,14 +200,14 @@ describe('Test group for EntityList', function () {
             let instance = wrapper.instance();
             instance.state.entity = {
                 email: 'ofhdfkzn',
-            }
+            };
             expect(instance.displayMailInfo()).toMatchSnapshot();
         });
 
         test('displayMailInfo to normal good', () => {
             let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
             let instance = wrapper.instance();
-            instance.state.entity = {}
+            instance.state.entity = {};
             expect(instance.displayMailInfo()).toBe(undefined);
         });
     });

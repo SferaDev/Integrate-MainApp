@@ -1,13 +1,5 @@
 import React, {Component} from 'react';
-import {
-    StyleSheet,
-    View,
-    TextInput,
-    TouchableHighlight,
-    Text, Keyboard, AsyncStorage
-} from 'react-native';
-
-import API from '../api';
+import {Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import Toast from '../login/toast';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -30,6 +22,10 @@ export default class ChangePassword extends Component {
 
     goSettings() {
         this.props.navigation.navigate('settings');
+    }
+
+    openMenu() {
+        this.props.navigation.navigate('DrawerOpen');
     }
 
     updatePassword(value) {
@@ -87,7 +83,7 @@ export default class ChangePassword extends Component {
         let new_password1 = this.state.new_password1;
         let new_password2 = this.state.new_password2;
 
-        if(new_password1 != new_password2) this.showError();
+        if (new_password1 != new_password2) this.showError();
         //TO DO: Canviar el text del toast fent que el text que es mostra sigui un paràmetre que se li passa
 
         //else {crida a la api passant password1 o password2 i el password antic}
@@ -98,7 +94,7 @@ export default class ChangePassword extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Icon onPress={this.goSettings.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={30}/>
+                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
                 </View>
                 <View style={[styles.body, {marginBottom: this.state.isFieldFocused ? 260 : 0}]}>
                     <Text style={[styles.basicTitle, {paddingBottom: 25}]}>
@@ -137,7 +133,7 @@ export default class ChangePassword extends Component {
                     <TouchableHighlight
                         style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                         onPress={this.changePassword.bind(this)}
-                        disabled = {this.isEmpty()}>
+                        disabled={this.isEmpty()}>
                         <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
                             Guardar contrasenya
                         </Text>
@@ -205,7 +201,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Helvetica',
         fontSize: 24,
         margin: 10,
-        textAlign:'center',
+        textAlign: 'center',
         fontWeight: 'bold',
         backgroundColor: 'transparent'
     },
@@ -213,7 +209,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Helvetica',
         fontSize: 19,
         margin: 10,
-        textAlign:'center',
+        textAlign: 'center',
         backgroundColor: 'transparent'
     },
 });

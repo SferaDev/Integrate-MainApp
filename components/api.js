@@ -21,11 +21,9 @@ const API = {
     },
     restoreCredentials: (nifnie = null) => {
         return new Promise(async (resolve, reject) => {
-            
             let url = 'register/reset';
             let params = [{key: 'nif', value: nifnie}];
-
-            let response = await http_helper.callApi(url, params, "POST",true);
+            let response = await http_helper.callApi(url, params, "POST", true);
             if (response.status === 404) {
                 reject();
             } else if (response.status === 200) {
@@ -36,8 +34,7 @@ const API = {
     getEntity: (id = null) => {
         return new Promise(async (resolve, reject) => {
             const token = await AsyncStorage.getItem('token');
-
-            let url = 'me/entity/'+id;
+            let url = 'me/entity/' + id;
             let params = [{key: 'token', value: token}];
 
             let response = await http_helper.callApi(url, params);
@@ -67,7 +64,7 @@ const API = {
         const token = await AsyncStorage.getItem('token');
 
         let url = 'me/goods';
-        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order',value: order}];
+        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}];
 
         if (loc != null) {
             params.push({key: 'latitude', value: loc.coords.latitude});
@@ -83,7 +80,7 @@ const API = {
         const token = await AsyncStorage.getItem('token');
 
         let url = 'me/goods/favourites';
-        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order',value: order}];
+        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}];
 
         if (loc != null) {
             params.push({key: 'latitude', value: loc.coords.latitude});
@@ -119,6 +116,28 @@ const API = {
         if (response.status === 200) return JSON.parse(response._bodyText);
         return null;
     },
+    checkOrder: async (selected_goods = []) => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/orders?token=' + token;
+        let params = [{key: 'goodIds', value: selected_goods}];
+
+        let response = await http_helper.callApi(url, params, "POST", true);
+
+        return {status: response.status, body: JSON.parse(response._bodyText)};
+    },
+    newOrder: async (selected_goods = [], entityId = null, validationCode = null) => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/orders?token=' + token + '&entityId=' + entityId + '&validationCode=' + validationCode;
+        let params = [{key: 'goodIds', value: selected_goods}];
+
+        let response = await http_helper.callApi(url, params, "POST", true);
+
+        return {status: response.status, body: JSON.parse(response._bodyText)};
+    }
 };
 
 export default API

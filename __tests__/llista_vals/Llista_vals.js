@@ -1,14 +1,13 @@
 import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
-
-jest.mock('../../components/http_helper');
-
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import LlistaVals from '../../components/llista_vals/llista_vals';
 
-const navigation = {navigate: jest.fn()};
+jest.mock('../../components/http_helper');
+
+const navigation = {navigate: jest.fn(), addListener: jest.fn(), removeListener: jest.fn()};
 let wrapper;
 let instance;
 
@@ -80,6 +79,14 @@ describe('Test group for llista_vals', function () {
         test('selectOrder is callable and returns nothing', () => {
             expect(instance.selectOrder(0, 2)).toBe(undefined);
         });
+    });
+
+    test('showGoodDetails is callable and returns nothing', () => {
+        expect(instance.showGoodDetails({_id: 0})).toBe(undefined);
+    });
+
+    test('showGoodsList is callable and returns nothing', () => {
+        expect(instance.showGoodsList()).toBe(undefined);
     });
 
     test('renderGood renders an entity correctly', () => {

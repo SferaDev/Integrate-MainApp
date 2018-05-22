@@ -9,8 +9,12 @@ export default class EntityList extends Component {
 
     renderEntity({item}) {
         return (
-            <Entity key={''+item._id+''} item={item} onDetailsShow={this.props.onDetailsShow} />
+            <Entity key={'' + item._id + ''} item={item} onDetailsShow={this.props.onDetailsShow}/>
         );
+    }
+
+    extractKey(item) {
+        return item._id
     }
 
     render() {
@@ -19,6 +23,7 @@ export default class EntityList extends Component {
                 <FlatList
                     data={this.props.entities}
                     renderItem={this.renderEntity.bind(this)}
+                    keyExtractor={this.extractKey.bind(this)}
                 />
             </View>
         );

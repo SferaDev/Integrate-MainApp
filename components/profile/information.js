@@ -1,12 +1,5 @@
 import React, {Component} from 'react';
-import {
-    StyleSheet,
-    View,
-    TouchableHighlight,
-    Text
-} from 'react-native';
-
-import API from '../api';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
 import language_settings from '../language_settings';
@@ -153,7 +146,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Helvetica',
         fontSize: 24,
         margin: 10,
-        textAlign:'center',
+        textAlign: 'center',
         fontWeight: 'bold',
         backgroundColor: 'transparent'
     },
@@ -161,7 +154,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Helvetica',
         fontSize: 19,
         margin: 10,
-        textAlign:'center',
+        textAlign: 'center',
         backgroundColor: 'transparent'
     },
     favProps: {
