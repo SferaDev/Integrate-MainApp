@@ -1,24 +1,28 @@
 {
-  "Profile": {
-    "configuration": [
-      "Configuració:",
-      "Configuración:",
-      "Settings:"
-    ],
-    "app_language": [
-      "Idioma de l'aplicació",
-      "Idioma de la aplicación",
-      "App language"
-    ],
-    "good_language": [
-      "Idioma dels vals",
-      "Idioma de los vales",
-      "Goods language"
-    ],
-    "button_text": [
-      "Canviar contrasenya",
-      "Cambiar contraseña",
-      "Change password"
-    ]
+  "ca": {
+    "profile": {
+      "configuration": "Configuració:",
+      "app_language": "Idioma de l'aplicació",
+      "good_language": "Idioma dels vals",
+      "button_text": "Canviar contrasenya"
+    }
+  },
+
+  "es": {
+    "profile": {
+      "configuration": "Configuración:",
+      "app_language": "Idioma de la aplicación",
+      "good_language": "Idioma de los vales",
+      "button_text": "Cambiar contraseña"
+    }
+  },
+
+  "en": {
+    "profile": {
+      "configuration": "Settings:",
+      "app_language": "App language",
+      "good_language": "Goods language",
+      "button_text": "Change password"
+    }
   }
 }

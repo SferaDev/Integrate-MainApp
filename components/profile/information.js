@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {AsyncStorage, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
 import language_settings from '../language_settings';
@@ -9,13 +9,14 @@ export default class Information extends Component {
     constructor(props) {
         super(props);
 
-        this.appLanguages = [{value: "Catala"}, {value: "Castella"}, {value: "Angles"}];
+        this.appLanguages = [{value: "Catala", iso: 'ca'}, {value: "Castella", iso: 'es'}, {value: "Angles", iso: 'en'}];
         this.goodsLanguages = [{value: "Catala"}, {value: "Castella"}, {value: "Angles"}, {value: "Altres"}];
 
         this.state = {
             appLanguage: 0,
             goodLanguage: 0,
-            selectedIndex: 1
+            selectedIndex: 1,
+            lang: 'ca'
         };
     }
 
@@ -28,8 +29,9 @@ export default class Information extends Component {
     }
 
     selectAppLanguage(value, index) {
-        this.setState({appLanguage: index});
-        console.warn(this.state.appLanguage);
+        this.setState({appLanguage: index, lang: this.appLanguages[index].iso});
+        global.lang = this.state.lang;
+        AsyncStorage.setItem('lang', global.lang);
     }
 
     selectGoodsLanguage(value, index) {
@@ -37,10 +39,7 @@ export default class Information extends Component {
     }
 
     goToChangePassword() {
-        //this.props.navigation.navigate('changePassword');
-        //console.warn(language_settings.Profile.configuration[2]);
-        //console.warn(language_settings.Profile.app_language[2]);
-        //console.warn(language_settings.Profile.good_language[2]);
+        this.props.navigation.navigate('changePassword');
     }
 
     render() {
@@ -68,12 +67,12 @@ export default class Information extends Component {
 
                 <View style={[styles.body, {paddingTop: 50}]}>
                     <Text style={styles.basicTitle}>
-                        {language_settings.Profile.configuration[2]}
+                        {language_settings[this.state.lang].profile.configuration}
                     </Text>
                     <View style={styles.filterLanguage}>
                         <View style={{flex: 1}}>
                             <Dropdown
-                                label={language_settings.Profile.app_language[2]}
+                                label={language_settings[this.state.lang].profile.app_language}
                                 data={this.appLanguages}
                                 onChangeText={this.selectAppLanguage.bind(this)}
                                 itemCount={3}
@@ -81,7 +80,7 @@ export default class Information extends Component {
                         </View>
                         <View style={{flex: 1}}>
                             <Dropdown
-                                label={language_settings.Profile.good_language[2]}
+                                label={language_settings[this.state.lang].profile.good_language}
                                 data={this.goodsLanguages}
                                 onChangeText={this.selectGoodsLanguage.bind(this)}
                                 itemCount={this.goodsLanguages.size}
@@ -95,7 +94,7 @@ export default class Information extends Component {
                         style={styles.button}
                         onPress={this.goToChangePassword.bind(this)}>
                         <Text style={{alignSelf: 'center', color: 'white'}}>
-                            {language_settings.Profile.button_text[2]}
+                            {language_settings[this.state.lang].profile.button_text}
                         </Text>
                     </TouchableHighlight>
                 </View>

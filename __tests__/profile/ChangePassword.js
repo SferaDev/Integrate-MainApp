@@ -7,7 +7,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import ChangePassword from '../../components/profile/change_password';
 
-const navigation = {navigate: jest.fn()};
+const navigation = {navigate: jest.fn(), goBack: jest.fn()};
 let wrapper;
 let instance;
 
@@ -54,8 +54,8 @@ describe('Test group for EntityList', function () {
         expect(instance.updateNewPassword2('')).toBe(undefined);
     });
 
-    test('goSettings is callable and returns nothing', () => {
-        expect(instance.goSettings()).toBe(undefined);
+    test('goBack is callable and returns nothing', () => {
+        expect(instance.goBack()).toBe(undefined);
     });
 
     test('handleBackButton is callable and returns true', () => {

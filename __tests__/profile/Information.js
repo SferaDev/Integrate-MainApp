@@ -45,7 +45,8 @@ describe('Test group for EntityList', function () {
     });
 
     test('selectAppLanguage() is callable and returns nothing', () => {
-        expect(instance.selectAppLanguage()).toBe(undefined);
+        instance.appLanguages = [{iso: 'es'}];
+        expect(instance.selectAppLanguage('',0)).toBe(undefined);
     });
 
     test('selectGoodsLanguage() is callable and returns nothing', () => {
