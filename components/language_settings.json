@@ -5,6 +5,15 @@
       "app_language": "Idioma de l'aplicació",
       "good_language": "Idioma dels vals",
       "button_text": "Canviar contrasenya"
+    },
+    "change_password": {
+      "title": "Canvi de contrasenya",
+      "actual_password_title": "Contrasenya actual:",
+      "actual_password_placeHolder": "Introduïr contrasenya actual",
+      "new_password_title": "Nova contrasenya:",
+      "new_password_placeHolder": "Introduïr nova contrasenya",
+      "new_password2_placeHolder": "Confirmar la nova contrasenya",
+      "button_text": "Guardar contrasenya"
     }
   },
 
@@ -14,6 +23,15 @@
       "app_language": "Idioma de la aplicación",
       "good_language": "Idioma de los vales",
       "button_text": "Cambiar contraseña"
+    },
+    "change_password": {
+      "title": "Cambio de contraseña",
+      "actual_password_title": "Contraseña actual:",
+      "actual_password_placeHolder": "Introducir contraseña actual",
+      "new_password_title": "Contraseña nueva:",
+      "new_password_placeHolder": "Introducir nueva contraseña",
+      "new_password2_placeHolder": "Confirmar la nueva contraseña",
+      "button_text": "Guardar contraseña"
     }
   },
 
@@ -23,6 +41,15 @@
       "app_language": "App language",
       "good_language": "Goods language",
       "button_text": "Change password"
+    },
+    "change_password": {
+      "title": "Change password",
+      "actual_password_title": "Actual password:",
+      "actual_password_placeHolder": "Introduce actual password",
+      "new_password_title": "New password:",
+      "new_password_placeHolder": "Introduce new password",
+      "new_password2_placeHolder": "Confirm new password",
+      "button_text": "Save password"
     }
   }
 }
