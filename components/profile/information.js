@@ -9,7 +9,7 @@ import {
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
-import ChangePassword from "./change_password";
+import language_settings from '../language_settings';
 
 export default class Information extends Component {
 
@@ -17,7 +17,7 @@ export default class Information extends Component {
         super(props);
 
         this.appLanguages = [{value: "Catala"}, {value: "Castella"}, {value: "Angles"}];
-            this.goodsLanguages = [{value: "Catala"}, {value: "Castella"}, {value: "Angles"}, {value: "Altres"}];
+        this.goodsLanguages = [{value: "Catala"}, {value: "Castella"}, {value: "Angles"}, {value: "Altres"}];
 
         this.state = {
             appLanguage: 0,
@@ -36,6 +36,7 @@ export default class Information extends Component {
 
     selectAppLanguage(value, index) {
         this.setState({appLanguage: index});
+        console.warn(this.state.appLanguage);
     }
 
     selectGoodsLanguage(value, index) {
@@ -43,7 +44,10 @@ export default class Information extends Component {
     }
 
     goToChangePassword() {
-        this.props.navigation.navigate('changePassword');
+        //this.props.navigation.navigate('changePassword');
+        //console.warn(language_settings.Profile.configuration[2]);
+        //console.warn(language_settings.Profile.app_language[2]);
+        //console.warn(language_settings.Profile.good_language[2]);
     }
 
     render() {
@@ -71,25 +75,23 @@ export default class Information extends Component {
 
                 <View style={[styles.body, {paddingTop: 50}]}>
                     <Text style={styles.basicTitle}>
-                        Configuració:
+                        {language_settings.Profile.configuration[2]}
                     </Text>
                     <View style={styles.filterLanguage}>
                         <View style={{flex: 1}}>
                             <Dropdown
-                                label='Idioma aplicació'
+                                label={language_settings.Profile.app_language[2]}
                                 data={this.appLanguages}
                                 onChangeText={this.selectAppLanguage.bind(this)}
                                 itemCount={3}
-                                dropdownPosition={0}
                             />
                         </View>
                         <View style={{flex: 1}}>
                             <Dropdown
-                                label='Idioma vals'
+                                label={language_settings.Profile.good_language[2]}
                                 data={this.goodsLanguages}
                                 onChangeText={this.selectGoodsLanguage.bind(this)}
                                 itemCount={this.goodsLanguages.size}
-                                dropdownPosition={0}
                             />
                         </View>
                     </View>
@@ -100,7 +102,7 @@ export default class Information extends Component {
                         style={styles.button}
                         onPress={this.goToChangePassword.bind(this)}>
                         <Text style={{alignSelf: 'center', color: 'white'}}>
-                            Canviar contrasenya
+                            {language_settings.Profile.button_text[2]}
                         </Text>
                     </TouchableHighlight>
                 </View>
