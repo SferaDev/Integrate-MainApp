@@ -1,10 +1,71 @@
 {
   "ca": {
+    "login": {
+      "nif_nie": "Introduïr NIF/NIE",
+      "password": "Introduïr contrasenya",
+      "restore_password": "He olvidat la contrasenya?",
+      "button_text": "Entra"
+    },
+    "restoreCredentials": {
+      "title": "Recuperar credencials",
+      "nif_nie": "Introduïr NIF/NIE",
+      "button_text": "Sol·licitar",
+      "go_back": "Enrera"
+    },
+    "searcher": {
+      "search": "Cercar"
+    },
+    "validate": {
+      "discount_applied": "Descompte aplicat correctament",
+      "wrong_code": "Codi incorrecte",
+      "conflict": "Conflicte amb els vals:",
+      "summary": "Resum compra:",
+      "discount": "Descompte total",
+      "title": "Introduïr codi de validació:",
+      "code": "Introduïr codi",
+      "button_text": "Validar"
+    },
+    "buy": {
+      "toast_message": "Conflicte amb els vals:"
+    },
+    "toast": {
+      "message": "El Nie / Nif introduït no existeix",
+      "exit": "Tancar"
+    },
+    "home": {
+      "searcher": "Cercador",
+      "goods": "Vals",
+      "log_out": "Tancar sessió",
+      "validate": "Validar",
+      "settings": "Configuració del perfil"
+    },
+    "goods": {
+      "favourites": "Favorits",
+      "show_all": "Tots",
+      "category": "Categoria",
+      "all": "Totes",
+      "feeding": "Alimentació",
+      "culture": "Cultura",
+      "education": "Formació",
+      "mobility": "Mobilitat",
+      "technology": "Tecnologia",
+      "health": "Salut",
+      "sports": "Esports",
+      "leisure": "Lleure",
+      "others": "Altres",
+      "filer": "Filtre",
+      "recent": "Recents",
+      "popularity": "Popularitat",
+      "proximity": "Proximitat"
+    },
     "profile": {
       "configuration": "Configuració:",
       "app_language": "Idioma de l'aplicació",
       "good_language": "Idioma dels vals",
-      "button_text": "Canviar contrasenya"
+      "button_text": "Canviar contrasenya",
+      "language_ca": "Català",
+      "language_es": "Castellà",
+      "language_en": "Inglès"
     },
     "change_password": {
       "title": "Canvi de contrasenya",
@@ -18,11 +79,72 @@
   },
 
   "es": {
+    "login": {
+      "nifNie": "Introducir NIF/NIE",
+      "password": "Introducir contraseña",
+      "restore_password": "He olvidado la contraseña?",
+      "button_text": "Entra"
+    },
+    "restoreCredentials": {
+      "title": "Recuperar credenciales",
+      "nif_nie": "Introducir NIF/NIE",
+      "button_text": "Solicitar",
+      "go_back": "Atrás"
+    },
+    "searcher": {
+      "search": "Buscar"
+    },
+    "validate": {
+      "discount_applied": "Descuento aplicado correctamente",
+      "wrong_code": "Código incorrecto",
+      "conflict": "Conflicto con los vales:",
+      "summary": "Resumen compra:",
+      "discount": "Descuento total",
+      "title": "Introducir código de validación:",
+      "code": "Introducir código",
+      "button_text": "Validar"
+    },
+    "buy": {
+      "toast_message": "Conflicto con los vales:"
+    },
+    "toast": {
+      "message": "El Nie / Nif introducido no existe",
+      "exit": "Cerrar"
+    },
+    "home": {
+      "searcher": "Buscador",
+      "goods": "Vales",
+      "log_out": "Cerrar sessión",
+      "validate": "Validar",
+      "settings": "Configuración del perfil"
+    },
+    "goods": {
+      "favourites": "Favoritos",
+      "show_all": "Todos",
+      "category": "Categoría",
+      "all": "Todas",
+      "feeding": "Alimentación",
+      "culture": "Cultura",
+      "education": "Formación",
+      "mobility": "Mobilidad",
+      "technology": "Tecnología",
+      "health": "Salud",
+      "sports": "Deportes",
+      "leisure": "Ocio",
+      "others": "Otros",
+      "filer": "Filtro",
+      "recent": "Recientes",
+      "popularity": "Popularidad",
+      "proximity": "Proximidad"
+    },
     "profile": {
       "configuration": "Configuración:",
       "app_language": "Idioma de la aplicación",
       "good_language": "Idioma de los vales",
-      "button_text": "Cambiar contraseña"
+      "button_text": "Cambiar contraseña",
+      "language_ca": "Catalán",
+      "language_es": "Español",
+      "language_en": "Inglés"
     },
     "change_password": {
       "title": "Cambio de contraseña",
@@ -36,16 +158,77 @@
   },
 
   "en": {
+    "login": {
+      "nifNie": "Introduce NIF/NIE",
+      "password": "Introduce password",
+      "restore_password": "Forgot password?",
+      "button_text": "Enter"
+    },
+    "restoreCredentials": {
+      "title": "Restore credentials",
+      "nif_nie": "Introduce NIF/NIE",
+      "button_text": "Restore",
+      "go_back": "Back"
+    },
+    "searcher": {
+      "search": "Search"
+    },
+    "validate": {
+      "discount_applied": "Discount applied correctly",
+      "wrong_code": "Wrong code",
+      "conflict": "Goods conflict:",
+      "summary": "Purchase summary:",
+      "discount": "Total discount",
+      "title": "Introduce validation's code:",
+      "code": "Introduce code",
+      "button_text": "Validate"
+    },
+    "buy": {
+      "toast_message": "Goods conflict:"
+    },
+    "toast": {
+      "message": "Nie / Nif introduced doesn't exisit",
+      "exit": "Close"
+    },
+    "home": {
+      "searcher": "Searcher",
+      "goods": "Goods",
+      "log_out": "Log Out",
+      "validate": "Validate",
+      "settings": "Profile settings"
+    },
+    "goods": {
+      "favourites": "Favourites",
+      "show_all": "All",
+      "category": "Category",
+      "all": "All",
+      "feeding": "Feeding",
+      "culture": "Culture",
+      "education": "Education",
+      "mobility": "Mobility",
+      "technology": "Technology",
+      "health": "Health",
+      "sports": "Sports",
+      "leisure": "Leisure",
+      "others": "Others",
+      "filer": "Filter",
+      "recent": "Recent",
+      "popularity": "Popularity",
+      "proximity": "Proximity"
+    },
     "profile": {
       "configuration": "Settings:",
       "app_language": "App language",
       "good_language": "Goods language",
-      "button_text": "Change password"
+      "button_text": "Change password",
+      "language_ca": "Catalan",
+      "language_es": "Spanish",
+      "language_en": "English"
     },
     "change_password": {
       "title": "Change password",
-      "actual_password_title": "Actual password:",
-      "actual_password_placeHolder": "Introduce actual password",
+      "actual_password_title": "Current password:",
+      "actual_password_placeHolder": "Introduce current password",
       "new_password_title": "New password:",
       "new_password_placeHolder": "Introduce new password",
       "new_password2_placeHolder": "Confirm new password",
