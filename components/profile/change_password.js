@@ -27,7 +27,6 @@ export default class ChangePassword extends Component {
 
     updatePassword(value) {
         this.setState({password: value});
-        console.warn(global.lang);
     }
 
     updateNewPassword1(value) {
@@ -96,26 +95,26 @@ export default class ChangePassword extends Component {
                 </View>
                 <View style={[styles.body, {marginBottom: this.state.isFieldFocused ? 260 : 0}]}>
                     <Text style={[styles.basicTitle, {paddingBottom: 25}]}>
-                        {language_settings[global.lang].change_password.title}
+                        Canvi de contrasenya
                     </Text>
                     <Text style={styles.basicText}>
-                        {language_settings[global.lang].change_password.actual_password_title}
+                        Contrasenya actual:
                     </Text>
                     <TextInput style={[styles.basicInput]}
                                value={this.state.password}
                                secureTextEntry={true}
-                               placeholder={language_settings[global.lang].change_password.actual_password_placeHolder}
+                               placeholder={"Introduïr contrasenya actual"}
                                onChangeText={this.updatePassword.bind(this)}
                                underlineColorAndroid='rgba(0,0,0,0)'
                     >
                     </TextInput>
                     <Text style={styles.basicText}>
-                        {language_settings[global.lang].change_password.new_password_title}
+                        Nova contrasenya:
                     </Text>
                     <TextInput style={[styles.basicInput]}
                                value={this.state.new_password1}
                                secureTextEntry={true}
-                               placeholder={language_settings[global.lang].change_password.new_password_placeHolder}
+                               placeholder={"Introduïr nova contrasenya"}
                                onChangeText={this.updateNewPassword1.bind(this)}
                                underlineColorAndroid='rgba(0,0,0,0)'
                     >
@@ -123,7 +122,7 @@ export default class ChangePassword extends Component {
                     <TextInput style={[styles.basicInput]}
                                value={this.state.new_password2}
                                secureTextEntry={true}
-                               placeholder={language_settings[global.lang].change_password.new_password2_placeHolder}
+                               placeholder={"Confirmar la nova contrasenya"}
                                onChangeText={this.updateNewPassword2.bind(this)}
                                underlineColorAndroid='rgba(0,0,0,0)'
                     >
@@ -133,7 +132,7 @@ export default class ChangePassword extends Component {
                         onPress={this.changePassword.bind(this)}
                         disabled={this.isEmpty()}>
                         <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
-                            {language_settings[global.lang].change_password.button_text}
+                            Guardar contrasenya
                         </Text>
                     </TouchableHighlight>
                     <Toast

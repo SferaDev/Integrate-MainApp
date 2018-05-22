@@ -61,14 +61,9 @@ const ProfileStack = StackNavigator({
             drawerLabel: 'Profile settings',
             drawerIcon: <Icon name="settings" size={25}/>,
         }
-    },
-    change_password: {
-        screen: ChangePassword,
-        navigationOptions: {
-            drawerLabel: 'Change password',
-            drawerIcon: <Icon name="settings" size={25}/>,
-        }
-    },
+    }, change_password: {
+        screen: ChangePassword
+    }
 }, {
     headerMode: 'none',
     disabledBackGesture: true,

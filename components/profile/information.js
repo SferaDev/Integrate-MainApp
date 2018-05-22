@@ -39,7 +39,8 @@ export default class Information extends Component {
     }
 
     goToChangePassword() {
-        this.props.navigation.navigate('changePassword');
+        //this.props.navigation.navigate('changePassword');
+        this.props.navigation.navigate('change_password');
     }
 
     render() {
