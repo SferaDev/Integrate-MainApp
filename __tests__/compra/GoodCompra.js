@@ -51,4 +51,14 @@ describe('Test group for good_compra', function () {
                                                  isSelected={false}/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
+
+    test('selectGood is callable and returns nothing', () => {
+      instance.props.item.isUsable = true;
+      expect(instance.selectGood()).toBe(undefined);
+    });
+
+    test('selectGood is callable and returns nothing', () => {
+      instance.props.item.isUsable = false;
+      expect(instance.selectGood()).toBe(undefined);
+    });
 });
