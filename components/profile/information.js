@@ -3,6 +3,7 @@ import {AsyncStorage, StyleSheet, Text, TouchableHighlight, View} from 'react-na
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
 import language_settings from '../language_settings';
+import API from '../api';
 
 export default class Information extends Component {
 
@@ -11,6 +12,7 @@ export default class Information extends Component {
 
         this.appLanguages = [{value: "Catala", iso: 'ca'}, {value: "Castella", iso: 'es'}, {value: "Angles", iso: 'en'}];
         this.goodsLanguages = [{value: "Catala"}, {value: "Castella"}, {value: "Angles"}, {value: "Altres"}];
+        //this.goodsLanguages = [{value: ""}];
 
         this.state = {
             appLanguage: 0,
@@ -18,6 +20,11 @@ export default class Information extends Component {
             selectedIndex: 1,
             lang: 'ca'
         };
+    }
+
+    async getAllLanguages() {
+        //this.goodsLanguages = await API.getLanguages();
+        //console.warn(this.goodsLanguages);
     }
 
     handleBackButton() {
@@ -35,11 +42,11 @@ export default class Information extends Component {
     }
 
     selectGoodsLanguage(value, index) {
+        this.getAllLanguages();
         this.setState({goodLanguage: index});
     }
 
     goToChangePassword() {
-        //this.props.navigation.navigate('changePassword');
         this.props.navigation.navigate('change_password');
     }
 

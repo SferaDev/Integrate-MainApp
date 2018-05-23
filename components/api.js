@@ -137,6 +137,15 @@ const API = {
         let response = await http_helper.callApi(url, params, "POST", true);
 
         return {status: response.status, body: JSON.parse(response._bodyText)};
+    },
+    getLanguages: async () => {
+
+        let url = 'language';
+        let params = [];
+
+        let response = await http_helper.callApi(url, params);
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
     }
 };
 

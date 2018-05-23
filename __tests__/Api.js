@@ -169,4 +169,13 @@ describe("API tests", () => {
             expect(JSON.stringify(r)).toBe('{"status":200,"body":{"something":"Hello World"}}');
         });
     });
+
+    describe("getLanguages() tests", () => {
+
+        test('getLanguages() is callable and returns nothing', async () => {
+
+            let r = await API.getLanguages();
+            expect(JSON.stringify(r)).toBe('{"something":"Hello World"}');
+        });
+    });
 });

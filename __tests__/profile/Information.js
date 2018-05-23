@@ -7,6 +7,8 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import Information from '../../components/profile/information';
 
+jest.mock('../../components/http_helper');
+
 const navigation = {navigate: jest.fn()};
 let wrapper;
 let instance;
@@ -51,6 +53,13 @@ describe('Test group for EntityList', function () {
 
     test('selectGoodsLanguage() is callable and returns nothing', () => {
         expect(instance.selectGoodsLanguage()).toBe(undefined);
+    });
+
+    describe("getAllLanguages() tests", () => {
+
+        test('getAllLanguages is callable and returns nothing', async () => {
+            expect(await instance.getAllLanguages()).toBe(undefined);
+        });
     });
 
 });
