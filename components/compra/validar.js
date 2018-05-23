@@ -64,6 +64,10 @@ export default class Validar extends Component {
         this.props.navigation.goBack();
     }
 
+    goDoubleBack() {
+        this.props.navigation.pop(2);
+    }
+
     moveUp() {
         this.setState({isFieldFocused: true});
     }
@@ -103,7 +107,7 @@ export default class Validar extends Component {
         let typeError = this.state.typeError;
         switch (typeError) {
             case 201: //Descompte aplicat correctament
-                this.props.navigation.goBack('detalls_entitat');
+                this.goDoubleBack();
                 break;
             case 403: //Error Codi Incorrecte
                 this.setState({toast: false});
@@ -112,6 +116,7 @@ export default class Validar extends Component {
                 this.goBack();
                 break;
             default:
+                this.goBack();
                 break;
         }
     }
@@ -203,6 +208,7 @@ export default class Validar extends Component {
                         <TextInput style={styles.basicInput}
                                    value={this.state.code}
                                    placeholder={"Introduir codi"}
+                                   secureTextEntry={true}
                                    onChangeText={this.updateCode.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'>
                         </TextInput>
