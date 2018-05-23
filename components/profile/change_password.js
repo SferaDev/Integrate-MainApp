@@ -75,16 +75,23 @@ export default class ChangePassword extends Component {
         this.setState({error: false});
     }
 
+    hasNumber() {
+        return /\d/.test(this.state.new_password1);
+    }
+
+    isPasswordOk() {
+        if (this.state.new_password1.length >= 8 && this.hasNumber()) return true;
+        else return false;
+    }
+
     changePassword() {
         let password = this.state.password;
         let new_password1 = this.state.new_password1;
         let new_password2 = this.state.new_password2;
 
         if (new_password1 != new_password2) this.showError();
-        //TO DO: Canviar el text del toast fent que el text que es mostra sigui un paràmetre que se li passa
-
-        //else {crida a la api passant password1 o password2 i el password antic}
-
+        else if (!this.isPasswordOk()) this.showError();
+        else if (this.isPasswordOk()) console.warn("API CALL");
     }
 
     render() {
