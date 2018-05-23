@@ -65,7 +65,9 @@ export default class Buy extends Component {
                 this.props.navigation.navigate('validar', {
                     entity: this.state.entity,
                     selected_goods: this.state.selected_goods,
-                    total_discount: response.body.totalDiscount
+                    total_discount: response.body.totalDiscount,
+                    forceRefresh: this.forceRefresh.bind(this),
+                    getEntity: this.props.navigation.state.params.getEntity
                 });
                 break;
             case 409: //Error conflicte vals
@@ -77,6 +79,9 @@ export default class Buy extends Component {
 
     onClose() {
         let typeError = this.state.typeError;
+
+        this.forceRefresh();
+
         switch (typeError) {
             case 409: //Error conflicte vals retornar a la mateixa vista
                 this.setState({toast: false});
@@ -155,6 +160,19 @@ export default class Buy extends Component {
     refreshfunction() {
         if (!this.block_get_Entity) this.getEntity();
         return false
+    }
+
+    forceRefresh(){
+        this.flatList.refreshing = true;
+        this.refreshfunction();
+        let selected_goods = this.state.selected_goods;
+        for(let sgoodi in selected_goods){
+            let sgood = selected_goods[sgoodi];
+            if(this.state.nonUsableGoods.includes(sgood) || this.state.soldOutGoods.includes(sgood)){
+                selected_goods.splice(sgoodi,1);
+            }
+        }
+        this.flatList.refreshing = false;
     }
 
     render() {

@@ -94,7 +94,7 @@ export default class DetallsEntitat extends Component {
     }
 
     goBuy() {
-        this.props.navigation.navigate('buy', {selectedEntity: this.state.entity});
+        this.props.navigation.navigate('buy', {selectedEntity: this.state.entity, getEntity: this.getEntity.bind(this)});
     }
 
     sendMail() {
