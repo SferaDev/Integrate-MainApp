@@ -150,9 +150,9 @@ export default class Validar extends Component {
         let typeError = this.state.typeError;
         switch (typeError) {
             case 201: //Descompte aplicat correctament
-                return (<Text style={{textAlign: 'center'}}>Descompte aplicat correctament</Text>);
+                return (<Text style={{textAlign: 'center', fontWeight: 'bold'}}>S'ha d'aplicar un descompte de -{this.state.total_discount} € </Text>);
             case 403: //Error Codi Incorrecte
-                return (<Text style={{textAlign: 'center'}}>Codi incorrecte</Text>);
+                return (<Text style={{textAlign: 'center', fontWeight: 'bold'}}>Codi incorrecte</Text>);
             case 409: //Error conflicte vals
                 let soldOutGoods = this.state.soldOutGoods;
                 let nonUsableGoods = this.state.nonUsableGoods;
@@ -160,7 +160,7 @@ export default class Validar extends Component {
                 let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
                 return (
                     <View style={{marginBottom: 10}}>
-                        <Text style={{fontSize: 18}}>Conflicte amb els vals: </Text>
+                        <Text style={{fontSize: 18, fontWeight: 'bold'}}>Conflicte amb els vals: </Text>
                         {conflictList}
                     </View>
                 );
