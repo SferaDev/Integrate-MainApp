@@ -97,7 +97,6 @@ export default class LlistaVals extends Component {
     }
 
     renderGood({item}) {
-
         return (
             <Good
                 id={item._id}
@@ -108,6 +107,10 @@ export default class LlistaVals extends Component {
                 isFav={this.isFav(item._id)}
             />
         );
+    }
+
+    extractKey(item) {
+        return item._id
     }
 
     setIndexChange(index) {
@@ -162,6 +165,9 @@ export default class LlistaVals extends Component {
                             <FlatList
                                 data={this.state.goods_shown}
                                 renderItem={this.renderGood.bind(this)}
+                                keyExtractor={this.extractKey.bind(this)}
+                                refreshing={false}
+                                onRefresh={this.getAllGoods.bind(this)}
                             />
                         </View>
                     </View>
