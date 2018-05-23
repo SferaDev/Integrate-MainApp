@@ -13,7 +13,8 @@ export default class ChangePassword extends Component {
             new_password1: "",
             new_password2: "",
             isFieldFocused: false,
-            error: false
+            error: false,
+            typeError: 0
         };
     }
 
@@ -89,9 +90,26 @@ export default class ChangePassword extends Component {
         let new_password1 = this.state.new_password1;
         let new_password2 = this.state.new_password2;
 
-        if (new_password1 != new_password2) this.showError();
-        else if (!this.isPasswordOk()) this.showError();
-        else if (this.isPasswordOk()) console.warn("API CALL");
+        if (new_password1 != new_password2) {
+            this.setState({typeError: 1});
+            this.showError();
+        }
+        else if (!this.isPasswordOk()) {
+            this.setState({typeError: 2});
+            this.showError();
+        }
+        //else if (this.isPasswordOk()) console.warn("API CALL");
+    }
+
+    displayToastContent() {
+        switch (this.state.typeError) {
+            case 1: //Contrasenyes diferents
+                return (<Text style={{textAlign: 'center'}}>Les contrasenyes no coincideixen</Text>);
+            case 2: //Contrasenya incorrecte
+                return (<Text style={{textAlign: 'center'}}>La contrasenya ha de contenir mínim 8 caracters i ha d'incloure un número</Text>);
+            default:
+                return (<Text style={{textAlign: 'center'}}>Error</Text>);
+        }
     }
 
     render() {
@@ -144,7 +162,9 @@ export default class ChangePassword extends Component {
                     </TouchableHighlight>
                     <Toast
                         visible={this.state.error}
-                        onClose={this.updateError.bind(this)}/>
+                        onClose={this.updateError.bind(this)}>
+                        {this.displayToastContent()}
+                    </Toast>
                 </View>
             </View>
         );

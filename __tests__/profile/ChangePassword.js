@@ -42,6 +42,18 @@ describe('Test group for EntityList', function () {
         expect(instance.changePassword()).toBe(undefined);
     });
 
+    test('changePassword() is callable and returns nothing', () => {
+        instance.state.new_password1 = 'A';
+        instance.state.new_password2 = 'A';
+        expect(instance.changePassword()).toBe(undefined);
+    });
+
+    test('changePassword() is callable and returns nothing', () => {
+        instance.state.new_password1 = 'aaabbbccc1';
+        instance.state.new_password2 = 'aaabbbccc1';
+        expect(instance.changePassword()).toBe(undefined);
+    });
+
     test('updatePassword() is callable and returns nothing', () => {
         expect(instance.updatePassword('')).toBe(undefined);
     });
@@ -193,4 +205,20 @@ describe('Test group for EntityList', function () {
             expect(instance.isPasswordOk()).toBe(true);
         });
     });
+
+    describe("displayToastContent() tests", () => {
+        test('displayToastContent typeError = 1 renders toast correctly', () => {
+            instance.state.typeError = 1;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
+        test('displayToastContent typeError = 2 renders toast correctly', () => {
+            instance.state.typeError = 2;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
+        test('displayToastContent typeError = default renders toast correctly', () => {
+            instance.state.typeError = 0;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
+    });
+
 });
