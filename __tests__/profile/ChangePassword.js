@@ -219,6 +219,10 @@ describe('Test group for EntityList', function () {
             instance.state.typeError = 0;
             expect(instance.displayToastContent()).toMatchSnapshot();
         });
+        test('displayToastContent typeError = default renders toast correctly', () => {
+            instance.state.typeError = 3;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
     });
 
 });

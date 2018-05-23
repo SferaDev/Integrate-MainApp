@@ -178,4 +178,21 @@ describe("API tests", () => {
             expect(JSON.stringify(r)).toBe('{"something":"Hello World"}');
         });
     });
+
+    describe("changePassword() tests", () => {
+
+        test('changePassword() is callable and returns nothing', async () => {
+
+            let r = await API.changePassword('12345678','funcionabe12');
+            expect(JSON.stringify(r)).toBe('{"something":"Hello World"}');
+        });
+
+        test('changePassword() is callable and returns nothing', async () => {
+
+            await AsyncStorage.removeItem('token');
+            API.changePassword(null).catch((s) => {
+                expect(s).toBe(null);
+            });
+        });
+    });
 });

@@ -146,7 +146,24 @@ const API = {
         let response = await http_helper.callApi(url, params);
 
         if (response.status === 200) return JSON.parse(response._bodyText);
-    }
+    },
+
+    changePassword: async (oldPassword = '', newPassword = '') => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/password';
+        let params = [{key: 'token', value: token}, {key: 'oldPassword', value: oldPassword}, {key: 'newPassword', value: newPassword}];
+
+        let response = await http_helper.callApi(url, params, "PUT", true);
+
+        if (!response || response.status === 404) {
+            reject();
+        } else if (response.status === 200) {
+            return JSON.parse(response._bodyText);
+        }
+        return null;
+    },
 };
 
 export default API

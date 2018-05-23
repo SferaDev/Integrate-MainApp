@@ -3,6 +3,7 @@ import {AsyncStorage, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight,
 import Toast from '../login/toast';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import language_settings from '../language_settings';
+import API from '../api';
 
 export default class ChangePassword extends Component {
 
@@ -98,7 +99,11 @@ export default class ChangePassword extends Component {
             this.setState({typeError: 2});
             this.showError();
         }
-        //else if (this.isPasswordOk()) console.warn("API CALL");
+        else if (this.isPasswordOk()) {
+            API.changePassword(password,new_password1).catch(this.showError.bind(this));
+            this.setState({typeError: 3});
+            this.showError();
+        }
     }
 
     displayToastContent() {
@@ -107,6 +112,8 @@ export default class ChangePassword extends Component {
                 return (<Text style={{textAlign: 'center'}}>Les contrasenyes no coincideixen</Text>);
             case 2: //Contrasenya incorrecte
                 return (<Text style={{textAlign: 'center'}}>La contrasenya ha de contenir mínim 8 caracters i ha d'incloure un número</Text>);
+            case 3: //Cas d'èxit
+                return (<Text style={{textAlign: 'center'}}>La contrasenya s'ha modificat correctament</Text>);
             default:
                 return (<Text style={{textAlign: 'center'}}>Error</Text>);
         }
