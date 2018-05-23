@@ -164,8 +164,17 @@ describe('Test group for EntityList', function () {
         expect(instance.extractKey(good)).toBe('1');
     });
 
-    test('refreshfunction is callable and returns false', () => {
-        expect(instance.refreshfunction()).toBe(false);
+    describe("refreshfunction() tests", () => {
+
+        test('refreshfunction is callable and returns false', () => {
+            instance.block_get_Entity = true;
+            expect(instance.refreshfunction()).toBe(false);
+        });
+
+        test('refreshfunction is callable and returns false', () => {
+            instance.block_get_Entity = false;
+            expect(instance.refreshfunction()).toBe(false);
+        });
     });
 
     describe("renderConflictGood() tests", () => {
