@@ -39,6 +39,14 @@ describe('Test group for good', function () {
     });
 
     test('renders normal good correctly', () => {
+        good.isUsable = true;
+        const tree = renderer.create(<Good item={good} onToggleFav={jest.fn()} onPress={jest.fn()} context={this} id={0}
+                                           isFav={false}/>).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    test('renders normal unsuable good correctly', () => {
+        good.isUsable = false;
         const tree = renderer.create(<Good item={good} onToggleFav={jest.fn()} onPress={jest.fn()} context={this} id={0}
                                            isFav={false}/>).toJSON();
         expect(tree).toMatchSnapshot();

@@ -94,16 +94,17 @@ export default class DetallsEntitat extends Component {
     }
 
     goBuy() {
-        this.props.navigation.navigate('buy', {selectedEntity: this.state.entity});
+        this.props.navigation.navigate('buy', {selectedEntity: this.state.entity, getEntity: this.getEntity.bind(this)});
     }
 
     sendMail() {
-        Linking.openURL('mailto:aleix.sanfeliu@gmail.com');
+
+        Linking.openURL('mailto:'+this.state.entity.email);
     }
 
     callTo() {
         const args = {
-            number: '617167362', // String value with the number to call
+            number: this.state.entity.phone, // String value with the number to call
             prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call
         };
         call(args);
