@@ -31,8 +31,7 @@ export default class Buscador extends Component {
     }
 
     async getEntities(loc) {
-
-        if(!loc)loc = this.loc;
+        if (!loc) loc = this.loc;
         this.loc = loc;
 
         let entities = await API.getEntities(loc);
