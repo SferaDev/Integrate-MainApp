@@ -144,7 +144,7 @@ export default class Buy extends Component {
                 let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
                 return (
                     <View style={{marginBottom: 10}}>
-                        <Text style={{fontSize: 18, fontWeight: 'bold'}}>Conflicte amb els vals: </Text>
+                        <Text style={{fontSize: 18, fontWeight: 'bold', paddingBottom: 5}}>Conflicte amb els vals: </Text>
                         {conflictList}
                     </View>
                 );
