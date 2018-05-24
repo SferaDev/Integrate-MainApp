@@ -50,5 +50,9 @@ describe('Test group for EntityList', function () {
         };
         expect(instance.extractKey(entity)).toBe('1');
     });
+
+    test('refreshfunction is callable and returns false', () => {
+        expect(instance.refreshfunction()).toBe(undefined);
+    });
 });
 
