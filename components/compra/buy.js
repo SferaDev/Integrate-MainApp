@@ -88,6 +88,7 @@ export default class Buy extends Component {
     }
 
     toggleSelected(id) {
+        this.block_get_Entity = true;
         this.flatList.refreshing = true;
         let selected_goods = this.state.selected_goods;
 
@@ -99,6 +100,7 @@ export default class Buy extends Component {
         }
         this.setState({selected_goods: selected_goods});
         this.flatList.refreshing = false;
+        this.block_get_Entity = false;
     }
 
     renderGood({item}) {
@@ -137,7 +139,7 @@ export default class Buy extends Component {
                 let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
                 return (
                     <View style={{marginBottom: 10}}>
-                        <Text style={{fontSize: 18}}>Conflicte amb els vals: </Text>
+                        <Text style={{fontSize: 18, fontWeight: 'bold'}}>Conflicte amb els vals: </Text>
                         {conflictList}
                     </View>
                 );
@@ -151,6 +153,7 @@ export default class Buy extends Component {
     }
 
     refreshfunction() {
+        if (!this.block_get_Entity) this.getEntity();
         return false
     }
 
