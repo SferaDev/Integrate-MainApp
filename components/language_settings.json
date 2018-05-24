@@ -1,7 +1,7 @@
 {
   "ca": {
     "login": {
-      "nif_nie": "Introduïr NIF/NIE",
+      "nifNie": "Introduïr NIF/NIE",
       "password": "Introduïr contrasenya",
       "restore_password": "He olvidat la contrasenya?",
       "button_text": "Entra"

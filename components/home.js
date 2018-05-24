@@ -13,12 +13,20 @@ import Validar from './compra/validar';
 import ChangePassword from "./profile/change_password";
 import Information from "./profile/information";
 import Buy from "./compra/buy";
+import language_settings from './language_settings';
+import {AsyncStorage} from "react-native";
+
+let searcher = language_settings['en'].home.searcher;
+let goods = language_settings['en'].home.goods;
+let log_out = language_settings['en'].home.log_out;
+let validate = language_settings['en'].home.validate;
+let settings = language_settings['en'].home.settings;
 
 const BuscadorStack = StackNavigator({
         buscador: {
             screen: Buscador,
             navigationOptions: {
-                drawerLabel: 'Buscador',
+                drawerLabel: searcher,
                 drawerIcon: <Icon name="home" size={25}/>,
                 gesturesEnabled: false
             }
@@ -42,7 +50,7 @@ const ValsStack = StackNavigator({
     llista_vals: {
         screen: LlistaVals,
         navigationOptions: {
-            drawerLabel: 'Vals',
+            drawerLabel: goods,
             drawerIcon: <Icon name="ticket-percent" size={25}/>,
         }
     }, detalls_entitat: {
@@ -58,7 +66,7 @@ const ProfileStack = StackNavigator({
     settings: {
         screen: Information,
         navigationOptions: {
-            drawerLabel: 'Profile settings',
+            drawerLabel: settings,
             drawerIcon: <Icon name="settings" size={25}/>,
         }
     }, change_password: {
@@ -76,11 +84,18 @@ const DrawerNavigation = DrawerNavigator({
     Logout: {
         screen: Logout,
         navigationOptions: {
-            drawerLabel: 'Log Out',
+            drawerLabel: log_out,
             drawerIcon: <Icon name="logout-variant" size={25}/>,
         }
     },
-    Validar: {screen: Validar},
+    Validar: {
+        screen: Validar,
+        navigationOptions: {
+            drawerLabel: validate,
+            drawerIcon: <Icon name="check" size={25}/>,
+            gesturesEnabled: false
+        }
+    },
     Profile: {screen: ProfileStack}
 }, {
     headerMode: 'none',

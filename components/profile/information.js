@@ -33,6 +33,7 @@ export default class Information extends Component {
     async setUserInformation() {
         let user = JSON.parse(await AsyncStorage.getItem('user'));
         this.setState({name: user.firstName, surname: user.lastName, nif: user.nif, email: user.email, lang: user.interfaceLanguage, goodLang: user.goodLanguage, appLanguage: (this.appLanguages.map(function(e) { return e.iso; }).indexOf(user.interfaceLanguage)), goodLanguage:(this.goodsLanguages.map(function(e) { return e.iso; }).indexOf(user.goodLanguage))});
+        if (global.lang == user.interfaceLanguage) this.setState({lang: user.interfaceLanguage});
     }
 
     async getAllLanguages() {
@@ -53,6 +54,7 @@ export default class Information extends Component {
         //Falta crida a la api modificant el llenguatge
         global.lang = this.state.lang;
         AsyncStorage.setItem('lang', global.lang);
+        API.setAppLanguage(global.lang);
     }
 
     selectGoodsLanguage(value, index) {

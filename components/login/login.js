@@ -13,6 +13,7 @@ import {
 
 import Toast from './toast';
 import API from '../api';
+import language_settings from '../language_settings';
 
 export default class LogIn extends Component {
     constructor(props) {
@@ -21,18 +22,20 @@ export default class LogIn extends Component {
             nifnie: "",
             password: "",
             error: false,
-            isFieldFocused: false
+            isFieldFocused: false,
+            lang: ''
         };
     }
 
     async setLanguage() {
-        global.lang = (JSON.parse(await AsyncStorage.getItem('user'))).interfaceLanguage;
+        global.lang = await AsyncStorage.getItem('lang');
+        if (global.lang == null) global.lang = 'en';
+        this.setState({lang: global.lang});
     }
 
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
-
         AsyncStorage.getItem('token').then(this.autologin.bind(this));
         this.setLanguage();
     }
@@ -120,7 +123,7 @@ export default class LogIn extends Component {
                         </Image>
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.nifnie}
-                                   placeholder={"Introduir NIF/NIE"}
+                                   placeholder={language_settings["ca"].login.nifNie}
                                    onChangeText={this.updateNifNie.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'
                         >
@@ -128,21 +131,21 @@ export default class LogIn extends Component {
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.password}
                                    secureTextEntry={true}
-                                   placeholder={"Introduir contrasenya"}
+                                   placeholder={language_settings["ca"].login.password}
                                    onChangeText={this.updatePassword.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'
                         >
                         </TextInput>
                         <Text style={styles.recuperarContrasenyaText}
                               onPress={this.restorePassword.bind(this)}>
-                            He oblidat la contrasenya?
+                            {language_settings["ca"].login.restore_password}
                         </Text>
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.login.bind(this)}
                             disabled={this.isEmpty()}>
                             <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
-                                Entra
+                                {language_settings["ca"].login.button_text}
                             </Text>
                         </TouchableHighlight>
                     </View>
