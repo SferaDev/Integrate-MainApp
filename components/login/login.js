@@ -25,11 +25,16 @@ export default class LogIn extends Component {
         };
     }
 
+    async setLanguage() {
+        global.lang = (JSON.parse(await AsyncStorage.getItem('user'))).interfaceLanguage;
+    }
+
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
 
         AsyncStorage.getItem('token').then(this.autologin.bind(this));
+        this.setLanguage();
     }
 
     componentWillUnmount() {

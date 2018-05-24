@@ -17,13 +17,12 @@ export default class Information extends Component {
         this.state = {
             appLanguage: 0,
             goodLanguage: 0,
-            selectedIndex: 1,
             lang: 'ca',
             goodLang: 'cat',
             name:'',
             surname: '',
             nif: '',
-            email: ''
+            email: '',
         };
     }
 
@@ -33,9 +32,13 @@ export default class Information extends Component {
 
     async setUserInformation() {
         let user = JSON.parse(await AsyncStorage.getItem('user'));
+        console.warn(user.interfaceLanguage);
+        console.warn(user.goodLanguage);
         this.setState({name: user.firstName, surname: user.lastName, nif: user.nif, email: user.email,
             lang: user.interfaceLanguage, goodLang: user.goodLanguage,
-            appLanguage: 1});
+            appLanguage: (this.appLanguages.map(function(e) { return e.iso; }).indexOf(user.interfaceLanguage)),
+            goodLanguage:(this.goodsLanguages.map(function(e) { return e.iso; }).indexOf(user.goodLanguage))
+        });
     }
 
     async getAllLanguages() {
@@ -56,7 +59,6 @@ export default class Information extends Component {
         //Falta crida a la api modificant el llenguatge
         global.lang = this.state.lang;
         AsyncStorage.setItem('lang', global.lang);
-        //console.warn(this.appLanguages.map(function(e) { return e.iso; }).indexOf('es'));
     }
 
     selectGoodsLanguage(value, index) {
