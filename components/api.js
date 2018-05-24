@@ -13,7 +13,9 @@ const API = {
                 if (!response || response.status === 401) {
                     reject();
                 } else if (response.status === 200) {
-                    AsyncStorage.setItem('token', JSON.parse(response._bodyText).token);
+                    let {user, token} = JSON.parse(response._bodyText);
+                    AsyncStorage.setItem('token', token);
+                    AsyncStorage.setItem('user', JSON.stringify(user));
                     resolve(JSON.parse(response._bodyText).token);
                 }
             }

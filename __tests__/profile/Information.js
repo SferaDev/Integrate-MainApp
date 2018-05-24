@@ -6,6 +6,7 @@ import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import Information from '../../components/profile/information';
+import API from "../../components/api";
 
 jest.mock('../../components/http_helper');
 
@@ -16,6 +17,7 @@ let instance;
 describe('Test group for EntityList', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
+        global.lang = 'ca';
     });
 
     beforeEach(function () {
@@ -46,9 +48,10 @@ describe('Test group for EntityList', function () {
         expect(instance.goToChangePassword()).toBe(undefined);
     });
 
-    test('selectAppLanguage() is callable and returns nothing', () => {
+    test('selectAppLanguage() is callable and returns nothing', async () => {
         instance.appLanguages = [{iso: 'es'}];
-        expect(instance.selectAppLanguage('',0)).toBe(undefined);
+        let r = await instance.selectAppLanguage('',0);
+        expect(JSON.stringify(r)).toBe(undefined);
     });
 
     test('selectGoodsLanguage() is callable and returns nothing', () => {

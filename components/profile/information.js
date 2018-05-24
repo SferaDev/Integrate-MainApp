@@ -18,8 +18,24 @@ export default class Information extends Component {
             appLanguage: 0,
             goodLanguage: 0,
             selectedIndex: 1,
-            lang: 'ca'
+            lang: 'ca',
+            goodLang: 'cat',
+            name:'',
+            surname: '',
+            nif: '',
+            email: ''
         };
+    }
+
+    componentDidMount() {
+        this.setUserInformation();
+    }
+
+    async setUserInformation() {
+        let user = JSON.parse(await AsyncStorage.getItem('user'));
+        this.setState({name: user.firstName, surname: user.lastName, nif: user.nif, email: user.email,
+            lang: user.interfaceLanguage, goodLang: user.goodLanguage,
+            appLanguage: 1});
     }
 
     async getAllLanguages() {
@@ -35,10 +51,12 @@ export default class Information extends Component {
         this.props.navigation.navigate('DrawerOpen');
     }
 
-    selectAppLanguage(value, index) {
+    async selectAppLanguage(value, index) {
         this.setState({appLanguage: index, lang: this.appLanguages[index].iso});
+        //Falta crida a la api modificant el llenguatge
         global.lang = this.state.lang;
         AsyncStorage.setItem('lang', global.lang);
+        //console.warn(this.appLanguages.map(function(e) { return e.iso; }).indexOf('es'));
     }
 
     selectGoodsLanguage(value, index) {
@@ -63,13 +81,13 @@ export default class Information extends Component {
 
                 <View style={styles.body}>
                     <Text style={styles.basicTitle}>
-                        Bacary Keita Douno
+                        {this.state.name} {this.state.surname}
                     </Text>
                     <Text style={styles.basicText}>
-                        44994912T
+                        {this.state.nif}
                     </Text>
                     <Text style={styles.basicText}>
-                        bacary@gmail.com
+                        {this.state.email}
                     </Text>
                 </View>
 
@@ -84,6 +102,7 @@ export default class Information extends Component {
                                 data={this.appLanguages}
                                 onChangeText={this.selectAppLanguage.bind(this)}
                                 itemCount={3}
+                                //value = "svsfvfdsvdf"
                             />
                         </View>
                         <View style={{flex: 1}}>
@@ -92,6 +111,7 @@ export default class Information extends Component {
                                 data={this.goodsLanguages}
                                 onChangeText={this.selectGoodsLanguage.bind(this)}
                                 itemCount={this.goodsLanguages.size}
+                                //selectedValue = "klkhl"
                             />
                         </View>
                     </View>
