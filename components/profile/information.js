@@ -32,8 +32,6 @@ export default class Information extends Component {
 
     async setUserInformation() {
         let user = JSON.parse(await AsyncStorage.getItem('user'));
-        console.warn(user.interfaceLanguage);
-        console.warn(user.goodLanguage);
         this.setState({name: user.firstName, surname: user.lastName, nif: user.nif, email: user.email, lang: user.interfaceLanguage, goodLang: user.goodLanguage, appLanguage: (this.appLanguages.map(function(e) { return e.iso; }).indexOf(user.interfaceLanguage)), goodLanguage:(this.goodsLanguages.map(function(e) { return e.iso; }).indexOf(user.goodLanguage))});
     }
 
