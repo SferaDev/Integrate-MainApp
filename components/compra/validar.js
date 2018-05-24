@@ -218,6 +218,7 @@ export default class Validar extends Component {
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.validar.bind(this)}
+                            underlayColor='none'
                             disabled={this.isEmpty()}>
                             <Text style={{
                                 alignSelf: 'center',

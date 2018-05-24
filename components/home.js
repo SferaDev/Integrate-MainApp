@@ -70,6 +70,7 @@ const ProfileStack = StackNavigator({
 const DrawerNavigation = DrawerNavigator({
     Buscador: {screen: BuscadorStack},
     Vals: {screen: ValsStack},
+    Profile: {screen: ProfileStack},
     Logout: {
         screen: Logout,
         navigationOptions: {
@@ -77,7 +78,6 @@ const DrawerNavigation = DrawerNavigator({
             drawerIcon: <Icon name="logout-variant" size={25}/>,
         }
     },
-    Profile: {screen: ProfileStack}
 }, {
     headerMode: 'none',
     disabledBackGesture: true,
