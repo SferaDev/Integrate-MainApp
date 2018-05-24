@@ -148,6 +148,18 @@ const API = {
         let response = await http_helper.callApi(url, params);
 
         if (response.status === 200) return JSON.parse(response._bodyText);
+    },
+    setAppLanguage: async (language = '') => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/language/interface';
+        let params = [{key: 'token', value: token}, {key: 'interfaceLanguage', value: language}];
+
+        let response = await http_helper.callApi(url, params, "PUT", true);
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
     }
 };
 

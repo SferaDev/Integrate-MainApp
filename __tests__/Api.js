@@ -178,4 +178,13 @@ describe("API tests", () => {
             expect(JSON.stringify(r)).toBe('{"something":"Hello World"}');
         });
     });
+
+    describe("setAppLanguage() tests", () => {
+
+        test('setAppLanguage() is callable and returns nothing', async () => {
+
+            let r = await API.setAppLanguage(undefined);
+            expect(JSON.stringify(r)).toBe('{"something":"Hello World"}');
+        });
+    });
 });
