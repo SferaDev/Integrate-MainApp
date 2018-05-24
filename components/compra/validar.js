@@ -107,15 +107,18 @@ export default class Validar extends Component {
         let typeError = this.state.typeError;
         switch (typeError) {
             case 201: //Descompte aplicat correctament
+                this.props.navigation.state.params.getEntity();
                 this.goDoubleBack();
                 break;
             case 403: //Error Codi Incorrecte
                 this.setState({toast: false});
                 break;
             case 409: //Error conflicte vals
+                this.props.navigation.state.params.forceRefresh();
                 this.goBack();
                 break;
             default:
+                this.props.navigation.state.params.forceRefresh();
                 this.goBack();
                 break;
         }

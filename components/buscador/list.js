@@ -17,6 +17,10 @@ export default class EntityList extends Component {
         return item._id
     }
 
+    refreshfunction() {
+        navigator.geolocation.getCurrentPosition(this.props.getEntities, () => {});
+    }
+
     render() {
         return (
             <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 60, backgroundColor: 'white'}]}>
@@ -24,6 +28,8 @@ export default class EntityList extends Component {
                     data={this.props.entities}
                     renderItem={this.renderEntity.bind(this)}
                     keyExtractor={this.extractKey.bind(this)}
+                    refreshing={false}
+                    onRefresh={this.props.getEntities}
                 />
             </View>
         );

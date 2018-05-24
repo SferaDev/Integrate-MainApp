@@ -46,7 +46,7 @@ export default class DetallsGood extends Component {
                                     style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.good.initialPrice + '€ (-' + this.props.good.discount + '' + this.props.good.discountType + ')'}</Text>
                             </View>
                         </View>
-                        <TouchableHighlight style={styles.entityResume} onPress={this.showEntity.bind(this)}>
+                        <TouchableHighlight style={styles.entityResume} onPress={this.showEntity.bind(this)} underlayColor='transparent' >
                             <Text style={styles.entityNameText}>{this.props.good.owner.name}</Text>
                         </TouchableHighlight>
                     </View>

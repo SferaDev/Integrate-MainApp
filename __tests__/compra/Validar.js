@@ -18,7 +18,9 @@ const navigation = {
                 goods: []
             },
             selected_goods: ['555'],
-            total_discount: 0
+            total_discount: 0,
+            forceRefresh: jest.fn(),
+            getEntity: jest.fn()
         }
     },
     goBack: jest.fn(),

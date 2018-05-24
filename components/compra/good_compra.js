@@ -9,12 +9,16 @@ export default class GoodCompra extends Component {
         this.colors = ["white", "#b22222", "pink", "#ff8c00", "#9400d3", "black", "green", "#4169e1", "#ffd700", "grey"];
     }
 
+    selectGood(){
+        if(this.props.item.isUsable)this.props.onPress.bind(this.props.context, this.props.item._id).call();
+    }
+
     render() {
         return (
             <TouchableHighlight
                 style={styles.selection}
                 key={this.props.item._id}
-                onPress={this.props.onPress.bind(this.props.context, this.props.item._id)}
+                onPress={this.selectGood.bind(this)}
                 underlayColor="transparent"
             >
                 <View
@@ -23,7 +27,7 @@ export default class GoodCompra extends Component {
                         borderWidth: this.props.isSelected ? 2 : 1
                     }]}>
                     <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}/>
-                    <View style={styles.viewGoodContent}>
+                    <View style={[styles.viewGoodContent,{backgroundColor: (this.props.item.isUsable) ? 'white' : 'rgba(127,127,127,0.3)'}]}>
                         <View style={styles.view1}>
                             <Text style={styles.goodBasicText}>Cada {this.props.item.reusePeriod} dies</Text>
                             <Text
@@ -32,12 +36,14 @@ export default class GoodCompra extends Component {
                         <View style={styles.view1}>
                             <Text style={styles.goodName}>{this.props.item.productName}</Text>
                             {
-                                this.props.isSelected ?
-                                    <Icon style={[styles.CheckBoxProps, styles.selected]}
-                                          name="checkbox-marked-circle-outline" size={30}/>
-                                    :
-                                    <Icon style={[styles.CheckBoxProps, styles.unselected]}
-                                          name="checkbox-blank-circle-outline" size={30}/>
+                                this.props.item.isUsable ?
+                                    this.props.isSelected ?
+                                        <Icon style={[styles.CheckBoxProps, styles.selected]}
+                                              name="checkbox-marked-circle-outline" size={30}/>
+                                        :
+                                        <Icon style={[styles.CheckBoxProps, styles.unselected]}
+                                              name="checkbox-blank-circle-outline" size={30}/>
+                                    : null
                             }
                         </View>
                     </View>
