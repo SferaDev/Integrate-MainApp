@@ -123,13 +123,9 @@ export default class Buscador extends Component {
                 </View>
                 {
                     this.isAnEntitySelected() ?
-                        <TouchableHighlight style={{height: this.isListView(), width: '100%'}}
-                                            onPress={this.showEntity.bind(this, this.state.selectedEntity)}
-                                            underlayColor='transparent'>
-                            <View>
-                                <Entity item={this.state.selectedEntity}/>
-                            </View>
-                        </TouchableHighlight>
+                        <View style={{height: this.isListView(), width: '100%'}} >
+                            <Entity item={this.state.selectedEntity} onDetailsShow={this.showEntity.bind(this)} />
+                        </View>
                         :
                         null
                 }
