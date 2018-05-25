@@ -81,6 +81,7 @@ const ProfileStack = StackNavigator({
 const DrawerNavigation = DrawerNavigator({
     Buscador: {screen: BuscadorStack},
     Vals: {screen: ValsStack},
+    Profile: {screen: ProfileStack},
     Logout: {
         screen: Logout,
         navigationOptions: {

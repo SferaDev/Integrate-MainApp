@@ -163,7 +163,7 @@ export default class Validar extends Component {
                 let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
                 return (
                     <View style={{marginBottom: 10}}>
-                        <Text style={{fontSize: 18, fontWeight: 'bold'}}>Conflicte amb els vals: </Text>
+                        <Text style={{fontSize: 18, fontWeight: 'bold', paddingBottom: 5}}>Conflicte amb els vals: </Text>
                         {conflictList}
                     </View>
                 );
@@ -218,6 +218,7 @@ export default class Validar extends Component {
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.validar.bind(this)}
+                            underlayColor='none'
                             disabled={this.isEmpty()}>
                             <Text style={{
                                 alignSelf: 'center',
