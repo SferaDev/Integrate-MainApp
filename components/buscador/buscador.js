@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BackHandler, StyleSheet, TextInput, View} from 'react-native';
+import {BackHandler, StyleSheet, TextInput, TouchableHighlight, View} from 'react-native';
 import Maps from './maps';
 import EntityList from './list';
 import Entity from './entity';
@@ -30,18 +30,23 @@ export default class Buscador extends Component {
         return true;
     }
 
-    getEntities(loc) {
-        API.getEntities(loc).then(this.setEntities.bind(this));
+    async getEntities(loc) {
+        if (!loc) loc = this.loc;
+        this.loc = loc;
+
+        let entities = await API.getEntities(loc);
+        if (entities != null) {
+            this.setState({entities: entities, entities_shown: entities});
+        }
     }
 
     showEntityInfo(ent) {
-
-        let selEntity = this.state.entities[ent];
+        let selEntity = this.state.entities_shown[ent];
         this.setState({selectedEntity: selEntity});
     }
 
-    setEntities(entities) {
-        this.setState({entities: entities, entities_shown: entities});
+    showEntity(selEntity) {
+        this.props.navigation.navigate('detalls_entitat', {selectedEntity: selEntity});
     }
 
     openMenu() {
@@ -79,7 +84,6 @@ export default class Buscador extends Component {
         this.setState({entities_shown: entities_shown});
     }
 
-
     isAnEntitySelected() {
         return this.state.selectedEntity !== null ? true : false;
     }
@@ -95,7 +99,9 @@ export default class Buscador extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
-                    <Icon onPress={this.switchView.bind(this)} style={styles.headerRightIco} name="format-list-bulleted"
+                    <Icon onPress={this.switchView.bind(this)} 
+                          style={styles.headerRightIco} 
+                          name={ this.state.isListView ? "google-maps" : "format-list-bulleted"}
                           size={30}/>
                 </View>
                 <View style={{
@@ -108,15 +114,17 @@ export default class Buscador extends Component {
                 }}>
                     {
                         this.state.isListView ?
-                            <EntityList entities={this.state.entities_shown}/>
+                            <EntityList entities={this.state.entities_shown}
+                                        onDetailsShow={this.showEntity.bind(this)}
+                                        getEntities={this.getEntities.bind(this)} />
                             :
                             <Maps entities={this.state.entities_shown} onMarkerClick={this.showEntityInfo.bind(this)}/>
                     }
                 </View>
                 {
                     this.isAnEntitySelected() ?
-                        <View style={{height: this.isListView(), width: '100%'}}>
-                            <Entity item={this.state.selectedEntity}/>
+                        <View style={{height: this.isListView(), width: '100%'}} >
+                            <Entity item={this.state.selectedEntity} onDetailsShow={this.showEntity.bind(this)} />
                         </View>
                         :
                         null

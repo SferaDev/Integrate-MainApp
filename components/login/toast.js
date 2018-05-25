@@ -19,12 +19,14 @@ export default class Toast extends Component {
         return (
             <View style={[styles.toastback, {display: this.isVisible()}]}>
                 <View style={styles.toastcontent}>
-                    <Text style={styles.text}>
-                        El Nie / Nif o la contrasenya són incorrectes
-                    </Text>
-                    <TouchableHighlight style={styles.closeButton}
-                                        onPress={this.props.onClose}>
-                        <Text style={[styles.text, {color: '#094671', fontWeight: 'bold'}]}>
+                    <View>
+                        {this.props.children}
+                    </View>
+                    <TouchableHighlight
+                        style={styles.button}
+                        underlayColor='none'
+                        onPress={this.props.onClose}>
+                        <Text style={styles.textButton}>
                             CLOSE
                         </Text>
                     </TouchableHighlight>
@@ -53,6 +55,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold'
     },
+    textButton: {
+        alignSelf: 'center',
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 17
+    },
     closeButton: {
         borderWidth: 3,
         //borderColor: '#67ACB1',
@@ -68,5 +76,16 @@ const styles = StyleSheet.create({
         //backgroundColor: '#094671'
         backgroundColor: '#67ACB1'
 
-    }
+    },
+    button: {
+        borderWidth: 1,
+        borderColor: '#0c59cf',
+        width: 120,
+        height: 40,
+        borderRadius: 4,
+        justifyContent: 'center',
+        margin: 10,
+        alignSelf: 'center',
+        backgroundColor: '#094671',
+    },
 });

@@ -4,6 +4,7 @@ import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
 import Good from './good';
+import DetallsGood from './detalls_good';
 import SegmentControl from 'react-native-segment-controller';
 
 export default class LlistaVals extends Component {
@@ -21,44 +22,36 @@ export default class LlistaVals extends Component {
             category: 0,
             order: 0,
             selectedIndex: 1,
-            visible: false
+            visible: false,
+            isGoodSelected: false,
+            selectedGood: null
         };
     }
 
     componentDidMount() {
-        this.getAllGoods();
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+        this.getAllGoods();
     }
 
     handleBackButton() {
         return true;
     }
 
-    getAllGoods() {
-        this.getGoods();
-        this.getGoodsFav();
-    }
+    async getAllGoods(loc) {
 
-    getGoods(loc) {
         let category = this.state.category;
         let order = this.state.order;
-        API.getGoods(category, order, loc).then(this.setGoods.bind(this));
-    }
 
-    getGoodsFav(loc) {
-        let category = this.state.category;
-        let order = this.state.order;
-        API.getGoodsFav(category, order, loc).then(this.setGoodsFav.bind(this));
-    }
+        let goods = await API.getGoods(category, order, loc);
+        let goodsFav = await API.getGoodsFav(category, order, loc);
 
-    setGoods(goods) {
-        this.setState({goods: goods});
-        if (this.state.selectedIndex == 1) this.setState({goods_shown: goods});
-    }
-
-    setGoodsFav(goodsFav) {
-        this.setState({goodsFav: goodsFav});
-        if (this.state.selectedIndex == 0) this.setState({goods_shown: goodsFav});
+        if (goods != null && goodsFav != null) {
+            if (this.state.selectedIndex == 1) {
+                this.setState({goods_shown: goods, goods: goods, goodsFav: goodsFav});
+            } else {
+                this.setState({goods_shown: goodsFav, goods: goods, goodsFav: goodsFav});
+            }
+        }
     }
 
     openMenu() {
@@ -68,34 +61,24 @@ export default class LlistaVals extends Component {
 
     selectFilter(value, index) {
 
-        //Seleccio filtre per categoria
         this.setState({category: index});
-
-        //Crida a la api
-        this.getGoods();
+        this.getAllGoods();
     }
 
     selectOrder(value, index) {
-        //Seleccio filtre per metode d'ordenacio
+
         this.setState({order: index});
 
-        //Crida a la api
-        if (index === 2) {
-            navigator.geolocation.getCurrentPosition(this.getGoods.bind(this), () => {
-            });
-        }
-        else {
-            this.getGoods();
-        }
+        if (index === 2) navigator.geolocation.getCurrentPosition(this.getAllGoods.bind(this), () => {
+        });
+        else this.getAllGoods();
     }
 
-    toggleFavourite(id, isFav) {
-        if (!isFav) {
-            API.addGoodFav(id).then(this.getAllGoods.bind(this));
-        }
-        else {
-            API.deleteGoodFav(id).then(this.getAllGoods.bind(this));
-        }
+    async toggleFavourite(id, isFav) {
+
+        if (!isFav) await API.addGoodFav(id);
+        else await API.deleteGoodFav(id);
+        this.getAllGoods();
     }
 
     isFav(id) {
@@ -105,17 +88,29 @@ export default class LlistaVals extends Component {
         return false;
     }
 
-    renderGood({item}) {
+    showGoodDetails(good) {
+        this.setState({isGoodSelected: true, selectedGood: good});
+    }
 
+    showGoodsList() {
+        this.setState({isGoodSelected: false, selectedGood: {}});
+    }
+
+    renderGood({item}) {
         return (
             <Good
                 id={item._id}
                 item={item}
-                onPress={this.toggleFavourite}
+                onPress={this.showGoodDetails}
+                onToggleFav={this.toggleFavourite}
                 context={this}
                 isFav={this.isFav(item._id)}
             />
         );
+    }
+
+    extractKey(item) {
+        return item._id
     }
 
     setIndexChange(index) {
@@ -131,47 +126,58 @@ export default class LlistaVals extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
-                </View>
-                <SegmentControl
-                    values={['Preferits', 'Tots']}
-                    height={50}
-                    borderRadius={1}
-                    selectedIndex={this.state.selectedIndex}
-                    onTabPress={this.setIndexChange.bind(this)}
-                />
-                <View style={[styles.filterGoods, {height: (this.canApplyFilters()) ? 1 : 60}]}>
-                    <View style={{flex: 1}}>
-                        <Dropdown
-                            label='Categoria'
-                            data={this.categories}
-                            onChangeText={this.selectFilter.bind(this)}
-                            itemCount={10}
-                            dropdownPosition={0}
-                            disabled={this.canApplyFilters()}
-                        />
+            <View style={{flex: 1}}>{!this.state.isGoodSelected ?
+                <View style={styles.container}>
+                    <View style={styles.header}>
+                        <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
                     </View>
-                    <View style={{flex: 1}}>
-                        <Dropdown
-                            label='Filtre'
-                            data={this.orders}
-                            onChangeText={this.selectOrder.bind(this)}
-                            itemCount={3}
-                            dropdownPosition={0}
-                            disabled={this.canApplyFilters()}
-                        />
+                    <SegmentControl
+                        values={['Preferits', 'Tots']}
+                        height={50}
+                        borderRadius={1}
+                        selectedIndex={this.state.selectedIndex}
+                        onTabPress={this.setIndexChange.bind(this)}
+                    />
+                    <View style={[styles.filterGoods, {height: (this.canApplyFilters()) ? 1 : 60}]}>
+                        <View style={{flex: 1}}>
+                            <Dropdown
+                                label='Categoria'
+                                data={this.categories}
+                                onChangeText={this.selectFilter.bind(this)}
+                                itemCount={10}
+                                dropdownPosition={0}
+                                disabled={this.canApplyFilters()}
+                            />
+                        </View>
+                        <View style={{flex: 1}}>
+                            <Dropdown
+                                label='Filtre'
+                                data={this.orders}
+                                onChangeText={this.selectOrder.bind(this)}
+                                itemCount={3}
+                                dropdownPosition={0}
+                                disabled={this.canApplyFilters()}
+                            />
+                        </View>
+                    </View>
+                    <View style={styles.body}>
+                        <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>
+                            <FlatList
+                                data={this.state.goods_shown}
+                                renderItem={this.renderGood.bind(this)}
+                                keyExtractor={this.extractKey.bind(this)}
+                                refreshing={false}
+                                onRefresh={this.getAllGoods.bind(this)}
+                            />
+                        </View>
                     </View>
                 </View>
-                <View style={styles.body}>
-                    <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>
-                        <FlatList
-                            data={this.state.goods_shown}
-                            renderItem={this.renderGood.bind(this)}
-                        />
-                    </View>
-                </View>
+                :
+                <DetallsGood navigation={this.props.navigation} good={this.state.selectedGood}
+                             isFav={this.isFav(this.state.selectedGood._id)}
+                             showGoodsList={this.showGoodsList.bind(this)} toggleFavourite={this.toggleFavourite}
+                             context={this}/>
+            }
             </View>
         );
     }

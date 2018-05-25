@@ -9,8 +9,16 @@ export default class EntityList extends Component {
 
     renderEntity({item}) {
         return (
-            <Entity item={item}/>
+            <Entity key={'' + item._id + ''} item={item} onDetailsShow={this.props.onDetailsShow}/>
         );
+    }
+
+    extractKey(item) {
+        return item._id
+    }
+
+    refreshfunction() {
+        navigator.geolocation.getCurrentPosition(this.props.getEntities, () => {});
     }
 
     render() {
@@ -18,7 +26,10 @@ export default class EntityList extends Component {
             <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 60, backgroundColor: 'white'}]}>
                 <FlatList
                     data={this.props.entities}
-                    renderItem={this.renderEntity}
+                    renderItem={this.renderEntity.bind(this)}
+                    keyExtractor={this.extractKey.bind(this)}
+                    refreshing={false}
+                    onRefresh={this.props.getEntities}
                 />
             </View>
         );

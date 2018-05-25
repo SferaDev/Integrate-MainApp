@@ -24,7 +24,7 @@ describe('Test group for EntityList', function () {
 
     beforeEach(function () {
         // Before each: Shallows the EntityList component
-        wrapper = shallow(<Entity item={entity}/>);
+        wrapper = shallow(<Entity item={entity} onDetailsShow={jest.fn()}/>);
         instance = wrapper.instance();
     });
 
@@ -34,9 +34,18 @@ describe('Test group for EntityList', function () {
         instance = null;
     });
 
-    test('renders buscador correctly', () => {
+    test('renders buscador correctly with onDetailsShow', () => {
+        const tree = renderer.create(<Entity item={entity} onDetailsShow={jest.fn()}/>).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    test('renders buscador correctly without onDetailsShow', () => {
         const tree = renderer.create(<Entity item={entity}/>).toJSON();
         expect(tree).toMatchSnapshot();
+    });
+
+    test('showEntityInfo is callable and returns nothing', () => {
+        expect(instance.showEntityInfo()).toMatchSnapshot();
     });
 
 });

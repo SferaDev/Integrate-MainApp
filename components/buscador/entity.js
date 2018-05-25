@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableHighlight} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Entity extends Component {
     constructor(props) {
@@ -7,17 +8,25 @@ export default class Entity extends Component {
         this.state = {};
     }
 
+    showEntityInfo() {
+        if( this.props.onDetailsShow ){
+            this.props.onDetailsShow(this.props.item);
+        }
+    }
+
     render() {
         return (
-            <View key={this.props.item.id} style={styles.entityView}>
-                <Text style={styles.entityName}>{this.props.item.name}</Text>
-                <Text style={styles.entityDescription}>{this.props.item.description}</Text>
-                <Text style={styles.entityAddress}>{this.props.item.addressName}</Text>
-                <View style={styles.entityLikes}>
-                    <Text>0</Text>
-                    <Text>TH</Text>
+            <TouchableHighlight key={this.props.item._id} style={styles.entityView} onPress={this.showEntityInfo.bind(this)} underlayColor='transparent' >
+                <View>
+                    <Text style={styles.entityName}>{this.props.item.name}</Text>
+                    <Text style={styles.entityDescription}>{this.props.item.description}</Text>
+                    <Text style={styles.entityAddress}>{this.props.item.addressName}</Text>
+                    <View style={styles.entityLikes}>
+                        <Text></Text>
+                        <Text></Text>
+                    </View>
                 </View>
-            </View>
+            </TouchableHighlight>
         );
     }
 }

@@ -9,7 +9,7 @@ const mockGeolocation = {
 global.navigator = {};
 global.navigator.geolocation = mockGeolocation;
 
-const Marker = class Marker extends React.Component {
+const MV_Marker = class Marker extends React.Component {
 
     render() {
         return React.createElement(Text, this.props, this.props.children);
@@ -18,7 +18,7 @@ const Marker = class Marker extends React.Component {
 
 class MapView extends React.Component {
 
-    //static Marker = '';
+    static Marker = MV_Marker;
 
     render() {
         return React.createElement(View, this.props, this.props.children);

@@ -10,6 +10,16 @@ import Maps from '../../components/buscador/maps';
 
 let wrapper;
 let instance;
+let entity = {
+    _id: 0,
+    name: 'name',
+    description: 'description',
+    addressName: 'addressName',
+    phone: '000000',
+    email: 'aaa@bbb.com',
+    coordinates: [0, 0],
+    goods: []
+};
 
 describe('Test group for Maps', function () {
     beforeAll(() => {
@@ -19,7 +29,7 @@ describe('Test group for Maps', function () {
 
     beforeEach(function () {
         // Before each: Shallows the Maps component
-        wrapper = shallow(<Maps entities={[]}/>);
+        wrapper = shallow(<Maps entities={[entity]}/>);
         instance = wrapper.instance();
     });
 
@@ -30,7 +40,7 @@ describe('Test group for Maps', function () {
     });
 
     test('renders maps correctly', () => {
-        const tree = renderer.create(<Maps entities={[]}/>).toJSON();
+        const tree = renderer.create(<Maps entities={[entity]}/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
 

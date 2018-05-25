@@ -1,10 +1,12 @@
 import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
-
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Buscador from '../../components/buscador/buscador';
+
+jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
+jest.mock('../../components/http_helper');
 
 const navigation = {navigate: jest.fn()};
 let wrapper;
@@ -12,7 +14,6 @@ let instance;
 
 describe('Test group for EntityList', function () {
     beforeAll(() => {
-        jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
         configure({adapter: new Adapter()});
     });
 
@@ -41,12 +42,12 @@ describe('Test group for EntityList', function () {
         expect(instance.switchView()).toBe(undefined);
     });
 
-    test('getEntities is callable and returns an array', () => {
-        expect(instance.getEntities()).toBe(undefined);
+    test('getEntities is callable and returns an array', async () => {
+        expect(await instance.getEntities()).toBe(undefined);
     });
 
-    test('setEntities is callable and returns an array', () => {
-        expect(instance.setEntities()).toBe(undefined);
+    test('getEntities is callable and returns an array', async () => {
+        expect(await instance.getEntities({coords: {longitude: 0, latitude: 0}})).toBe(undefined);
     });
 
     test('handleBackButton is callable and returns true', () => {
@@ -57,8 +58,8 @@ describe('Test group for EntityList', function () {
         expect(instance.showEntityInfo()).toBe(undefined);
     });
 
-    test('setEntities is callable and returns nothing', () => {
-        expect(instance.setEntities()).toBe(undefined);
+    test('showEntity is callable and returns nothing', () => {
+        expect(instance.showEntity()).toBe(undefined);
     });
 
     test('showListView is callable and returns nothing', () => {

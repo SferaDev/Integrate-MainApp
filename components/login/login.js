@@ -83,7 +83,7 @@ export default class LogIn extends Component {
     }
 
     restorePassword() {
-        //console.warn('Recuperar Contrasenya')
+        this.props.navigation.navigate('RestoreCredentials');
     }
 
     getButtonBackground() {
@@ -135,6 +135,7 @@ export default class LogIn extends Component {
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.login.bind(this)}
+                            underlayColor='none'
                             disabled={this.isEmpty()}>
                             <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
                                 Entra
@@ -143,7 +144,9 @@ export default class LogIn extends Component {
                     </View>
                     <Toast
                         visible={this.state.error}
-                        onClose={this.updateError.bind(this)}/>
+                        onClose={this.updateError.bind(this)}>
+                        <Text style={{textAlign: 'center'}}>El Nie / Nif o la contrasenya són incorrectes</Text>
+                    </Toast>
                 </ImageBackground>
             </View>
         );
@@ -166,7 +169,7 @@ const styles = StyleSheet.create({
     basicInput: {
         borderWidth: 1,
         borderColor: '#0c59cf',
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(255,255,255,0.85)',
         width: 260,
         height: 35,
         borderRadius: 2,

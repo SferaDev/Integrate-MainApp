@@ -12,14 +12,25 @@ const buildQuery = (url = '', params = [], base_url = BASE_URL) => {
     return query;
 };
 
-const callApi = (url, params, success, error, method = 'GET') => {
+const callApi = async (url, params, method = 'GET') => {
     //fetch(buildQuery(url, params), { method: method }).then(success).catch(error);
-    new Promise((resolve) => {
-        resolve({
+
+    let isNull = false;
+    for (let p of params) {
+        if (p.key != "token" && p.value == null) isNull = true;
+    }
+
+    if (url.split('/')[url.split('/').length - 1] == "null" || isNull) {
+        return await {
+            status: url === 'login' ? 401 : 404,
+            _bodyText: JSON.stringify({something: 'Not found'})
+        };
+    } else {
+        return await {
             status: 200,
             _bodyText: JSON.stringify({something: 'Hello World'})
-        });
-    });
+        };
+    }
 };
 
 const httpHelper = {

@@ -43,5 +43,16 @@ describe('Test group for EntityList', function () {
     test('renderEntity renders an entity correctly', () => {
         expect(instance.renderEntity({item: {id: 1}})).toMatchSnapshot();
     });
+
+    test('extractKey is callable and returns item id', () => {
+        let entity = {
+            _id: '1'
+        };
+        expect(instance.extractKey(entity)).toBe('1');
+    });
+
+    test('refreshfunction is callable and returns false', () => {
+        expect(instance.refreshfunction()).toBe(undefined);
+    });
 });
 
