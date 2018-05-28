@@ -22,6 +22,7 @@ global.navigator = mockNavigator;
 describe('Test group for llista_vals', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
+        global.lang = 'ca';
     });
 
     beforeEach(function () {

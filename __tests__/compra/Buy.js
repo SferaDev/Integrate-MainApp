@@ -37,6 +37,7 @@ let entity = {
 describe('Test group for EntityList', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
+        global.lang = 'ca';
     });
 
     beforeEach(function () {

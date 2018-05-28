@@ -64,5 +64,4 @@ describe('Test group for EntityList', function () {
             expect(await instance.getAllLanguages()).toBe(undefined);
         });
     });
-
 });
