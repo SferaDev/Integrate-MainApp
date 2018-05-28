@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View, ScrollView} from 'react-native';
 
 import Toast from './toast';
 import API from "../api";
@@ -15,21 +15,21 @@ export default class RestoreCredentials extends Component {
     }
 
     componentDidMount() {
-        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
-        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
+        //this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
+        //this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
     }
 
-    moveUp() {
+    /*moveUp() {
         this.setState({isFieldFocused: true});
     }
 
     moveDown() {
         this.setState({isFieldFocused: false});
-    }
+    }*/
 
     componentWillUnmount() {
-        this.keyboardDidShowListener.remove();
-        this.keyboardDidHideListener.remove();
+        //this.keyboardDidShowListener.remove();
+        //this.keyboardDidHideListener.remove();
     }
 
     updateText(value) {
