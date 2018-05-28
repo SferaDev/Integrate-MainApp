@@ -3,6 +3,7 @@ import {ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableHighlig
 
 import Toast from './toast';
 import API from "../api";
+import language_settings from '../language_settings';
 
 export default class RestoreCredentials extends Component {
     constructor(props) {
@@ -75,12 +76,12 @@ export default class RestoreCredentials extends Component {
                         <View style={{display: 'flex', alignItems: 'center', width: '100%', height: 300}}>
                             <View style={{flex: 40, justifyContent: 'flex-end'}}>
                                 <Text style={styles.basicTitle}>
-                                    Recuperar credencials:
+                                    {language_settings[global.lang].restoreCredentials.title}
                                 </Text>
                             </View>
                             <View style={{flex: 20}}>
                                 <TextInput style={styles.basicInput}
-                                           placeholder="NIE/NIF"
+                                           placeholder={language_settings[global.lang].restoreCredentials.nif_nie}
                                            value={this.state.nifNie}
                                            onChangeText={this.updateText.bind(this)}
                                            underlineColorAndroid='rgba(0,0,0,0)'>
@@ -94,13 +95,13 @@ export default class RestoreCredentials extends Component {
                                 >
                                     <Text
                                         style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
-                                        Sol·licitar
+                                        {language_settings[global.lang].restoreCredentials.button_text}
                                     </Text>
                                 </TouchableHighlight>
                             </View>
                             <View style={{flex: 40}}>
                                 <Text style={styles.textGoToLogIn} onPress={this.goToLogIn.bind(this)}>
-                                    Enrera
+                                    {language_settings[global.lang].restoreCredentials.go_back}
                                 </Text>
                             </View>
                         </View>

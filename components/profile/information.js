@@ -10,7 +10,9 @@ export default class Information extends Component {
     constructor(props) {
         super(props);
 
-        this.appLanguages = [{value: "Catala", iso: 'ca'}, {value: "Castella", iso: 'es'}, {value: "Angles", iso: 'en'}];
+        this.appLanguages = [{value: language_settings[global.lang].profile.language_ca, iso: 'ca'},
+            {value: language_settings[global.lang].profile.language_es, iso: 'es'},
+            {value: language_settings[global.lang].profile.language_en, iso: 'en'}];
         this.goodsLanguages = [{value: "Catala"}, {value: "Castella"}, {value: "Angles"}, {value: "Altres"}];
         //this.goodsLanguages = [{value: ""}];
 

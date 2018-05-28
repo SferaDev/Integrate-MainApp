@@ -16,6 +16,13 @@ import Buy from "./compra/buy";
 import language_settings from './language_settings';
 import {AsyncStorage} from "react-native";
 
+let loadLang = async () => {
+    return await AsyncStorage.getItem('lang');
+}
+
+//console.warn(JSON.stringify(loadLang));
+//console.warn(JSON.parse(AsyncStorage.getItem('lang')));
+
 let searcher = language_settings['en'].home.searcher;
 let goods = language_settings['en'].home.goods;
 let log_out = language_settings['en'].home.log_out;

@@ -5,6 +5,7 @@ import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import GoodCompra from "./good_compra";
 import Toast from "../login/toast";
+import language_settings from '../language_settings';
 
 
 export default class Buy extends Component {
@@ -144,7 +145,7 @@ export default class Buy extends Component {
                 let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
                 return (
                     <View style={{marginBottom: 10}}>
-                        <Text style={{fontSize: 18, fontWeight: 'bold'}}>Conflicte amb els vals: </Text>
+                        <Text style={{fontSize: 18, fontWeight: 'bold'}}> {language_settings[global.lang].validate.conflict} </Text>
                         {conflictList}
                     </View>
                 );
