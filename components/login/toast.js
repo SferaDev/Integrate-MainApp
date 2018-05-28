@@ -24,6 +24,7 @@ export default class Toast extends Component {
                     </View>
                     <TouchableHighlight
                         style={styles.button}
+                        underlayColor='none'
                         onPress={this.props.onClose}>
                         <Text style={styles.textButton}>
                             CLOSE

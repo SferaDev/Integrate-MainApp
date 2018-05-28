@@ -136,6 +136,7 @@ export default class LogIn extends Component {
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.login.bind(this)}
+                            underlayColor='none'
                             disabled={this.isEmpty()}>
                             <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
                                 {language_settings[global.lang].login.button_text}
