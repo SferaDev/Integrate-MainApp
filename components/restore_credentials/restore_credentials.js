@@ -47,6 +47,7 @@ export default class RestoreCredentials extends Component {
     }
 
     restoreCredentials() {
+        Keyboard.dismiss();
         let nifnie = this.state.nifnie;
         API.restoreCredentials(nifnie).then(this.goToLogIn.bind(this)).catch(this.showError.bind(this));
     }

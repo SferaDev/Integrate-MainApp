@@ -46,6 +46,7 @@ export default class LogIn extends Component {
     }
 
     login() {
+        Keyboard.dismiss();
         let nifnie = this.state.nifnie;
         let password = this.state.password;
         let that = this;
