@@ -48,8 +48,8 @@ export default class RestoreCredentials extends Component {
 
     restoreCredentials() {
         let nifnie = this.state.nifnie;
-        API.restoreCredentials(nifnie).catch(this.showError.bind(this));
-        this.props.navigation.navigate('LoginStack');
+        API.restoreCredentials(nifnie).then(this.goToLogIn).catch(this.showError);
+        //this.props.navigation.navigate('LoginStack');
     }
 
     showError() {
@@ -61,7 +61,7 @@ export default class RestoreCredentials extends Component {
     }
 
     goToLogIn() {
-        this.props.navigation.navigate('LoginStack');
+        this.props.navigation.goBack();
     }
 
     isEmpty() {
