@@ -14,10 +14,10 @@ const API = {
                     reject();
                 } else if (response.status === 200) {
                     let {user, token} = JSON.parse(response._bodyText);
-                    AsyncStorage.setItem('token', token);
-                    AsyncStorage.setItem('user', JSON.stringify(user));
 
-                    AsyncStorage.setItem('lang', user.interfaceLanguage);
+                    AsyncStorage.setItem('token', token);
+                    user.interfaceLanguage = global.lang;
+                    AsyncStorage.setItem('user', JSON.stringify(user));
                     global.lang = user.interfaceLanguage;
 
                     resolve(JSON.parse(response._bodyText).token);
@@ -70,7 +70,7 @@ const API = {
         const token = await AsyncStorage.getItem('token');
 
         let url = 'me/goods';
-        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}];
+        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}, {key:'language', value: 'fr'}];
 
         if (loc != null) {
             params.push({key: 'latitude', value: loc.coords.latitude});
@@ -159,6 +159,18 @@ const API = {
 
         let url = 'me/language/interface';
         let params = [{key: 'token', value: token}, {key: 'interfaceLanguage', value: language}];
+
+        let response = await http_helper.callApi(url, params, "PUT", true);
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
+    },
+    setGoodLanguage: async (language = '') => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/language/goods';
+        let params = [{key: 'token', value: token}, {key: 'goodLanguage', value: language}];
 
         let response = await http_helper.callApi(url, params, "PUT", true);
 

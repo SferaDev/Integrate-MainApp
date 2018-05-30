@@ -16,19 +16,21 @@ export default class Information extends Component {
             appLanguage: 0,
             goodLanguage: 0,
             lang: 'ca',
-            goodLang: 'cat',
+            goodLang: 'ca',
             goodsLanguages: [],
             name:'',
             surname: '',
             nif: '',
-            email: '',
-            langToShow: 'Català'
+            email: ''
         };
     }
 
     componentDidMount() {
         this.setUserInformation();
-        this.getAllLanguages();
+    }
+
+    setAppLanguage(lang) {
+        return this.appLanguages.map(function(e) { return e.iso; }).indexOf(lang);
     }
 
     async setUserInformation() {
@@ -40,19 +42,21 @@ export default class Information extends Component {
             email: user.email,
             lang: user.interfaceLanguage,
             goodLang: user.goodLanguage,
-            appLanguage: (this.appLanguages.map(function(e) { return e.iso; }).indexOf(user.interfaceLanguage)),
-            goodLanguage:(this.state.goodsLanguages.map(function(e) { return e.iso; }).indexOf(user.goodLanguage))
+            appLanguage: this.setAppLanguage(user.interfaceLanguage)
         });
+        this.getAllLanguages(user.goodLanguage);
         if (global.lang == user.interfaceLanguage) this.setState({lang: user.interfaceLanguage});
         else this.setState({lang: global.lang});
     }
 
-    async getAllLanguages() {
+    async getAllLanguages(iso) {
         let langs = await API.getLanguages();
-        let goodsLanguages = langs.map( (lang) => {return {value: lang.name, iso: lang.language};} );
-        this.setState({goodsLanguages: goodsLanguages});
-        this.setState({langToShow: this.state.goodsLanguages.map(function(e) { return e.value; }).valueOf(this.state.goodLanguage)})
-        //console.warn(goodsLanguages.value);
+        let index = 0;
+        let goodsLanguages = langs.map( (lang, i) => {
+            if (iso == lang.language) index = i;
+            return {value: lang.name, iso: lang.language};
+        } );
+        this.setState({goodsLanguages: goodsLanguages, goodLanguage: index, goodLang: iso});
     }
 
     handleBackButton() {
@@ -67,23 +71,18 @@ export default class Information extends Component {
         this.setState({appLanguage: index, lang: this.appLanguages[index].iso});
         global.lang = this.state.lang;
         AsyncStorage.setItem('lang', global.lang);
-        //console.warn(this.state.lang);
-        API.setAppLanguage(this.state.lang);
-
-
         let user = JSON.parse(await AsyncStorage.getItem('user'));
-        //console.warn(user);
+        user.interfaceLanguage = global.lang;
+        AsyncStorage.setItem('user', JSON.stringify(user));
     }
 
-    selectGoodsLanguage(value, index) {
-        //console.warn(this.state.goodsLanguages[index].value);
+    async selectGoodsLanguage(value, index) {
         this.setState({goodLanguage: index});
-        //console.warn(this.state.goodLanguage);
-        //console.warn(this.appLanguages);
-        //var obj = this.appLanguages.find(function (obj) { return obj.iso === global.lang; });
-        //console.warn(obj.value);
-        //arr.find(callback[, thisArg])
-        //this.getAllLanguages();
+        let goodLang = this.state.goodsLanguages[index].iso;
+        API.setGoodLanguage(goodLang);
+        let user = JSON.parse(await AsyncStorage.getItem('user'));
+        user.goodLanguage = goodLang;
+        AsyncStorage.setItem('user', JSON.stringify(user));
     }
 
     goToChangePassword() {
@@ -134,7 +133,7 @@ export default class Information extends Component {
                                 data={this.state.goodsLanguages}
                                 onChangeText={this.selectGoodsLanguage.bind(this)}
                                 itemCount={4}
-                                value = {this.state.langToShow}
+                                value = {(this.state.goodsLanguages[this.state.goodLanguage] ? this.state.goodsLanguages[this.state.goodLanguage].value : "")}
                             />
                         </View>
                     </View>

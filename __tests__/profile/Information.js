@@ -49,14 +49,7 @@ describe('Test group for EntityList', function () {
         expect(instance.goToChangePassword()).toBe(undefined);
     });
 
-    test('selectAppLanguage() is callable and returns nothing', async () => {
-        instance.appLanguages = [{iso: 'es'}];
-        let r = await instance.selectAppLanguage('',0);
-        expect(JSON.stringify(r)).toBe(undefined);
+    test('selectGoodsLanguage() is callable and returns nothing', async() => {
+        expect(instance.setAppLanguage()).toBe(-1);
     });
-
-    test('selectGoodsLanguage() is callable and returns nothing', () => {
-        expect(instance.selectGoodsLanguage()).toBe(undefined);
-    });
-
 });
