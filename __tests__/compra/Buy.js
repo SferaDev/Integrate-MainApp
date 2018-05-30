@@ -15,7 +15,8 @@ const navigation = {
         params: {
             selectedEntity: {
                 _id: 0
-            }
+            },
+            getEntity: jest.fn()
         }
     },
     goBack: jest.fn()
@@ -109,11 +110,13 @@ describe('Test group for EntityList', function () {
 
         test('onClose when typeError is 409 ', () => {
             instance.state.typeError = 409;
+            instance.flatList = {};
             expect(instance.onClose()).toBe(undefined);
         });
 
         test('onClose when typeError is default ', () => {
             instance.state.typeError = 200;
+            instance.flatList = {};
             expect(instance.onClose()).toBe(undefined);
         });
     });
@@ -164,8 +167,17 @@ describe('Test group for EntityList', function () {
         expect(instance.extractKey(good)).toBe('1');
     });
 
-    test('refreshfunction is callable and returns false', () => {
-        expect(instance.refreshfunction()).toBe(false);
+    describe("refreshfunction() tests", () => {
+
+        test('refreshfunction is callable and returns false', () => {
+            instance.block_get_Entity = true;
+            expect(instance.refreshfunction()).toBe(false);
+        });
+
+        test('refreshfunction is callable and returns false', () => {
+            instance.block_get_Entity = false;
+            expect(instance.refreshfunction()).toBe(false);
+        });
     });
 
     describe("renderConflictGood() tests", () => {
@@ -192,6 +204,14 @@ describe('Test group for EntityList', function () {
             instance.state.typeError = 403;
             expect(instance.displayToastContent()).toMatchSnapshot();
         });
+    });
+
+    test('forceRefresh to selected good', () => {
+        instance.flatList = {};
+        instance.state.selected_goods = [1,2,3,4,5];
+        instance.state.nonUsableGoods = [1,2];
+        instance.state.soldOutGoods = [4,5];
+        expect(instance.forceRefresh()).toBe(undefined);
     });
 
 });

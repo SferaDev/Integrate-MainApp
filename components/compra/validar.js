@@ -64,6 +64,10 @@ export default class Validar extends Component {
         this.props.navigation.goBack();
     }
 
+    goDoubleBack() {
+        this.props.navigation.pop(2);
+    }
+
     moveUp() {
         this.setState({isFieldFocused: true});
     }
@@ -103,15 +107,19 @@ export default class Validar extends Component {
         let typeError = this.state.typeError;
         switch (typeError) {
             case 201: //Descompte aplicat correctament
-                this.props.navigation.goBack('detalls_entitat');
+                this.props.navigation.state.params.getEntity();
+                this.goDoubleBack();
                 break;
             case 403: //Error Codi Incorrecte
                 this.setState({toast: false});
                 break;
             case 409: //Error conflicte vals
+                this.props.navigation.state.params.forceRefresh();
                 this.goBack();
                 break;
             default:
+                this.props.navigation.state.params.forceRefresh();
+                this.goBack();
                 break;
         }
     }
@@ -145,9 +153,9 @@ export default class Validar extends Component {
         let typeError = this.state.typeError;
         switch (typeError) {
             case 201: //Descompte aplicat correctament
-                return (<Text style={{textAlign: 'center'}}>Descompte aplicat correctament</Text>);
+                return (<Text style={{textAlign: 'center', fontWeight: 'bold'}}>S'ha d'aplicar un descompte de -{this.state.total_discount} € </Text>);
             case 403: //Error Codi Incorrecte
-                return (<Text style={{textAlign: 'center'}}>Codi incorrecte</Text>);
+                return (<Text style={{textAlign: 'center', fontWeight: 'bold'}}>Codi incorrecte</Text>);
             case 409: //Error conflicte vals
                 let soldOutGoods = this.state.soldOutGoods;
                 let nonUsableGoods = this.state.nonUsableGoods;
@@ -155,7 +163,7 @@ export default class Validar extends Component {
                 let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
                 return (
                     <View style={{marginBottom: 10}}>
-                        <Text style={{fontSize: 18}}>Conflicte amb els vals: </Text>
+                        <Text style={{fontSize: 18, fontWeight: 'bold', paddingBottom: 5}}>Conflicte amb els vals: </Text>
                         {conflictList}
                     </View>
                 );
@@ -203,12 +211,14 @@ export default class Validar extends Component {
                         <TextInput style={styles.basicInput}
                                    value={this.state.code}
                                    placeholder={"Introduir codi"}
+                                   secureTextEntry={true}
                                    onChangeText={this.updateCode.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'>
                         </TextInput>
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.validar.bind(this)}
+                            underlayColor='none'
                             disabled={this.isEmpty()}>
                             <Text style={{
                                 alignSelf: 'center',

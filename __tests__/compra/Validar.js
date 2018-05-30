@@ -18,10 +18,13 @@ const navigation = {
                 goods: []
             },
             selected_goods: ['555'],
-            total_discount: 0
+            total_discount: 0,
+            forceRefresh: jest.fn(),
+            getEntity: jest.fn()
         }
     },
-    goBack: jest.fn()
+    goBack: jest.fn(),
+    pop: jest.fn()
 };
 let wrapper;
 let instance;
@@ -100,6 +103,10 @@ describe('Test group for Validar', function () {
 
     test('goBack is callable and returns nothing', () => {
         expect(instance.goBack()).toBe(undefined);
+    });
+
+    test('goDoubleBack is callable and returns nothing', () => {
+        expect(instance.goDoubleBack()).toBe(undefined);
     });
 
     test('moveUp() is callable and returns nothing', () => {

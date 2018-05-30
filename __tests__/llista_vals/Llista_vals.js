@@ -149,4 +149,8 @@ describe('Test group for llista_vals', function () {
             expect(instance.isFav(2)).toBe(false);
         });
     });
+
+    test('extractKey is callable and returns item id', () => {
+        expect(instance.extractKey({_id: 1})).toBe(1);
+    });
 });
