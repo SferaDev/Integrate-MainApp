@@ -1,4 +1,5 @@
 import {AppRegistry, AsyncStorage} from 'react-native';
+
 import App from './components/home';
 
 let loadLang = async () => {

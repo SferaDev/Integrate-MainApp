@@ -43,6 +43,18 @@ describe('Test group for EntityList', function () {
         expect(instance.changePassword()).toBe(undefined);
     });
 
+    test('changePassword() is callable and returns nothing', () => {
+        instance.state.new_password1 = 'A';
+        instance.state.new_password2 = 'A';
+        expect(instance.changePassword()).toBe(undefined);
+    });
+
+    test('changePassword() is callable and returns nothing', () => {
+        instance.state.new_password1 = 'aaabbbccc1';
+        instance.state.new_password2 = 'aaabbbccc1';
+        expect(instance.changePassword()).toBe(undefined);
+    });
+
     test('updatePassword() is callable and returns nothing', () => {
         expect(instance.updatePassword('')).toBe(undefined);
     });
@@ -165,4 +177,53 @@ describe('Test group for EntityList', function () {
     test('updateError() is callable and returns nothing', () => {
         expect(instance.updateError()).toBe(undefined);
     });
+
+    describe("hasNumber() tests", () => {
+        test('hasNumber() when new password not contains a number then returns false', () => {
+            instance.state.new_password1 = 'aaa';
+            expect(instance.hasNumber()).toBe(false);
+        });
+
+        test('hasNumber() when new password contains a number then returns true', () => {
+            instance.state.new_password1 = '123';
+            expect(instance.hasNumber()).toBe(true);
+        });
+    });
+
+    describe("isPasswordOk() tests", () => {
+        test('isPasswordOk() when new password length is less than 8 returns false', () => {
+            instance.state.new_password1 = 'aaa';
+            expect(instance.isPasswordOk()).toBe(false);
+        });
+
+        test('isPasswordOk() when new password length is more or equal than 8 and not contains a number returns false', () => {
+            instance.state.new_password1 = 'aaabbbccc';
+            expect(instance.isPasswordOk()).toBe(false);
+        });
+
+        test('isPasswordOk() when new password length is more or equal than 8 and contains a number returns true', () => {
+            instance.state.new_password1 = 'aaabbbccc1';
+            expect(instance.isPasswordOk()).toBe(true);
+        });
+    });
+
+    describe("displayToastContent() tests", () => {
+        test('displayToastContent typeError = 1 renders toast correctly', () => {
+            instance.state.typeError = 1;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
+        test('displayToastContent typeError = 2 renders toast correctly', () => {
+            instance.state.typeError = 2;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
+        test('displayToastContent typeError = default renders toast correctly', () => {
+            instance.state.typeError = 0;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
+        test('displayToastContent typeError = default renders toast correctly', () => {
+            instance.state.typeError = 3;
+            expect(instance.displayToastContent()).toMatchSnapshot();
+        });
+    });
+
 });

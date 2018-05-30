@@ -71,7 +71,6 @@
       "new_password_placeHolder": "Introduïr nova contrasenya",
       "new_password2_placeHolder": "Confirmar la nova contrasenya",
       "button_text": "Guardar contrasenya"
-      
     }
   },
 
@@ -93,7 +92,7 @@
       "search": "Buscar"
     },
     "validate": {
-      "discount_applied": "Se ha de aplicar un descuento de -",
+      "discount_applied": "Se debe aplicar un descuento de -",
       "wrong_code": "Código incorrecto",
       "conflict": "Conflicto con los vales:",
       "summary": "Resumen compra:",
@@ -170,7 +169,7 @@
     "validate": {
       "discount_applied": "Should apply a discount of -",
       "wrong_code": "Wrong code",
-      "conflict": "Goods conflict:",
+      "conflict": "Goods in conflict:",
       "summary": "Purchase summary:",
       "discount": "Total discount",
       "title": "Introduce validation's code:",
@@ -179,7 +178,7 @@
       "done": "DONE"
     },
     "toast": {
-      "message": "Nie / Nif introduced doesn't exisit",
+      "message": "Nie / Nif introduced doesn't exist",
       "exit": "Close"
     },
     "home": {
@@ -194,7 +193,7 @@
       "show_all": "All",
       "category": "Category",
       "all": "All",
-      "feeding": "Feeding",
+      "feeding": "Groceries",
       "culture": "Culture",
       "education": "Education",
       "mobility": "Mobility",

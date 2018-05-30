@@ -52,4 +52,5 @@ describe('Test group for EntityList', function () {
     test('selectGoodsLanguage() is callable and returns nothing', async() => {
         expect(instance.setAppLanguage()).toBe(-1);
     });
+
 });

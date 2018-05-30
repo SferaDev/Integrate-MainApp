@@ -3,6 +3,7 @@ import {AsyncStorage, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight,
 import Toast from '../login/toast';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import language_settings from '../language_settings';
+import API from '../api';
 
 export default class ChangePassword extends Component {
 
@@ -13,7 +14,8 @@ export default class ChangePassword extends Component {
             new_password1: "",
             new_password2: "",
             isFieldFocused: false,
-            error: false
+            error: false,
+            typeError: 0
         };
     }
 
@@ -75,16 +77,46 @@ export default class ChangePassword extends Component {
         this.setState({error: false});
     }
 
+    hasNumber() {
+        return /\d/.test(this.state.new_password1);
+    }
+
+    isPasswordOk() {
+        if (this.state.new_password1.length >= 8 && this.hasNumber()) return true;
+        else return false;
+    }
+
     changePassword() {
         let password = this.state.password;
         let new_password1 = this.state.new_password1;
         let new_password2 = this.state.new_password2;
 
-        if (new_password1 != new_password2) this.showError();
-        //TO DO: Canviar el text del toast fent que el text que es mostra sigui un paràmetre que se li passa
+        if (new_password1 != new_password2) {
+            this.setState({typeError: 1});
+            this.showError();
+        }
+        else if (!this.isPasswordOk()) {
+            this.setState({typeError: 2});
+            this.showError();
+        }
+        else if (this.isPasswordOk()) {
+            API.changePassword(password,new_password1).catch(this.showError.bind(this));
+            this.setState({typeError: 3});
+            this.showError();
+        }
+    }
 
-        //else {crida a la api passant password1 o password2 i el password antic}
-
+    displayToastContent() {
+        switch (this.state.typeError) {
+            case 1: //Contrasenyes diferents
+                return (<Text style={{textAlign: 'center'}}>Les contrasenyes no coincideixen</Text>);
+            case 2: //Contrasenya incorrecte
+                return (<Text style={{textAlign: 'center'}}>La contrasenya ha de contenir mínim 8 caracters i ha d'incloure un número</Text>);
+            case 3: //Cas d'èxit
+                return (<Text style={{textAlign: 'center'}}>La contrasenya s'ha modificat correctament</Text>);
+            default:
+                return (<Text style={{textAlign: 'center'}}>Error</Text>);
+        }
     }
 
     render() {
@@ -93,7 +125,7 @@ export default class ChangePassword extends Component {
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
                 </View>
-                <View style={[styles.body, {marginBottom: this.state.isFieldFocused ? 260 : 0}]}>
+                <View style={styles.body}>
                     <Text style={[styles.basicTitle, {paddingBottom: 25}]}>
                         {language_settings[global.lang].change_password.title}
                     </Text>
@@ -137,7 +169,9 @@ export default class ChangePassword extends Component {
                     </TouchableHighlight>
                     <Toast
                         visible={this.state.error}
-                        onClose={this.updateError.bind(this)}/>
+                        onClose={this.updateError.bind(this)}>
+                        {this.displayToastContent()}
+                    </Toast>
                 </View>
             </View>
         );
