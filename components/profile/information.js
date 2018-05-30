@@ -10,37 +10,49 @@ export default class Information extends Component {
     constructor(props) {
         super(props);
 
-        this.appLanguages = [{value: language_settings[global.lang].profile.language_ca, iso: 'ca'},
-            {value: language_settings[global.lang].profile.language_es, iso: 'es'},
-            {value: language_settings[global.lang].profile.language_en, iso: 'en'}];
-        this.goodsLanguages = [{value: "Catala"}, {value: "Castella"}, {value: "Angles"}, {value: "Altres"}];
-        //this.goodsLanguages = [{value: ""}];
+        this.appLanguages = [{value: 'Català', iso: 'ca'}, {value: 'Castellano', iso: 'es'}, {value: 'English', iso: 'en'}];
 
         this.state = {
             appLanguage: 0,
             goodLanguage: 0,
             lang: 'ca',
             goodLang: 'cat',
+            goodsLanguages: [],
             name:'',
             surname: '',
             nif: '',
             email: '',
+            langToShow: 'Català'
         };
     }
 
     componentDidMount() {
         this.setUserInformation();
+        this.getAllLanguages();
     }
 
     async setUserInformation() {
         let user = JSON.parse(await AsyncStorage.getItem('user'));
-        this.setState({name: user.firstName, surname: user.lastName, nif: user.nif, email: user.email, lang: user.interfaceLanguage, goodLang: user.goodLanguage, appLanguage: (this.appLanguages.map(function(e) { return e.iso; }).indexOf(user.interfaceLanguage)), goodLanguage:(this.goodsLanguages.map(function(e) { return e.iso; }).indexOf(user.goodLanguage))});
+        this.setState({
+            name: user.firstName,
+            surname: user.lastName,
+            nif: user.nif,
+            email: user.email,
+            lang: user.interfaceLanguage,
+            goodLang: user.goodLanguage,
+            appLanguage: (this.appLanguages.map(function(e) { return e.iso; }).indexOf(user.interfaceLanguage)),
+            goodLanguage:(this.state.goodsLanguages.map(function(e) { return e.iso; }).indexOf(user.goodLanguage))
+        });
         if (global.lang == user.interfaceLanguage) this.setState({lang: user.interfaceLanguage});
+        else this.setState({lang: global.lang});
     }
 
     async getAllLanguages() {
-        //this.goodsLanguages = await API.getLanguages();
-        //console.warn(this.goodsLanguages);
+        let langs = await API.getLanguages();
+        let goodsLanguages = langs.map( (lang) => {return {value: lang.name, iso: lang.language};} );
+        this.setState({goodsLanguages: goodsLanguages});
+        this.setState({langToShow: this.state.goodsLanguages.map(function(e) { return e.value; }).valueOf(this.state.goodLanguage)})
+        //console.warn(goodsLanguages.value);
     }
 
     handleBackButton() {
@@ -53,15 +65,25 @@ export default class Information extends Component {
 
     async selectAppLanguage(value, index) {
         this.setState({appLanguage: index, lang: this.appLanguages[index].iso});
-        //Falta crida a la api modificant el llenguatge
         global.lang = this.state.lang;
         AsyncStorage.setItem('lang', global.lang);
-        API.setAppLanguage(global.lang);
+        //console.warn(this.state.lang);
+        API.setAppLanguage(this.state.lang);
+
+
+        let user = JSON.parse(await AsyncStorage.getItem('user'));
+        //console.warn(user);
     }
 
     selectGoodsLanguage(value, index) {
-        this.getAllLanguages();
+        //console.warn(this.state.goodsLanguages[index].value);
         this.setState({goodLanguage: index});
+        //console.warn(this.state.goodLanguage);
+        //console.warn(this.appLanguages);
+        //var obj = this.appLanguages.find(function (obj) { return obj.iso === global.lang; });
+        //console.warn(obj.value);
+        //arr.find(callback[, thisArg])
+        //this.getAllLanguages();
     }
 
     goToChangePassword() {
@@ -76,7 +98,7 @@ export default class Information extends Component {
                 </View>
 
                 <View style={{alignItems: 'center'}}>
-                    <Icon style={styles.favProps} name="account-circle" size={200}/>
+                    <Icon style={styles.favProps} name="account-circle" size={170}/>
                 </View>
 
                 <View style={styles.body}>
@@ -91,7 +113,7 @@ export default class Information extends Component {
                     </Text>
                 </View>
 
-                <View style={[styles.body, {paddingTop: 50}]}>
+                <View style={[styles.body, {paddingBottom: 150}]}>
                     <Text style={styles.basicTitle}>
                         {language_settings[this.state.lang].profile.configuration}
                     </Text>
@@ -101,25 +123,23 @@ export default class Information extends Component {
                                 label={language_settings[this.state.lang].profile.app_language}
                                 data={this.appLanguages}
                                 onChangeText={this.selectAppLanguage.bind(this)}
-                                itemCount={3}
-                                //value = "svsfvfdsvdf"
-                            />
-                        </View>
-                        <View style={{flex: 1}}>
-                            <Dropdown
-                                label={language_settings[this.state.lang].profile.good_language}
-                                data={this.goodsLanguages}
-                                onChangeText={this.selectGoodsLanguage.bind(this)}
-                                itemCount={this.goodsLanguages.size}
-                                //selectedValue = "klkhl"
+                                value = {this.appLanguages[this.state.appLanguage].value}
                             />
                         </View>
                     </View>
-                </View>
-
-                <View style={[styles.body, {paddingTop: 25}]}>
+                    <View style={styles.filterLanguage}>
+                        <View style={{flex: 1}}>
+                            <Dropdown
+                                label={language_settings[this.state.lang].profile.good_language}
+                                data={this.state.goodsLanguages}
+                                onChangeText={this.selectGoodsLanguage.bind(this)}
+                                itemCount={4}
+                                value = {this.state.langToShow}
+                            />
+                        </View>
+                    </View>
                     <TouchableHighlight
-                        style={styles.button}
+                        style={[styles.button, {margin: 40}]}
                         onPress={this.goToChangePassword.bind(this)}>
                         <Text style={{alignSelf: 'center', color: 'white'}}>
                             {language_settings[this.state.lang].profile.button_text}
@@ -190,6 +210,7 @@ const styles = StyleSheet.create({
     },
     filterLanguage: {
         height: 60,
+        width: 260,
         display: 'flex',
         flexDirection: 'row',
         padding: 0,

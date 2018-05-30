@@ -24,7 +24,8 @@
       "discount": "Descompte total",
       "title": "Introduïr codi de validació:",
       "code": "Introduïr codi",
-      "button_text": "Validar"
+      "button_text": "Validar",
+      "done": "FET"
     },
     "toast": {
       "message": "El Nie / Nif introduït no existeix",
@@ -60,10 +61,7 @@
       "configuration": "Configuració:",
       "app_language": "Idioma de l'aplicació",
       "good_language": "Idioma dels vals",
-      "button_text": "Canviar contrasenya",
-      "language_ca": "Català",
-      "language_es": "Castellà",
-      "language_en": "Inglès"
+      "button_text": "Canviar contrasenya"
     },
     "change_password": {
       "title": "Canvi de contrasenya",
@@ -102,7 +100,8 @@
       "discount": "Descuento total",
       "title": "Introducir código de validación:",
       "code": "Introducir código",
-      "button_text": "Validar"
+      "button_text": "Validar",
+      "done": "HECHO"
     },
     "toast": {
       "message": "El Nie / Nif introducido no existe",
@@ -138,10 +137,7 @@
       "configuration": "Configuración:",
       "app_language": "Idioma de la aplicación",
       "good_language": "Idioma de los vales",
-      "button_text": "Cambiar contraseña",
-      "language_ca": "Catalán",
-      "language_es": "Español",
-      "language_en": "Inglés"
+      "button_text": "Cambiar contraseña"
     },
     "change_password": {
       "title": "Cambio de contraseña",
@@ -179,7 +175,8 @@
       "discount": "Total discount",
       "title": "Introduce validation's code:",
       "code": "Introduce code",
-      "button_text": "Validate"
+      "button_text": "Validate",
+      "done": "DONE"
     },
     "toast": {
       "message": "Nie / Nif introduced doesn't exisit",
@@ -215,10 +212,7 @@
       "configuration": "Settings:",
       "app_language": "App language",
       "good_language": "Goods language",
-      "button_text": "Change password",
-      "language_ca": "Catalan",
-      "language_es": "Spanish",
-      "language_en": "English"
+      "button_text": "Change password"
     },
     "change_password": {
       "title": "Change password",

@@ -182,7 +182,7 @@ export default class Buy extends Component {
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
                     <Text onPress={this.goValidar.bind(this)} style={styles.headerRightIco}>
-                        DONE
+                        {language_settings[global.lang].validate.done}
                     </Text>
                 </View>
                 <Text style={styles.entityName}>

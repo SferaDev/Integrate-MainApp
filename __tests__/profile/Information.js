@@ -7,6 +7,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import Information from '../../components/profile/information';
 import API from "../../components/api";
+import {AsyncStorage} from "react-native";
 
 jest.mock('../../components/http_helper');
 
@@ -58,10 +59,4 @@ describe('Test group for EntityList', function () {
         expect(instance.selectGoodsLanguage()).toBe(undefined);
     });
 
-    describe("getAllLanguages() tests", () => {
-
-        test('getAllLanguages is callable and returns nothing', async () => {
-            expect(await instance.getAllLanguages()).toBe(undefined);
-        });
-    });
 });

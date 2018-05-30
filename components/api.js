@@ -16,6 +16,10 @@ const API = {
                     let {user, token} = JSON.parse(response._bodyText);
                     AsyncStorage.setItem('token', token);
                     AsyncStorage.setItem('user', JSON.stringify(user));
+
+                    AsyncStorage.setItem('lang', user.interfaceLanguage);
+                    global.lang = user.interfaceLanguage;
+
                     resolve(JSON.parse(response._bodyText).token);
                 }
             }
