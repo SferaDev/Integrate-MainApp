@@ -37,7 +37,8 @@
       "!**/android/**",
       "!**/ios/**",
       "!**/coverage/**",
-      "!**/index.js"
+      "!**/index.js",
+      "!/components/language_settings.json"
     ],
     "coverageReporters": [
       "lcov",

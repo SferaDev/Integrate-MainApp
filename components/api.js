@@ -13,7 +13,13 @@ const API = {
                 if (!response || response.status === 401) {
                     reject();
                 } else if (response.status === 200) {
-                    AsyncStorage.setItem('token', JSON.parse(response._bodyText).token);
+                    let {user, token} = JSON.parse(response._bodyText);
+
+                    AsyncStorage.setItem('token', token);
+                    user.interfaceLanguage = global.lang;
+                    AsyncStorage.setItem('user', JSON.stringify(user));
+                    global.lang = user.interfaceLanguage;
+
                     resolve(JSON.parse(response._bodyText).token);
                 }
             }
@@ -64,7 +70,7 @@ const API = {
         const token = await AsyncStorage.getItem('token');
 
         let url = 'me/goods';
-        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}];
+        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}, {key:'language', value: 'fr'}];
 
         if (loc != null) {
             params.push({key: 'latitude', value: loc.coords.latitude});
@@ -137,6 +143,55 @@ const API = {
         let response = await http_helper.callApi(url, params, "POST", true);
 
         return {status: response.status, body: JSON.parse(response._bodyText)};
+    },
+    getLanguages: async () => {
+
+        let url = 'language';
+        let params = [];
+
+        let response = await http_helper.callApi(url, params);
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+    },
+    setAppLanguage: async (language = '') => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/language/interface';
+        let params = [{key: 'token', value: token}, {key: 'interfaceLanguage', value: language}];
+
+        let response = await http_helper.callApi(url, params, "PUT", true);
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
+    },
+    setGoodLanguage: async (language = '') => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/language/goods';
+        let params = [{key: 'token', value: token}, {key: 'goodLanguage', value: language}];
+
+        let response = await http_helper.callApi(url, params, "PUT", true);
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
+    },
+    changePassword: async (oldPassword = '', newPassword = '') => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/password';
+        let params = [{key: 'token', value: token}, {key: 'oldPassword', value: oldPassword}, {key: 'newPassword', value: newPassword}];
+
+        let response = await http_helper.callApi(url, params, "PUT", true);
+
+        if (!response || response.status === 404) {
+            reject();
+        } else if (response.status === 200) {
+            return JSON.parse(response._bodyText);
+        }
+        return null;
     }
 };
 
