@@ -125,7 +125,7 @@ export default class ChangePassword extends Component {
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
                 </View>
-                <View style={[styles.body, {marginBottom: this.state.isFieldFocused ? 260 : 0}]}>
+                <View style={styles.body}>
                     <Text style={[styles.basicTitle, {paddingBottom: 25}]}>
                         Canvi de contrasenya
                     </Text>
