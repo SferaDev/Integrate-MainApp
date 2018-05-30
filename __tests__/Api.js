@@ -179,6 +179,36 @@ describe("API tests", () => {
         });
     });
 
+    describe("setAppLanguage() tests", () => {
+
+        test('setAppLanguage() is callable and returns nothing', async () => {
+
+            let r = await API.setAppLanguage(undefined);
+            expect(JSON.stringify(r)).toBe('{"something":"Hello World"}');
+        });
+
+        test('setAppLanguage() is callable and returns nothing', async () => {
+
+            let r = await API.setAppLanguage(null);
+            expect(JSON.stringify(r)).toBe('null');
+        });
+    });
+
+    describe("setGoodLanguage() tests", () => {
+
+        test('setGoodLanguage() is callable and returns nothing', async () => {
+
+            let r = await API.setGoodLanguage(undefined);
+            expect(JSON.stringify(r)).toBe('{"something":"Hello World"}');
+        });
+
+        test('setGoodLanguage() is callable and returns nothing', async () => {
+
+            let r = await API.setGoodLanguage(null);
+            expect(JSON.stringify(r)).toBe('null');
+        });
+    });
+
     describe("changePassword() tests", () => {
 
         test('changePassword() is callable and returns nothing', async () => {

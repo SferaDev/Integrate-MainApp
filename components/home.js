@@ -13,12 +13,13 @@ import Validar from './compra/validar';
 import ChangePassword from "./profile/change_password";
 import Information from "./profile/information";
 import Buy from "./compra/buy";
+import language_settings from './language_settings';
 
 const BuscadorStack = StackNavigator({
         buscador: {
             screen: Buscador,
             navigationOptions: {
-                drawerLabel: 'Buscador',
+                drawerLabel: language_settings['en'].home.searcher,
                 drawerIcon: <Icon name="home" size={25}/>,
                 gesturesEnabled: false
             }
@@ -42,7 +43,7 @@ const ValsStack = StackNavigator({
     llista_vals: {
         screen: LlistaVals,
         navigationOptions: {
-            drawerLabel: 'Vals',
+            drawerLabel: language_settings['en'].home.goods,
             drawerIcon: <Icon name="ticket-percent" size={25}/>,
         }
     }, detalls_entitat: {
@@ -58,7 +59,7 @@ const ProfileStack = StackNavigator({
     settings: {
         screen: Information,
         navigationOptions: {
-            drawerLabel: 'Profile settings',
+            drawerLabel: language_settings['en'].home.settings,
             drawerIcon: <Icon name="settings" size={25}/>,
         }
     }, change_password: {
@@ -77,11 +78,18 @@ const DrawerNavigation = DrawerNavigator({
     Logout: {
         screen: Logout,
         navigationOptions: {
-            drawerLabel: 'Log Out',
+            drawerLabel: language_settings['en'].home.log_out,
             drawerIcon: <Icon name="logout-variant" size={25}/>,
         }
     },
-    Validar: {screen: Validar},
+    Validar: {
+        screen: Validar,
+        navigationOptions: {
+            drawerLabel: language_settings['en'].home.validate,
+            drawerIcon: <Icon name="check" size={25}/>,
+            gesturesEnabled: false
+        }
+    },
     Profile: {screen: ProfileStack}
 }, {
     headerMode: 'none',

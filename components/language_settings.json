@@ -1,10 +1,11 @@
 {
   "ca": {
     "login": {
-      "nif_nie": "Introduïr NIF/NIE",
+      "nifNie": "Introduïr NIF/NIE",
       "password": "Introduïr contrasenya",
       "restore_password": "He olvidat la contrasenya?",
-      "button_text": "Entra"
+      "button_text": "Entra",
+      "error": "El Nie / Nif o la contrasenya són incorrectes"
     },
     "restoreCredentials": {
       "title": "Recuperar credencials",
@@ -16,17 +17,15 @@
       "search": "Cercar"
     },
     "validate": {
-      "discount_applied": "Descompte aplicat correctament",
+      "discount_applied": "S'ha d'aplicar un descompte de -",
       "wrong_code": "Codi incorrecte",
       "conflict": "Conflicte amb els vals:",
       "summary": "Resum compra:",
       "discount": "Descompte total",
       "title": "Introduïr codi de validació:",
       "code": "Introduïr codi",
-      "button_text": "Validar"
-    },
-    "buy": {
-      "toast_message": "Conflicte amb els vals:"
+      "button_text": "Validar",
+      "done": "FET"
     },
     "toast": {
       "message": "El Nie / Nif introduït no existeix",
@@ -40,7 +39,7 @@
       "settings": "Configuració del perfil"
     },
     "goods": {
-      "favourites": "Favorits",
+      "favourites": "Preferits",
       "show_all": "Tots",
       "category": "Categoria",
       "all": "Totes",
@@ -53,7 +52,7 @@
       "sports": "Esports",
       "leisure": "Lleure",
       "others": "Altres",
-      "filer": "Filtre",
+      "filter": "Filtre",
       "recent": "Recents",
       "popularity": "Popularitat",
       "proximity": "Proximitat"
@@ -62,10 +61,7 @@
       "configuration": "Configuració:",
       "app_language": "Idioma de l'aplicació",
       "good_language": "Idioma dels vals",
-      "button_text": "Canviar contrasenya",
-      "language_ca": "Català",
-      "language_es": "Castellà",
-      "language_en": "Inglès"
+      "button_text": "Canviar contrasenya"
     },
     "change_password": {
       "title": "Canvi de contrasenya",
@@ -83,7 +79,8 @@
       "nifNie": "Introducir NIF/NIE",
       "password": "Introducir contraseña",
       "restore_password": "He olvidado la contraseña?",
-      "button_text": "Entra"
+      "button_text": "Entra",
+      "error": "El Nie / Nif o la contraseña son incorrectos"
     },
     "restoreCredentials": {
       "title": "Recuperar credenciales",
@@ -95,17 +92,15 @@
       "search": "Buscar"
     },
     "validate": {
-      "discount_applied": "Descuento aplicado correctamente",
+      "discount_applied": "Se debe aplicar un descuento de -",
       "wrong_code": "Código incorrecto",
       "conflict": "Conflicto con los vales:",
       "summary": "Resumen compra:",
       "discount": "Descuento total",
       "title": "Introducir código de validación:",
       "code": "Introducir código",
-      "button_text": "Validar"
-    },
-    "buy": {
-      "toast_message": "Conflicto con los vales:"
+      "button_text": "Validar",
+      "done": "HECHO"
     },
     "toast": {
       "message": "El Nie / Nif introducido no existe",
@@ -132,7 +127,7 @@
       "sports": "Deportes",
       "leisure": "Ocio",
       "others": "Otros",
-      "filer": "Filtro",
+      "filter": "Filtro",
       "recent": "Recientes",
       "popularity": "Popularidad",
       "proximity": "Proximidad"
@@ -141,10 +136,7 @@
       "configuration": "Configuración:",
       "app_language": "Idioma de la aplicación",
       "good_language": "Idioma de los vales",
-      "button_text": "Cambiar contraseña",
-      "language_ca": "Catalán",
-      "language_es": "Español",
-      "language_en": "Inglés"
+      "button_text": "Cambiar contraseña"
     },
     "change_password": {
       "title": "Cambio de contraseña",
@@ -162,7 +154,8 @@
       "nifNie": "Introduce NIF/NIE",
       "password": "Introduce password",
       "restore_password": "Forgot password?",
-      "button_text": "Enter"
+      "button_text": "Enter",
+      "error": "Nie / Nif or password is incorrect"
     },
     "restoreCredentials": {
       "title": "Restore credentials",
@@ -174,20 +167,18 @@
       "search": "Search"
     },
     "validate": {
-      "discount_applied": "Discount applied correctly",
+      "discount_applied": "Should apply a discount of -",
       "wrong_code": "Wrong code",
-      "conflict": "Goods conflict:",
+      "conflict": "Goods in conflict:",
       "summary": "Purchase summary:",
       "discount": "Total discount",
       "title": "Introduce validation's code:",
       "code": "Introduce code",
-      "button_text": "Validate"
-    },
-    "buy": {
-      "toast_message": "Goods conflict:"
+      "button_text": "Validate",
+      "done": "DONE"
     },
     "toast": {
-      "message": "Nie / Nif introduced doesn't exisit",
+      "message": "Nie / Nif introduced doesn't exist",
       "exit": "Close"
     },
     "home": {
@@ -202,7 +193,7 @@
       "show_all": "All",
       "category": "Category",
       "all": "All",
-      "feeding": "Feeding",
+      "feeding": "Groceries",
       "culture": "Culture",
       "education": "Education",
       "mobility": "Mobility",
@@ -211,7 +202,7 @@
       "sports": "Sports",
       "leisure": "Leisure",
       "others": "Others",
-      "filer": "Filter",
+      "filter": "Filter",
       "recent": "Recent",
       "popularity": "Popularity",
       "proximity": "Proximity"
@@ -220,10 +211,7 @@
       "configuration": "Settings:",
       "app_language": "App language",
       "good_language": "Goods language",
-      "button_text": "Change password",
-      "language_ca": "Catalan",
-      "language_es": "Spanish",
-      "language_en": "English"
+      "button_text": "Change password"
     },
     "change_password": {
       "title": "Change password",

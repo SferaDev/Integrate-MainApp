@@ -42,6 +42,7 @@ let entity = {
 describe('Test group for Validar', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
+        global.lang = 'ca';
     });
 
     beforeEach(function () {

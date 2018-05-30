@@ -5,6 +5,7 @@ import EntityList from './list';
 import Entity from './entity';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import language_settings from '../language_settings'
 
 export default class Buscador extends Component {
 
@@ -134,7 +135,7 @@ export default class Buscador extends Component {
                     <TextInput
                         style={{flex: 18, padding: 0, paddingLeft: 5}}
                         value={this.state.searchText}
-                        placeholder="Search"
+                        placeholder={language_settings[global.lang].searcher.search}
                         onFocus={this.showListView.bind(this)}
                         onChangeText={this.updateSearchText.bind(this)}
                         autoComplete={false}

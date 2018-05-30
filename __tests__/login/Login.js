@@ -15,6 +15,7 @@ describe('Test group for EntityList', function () {
     beforeAll(() => {
         jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
         configure({adapter: new Adapter()});
+        global.lang = 'ca';
     });
 
     beforeEach(function () {

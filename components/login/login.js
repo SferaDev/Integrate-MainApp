@@ -13,6 +13,7 @@ import {
 
 import Toast from './toast';
 import API from '../api';
+import language_settings from '../language_settings';
 
 export default class LogIn extends Component {
     constructor(props) {
@@ -21,14 +22,14 @@ export default class LogIn extends Component {
             nifnie: "",
             password: "",
             error: false,
-            isFieldFocused: false
+            isFieldFocused: false,
+            lang: ''
         };
     }
 
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
-
         AsyncStorage.getItem('token').then(this.autologin.bind(this));
     }
 
@@ -115,7 +116,7 @@ export default class LogIn extends Component {
                         </Image>
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.nifnie}
-                                   placeholder={"Introduir NIF/NIE"}
+                                   placeholder={language_settings[global.lang].login.nifNie}
                                    onChangeText={this.updateNifNie.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'
                         >
@@ -123,14 +124,14 @@ export default class LogIn extends Component {
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.password}
                                    secureTextEntry={true}
-                                   placeholder={"Introduir contrasenya"}
+                                   placeholder={language_settings[global.lang].login.password}
                                    onChangeText={this.updatePassword.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'
                         >
                         </TextInput>
                         <Text style={styles.recuperarContrasenyaText}
                               onPress={this.restorePassword.bind(this)}>
-                            He oblidat la contrasenya?
+                            {language_settings[global.lang].login.restore_password}
                         </Text>
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
@@ -138,14 +139,14 @@ export default class LogIn extends Component {
                             underlayColor='none'
                             disabled={this.isEmpty()}>
                             <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
-                                Entra
+                                {language_settings[global.lang].login.button_text}
                             </Text>
                         </TouchableHighlight>
                     </View>
                     <Toast
                         visible={this.state.error}
                         onClose={this.updateError.bind(this)}>
-                        <Text style={{textAlign: 'center'}}>El Nie / Nif o la contrasenya són incorrectes</Text>
+                        <Text style={{textAlign: 'center'}}> {language_settings[global.lang].login.error} </Text>
                     </Toast>
                 </ImageBackground>
             </View>

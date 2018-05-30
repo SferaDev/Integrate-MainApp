@@ -6,6 +6,8 @@ import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import Information from '../../components/profile/information';
+import API from "../../components/api";
+import {AsyncStorage} from "react-native";
 
 jest.mock('../../components/http_helper');
 
@@ -16,6 +18,7 @@ let instance;
 describe('Test group for EntityList', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
+        global.lang = 'ca';
     });
 
     beforeEach(function () {
@@ -46,20 +49,8 @@ describe('Test group for EntityList', function () {
         expect(instance.goToChangePassword()).toBe(undefined);
     });
 
-    test('selectAppLanguage() is callable and returns nothing', () => {
-        instance.appLanguages = [{iso: 'es'}];
-        expect(instance.selectAppLanguage('',0)).toBe(undefined);
-    });
-
-    test('selectGoodsLanguage() is callable and returns nothing', () => {
-        expect(instance.selectGoodsLanguage()).toBe(undefined);
-    });
-
-    describe("getAllLanguages() tests", () => {
-
-        test('getAllLanguages is callable and returns nothing', async () => {
-            expect(await instance.getAllLanguages()).toBe(undefined);
-        });
+    test('selectGoodsLanguage() is callable and returns nothing', async() => {
+        expect(instance.setAppLanguage()).toBe(-1);
     });
 
 });
