@@ -109,11 +109,11 @@ export default class ChangePassword extends Component {
     displayToastContent() {
         switch (this.state.typeError) {
             case 1: //Contrasenyes diferents
-                return (<Text style={{textAlign: 'center'}}>Les contrasenyes no coincideixen</Text>);
+                return (<Text style={{textAlign: 'center'}}> {language_settings[global.lang].change_password.different_passwords} </Text>);
             case 2: //Contrasenya incorrecte
-                return (<Text style={{textAlign: 'center'}}>La contrasenya ha de contenir mínim 8 caracters i ha d'incloure un número</Text>);
+                return (<Text style={{textAlign: 'center'}}> {language_settings[global.lang].change_password.wrong_password} </Text>);
             case 3: //Cas d'èxit
-                return (<Text style={{textAlign: 'center'}}>La contrasenya s'ha modificat correctament</Text>);
+                return (<Text style={{textAlign: 'center'}}> {language_settings[global.lang].change_password.set_password} </Text>);
             default:
                 return (<Text style={{textAlign: 'center'}}>Error</Text>);
         }

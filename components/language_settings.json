@@ -70,7 +70,11 @@
       "new_password_title": "Nova contrasenya:",
       "new_password_placeHolder": "Introduïr nova contrasenya",
       "new_password2_placeHolder": "Confirmar la nova contrasenya",
-      "button_text": "Guardar contrasenya"
+      "button_text": "Guardar contrasenya",
+      "different_passwords": "Les contrasenyes no coincideixen",
+      "wrong_password": "La contrasenya ha de contenir mínim 8 caracters i ha d'incloure un número",
+      "set_password": "La contrasenya s'ha modificat correctament"
+
     }
   },
 
@@ -145,7 +149,10 @@
       "new_password_title": "Contraseña nueva:",
       "new_password_placeHolder": "Introducir nueva contraseña",
       "new_password2_placeHolder": "Confirmar la nueva contraseña",
-      "button_text": "Guardar contraseña"
+      "button_text": "Guardar contraseña",
+      "different_passwords": "Las contraseñas no coinciden",
+      "wrong_password": "La contraseña ha de contener mínimo 8 caracteres y incluir un numero",
+      "set_password": "La contraseña se ha modificado correctamente"
     }
   },
 
@@ -220,7 +227,10 @@
       "new_password_title": "New password:",
       "new_password_placeHolder": "Introduce new password",
       "new_password2_placeHolder": "Confirm new password",
-      "button_text": "Save password"
+      "button_text": "Save password",
+      "different_passwords": "Passwords not match",
+      "wrong_password": "New password should include minimum 8 characters and one number",
+      "set_password": "Password changed correctly"
     }
   }
 }
