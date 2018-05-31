@@ -7,7 +7,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import RestoreCredentials from '../../components/restore_credentials/restore_credentials';
 
-const navigation = {navigate: jest.fn()};
+const navigation = {navigate: jest.fn(), goBack: jest.fn()};
 let wrapper;
 let instance;
 
@@ -68,8 +68,8 @@ describe('Test group for RestoreCredentials', function () {
         expect(instance.restoreCredentials()).toBe(undefined);
     });
 
-    it('goToLogIn() is callable and returns nothing', () => {
-        expect(instance.goToLogIn()).toBe(undefined);
+    it('goBack() is callable and returns nothing', () => {
+        expect(instance.goBack()).toBe(undefined);
     });
 
     describe("isEmpty() tests", () => {

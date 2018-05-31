@@ -51,8 +51,8 @@ export default class RestoreCredentials extends Component {
         this.setState({error: false})
     }
 
-    goToLogIn() {
-        this.props.navigation.navigate('LoginStack');
+    goBack() {
+        this.props.navigation.goBack();
     }
 
     isEmpty() {
@@ -100,7 +100,7 @@ export default class RestoreCredentials extends Component {
                                 </TouchableHighlight>
                             </View>
                             <View style={{flex: 40}}>
-                                <Text style={styles.textGoToLogIn} onPress={this.goToLogIn.bind(this)}>
+                                <Text style={styles.textGoToLogIn} onPress={this.goBack.bind(this)}>
                                     {language_settings[global.lang].restoreCredentials.go_back}
                                 </Text>
                             </View>
