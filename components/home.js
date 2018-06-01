@@ -17,24 +17,11 @@ import language_settings from './language_settings';
 
 import DRAWER from './drawer';
 
-const getAppLang = async () => {
-    let user = await AsyncStorage.getItem('user');
-    let lang;
-    if( !user || !user.interfaceLanguage )lang = 'en';
-    else lang = user.interfaceLanguage;
-
-    return lang;
-}
-
-console.warn('HOME LANG: ' + global.lang);
-
-const LANG = global.lang ? global.lang : 'en';
-
 const BuscadorStack = StackNavigator({
         buscador: {
             screen: Buscador,
             navigationOptions: {
-                drawerLabel: language_settings[ LANG ].home.searcher,
+                drawerLabel: language_settings[ 'en' ].home.searcher,
                 drawerIcon: <Icon name="home" size={25}/>,
                 gesturesEnabled: false
             }

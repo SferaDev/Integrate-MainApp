@@ -40,8 +40,28 @@ const styles = StyleSheet.create({
 });
 
 class Drawer extends Component {
+
+    constructor(props){
+        super(props);
+
+        global.updateAppLanguage = this.updateAppLanguage.bind(this);
+        global.updateContentLanguage = this.updateContentLanguage.bind(this);
+    }
+
+    _save(){
+        console.warn("SAVING");
+    }
+
+    updateAppLanguage(iso){
+        console.warn(["APP",iso]);
+    }
+
+    updateContentLanguage(iso){
+        console.warn(["GOOD",iso]);
+    }
     
     navigateToScreen(route){
+
         const navigateAction = NavigationActions.navigate({routeName: route});
         this.props.navigation.dispatch(navigateAction);
     }
@@ -52,21 +72,21 @@ class Drawer extends Component {
                 <Image source={require('../Images/ic_launcher.png')} style={{height: 100, width: 100,alignSelf: 'center',marginBottom: 20}} />
                 <ScrollView>
 
-                    <TouchableHighlight style={styles.navSection} onPress={() => this.navigateToScreen('Buscador')} underlayColor="white">
+                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Buscador")} underlayColor="white">
                         <View style={styles.navItem} >
                             <Icon style={styles.navItemLogo} name="home" size={25}/>
                             <Text style={styles.navItemLabel}>{language_settings[ global.lang ].home.searcher}</Text>
                         </View>
                     </TouchableHighlight>
 
-                    <TouchableHighlight style={styles.navSection} onPress={() => this.navigateToScreen('Vals')} underlayColor="white">
+                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Vals")} underlayColor="white">
                         <View style={styles.navItem} >
                             <Icon style={styles.navItemLogo} name="ticket-percent" size={25}/>
                             <Text style={styles.navItemLabel}>{language_settings[ global.lang ].home.goods}</Text>
                         </View>
                     </TouchableHighlight>
 
-                    <TouchableHighlight style={styles.navSection} onPress={() => this.navigateToScreen('Profile')} underlayColor="white">
+                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Profile")} underlayColor="white">
                         <View style={styles.navItem} >
                             <Icon style={styles.navItemLogo} name="settings" size={25}/>
                             <Text style={styles.navItemLabel}>{language_settings[ global.lang ].home.settings}</Text>
@@ -74,8 +94,8 @@ class Drawer extends Component {
                     </TouchableHighlight>
 
                 </ScrollView>
-                
-                <TouchableHighlight style={styles.navSection} onPress={() => this.navigateToScreen('Logout')} underlayColor="white">
+
+                <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Logout")} underlayColor="white">
                     <View style={[styles.navItem,{height: 75}]} >
                         <Icon style={styles.navItemLogo} name="logout-variant" size={25}/>
                         <Text style={styles.navItemLabel}>{language_settings[ global.lang ].home.log_out}</Text>
