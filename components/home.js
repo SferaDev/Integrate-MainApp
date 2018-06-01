@@ -15,11 +15,30 @@ import Information from "./profile/information";
 import Buy from "./compra/buy";
 import language_settings from './language_settings';
 
+import DRAWER from './drawer';
+
+const getAppLang = async () => {
+    let user = await AsyncStorage.getItem('user');
+    let lang;
+    if( !user || !user.interfaceLanguage )lang = 'en';
+    else lang = user.interfaceLanguage;
+
+    return lang;
+}
+
+console.warn('HOME LANG: ' + global.lang);
+
+const LANG = global.lang ? global.lang : 'en';
+
+//console.warn( language_settings[LANG].home.searcher );
+
+//const BUSCADOR_LABEL = language_settings[LANG].home.searcher;
+
 const BuscadorStack = StackNavigator({
         buscador: {
             screen: Buscador,
             navigationOptions: {
-                drawerLabel: language_settings['en'].home.searcher,
+                drawerLabel: language_settings[ LANG ].home.searcher,
                 drawerIcon: <Icon name="home" size={25}/>,
                 gesturesEnabled: false
             }
@@ -72,11 +91,10 @@ const ProfileStack = StackNavigator({
 });
 
 const DrawerNavigation = DrawerNavigator({
-    Buscador: {screen: BuscadorStack},
-    Vals: {screen: ValsStack},
-    Profile: {screen: ProfileStack},
-    Logout: {
-        screen: Logout,
+    Buscador: {screen: Buscador},
+    Vals: {screen: LlistaVals},
+    Profile: {screen: Information},
+    Logout: { screen: Logout,
         navigationOptions: {
             drawerLabel: language_settings['en'].home.log_out,
             drawerIcon: <Icon name="logout-variant" size={25}/>,
@@ -84,6 +102,7 @@ const DrawerNavigation = DrawerNavigator({
     },
     Profile: {screen: ProfileStack}
 }, {
+    contentComponent: DRAWER,
     headerMode: 'none',
     disabledBackGesture: true,
     gesturesEnabled: false
