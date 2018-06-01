@@ -1,10 +1,92 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {NavigationActions} from 'react-navigation';
-import {ScrollView, Text, View, StyleSheet, Image, TouchableHighlight} from 'react-native';
+import {ScrollView, Text, View, StyleSheet, Image, TouchableHighlight, AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import API from './api';
 import language_settings from './language_settings';
 
+class Drawer extends Component {
+
+    constructor(props){
+        super(props);
+
+        this.state = {
+            appLanguage: global.lang
+        }
+
+        global.updateAppLanguage = this.updateAppLanguage.bind(this);
+        global.updateContentLanguage = this.updateContentLanguage.bind(this);
+    }
+
+    async updateAppLanguage(iso){
+
+        this.setState({appLanguage: iso});
+
+        API.setAppLanguage(iso);
+
+        global.lang = iso;
+        AsyncStorage.setItem('lang', iso);
+
+        let user = JSON.parse(await AsyncStorage.getItem('user'));
+        user.interfaceLanguage = iso;
+        AsyncStorage.setItem('user', JSON.stringify(user));
+    }
+
+    async updateContentLanguage(iso){
+
+        API.setGoodLanguage(iso);
+
+        let user = JSON.parse(await AsyncStorage.getItem('user'));
+        user.goodLanguage = iso;
+        AsyncStorage.setItem('user', JSON.stringify(user));
+    }
+    
+    navigateToScreen(route){
+
+        const navigateAction = NavigationActions.navigate({routeName: route});
+        this.props.navigation.dispatch(navigateAction);
+    }
+
+    render () {
+        return (
+            <View style={styles.container}>
+                <Image source={require('../Images/ic_launcher.png')} style={{height: 100, width: 100,alignSelf: 'center',marginBottom: 20}} />
+                <ScrollView>
+
+                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Buscador")} underlayColor="white">
+                        <View style={styles.navItem} >
+                            <Icon style={styles.navItemLogo} name="home" size={25}/>
+                            <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.searcher}</Text>
+                        </View>
+                    </TouchableHighlight>
+
+                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Vals")} underlayColor="white">
+                        <View style={styles.navItem} >
+                            <Icon style={styles.navItemLogo} name="ticket-percent" size={25}/>
+                            <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.goods}</Text>
+                        </View>
+                    </TouchableHighlight>
+
+                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Profile")} underlayColor="white">
+                        <View style={styles.navItem} >
+                            <Icon style={styles.navItemLogo} name="settings" size={25}/>
+                            <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.settings}</Text>
+                        </View>
+                    </TouchableHighlight>
+
+                </ScrollView>
+
+                <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Logout")} underlayColor="white">
+                    <View style={[styles.navItem,{height: 75}]} >
+                        <Icon style={styles.navItemLogo} name="logout-variant" size={25}/>
+                        <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.log_out}</Text>
+                    </View>
+                </TouchableHighlight>
+            </View>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -39,75 +121,8 @@ const styles = StyleSheet.create({
     }
 });
 
-class Drawer extends Component {
-
-    constructor(props){
-        super(props);
-
-        global.updateAppLanguage = this.updateAppLanguage.bind(this);
-        global.updateContentLanguage = this.updateContentLanguage.bind(this);
-    }
-
-    _save(){
-        console.warn("SAVING");
-    }
-
-    updateAppLanguage(iso){
-        console.warn(["APP",iso]);
-    }
-
-    updateContentLanguage(iso){
-        console.warn(["GOOD",iso]);
-    }
-    
-    navigateToScreen(route){
-
-        const navigateAction = NavigationActions.navigate({routeName: route});
-        this.props.navigation.dispatch(navigateAction);
-    }
-
-    render () {
-        return (
-            <View style={styles.container}>
-                <Image source={require('../Images/ic_launcher.png')} style={{height: 100, width: 100,alignSelf: 'center',marginBottom: 20}} />
-                <ScrollView>
-
-                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Buscador")} underlayColor="white">
-                        <View style={styles.navItem} >
-                            <Icon style={styles.navItemLogo} name="home" size={25}/>
-                            <Text style={styles.navItemLabel}>{language_settings[ global.lang ].home.searcher}</Text>
-                        </View>
-                    </TouchableHighlight>
-
-                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Vals")} underlayColor="white">
-                        <View style={styles.navItem} >
-                            <Icon style={styles.navItemLogo} name="ticket-percent" size={25}/>
-                            <Text style={styles.navItemLabel}>{language_settings[ global.lang ].home.goods}</Text>
-                        </View>
-                    </TouchableHighlight>
-
-                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Profile")} underlayColor="white">
-                        <View style={styles.navItem} >
-                            <Icon style={styles.navItemLogo} name="settings" size={25}/>
-                            <Text style={styles.navItemLabel}>{language_settings[ global.lang ].home.settings}</Text>
-                        </View>
-                    </TouchableHighlight>
-
-                </ScrollView>
-
-                <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Logout")} underlayColor="white">
-                    <View style={[styles.navItem,{height: 75}]} >
-                        <Icon style={styles.navItemLogo} name="logout-variant" size={25}/>
-                        <Text style={styles.navItemLabel}>{language_settings[ global.lang ].home.log_out}</Text>
-                    </View>
-                </TouchableHighlight>
-            </View>
-        );
-    }
-}
-
 Drawer.propTypes = {
-  navigation: PropTypes.object
+    navigation: PropTypes.object
 };
 
 export default Drawer;
