@@ -10,6 +10,7 @@ import API from "../../components/api";
 import {AsyncStorage} from "react-native";
 
 jest.mock('../../components/http_helper');
+jest.mock('../../components/api');
 
 const navigation = {navigate: jest.fn()};
 let wrapper;
@@ -19,6 +20,8 @@ describe('Test group for EntityList', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
         global.lang = 'ca';
+        global.updateAppLanguage = jest.fn();
+        global.updateContentLanguage = jest.fn();
     });
 
     beforeEach(function () {
@@ -49,8 +52,26 @@ describe('Test group for EntityList', function () {
         expect(instance.goToChangePassword()).toBe(undefined);
     });
 
-    test('selectGoodsLanguage() is callable and returns nothing', async() => {
+    test('setAppLanguage() is callable and returns nothing',() => {
         expect(instance.setAppLanguage()).toBe(-1);
+    });
+
+    test('setUserInformation() is callable and returns nothing', async() => {
+        expect(await instance.setUserInformation()).toBe(undefined);
+    });
+
+    test('getAllLanguages() is callable and returns nothing', async() => {
+        expect(await instance.getAllLanguages('ca')).toBe(undefined);
+    });
+
+    test('selectAppLanguage() is callable and returns nothing',() => {
+        instance.state.appLanguages = [{iso: 'ca'}];
+        expect(instance.selectAppLanguage('ca',0)).toBe(undefined);
+    });
+
+    test('selectGoodsLanguage() is callable and returns nothing',() => {
+        instance.state.goodsLanguages = [{iso: 'ca'}];
+        expect(instance.selectGoodsLanguage('ca',0)).toBe(undefined);
     });
 
 });

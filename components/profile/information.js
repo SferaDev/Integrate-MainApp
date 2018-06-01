@@ -34,7 +34,7 @@ export default class Information extends Component {
     }
 
     async setUserInformation() {
-        let user = JSON.parse(await AsyncStorage.getItem('user'));
+        let user = JSON.parse(await AsyncStorage.getItem('user')) || {};
         this.setState({
             name: user.firstName,
             surname: user.lastName,
@@ -77,8 +77,7 @@ export default class Information extends Component {
         );
     }
 
-    async selectGoodsLanguage(value, index) {
-
+    selectGoodsLanguage(value, index) {
         let goodLang = this.state.goodsLanguages[index].iso;
         this.setState(
             {
@@ -86,7 +85,6 @@ export default class Information extends Component {
             },
             () => global.updateContentLanguage( goodLang )
         );
-        
     }
 
     goToChangePassword() {

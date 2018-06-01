@@ -44,7 +44,11 @@ const API = {
         } else {
             return {status: 409, body: {soldOutGoods: [], nonUsableGoods: []}};
         }
-    }
+    },
+    getLanguages: async () => {
+
+        return [{name: 'Catalan',language: 'ca'}];
+    },
 };
 
 export default API
