@@ -5,6 +5,7 @@ import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import GoodCompra from "./good_compra";
 import Toast from "../login/toast";
+import language_settings from '../language_settings';
 
 
 export default class Buy extends Component {
@@ -144,7 +145,7 @@ export default class Buy extends Component {
                 let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
                 return (
                     <View style={{marginBottom: 10}}>
-                        <Text style={{fontSize: 18, fontWeight: 'bold', paddingBottom: 5}}>Conflicte amb els vals: </Text>
+                        <Text style={{fontSize: 18, fontWeight: 'bold'}}> {language_settings[global.lang].validate.conflict} </Text>
                         {conflictList}
                     </View>
                 );
@@ -181,7 +182,7 @@ export default class Buy extends Component {
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
                     <Text onPress={this.goValidar.bind(this)} style={styles.headerRightIco}>
-                        DONE
+                        {language_settings[global.lang].validate.done}
                     </Text>
                 </View>
                 <Text style={styles.entityName}>

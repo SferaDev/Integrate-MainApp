@@ -18,7 +18,8 @@ describe('Test group for good_compra', function () {
             _id: 1,
             productName: 'name',
             initialPrice: 24,
-        }
+        };
+        global.lang = 'ca';
     });
 
     beforeEach(function () {

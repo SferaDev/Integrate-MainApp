@@ -2,6 +2,11 @@ const GOODS = ['111', '222', '333', '444', '555', '666', '777', '888', '999'];
 const USED_GOODS = ['111', '222', '333', '777'];
 
 const API = {
+    login: async (nifnie = '', password = '') => {
+        
+        if (nifnie.length === 0 || password.length === 0) return null;
+        else return 'TOKEN';
+    },
     getEntity: (id = null) => {
         return new Promise(async (resolve, reject) => {
             let entity = {
@@ -44,7 +49,11 @@ const API = {
         } else {
             return {status: 409, body: {soldOutGoods: [], nonUsableGoods: []}};
         }
-    }
+    },
+    getLanguages: async () => {
+
+        return [{name: 'Catalan',language: 'ca'}];
+    },
 };
 
 export default API

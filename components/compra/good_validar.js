@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import language_settings from '../language_settings';
 
 export default class GoodValidar extends Component {
     constructor(props) {
