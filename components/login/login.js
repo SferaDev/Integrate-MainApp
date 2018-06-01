@@ -45,8 +45,10 @@ export default class LogIn extends Component {
         API.login(nifnie, password).then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
     }
 
-    autologin(token) {
+    async autologin(token) {
         if (token !== null) {
+            let user = JSON.parse(await AsyncStorage.getItem('user')) || {interfaceLanguage: 'en'};
+            global.lang = user.interfaceLanguage;
             this.navigateHome();
         }
     }

@@ -20,7 +20,6 @@ class Drawer extends Component {
     }
 
     async updateAppLanguage(iso){
-
         this.setState({appLanguage: iso});
 
         API.setAppLanguage(iso);

@@ -40,12 +40,12 @@ describe('Test group for EntityList', function () {
         expect(instance.login()).toBe(undefined);
     });
 
-    it('autologin() when token is null is callable and returns nothing', () => {
-        expect(instance.autologin(null)).toBe(undefined);
+    it('autologin() when token is null is callable and returns nothing', async () => {
+        expect(await instance.autologin(null)).toBe(undefined);
     });
 
-    it('autologin() when token is not null is callable and returns nothing', () => {
-        expect(instance.autologin("MI_TOKEN")).toBe(undefined);
+    it('autologin() when token is not null is callable and returns nothing', async () => {
+        expect(await instance.autologin("MI_TOKEN")).toBe(undefined);
     });
 
     it('updateNifNie() is callable and returns nothing', () => {
