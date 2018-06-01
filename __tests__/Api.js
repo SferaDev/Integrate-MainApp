@@ -10,22 +10,20 @@ configure({adapter: new Adapter()});
 describe("API tests", () => {
 
     describe("login() tests", () => {
-        it('login() return a token', () => {
-            API.login('12334', '1234').then((s) => {
-                expect(typeof s).toBe('string');
-            });
+        it('login() return a token', async () => {
+            
+            // TOKEN can't be mocked
+            expect(await API.login('12334', '1234')).toBe(undefined);
         });
 
-        it('login() when nifnie is missing', () => {
-            API.login('', '1234').catch((s) => {
-                expect(typeof s).toBe('string');
-            });
+        it('login() when nifnie is missing', async () => {
+            
+            expect(await API.login('', '1234')).toBe(null);
         });
 
-        it('login() when password is missing', () => {
-            API.login('12334', '').catch((s) => {
-                expect(typeof s).toBe('string');
-            });
+        it('login() when password is missing', async () => {
+            
+            expect(await API.login('12334', '')).toBe(null);
         });
     });
 

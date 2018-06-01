@@ -5,6 +5,8 @@ import renderer from 'react-test-renderer';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
+jest.mock('../../components/api');
+
 import LogIn from '../../components/login/login';
 
 const navigation = {navigate: jest.fn()};
@@ -36,8 +38,14 @@ describe('Test group for EntityList', function () {
         expect(tree).toMatchSnapshot();
     });
 
-    it('login() is callable and returns nothing', () => {
-        expect(instance.login()).toBe(undefined);
+    it('login() is callable and returns nothing', async () => {
+        instance.state.nifnie = '55';
+        instance.state.password = '55';
+        expect(await instance.login()).toBe(undefined);
+    });
+
+    it('login() is callable and returns nothing', async () => {
+        expect(await instance.login()).toBe(undefined);
     });
 
     it('autologin() when token is null is callable and returns nothing', async () => {

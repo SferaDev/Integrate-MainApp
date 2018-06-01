@@ -38,11 +38,17 @@ export default class LogIn extends Component {
         this.keyboardDidHideListener.remove();
     }
 
-    login() {
+    async login() {
         let nifnie = this.state.nifnie;
         let password = this.state.password;
         let that = this;
-        API.login(nifnie, password).then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
+        
+        let token = await API.login(nifnie, password); //.then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
+        if( token === null ){
+            this.navigateHome();
+        }else{
+            this.showError();
+        }
     }
 
     async autologin(token) {

@@ -2,27 +2,26 @@ import {AsyncStorage} from 'react-native';
 import http_helper from './http_helper';
 
 const API = {
-    login: (nifnie = '', password = '') => {
-        return new Promise(async (resolve, reject) => {
-            if (nifnie.length === 0 || password.length === 0) reject();
-            else {
-                let url = 'login';
-                let params = [{key: 'nif', value: nifnie}, {key: 'password', value: password}];
+    login: async (nifnie = '', password = '') => {
+        
+        if (nifnie.length === 0 || password.length === 0) return null;
+        else {
+            let url = 'login';
+            let params = [{key: 'nif', value: nifnie}, {key: 'password', value: password}];
 
-                let response = await http_helper.callApi(url, params);
-                if (!response || response.status === 401) {
-                    reject();
-                } else if (response.status === 200) {
-                    let {user, token} = JSON.parse(response._bodyText);
+            let response = await http_helper.callApi(url, params);
+            if (!response || response.status === 401) {
+                return null;
+            } else if (response.status === 200) {
+                let {user, token} = JSON.parse(response._bodyText);
 
-                    AsyncStorage.setItem('token', token);
-                    AsyncStorage.setItem('user', JSON.stringify(user));
-                    global.lang = user.interfaceLanguage;
+                AsyncStorage.setItem('token', token);
+                AsyncStorage.setItem('user', JSON.stringify(user));
+                global.lang = user != null ? user.interfaceLanguage : 'en';
 
-                    resolve(JSON.parse(response._bodyText).token);
-                }
+                return JSON.parse(response._bodyText).token;
             }
-        });
+        }
     },
     restoreCredentials: (nifnie = null) => {
         return new Promise(async (resolve, reject) => {
@@ -183,12 +182,7 @@ const API = {
         let params = [{key: 'token', value: token}, {key: 'oldPassword', value: oldPassword}, {key: 'newPassword', value: newPassword}];
 
         let response = await http_helper.callApi(url, params, "PUT", true);
-
-        if (!response || response.status === 404) {
-            reject();
-        } else if (response.status === 200) {
-            return JSON.parse(response._bodyText);
-        }
+        if(response.status === 200) return JSON.parse(response._bodyText);
         return null;
     }
 };
