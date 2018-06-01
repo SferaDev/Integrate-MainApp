@@ -28,7 +28,7 @@ class Drawer extends Component {
         global.lang = iso;
         AsyncStorage.setItem('lang', iso);
 
-        let user = JSON.parse(await AsyncStorage.getItem('user'));
+        let user = JSON.parse(await AsyncStorage.getItem('user')) || {};
         user.interfaceLanguage = iso;
         AsyncStorage.setItem('user', JSON.stringify(user));
     }
@@ -37,15 +37,13 @@ class Drawer extends Component {
 
         API.setGoodLanguage(iso);
 
-        let user = JSON.parse(await AsyncStorage.getItem('user'));
+        let user = JSON.parse(await AsyncStorage.getItem('user')) || {};
         user.goodLanguage = iso;
         AsyncStorage.setItem('user', JSON.stringify(user));
     }
     
     navigateToScreen(route){
-
-        const navigateAction = NavigationActions.navigate({routeName: route});
-        this.props.navigation.dispatch(navigateAction);
+        this.props.navigation.navigate(route);
     }
 
     render () {
