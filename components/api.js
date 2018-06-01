@@ -16,7 +16,6 @@ const API = {
                     let {user, token} = JSON.parse(response._bodyText);
 
                     AsyncStorage.setItem('token', token);
-                    user.interfaceLanguage = global.lang;
                     AsyncStorage.setItem('user', JSON.stringify(user));
                     global.lang = user.interfaceLanguage;
 
@@ -70,7 +69,7 @@ const API = {
         const token = await AsyncStorage.getItem('token');
 
         let url = 'me/goods';
-        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}, {key:'language', value: 'fr'}];
+        let params = [{key: 'token', value: token}, {key: 'category', value: category}, {key: 'order', value: order}];
 
         if (loc != null) {
             params.push({key: 'latitude', value: loc.coords.latitude});
@@ -173,7 +172,7 @@ const API = {
         let params = [{key: 'token', value: token}, {key: 'goodLanguage', value: language}];
 
         let response = await http_helper.callApi(url, params, "PUT", true);
-
+        console.warn(response);
         if (response.status === 200) return JSON.parse(response._bodyText);
         return null;
     },

@@ -82,14 +82,6 @@ const DrawerNavigation = DrawerNavigator({
             drawerIcon: <Icon name="logout-variant" size={25}/>,
         }
     },
-    Validar: {
-        screen: Validar,
-        navigationOptions: {
-            drawerLabel: language_settings['en'].home.validate,
-            drawerIcon: <Icon name="check" size={25}/>,
-            gesturesEnabled: false
-        }
-    },
     Profile: {screen: ProfileStack}
 }, {
     headerMode: 'none',
