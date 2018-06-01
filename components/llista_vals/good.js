@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import language_settings from '../language_settings';
 
 export default class Good extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ export default class Good extends Component {
                     <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
                     <View style={[styles.viewInfo,{backgroundColor: (this.props.item.isUsable) ? 'white' : 'rgba(127,127,127,0.3)'}]}>
                         <View style={styles.view1}>
-                            <Text style={[styles.goodBasicText,{color: (this.props.item.isUsable) ? 'black' : 'rgb(127,127,127)'}]}>Cada {this.props.item.reusePeriod} dies</Text>
+                            <Text style={[styles.goodBasicText,{color: (this.props.item.isUsable) ? 'black' : 'rgb(127,127,127)'}]}>{language_settings[global.lang].goods.period_before + ' ' + this.props.item.reusePeriod + ' ' + language_settings[global.lang].goods.period_after}</Text>
                             <Text
                                 style={[[styles.goodBasicText,{color: (this.props.item.isUsable) ? 'black' : 'rgb(127,127,127)'}], {textAlign: 'right'}]}>{this.props.item.initialPrice + '€ (-' + this.props.item.discount + '' + this.props.item.discountType + ')'}</Text>
                         </View>

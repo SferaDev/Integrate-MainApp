@@ -55,7 +55,9 @@
       "filter": "Filtre",
       "recent": "Recents",
       "popularity": "Popularitat",
-      "proximity": "Proximitat"
+      "proximity": "Proximitat",
+      "period_before": "Cada",
+      "period_after": "dies"
     },
     "profile": {
       "configuration": "Configuració:",
@@ -134,7 +136,9 @@
       "filter": "Filtro",
       "recent": "Recientes",
       "popularity": "Popularidad",
-      "proximity": "Proximidad"
+      "proximity": "Proximidad",
+      "period_before": "Cada",
+      "period_after": "dias"
     },
     "profile": {
       "configuration": "Configuración:",
@@ -212,7 +216,9 @@
       "filter": "Filter",
       "recent": "Recent",
       "popularity": "Popularity",
-      "proximity": "Proximity"
+      "proximity": "Proximity",
+      "period_before": "Every",
+      "period_after": "days"
     },
     "profile": {
       "configuration": "Settings:",
