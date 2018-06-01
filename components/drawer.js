@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {NavigationActions} from 'react-navigation';
-import {ScrollView, Text, View, StyleSheet, Image, TouchableHighlight, AsyncStorage} from 'react-native';
+import {ScrollView, Text, View, StyleSheet, Image, ImageBackground, TouchableHighlight, AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from './api';
 import language_settings from './language_settings';
@@ -49,7 +49,11 @@ class Drawer extends Component {
     render () {
         return (
             <View style={styles.container}>
-                <Image source={require('../Images/ic_launcher.png')} style={{height: 100, width: 100,alignSelf: 'center',marginBottom: 20}} />
+                <View style={{backgroundColor: 'rgba(255,0,0,0.3)'}} >
+                    <ImageBackground source={require('../Images/bg.jpg')} style={{width: '100%',height: 140}} >
+                        <Image source={require('../Images/ic_launcher.png')} style={{height: 100, width: 100,alignSelf: 'center',marginBottom: 20,marginTop: 20}} />
+                    </ImageBackground>
+                </View>
                 <ScrollView>
 
                     <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Buscador")} underlayColor="white">
@@ -75,7 +79,7 @@ class Drawer extends Component {
 
                 </ScrollView>
 
-                <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Logout")} underlayColor="white">
+                <TouchableHighlight style={[styles.navSection,{backgroundColor: '#8882'}]} onPress={this.navigateToScreen.bind(this,"Logout")} underlayColor="white">
                     <View style={[styles.navItem,{height: 75}]} >
                         <Icon style={styles.navItemLogo} name="logout-variant" size={25}/>
                         <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.log_out}</Text>
@@ -88,7 +92,6 @@ class Drawer extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 20,
         flex: 1
     },
     navSection: {
