@@ -172,7 +172,6 @@ const API = {
         let params = [{key: 'token', value: token}, {key: 'goodLanguage', value: language}];
 
         let response = await http_helper.callApi(url, params, "PUT", true);
-        console.warn(response);
         if (response.status === 200) return JSON.parse(response._bodyText);
         return null;
     },

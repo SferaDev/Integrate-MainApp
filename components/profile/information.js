@@ -67,22 +67,26 @@ export default class Information extends Component {
         this.props.navigation.navigate('DrawerOpen');
     }
 
-    async selectAppLanguage(value, index) {
-        this.setState({appLanguage: index, lang: this.appLanguages[index].iso});
-        global.lang = this.state.lang;
-        AsyncStorage.setItem('lang', global.lang);
-        let user = JSON.parse(await AsyncStorage.getItem('user'));
-        user.interfaceLanguage = global.lang;
-        AsyncStorage.setItem('user', JSON.stringify(user));
+    selectAppLanguage(value, index) {
+        this.setState(
+            {
+                appLanguage: index, 
+                lang: this.appLanguages[index].iso
+            }, 
+            () => global.updateAppLanguage( this.appLanguages[index].iso ) 
+        );
     }
 
     async selectGoodsLanguage(value, index) {
-        this.setState({goodLanguage: index});
+
         let goodLang = this.state.goodsLanguages[index].iso;
-        API.setGoodLanguage(goodLang);
-        let user = JSON.parse(await AsyncStorage.getItem('user'));
-        user.goodLanguage = goodLang;
-        AsyncStorage.setItem('user', JSON.stringify(user));
+        this.setState(
+            {
+                goodLanguage: index
+            },
+            () => global.updateContentLanguage( goodLang )
+        );
+        
     }
 
     goToChangePassword() {
