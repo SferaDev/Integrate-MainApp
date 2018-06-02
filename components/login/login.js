@@ -8,7 +8,9 @@ import {
     Text,
     TextInput,
     TouchableHighlight,
-    View
+    View,
+    Animated,
+    SafeAreaView
 } from 'react-native';
 
 import Toast from './toast';
@@ -16,6 +18,7 @@ import API from '../api';
 import language_settings from '../language_settings';
 
 export default class LogIn extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -25,6 +28,11 @@ export default class LogIn extends Component {
             isFieldFocused: false,
             lang: ''
         };
+    }
+
+    componentWillMount(){
+        this.integrateLogoSize = new Animated.Value(200);
+        this.integrateHeaderSize = new Animated.ValueXY({y: 58, x: 293});   
     }
 
     componentDidMount() {
@@ -39,15 +47,17 @@ export default class LogIn extends Component {
     }
 
     async login() {
+        Keyboard.dismiss();
+
         let nifnie = this.state.nifnie;
         let password = this.state.password;
         let that = this;
         
         let token = await API.login(nifnie, password); //.then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
         if( token === null ){
-            this.navigateHome();
-        }else{
             this.showError();
+        }else{
+            this.navigateHome();
         }
     }
 
@@ -80,11 +90,27 @@ export default class LogIn extends Component {
     }
 
     moveUp() {
-        this.setState({isFieldFocused: true});
+        Animated.timing(this.integrateLogoSize,{
+            toValue: 100,
+            duration: 300
+        }).start();
+
+        Animated.timing(this.integrateHeaderSize,{
+            toValue: {y: 40, x: 202},
+            duration: 300
+        }).start();
     }
 
     moveDown() {
-        this.setState({isFieldFocused: false});
+        Animated.timing(this.integrateLogoSize,{
+            toValue: 200,
+            duration: 300
+        }).start();
+
+        Animated.timing(this.integrateHeaderSize,{
+            toValue: {y: 58, x: 293},
+            duration: 300
+        }).start();
     }
 
     navigateHome() {
@@ -104,29 +130,35 @@ export default class LogIn extends Component {
     }
 
     render() {
+        const integrateLogoStyle = { width: this.integrateLogoSize, height: this.integrateLogoSize };
+        const integrateHeaderStyle = { width: this.integrateHeaderSize.x, height: this.integrateHeaderSize.y };
 
         return (
             <View style={styles.container}>
                 <ImageBackground
                     style={styles.imageBackground}
-                    source={require('../../Images/bg.jpg')}>
-                    <View style={{alignItems: 'center', display: this.state.isFieldFocused ? 'none' : 'flex'}}>
-                        <Image style={styles.ic_launcher}
-                               source={require('../../Images/ic_launcher.png')}>
-                        </Image>
+                    source={require('../../Images/bg.jpg')}
+                >
+                    <View style={{alignItems: 'center',width: '100%'}}>
+                        <Animated.View style={integrateLogoStyle} >
+                            <Image style={{width: '100%', height: '100%'}}
+                                   source={require('../../Images/ic_launcher.png')}>
+                            </Image>
+                        </Animated.View>
                     </View>
-                    <View style={{display: 'flex', alignItems: 'center'}}>
-                        <Image style={[styles.integrateHeader, {
-                            marginBottom: this.state.isFieldFocused ? 50 : 20,
-                            marginTop: this.state.isFieldFocused ? 20 : 10
-                        }]}
-                               source={require('../../Images/integrateHeader1.png')}>
-                        </Image>
+                    <View style={{display: 'flex', alignItems: 'center',width: '100%'}}>
+                        <Animated.View style={integrateHeaderStyle} >
+                            <Image style={{width: '100%', height: '100%'}}
+                                   source={require('../../Images/integrateHeader1.png')}>
+                            </Image>
+                        </Animated.View>
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.nifnie}
                                    placeholder={language_settings[global.lang].login.nifNie}
                                    onChangeText={this.updateNifNie.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'
+                                   autoCorrect={false}
+                                   keyboardType="numeric"
                         >
                         </TextInput>
                         <TextInput style={[styles.basicInput]}
@@ -144,7 +176,7 @@ export default class LogIn extends Component {
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.login.bind(this)}
-                            underlayColor='none'
+                            underlayColor='#094671AA'
                             disabled={this.isEmpty()}>
                             <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
                                 {language_settings[global.lang].login.button_text}
@@ -195,14 +227,6 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         justifyContent: 'center',
         margin: 10,
-    },
-    ic_launcher: {
-        width: 200,
-        height: 200,
-    },
-    integrateHeader: {
-        width: 293,
-        height: 58,
     },
     recuperarContrasenyaText: {
         textDecorationLine: 'underline',

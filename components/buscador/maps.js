@@ -15,12 +15,8 @@ export default class Maps extends Component {
                 lat: 0,
                 long: 0
             },
+            isMapReady: false,
         };
-    }
-
-    componentDidMount() {
-
-        this.goToMe();
     }
 
     mapAnimateToMe(loc) {
@@ -40,8 +36,12 @@ export default class Maps extends Component {
     }
 
     goToMe() {
-        navigator.geolocation.getCurrentPosition(this.mapAnimateToMe.bind(this), () => {
-        });
+        navigator.geolocation.getCurrentPosition(this.mapAnimateToMe.bind(this), () => {});
+    }
+
+    onMapLayout(){
+        this.setState({ isMapReady: true });
+        this.goToMe();
     }
 
     render() {
@@ -62,8 +62,12 @@ export default class Maps extends Component {
                     showsCompass={false}
                     toolbarEnabled={false}
                     style={{...StyleSheet.absoluteFillObject, paddingTop: 100}}
+                    onLayout={this.onMapLayout.bind(this)}
                 >
-                    <MarkerList items={this.props.entities} onMarkerClick={this.props.onMarkerClick}/>
+                    {   this.state.isMapReady ?
+                        <MarkerList items={this.props.entities} onMarkerClick={this.props.onMarkerClick}/>
+                        : null
+                    }
                 </MapView>
                 <TouchableHighlight
                     underlayColor="rgba(0,0,0,0.3)"

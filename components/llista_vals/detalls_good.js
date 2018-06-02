@@ -32,25 +32,27 @@ export default class DetallsGood extends Component {
                             source={{uri: this.props.good.picture}}
                         />
                     </View>
-                    <View style={{
+                    <TouchableHighlight style={{
                         backgroundColor: 'rgba(255,255,255,0)',
                         position: 'absolute',
                         bottom: 0,
-                        width: '100%',
-                        height: 125
-                    }}>
-                        <View style={styles.goodResume}>
-                            <Text style={styles.productName}>{this.props.good.productName}</Text>
+                        width: '100%'
+                    }}
+                        onPress={this.showEntity.bind(this)} 
+                        underlayColor='transparent'
+                    >
+                        <View style={styles.goodResume} >
+                            <View style={{display: 'flex',flexDirection: 'column'}} >
+                                <Text style={[styles.productName,{flex: 1}]}>{this.props.good.productName}</Text>
+                                <Text style={[styles.entityNameText,{flex: 1}]}>{this.props.good.owner.name}</Text>
+                            </View>
                             <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
                                 <Text style={styles.goodBasicText}>{language_settings[global.lang].goods.period_before + ' ' + this.props.good.reusePeriod + ' ' + language_settings[global.lang].goods.period_after}</Text>
                                 <Text
                                     style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.good.initialPrice + '€ (-' + this.props.good.discount + '' + this.props.good.discountType + ')'}</Text>
                             </View>
                         </View>
-                        <TouchableHighlight style={styles.entityResume} onPress={this.showEntity.bind(this)} underlayColor='transparent' >
-                            <Text style={styles.entityNameText}>{this.props.good.owner.name}</Text>
-                        </TouchableHighlight>
-                    </View>
+                    </TouchableHighlight>
                 </View>
             </View>
         );
@@ -92,11 +94,13 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     goodResume: {
-        height: 75,
+        flex: 1,
         backgroundColor: '#e8eaf6AA',
         flexDirection: 'column',
         paddingLeft: 5,
-        paddingRight: 5
+        paddingRight: 5,
+        paddingTop: 10,
+        paddingBottom: 15
     },
     entityResume: {
         display: 'flex',
@@ -109,8 +113,7 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         fontSize: 22,
         color: '#232323',
-        fontWeight: 'bold',
-        lineHeight: 40
+        fontWeight: 'bold'
     },
     goodBasicText: {
         fontSize: 15,
@@ -120,9 +123,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     entityNameText: {
-        fontSize: 20,
         paddingLeft: 15,
-        color: '#232323',
-        flex: 1
+        fontSize: 20,
+        color: '#232323'
     },
 });

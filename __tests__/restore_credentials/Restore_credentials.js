@@ -13,6 +13,7 @@ let instance;
 
 describe('Test group for RestoreCredentials', function () {
     beforeAll(() => {
+        jest.useFakeTimers();
         jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
         configure({adapter: new Adapter()});
         global.lang = 'ca';
@@ -68,8 +69,8 @@ describe('Test group for RestoreCredentials', function () {
         expect(instance.restoreCredentials()).toBe(undefined);
     });
 
-    it('goBack() is callable and returns nothing', () => {
-        expect(instance.goBack()).toBe(undefined);
+    it('goToLogIn() is callable and returns nothing', () => {
+        expect(instance.goToLogIn()).toBe(undefined);
     });
 
     describe("isEmpty() tests", () => {

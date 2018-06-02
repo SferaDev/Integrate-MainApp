@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AsyncStorage, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {AsyncStorage, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View, ScrollView} from 'react-native';
 import Toast from '../login/toast';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import language_settings from '../language_settings';
@@ -125,7 +125,7 @@ export default class ChangePassword extends Component {
                 <View style={styles.header}>
                     <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
                 </View>
-                <View style={styles.body}>
+                <ScrollView style={styles.body} justifyContent="center" alignItems="center">
                     <Text style={[styles.basicTitle, {paddingBottom: 25}]}>
                         {language_settings[global.lang].change_password.title}
                     </Text>
@@ -167,12 +167,14 @@ export default class ChangePassword extends Component {
                             {language_settings[global.lang].change_password.button_text}
                         </Text>
                     </TouchableHighlight>
-                    <Toast
-                        visible={this.state.error}
-                        onClose={this.updateError.bind(this)}>
-                        {this.displayToastContent()}
-                    </Toast>
-                </View>
+                    
+                </ScrollView>
+
+                <Toast
+                    visible={this.state.error}
+                    onClose={this.updateError.bind(this)}>
+                    {this.displayToastContent()}
+                </Toast>
             </View>
         );
     }
@@ -201,8 +203,6 @@ const styles = StyleSheet.create({
     },
     body: {
         flex: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#F4F3F2',
         width: '100%',
         height: '100%'
