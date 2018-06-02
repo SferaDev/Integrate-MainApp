@@ -69,8 +69,8 @@ describe('Test group for RestoreCredentials', function () {
         expect(instance.restoreCredentials()).toBe(undefined);
     });
 
-    it('goBack() is callable and returns nothing', () => {
-        expect(instance.goBack()).toBe(undefined);
+    it('goToLogIn() is callable and returns nothing', () => {
+        expect(instance.goToLogIn()).toBe(undefined);
     });
 
     describe("isEmpty() tests", () => {
