@@ -71,4 +71,8 @@ describe('Test group for Maps', function () {
             }
         })).toBe(undefined);
     });
+
+    test('onMapLayout is callable and returns nothing', () => {
+        expect(instance.onMapLayout()).toBe(undefined);
+    });
 });

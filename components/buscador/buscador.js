@@ -23,8 +23,7 @@ export default class Buscador extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
 
-        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {
-        });
+        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {});
     }
 
     handleBackButton() {
