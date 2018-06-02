@@ -1,0 +1,242 @@
+{
+  "ca": {
+    "login": {
+      "nifNie": "Introduïr NIF/NIE",
+      "password": "Introduïr contrasenya",
+      "restore_password": "He olvidat la contrasenya?",
+      "button_text": "Entra",
+      "error": "El Nie / Nif o la contrasenya són incorrectes"
+    },
+    "restoreCredentials": {
+      "title": "Recuperar credencials",
+      "nif_nie": "Introduïr NIF/NIE",
+      "button_text": "Sol·licitar",
+      "go_back": "Enrera"
+    },
+    "searcher": {
+      "search": "Cercar"
+    },
+    "validate": {
+      "discount_applied": "S'ha d'aplicar un descompte de -",
+      "wrong_code": "Codi incorrecte",
+      "conflict": "Conflicte amb els vals:",
+      "summary": "Resum compra:",
+      "discount": "Descompte total",
+      "title": "Introduïr codi de validació:",
+      "code": "Introduïr codi",
+      "button_text": "Validar",
+      "done": "FET"
+    },
+    "toast": {
+      "message": "El Nie / Nif introduït no existeix",
+      "exit": "Tancar"
+    },
+    "home": {
+      "searcher": "Cercador",
+      "goods": "Vals",
+      "log_out": "Tancar sessió",
+      "validate": "Validar",
+      "settings": "Configuració del perfil"
+    },
+    "goods": {
+      "favourites": "Preferits",
+      "show_all": "Tots",
+      "category": "Categoria",
+      "all": "Totes",
+      "feeding": "Alimentació",
+      "culture": "Cultura",
+      "education": "Formació",
+      "mobility": "Mobilitat",
+      "technology": "Tecnologia",
+      "health": "Salut",
+      "sports": "Esports",
+      "leisure": "Lleure",
+      "others": "Altres",
+      "filter": "Filtre",
+      "recent": "Recents",
+      "popularity": "Popularitat",
+      "proximity": "Proximitat",
+      "period_before": "Cada",
+      "period_after": "dies"
+    },
+    "profile": {
+      "configuration": "Configuració:",
+      "app_language": "Idioma de l'aplicació",
+      "good_language": "Idioma dels vals",
+      "button_text": "Canviar contrasenya"
+    },
+    "change_password": {
+      "title": "Canvi de contrasenya",
+      "actual_password_title": "Contrasenya actual:",
+      "actual_password_placeHolder": "Introduïr contrasenya actual",
+      "new_password_title": "Nova contrasenya:",
+      "new_password_placeHolder": "Introduïr nova contrasenya",
+      "new_password2_placeHolder": "Confirmar la nova contrasenya",
+      "button_text": "Guardar contrasenya",
+      "different_passwords": "Les contrasenyes no coincideixen",
+      "wrong_password": "La contrasenya ha de contenir mínim 8 caracters i ha d'incloure un número",
+      "set_password": "La contrasenya s'ha modificat correctament"
+
+    }
+  },
+
+  "es": {
+    "login": {
+      "nifNie": "Introducir NIF/NIE",
+      "password": "Introducir contraseña",
+      "restore_password": "He olvidado la contraseña?",
+      "button_text": "Entra",
+      "error": "El Nie / Nif o la contraseña son incorrectos"
+    },
+    "restoreCredentials": {
+      "title": "Recuperar credenciales",
+      "nif_nie": "Introducir NIF/NIE",
+      "button_text": "Solicitar",
+      "go_back": "Atrás"
+    },
+    "searcher": {
+      "search": "Buscar"
+    },
+    "validate": {
+      "discount_applied": "Se debe aplicar un descuento de -",
+      "wrong_code": "Código incorrecto",
+      "conflict": "Conflicto con los vales:",
+      "summary": "Resumen compra:",
+      "discount": "Descuento total",
+      "title": "Introducir código de validación:",
+      "code": "Introducir código",
+      "button_text": "Validar",
+      "done": "HECHO"
+    },
+    "toast": {
+      "message": "El Nie / Nif introducido no existe",
+      "exit": "Cerrar"
+    },
+    "home": {
+      "searcher": "Buscador",
+      "goods": "Vales",
+      "log_out": "Cerrar sessión",
+      "validate": "Validar",
+      "settings": "Configuración del perfil"
+    },
+    "goods": {
+      "favourites": "Favoritos",
+      "show_all": "Todos",
+      "category": "Categoría",
+      "all": "Todas",
+      "feeding": "Alimentación",
+      "culture": "Cultura",
+      "education": "Formación",
+      "mobility": "Mobilidad",
+      "technology": "Tecnología",
+      "health": "Salud",
+      "sports": "Deportes",
+      "leisure": "Ocio",
+      "others": "Otros",
+      "filter": "Filtro",
+      "recent": "Recientes",
+      "popularity": "Popularidad",
+      "proximity": "Proximidad",
+      "period_before": "Cada",
+      "period_after": "dias"
+    },
+    "profile": {
+      "configuration": "Configuración:",
+      "app_language": "Idioma de la aplicación",
+      "good_language": "Idioma de los vales",
+      "button_text": "Cambiar contraseña"
+    },
+    "change_password": {
+      "title": "Cambio de contraseña",
+      "actual_password_title": "Contraseña actual:",
+      "actual_password_placeHolder": "Introducir contraseña actual",
+      "new_password_title": "Contraseña nueva:",
+      "new_password_placeHolder": "Introducir nueva contraseña",
+      "new_password2_placeHolder": "Confirmar la nueva contraseña",
+      "button_text": "Guardar contraseña",
+      "different_passwords": "Las contraseñas no coinciden",
+      "wrong_password": "La contraseña ha de contener mínimo 8 caracteres y incluir un numero",
+      "set_password": "La contraseña se ha modificado correctamente"
+    }
+  },
+
+  "en": {
+    "login": {
+      "nifNie": "Introduce NIF/NIE",
+      "password": "Introduce password",
+      "restore_password": "Forgot password?",
+      "button_text": "Enter",
+      "error": "Nie / Nif or password is incorrect"
+    },
+    "restoreCredentials": {
+      "title": "Restore credentials",
+      "nif_nie": "Introduce NIF/NIE",
+      "button_text": "Restore",
+      "go_back": "Back"
+    },
+    "searcher": {
+      "search": "Search"
+    },
+    "validate": {
+      "discount_applied": "Should apply a discount of -",
+      "wrong_code": "Wrong code",
+      "conflict": "Goods in conflict:",
+      "summary": "Purchase summary:",
+      "discount": "Total discount",
+      "title": "Introduce validation's code:",
+      "code": "Introduce code",
+      "button_text": "Validate",
+      "done": "DONE"
+    },
+    "toast": {
+      "message": "Nie / Nif introduced doesn't exist",
+      "exit": "Close"
+    },
+    "home": {
+      "searcher": "Searcher",
+      "goods": "Goods",
+      "log_out": "Log Out",
+      "validate": "Validate",
+      "settings": "Profile settings"
+    },
+    "goods": {
+      "favourites": "Favourites",
+      "show_all": "All",
+      "category": "Category",
+      "all": "All",
+      "feeding": "Groceries",
+      "culture": "Culture",
+      "education": "Education",
+      "mobility": "Mobility",
+      "technology": "Technology",
+      "health": "Health",
+      "sports": "Sports",
+      "leisure": "Leisure",
+      "others": "Others",
+      "filter": "Filter",
+      "recent": "Recent",
+      "popularity": "Popularity",
+      "proximity": "Proximity",
+      "period_before": "Every",
+      "period_after": "days"
+    },
+    "profile": {
+      "configuration": "Settings:",
+      "app_language": "App language",
+      "good_language": "Goods language",
+      "button_text": "Change password"
+    },
+    "change_password": {
+      "title": "Change password",
+      "actual_password_title": "Current password:",
+      "actual_password_placeHolder": "Introduce current password",
+      "new_password_title": "New password:",
+      "new_password_placeHolder": "Introduce new password",
+      "new_password2_placeHolder": "Confirm new password",
+      "button_text": "Save password",
+      "different_passwords": "Passwords not match",
+      "wrong_password": "New password should include minimum 8 characters and one number",
+      "set_password": "Password changed correctly"
+    }
+  }
+}

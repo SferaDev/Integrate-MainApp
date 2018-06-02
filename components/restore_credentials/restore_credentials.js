@@ -3,6 +3,7 @@ import {ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableHighlig
 
 import Toast from './toast';
 import API from "../api";
+import language_settings from '../language_settings';
 
 export default class RestoreCredentials extends Component {
     constructor(props) {
@@ -82,6 +83,7 @@ export default class RestoreCredentials extends Component {
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.imageBackground} source={require('../../Images/bg.jpg')}>
+
                     <Animated.View style={[styles.body,integrateTopPaddingStyle]}>
                         <Text style={styles.basicTitle}>
                             Recuperar credencials:
@@ -106,6 +108,7 @@ export default class RestoreCredentials extends Component {
                             Enrera
                         </Text>
                     </Animated.View>
+
                     <Toast visible={this.state.error} onClose={this.updateError.bind(this)}/>
                 </ImageBackground>
             </View>

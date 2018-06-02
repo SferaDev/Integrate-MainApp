@@ -15,6 +15,7 @@ import {
 
 import Toast from './toast';
 import API from '../api';
+import language_settings from '../language_settings';
 
 export default class LogIn extends Component {
 
@@ -24,7 +25,8 @@ export default class LogIn extends Component {
             nifnie: "",
             password: "",
             error: false,
-            isFieldFocused: false
+            isFieldFocused: false,
+            lang: ''
         };
     }
 
@@ -36,7 +38,6 @@ export default class LogIn extends Component {
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
-
         AsyncStorage.getItem('token').then(this.autologin.bind(this));
     }
 
@@ -45,16 +46,25 @@ export default class LogIn extends Component {
         this.keyboardDidHideListener.remove();
     }
 
-    login() {
+    async login() {
         Keyboard.dismiss();
+        
         let nifnie = this.state.nifnie;
         let password = this.state.password;
         let that = this;
-        API.login(nifnie, password).then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
+        
+        let token = await API.login(nifnie, password); //.then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
+        if( token === null ){
+            this.navigateHome();
+        }else{
+            this.showError();
+        }
     }
 
-    autologin(token) {
+    async autologin(token) {
         if (token !== null) {
+            let user = JSON.parse(await AsyncStorage.getItem('user')) || {interfaceLanguage: 'en'};
+            global.lang = user.interfaceLanguage;
             this.navigateHome();
         }
     }
@@ -144,7 +154,7 @@ export default class LogIn extends Component {
                         </Animated.View>
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.nifnie}
-                                   placeholder={"Introduir NIF/NIE"}
+                                   placeholder={language_settings[global.lang].login.nifNie}
                                    onChangeText={this.updateNifNie.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'
                                    autoCorrect={false}
@@ -154,14 +164,14 @@ export default class LogIn extends Component {
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.password}
                                    secureTextEntry={true}
-                                   placeholder={"Introduir contrasenya"}
+                                   placeholder={language_settings[global.lang].login.password}
                                    onChangeText={this.updatePassword.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'
                         >
                         </TextInput>
                         <Text style={styles.recuperarContrasenyaText}
                               onPress={this.restorePassword.bind(this)}>
-                            He oblidat la contrasenya?
+                            {language_settings[global.lang].login.restore_password}
                         </Text>
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
@@ -169,14 +179,14 @@ export default class LogIn extends Component {
                             underlayColor='#094671AA'
                             disabled={this.isEmpty()}>
                             <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
-                                Entra
+                                {language_settings[global.lang].login.button_text}
                             </Text>
                         </TouchableHighlight>
                     </View>
                     <Toast
                         visible={this.state.error}
                         onClose={this.updateError.bind(this)}>
-                        <Text style={{textAlign: 'center'}}>El Nie / Nif o la contrasenya són incorrectes</Text>
+                        <Text style={{textAlign: 'center'}}> {language_settings[global.lang].login.error} </Text>
                     </Toast>
                 </ImageBackground>
             </View>

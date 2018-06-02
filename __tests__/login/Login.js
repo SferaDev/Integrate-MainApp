@@ -5,6 +5,8 @@ import renderer from 'react-test-renderer';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
+jest.mock('../../components/api');
+
 import LogIn from '../../components/login/login';
 
 const navigation = {navigate: jest.fn()};
@@ -16,6 +18,7 @@ describe('Test group for EntityList', function () {
         jest.useFakeTimers();
         jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
         configure({adapter: new Adapter()});
+        global.lang = 'ca';
     });
 
     beforeEach(function () {
@@ -36,16 +39,22 @@ describe('Test group for EntityList', function () {
         expect(tree).toMatchSnapshot();
     });
 
-    it('login() is callable and returns nothing', () => {
-        expect(instance.login()).toBe(undefined);
+    it('login() is callable and returns nothing', async () => {
+        instance.state.nifnie = '55';
+        instance.state.password = '55';
+        expect(await instance.login()).toBe(undefined);
     });
 
-    it('autologin() when token is null is callable and returns nothing', () => {
-        expect(instance.autologin(null)).toBe(undefined);
+    it('login() is callable and returns nothing', async () => {
+        expect(await instance.login()).toBe(undefined);
     });
 
-    it('autologin() when token is not null is callable and returns nothing', () => {
-        expect(instance.autologin("MI_TOKEN")).toBe(undefined);
+    it('autologin() when token is null is callable and returns nothing', async () => {
+        expect(await instance.autologin(null)).toBe(undefined);
+    });
+
+    it('autologin() when token is not null is callable and returns nothing', async () => {
+        expect(await instance.autologin("MI_TOKEN")).toBe(undefined);
     });
 
     it('updateNifNie() is callable and returns nothing', () => {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import language_settings from '../language_settings';
 
 export default class DetallsGood extends Component {
 
@@ -47,7 +48,7 @@ export default class DetallsGood extends Component {
                                 <Text style={styles.entityNameText}>{this.props.good.owner.name}</Text>
                             </View>
                             <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
-                                <Text style={styles.goodBasicText}>Cada {this.props.good.reusePeriod} dies</Text>
+                                <Text style={styles.goodBasicText}>{language_settings[global.lang].goods.period_before + ' ' + this.props.good.reusePeriod + ' ' + language_settings[global.lang].goods.period_after}</Text>
                                 <Text
                                     style={[styles.goodBasicText, {textAlign: 'right'}]}>{this.props.good.initialPrice + '€ (-' + this.props.good.discount + '' + this.props.good.discountType + ')'}</Text>
                             </View>

@@ -6,14 +6,17 @@ import {Dropdown} from 'react-native-material-dropdown';
 import Good from './good';
 import DetallsGood from './detalls_good';
 import SegmentControl from 'react-native-segment-controller';
+import language_settings from '../language_settings';
 
 export default class LlistaVals extends Component {
 
     constructor(props) {
         super(props);
 
-        this.categories = [{value: "Totes"}, {value: "Alimentació"}, {value: "Cultura"}, {value: "Formació"}, {value: "Mobilitat"}, {value: "Tecnologia"}, {value: "Salut"}, {value: "Esports"}, {value: "Lleure"}, {value: "Altres"}];
-        this.orders = [{value: "Recents"}, {value: "Popularitat"}, {value: "Proximitat"}];
+        this.categories = [{value: language_settings[global.lang].goods.all}, {value: language_settings[global.lang].goods.feeding}, {value: language_settings[global.lang].goods.culture},
+            {value: language_settings[global.lang].goods.education}, {value: language_settings[global.lang].goods.mobility}, {value: language_settings[global.lang].goods.technology}, {value: language_settings[global.lang].goods.health},
+            {value: language_settings[global.lang].goods.sports}, {value: language_settings[global.lang].goods.leisure}, {value: language_settings[global.lang].goods.others}];
+        this.orders = [{value: language_settings[global.lang].goods.recent}, {value: language_settings[global.lang].goods.popularity}, {value: language_settings[global.lang].goods.proximity}];
 
         this.state = {
             goods: [],
@@ -132,7 +135,7 @@ export default class LlistaVals extends Component {
                         <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
                     </View>
                     <SegmentControl
-                        values={['Preferits', 'Tots']}
+                        values={[language_settings[global.lang].goods.favourites, language_settings[global.lang].goods.show_all]}
                         height={50}
                         borderRadius={1}
                         selectedIndex={this.state.selectedIndex}
@@ -141,7 +144,7 @@ export default class LlistaVals extends Component {
                     <View style={[styles.filterGoods, {height: (this.canApplyFilters()) ? 1 : 60}]}>
                         <View style={{flex: 1}}>
                             <Dropdown
-                                label='Categoria'
+                                label={language_settings[global.lang].goods.category}
                                 data={this.categories}
                                 onChangeText={this.selectFilter.bind(this)}
                                 itemCount={10}
@@ -151,7 +154,7 @@ export default class LlistaVals extends Component {
                         </View>
                         <View style={{flex: 1}}>
                             <Dropdown
-                                label='Filtre'
+                                label={language_settings[global.lang].goods.filter}
                                 data={this.orders}
                                 onChangeText={this.selectOrder.bind(this)}
                                 itemCount={3}

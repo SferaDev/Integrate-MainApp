@@ -22,7 +22,8 @@ describe('Test group for good', function () {
             owner: {
                 name: 'NAME'
             }
-        }
+        };
+        global.lang = 'ca';
     });
 
     beforeEach(function () {
