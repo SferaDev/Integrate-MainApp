@@ -48,16 +48,16 @@ export default class LogIn extends Component {
 
     async login() {
         Keyboard.dismiss();
-        
+
         let nifnie = this.state.nifnie;
         let password = this.state.password;
         let that = this;
         
         let token = await API.login(nifnie, password); //.then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
         if( token === null ){
-            this.navigateHome();
-        }else{
             this.showError();
+        }else{
+            this.navigateHome();
         }
     }
 
