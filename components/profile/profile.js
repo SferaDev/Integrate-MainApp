@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {AsyncStorage, StyleSheet, View, ScrollView, Text, Dimensions} from 'react-native';
+import {AsyncStorage, StyleSheet, View, ScrollView, Text, Dimensions, Keyboard} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import language_settings from '../language_settings';
 
 import Information from './information';
+import ChangePassword from './change_password';
 
 export default class Profile extends Component {
 
@@ -13,10 +14,29 @@ export default class Profile extends Component {
         let {height, width} = Dimensions.get('window');
 
         this.state = {
+            isFieldFocused: false,
             tabActive: 0,
             Dwidth: width,
             Dheight: height
         }
+    }
+
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
+    }
+
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
+    }
+
+    moveUp() {
+        this.setState({isFieldFocused: true});
+    }
+
+    moveDown() {
+        this.setState({isFieldFocused: false});
     }
 
     openMenu() {
@@ -48,9 +68,7 @@ export default class Profile extends Component {
 
                         <Information style={{width: this.state.Dwidth}} />
 
-                        <View style={{width: this.state.Dwidth}} >
-                            <Text>HELLO WORLD</Text>
-                        </View>
+                        <ChangePassword style={{width: this.state.Dwidth}} />
 
                         <View style={{width: this.state.Dwidth}} >
                             <Text>HELLO WORLD</Text>
@@ -63,7 +81,7 @@ export default class Profile extends Component {
                     </ScrollView>
                 </View>
 
-                <View style={styles.footer} >
+                <View style={[styles.footer,{display: this.state.isFieldFocused ? 'none' : 'flex'}]} >
                     <Icon onPress={this.setActiveTab.bind(this,0)} style={[styles.footerIcon,this.activeTabStyles(0)]} name="account" size={30}/>
                     <Icon onPress={this.setActiveTab.bind(this,1)} style={[styles.footerIcon,this.activeTabStyles(1)]} name="lock-reset" size={30}/>
                     <Icon onPress={this.setActiveTab.bind(this,2)} style={[styles.footerIcon,this.activeTabStyles(2)]} name="information-outline" size={30}/>
