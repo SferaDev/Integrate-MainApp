@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AsyncStorage, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {AsyncStorage, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
 import language_settings from '../language_settings';
@@ -63,10 +63,6 @@ export default class Information extends Component {
         return true;
     }
 
-    openMenu() {
-        this.props.navigation.navigate('DrawerOpen');
-    }
-
     selectAppLanguage(value, index) {
         this.setState(
             {
@@ -93,10 +89,7 @@ export default class Information extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
-                </View>
+            <View style={[styles.container,this.props.style]}>
 
                 <View style={{alignItems: 'center'}}>
                     <Icon style={styles.favProps} name="account-circle" size={170}/>
@@ -139,13 +132,7 @@ export default class Information extends Component {
                             />
                         </View>
                     </View>
-                    <TouchableHighlight
-                        style={[styles.button, {margin: 40}]}
-                        onPress={this.goToChangePassword.bind(this)}>
-                        <Text style={{alignSelf: 'center', color: 'white'}}>
-                            {language_settings[this.state.lang].profile.button_text}
-                        </Text>
-                    </TouchableHighlight>
+
                 </View>
             </View>
         );
@@ -176,7 +163,6 @@ const styles = StyleSheet.create({
     body: {
         flex: 8,
         alignItems: 'center',
-        backgroundColor: '#F4F3F2',
         width: '100%',
         height: '100%'
     },

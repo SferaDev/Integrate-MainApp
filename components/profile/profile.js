@@ -1,15 +1,21 @@
 import React, {Component} from 'react';
-import {AsyncStorage, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {AsyncStorage, StyleSheet, View, ScrollView, Text, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import language_settings from '../language_settings';
 
-export default class Information extends Component {
+import Information from './information';
+
+export default class Profile extends Component {
 
     constructor(props) {
         super(props);
 
+        let {height, width} = Dimensions.get('window');
+
         this.state = {
-            tabActive: 0
+            tabActive: 0,
+            Dwidth: width,
+            Dheight: height
         }
     }
 
@@ -19,6 +25,7 @@ export default class Information extends Component {
 
     setActiveTab(i){
         this.setState({tabActive: i});
+        this.sv.scrollTo({x: (i*this.state.Dwidth), y: 0, animated: true});
     }
 
     activeTabStyles(i){
@@ -37,8 +44,23 @@ export default class Information extends Component {
                 </View>
 
                 <View style={styles.body}>
+                    <ScrollView ref={sv => this.sv = sv} style={{backgroundColor: 'blue',width: '100%'}} horizontal={true} scrollEnabled={false}>
 
+                        <Information style={{width: this.state.Dwidth}} />
 
+                        <View style={{width: this.state.Dwidth}} >
+                            <Text>HELLO WORLD</Text>
+                        </View>
+
+                        <View style={{width: this.state.Dwidth}} >
+                            <Text>HELLO WORLD</Text>
+                        </View>
+
+                        <View style={{width: this.state.Dwidth}} >
+                            <Text>HELLO WORLD</Text>
+                        </View>
+
+                    </ScrollView>
                 </View>
 
                 <View style={styles.footer} >
