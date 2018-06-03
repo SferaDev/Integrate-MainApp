@@ -3,19 +3,20 @@ import {DrawerNavigator, StackNavigator} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Login from './login/login';
-import Buscador from './buscador/buscador';
-import LlistaVals from './llista_vals/llista_vals';
-import DetallsEntitat from './compra/detalls_entitat';
-import App from '../App';
-import Logout from "./login/logout";
 import RestoreCredentials from "./restore_credentials/restore_credentials";
+import Logout from "./login/logout";
+
+import Buscador from './buscador/buscador';
+import DetallsEntitat from './compra/detalls_entitat';
+
+import LlistaVals from './llista_vals/llista_vals';
 import Validar from './compra/validar';
-import ChangePassword from "./profile/change_password";
-import Information from "./profile/information";
 import Buy from "./compra/buy";
-import language_settings from './language_settings';
+
+import Profile from "./profile/profile";
 
 import DRAWER from './drawer';
+import language_settings from './language_settings';
 
 const BuscadorStack = StackNavigator({
     buscador: { screen: Buscador },
@@ -38,19 +39,19 @@ const ValsStack = StackNavigator({
     gesturesEnabled: false
 });
 
-const ProfileStack = StackNavigator({
+/*const ProfileStack = StackNavigator({
     settings: { screen: Information, }, 
     change_password: { screen: ChangePassword }
 }, {
     headerMode: 'none',
     disabledBackGesture: true,
     gesturesEnabled: false
-});
+});*/
 
 const DrawerNavigation = DrawerNavigator({
     Buscador: {screen: BuscadorStack},
     Vals: {screen: ValsStack},
-    Profile: {screen: ProfileStack},
+    Profile: {screen: Profile},
     Logout: {screen: Logout}
 }, {
     contentComponent: DRAWER,
