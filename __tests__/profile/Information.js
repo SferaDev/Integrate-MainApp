@@ -40,18 +40,6 @@ describe('Test group for EntityList', function () {
         expect(tree).toMatchSnapshot();
     });
 
-    test('openMenu is callable and returns nothing', () => {
-        expect(instance.openMenu()).toBe(undefined);
-    });
-
-    test('handleBackButton is callable and returns true', () => {
-        expect(instance.handleBackButton()).toBe(true);
-    });
-
-    test('goToChangePassword() is callable and returns nothing', () => {
-        expect(instance.goToChangePassword()).toBe(undefined);
-    });
-
     test('setAppLanguage() is callable and returns nothing',() => {
         expect(instance.setAppLanguage()).toBe(-1);
     });

@@ -58,11 +58,7 @@ export default class Information extends Component {
         } );
         this.setState({goodsLanguages: goodsLanguages, goodLanguage: index, goodLang: iso});
     }
-
-    handleBackButton() {
-        return true;
-    }
-
+    
     selectAppLanguage(value, index) {
         this.setState(
             {
