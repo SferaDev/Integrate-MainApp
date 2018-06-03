@@ -77,6 +77,9 @@
       "wrong_password": "La contrasenya ha de contenir mínim 8 caracters i ha d'incloure un número",
       "set_password": "La contrasenya s'ha modificat correctament"
 
+    },
+    "about": {
+      "description": "Projecte d'integració social en el marc de l'assignatura de PES (Projecte d'enginyeria del Software)"
     }
   },
 
@@ -157,6 +160,9 @@
       "different_passwords": "Las contraseñas no coinciden",
       "wrong_password": "La contraseña ha de contener mínimo 8 caracteres y incluir un numero",
       "set_password": "La contraseña se ha modificado correctamente"
+    },
+    "about": {
+      "description": "Proyecto de integración social en el marco de la assignatura de PES (Proyecto de inginyeria de Software)"
     }
   },
 
@@ -237,6 +243,9 @@
       "different_passwords": "Passwords not match",
       "wrong_password": "New password should include minimum 8 characters and one number",
       "set_password": "Password changed correctly"
+    },
+    "about": {
+      "description": "Social integration project under the module SEP (Software Engineering Project)"
     }
   }
 }
