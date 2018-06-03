@@ -67,14 +67,6 @@ describe('Test group for EntityList', function () {
         expect(instance.updateNewPassword2('')).toBe(undefined);
     });
 
-    test('goBack is callable and returns nothing', () => {
-        expect(instance.goBack()).toBe(undefined);
-    });
-
-    test('handleBackButton is callable and returns true', () => {
-        expect(instance.handleBackButton()).toBe(true);
-    });
-
     describe("getButtonBackground() and getButtonColor() tests", () => {
 
         test('getButtonBackground() is callable and returns a color code', () => {

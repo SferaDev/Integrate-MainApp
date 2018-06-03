@@ -19,12 +19,22 @@ export default class ChangePassword extends Component {
         };
     }
 
-    handleBackButton() {
-        return true;
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
     }
 
-    goBack() {
-        this.props.navigation.goBack();
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
+    }
+
+    moveUp() {
+        this.setState({isFieldFocused: true});
+    }
+
+    moveDown() {
+        this.setState({isFieldFocused: false});
     }
 
     updatePassword(value) {
@@ -49,24 +59,6 @@ export default class ChangePassword extends Component {
 
     getButtonBackground() {
         return (this.isEmpty() ? '#CCC' : '#094671');
-    }
-
-    componentDidMount() {
-        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
-        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
-    }
-
-    componentWillUnmount() {
-        this.keyboardDidShowListener.remove();
-        this.keyboardDidHideListener.remove();
-    }
-
-    moveUp() {
-        this.setState({isFieldFocused: true});
-    }
-
-    moveDown() {
-        this.setState({isFieldFocused: false});
     }
 
     showError() {
@@ -121,12 +113,9 @@ export default class ChangePassword extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Icon onPress={this.goBack.bind(this)} style={styles.headerLeftIco} name="chevron-left" size={35}/>
-                </View>
-                <ScrollView style={styles.body} justifyContent="center" alignItems="center">
-                    <Text style={[styles.basicTitle, {paddingBottom: 25}]}>
+            <View style={[styles.container,this.props.style]}>
+                <ScrollView style={styles.body} alignItems="center">
+                    <Text style={[styles.basicTitle, {paddingTop: 75}]}>
                         {language_settings[global.lang].change_password.title}
                     </Text>
                     <Text style={styles.basicText}>
