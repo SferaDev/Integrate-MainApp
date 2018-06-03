@@ -83,16 +83,12 @@ export default class Information extends Component {
         );
     }
 
-    goToChangePassword() {
-        this.props.navigation.navigate('change_password');
-    }
-
     render() {
         return (
             <View style={[styles.container,this.props.style]}>
 
                 <View style={{alignItems: 'center'}}>
-                    <Icon style={styles.favProps} name="account-circle" size={170}/>
+                    <Icon style={styles.userIcon} name="account-circle" size={150}/>
                 </View>
 
                 <View style={styles.body}>
@@ -107,7 +103,7 @@ export default class Information extends Component {
                     </Text>
                 </View>
 
-                <View style={[styles.body, {paddingBottom: 150}]}>
+                <View style={[styles.body, {paddingBottom: 75}]}>
                     <Text style={styles.basicTitle}>
                         {language_settings[this.state.lang].profile.configuration}
                     </Text>
@@ -160,6 +156,9 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         color: 'white'
     },
+    userIcon: {
+        color: '#444444',
+    },
     body: {
         flex: 8,
         alignItems: 'center',
@@ -190,10 +189,6 @@ const styles = StyleSheet.create({
         margin: 10,
         textAlign: 'center',
         backgroundColor: 'transparent'
-    },
-    favProps: {
-        color: '#444444',
-        paddingTop: 20,
     },
     filterLanguage: {
         height: 60,
