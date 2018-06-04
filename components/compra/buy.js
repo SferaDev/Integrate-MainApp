@@ -169,7 +169,8 @@ export default class Buy extends Component {
         let selected_goods = this.state.selected_goods;
         for(let sgoodi in selected_goods){
             let sgood = selected_goods[sgoodi];
-            if(this.state.nonUsableGoods.includes(sgood) || this.state.soldOutGoods.includes(sgood)){
+            if(this.state.nonUsableGoods.includes(sgood) || this.state.soldOutGoods.includes(sgood) ||
+                !this.state.entity.goods.includes(sgood)) {
                 selected_goods.splice(sgoodi,1);
             }
         }
