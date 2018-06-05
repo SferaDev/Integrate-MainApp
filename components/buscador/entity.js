@@ -9,7 +9,7 @@ export default class Entity extends Component {
     }
 
     showEntityInfo() {
-        if( this.props.onDetailsShow ){
+        if (this.props.onDetailsShow) {
             this.props.onDetailsShow(this.props.item);
         }
     }
@@ -22,8 +22,8 @@ export default class Entity extends Component {
                     <Text style={styles.entityDescription}>{this.props.item.description}</Text>
                     <Text style={styles.entityAddress}>{this.props.item.addressName}</Text>
                     <View style={styles.entityLikes}>
-                        <Text></Text>
-                        <Text></Text>
+                        <Text style={styles.numberLikesStyle}>{this.props.item.numberLikes}</Text>
+                        <Icon style={styles.voteIcon} name="thumb-up" size={22}/>
                     </View>
                 </View>
             </TouchableHighlight>
@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderTopWidth: 1,
         padding: 15,
-        paddingRight: 60
     },
     entityName: {
         fontSize: 24,
@@ -49,13 +48,21 @@ const styles = StyleSheet.create({
     },
     entityAddress: {
         fontSize: 14,
-        color: '#606060'
+        color: '#606060',
+        paddingRight: 60
     },
     entityLikes: {
         position: 'absolute',
-        right: 15,
-        top: 15,
+        right: 5,
+        top: 5,
         display: 'flex',
         flexDirection: 'row',
+    },
+    numberLikesStyle: {
+        fontSize: 22,
+        color: '#094671',
+    },
+    voteIcon: {
+        marginLeft: 10
     }
 });
