@@ -14,6 +14,16 @@ export default class Entity extends Component {
         }
     }
 
+    unvote() {
+        //desvotar
+        this.props.item.isLiked = false;
+    }
+
+    vote() {
+        //votar
+        this.props.item.isLiked = true;
+    }
+
     render() {
         return (
             <TouchableHighlight key={this.props.item._id} style={styles.entityView} onPress={this.showEntityInfo.bind(this)} underlayColor='transparent' >
@@ -23,7 +33,12 @@ export default class Entity extends Component {
                     <Text style={styles.entityAddress}>{this.props.item.addressName}</Text>
                     <View style={styles.entityLikes}>
                         <Text style={styles.numberLikesStyle}>{this.props.item.numberLikes}</Text>
-                        <Icon style={styles.voteIcon} name="thumb-up" size={22}/>
+                        {
+                            this.props.item.isLiked ?
+                                <Icon onPress={this.unvote.bind(this)} style={styles.voteIcon} name="thumb-up" size={22}/>
+                                :
+                                <Icon onPress={this.vote.bind(this)} style={styles.voteIcon} name="thumb-up-outline" size={22}/>
+                        }
                     </View>
                 </View>
             </TouchableHighlight>
@@ -63,6 +78,7 @@ const styles = StyleSheet.create({
         color: '#094671',
     },
     voteIcon: {
-        marginLeft: 10
+        marginLeft: 10,
+        color: '#094671',
     }
 });
