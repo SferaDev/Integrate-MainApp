@@ -18,12 +18,14 @@ export default class Entity extends Component {
     }
 
     async unvote() {
-        await API.dislikeEntity(this.props.item.id);
+        let response = await API.dislikeEntity(this.props.item._id);
+        console.warn(response);
         this.setState({isLiked: false});
         }
 
     async vote() {
-        await API.likeEntity(this.props.item.id);
+        let response = await API.likeEntity(this.props.item._id);
+        console.warn(response);
         this.setState({isLiked: true});
         }
 
