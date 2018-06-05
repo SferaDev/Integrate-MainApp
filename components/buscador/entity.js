@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import API from "../api";
 
 export default class Entity extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            isLiked: this.props.item.isLiked
+        };
     }
 
     showEntityInfo() {
@@ -14,19 +17,20 @@ export default class Entity extends Component {
         }
     }
 
-    unvote() {
-        //desvotar
-        this.props.item.isLiked = false;
-    }
+    async unvote() {
+        await API.dislikeEntity(this.props.item.id);
+        this.setState({isLiked: false});
+        }
 
-    vote() {
-        //votar
-        this.props.item.isLiked = true;
-    }
+    async vote() {
+        await API.likeEntity(this.props.item.id);
+        this.setState({isLiked: true});
+        }
 
     render() {
         return (
-            <TouchableHighlight key={this.props.item._id} style={styles.entityView} onPress={this.showEntityInfo.bind(this)} underlayColor='transparent' >
+            <TouchableHighlight key={this.props.item._id} style={styles.entityView}
+                                onPress={this.showEntityInfo.bind(this)} underlayColor='transparent'>
                 <View>
                     <Text style={styles.entityName}>{this.props.item.name}</Text>
                     <Text style={styles.entityDescription}>{this.props.item.description}</Text>
@@ -34,10 +38,12 @@ export default class Entity extends Component {
                     <View style={styles.entityLikes}>
                         <Text style={styles.numberLikesStyle}>{this.props.item.numberLikes}</Text>
                         {
-                            this.props.item.isLiked ?
-                                <Icon onPress={this.unvote.bind(this)} style={styles.voteIcon} name="thumb-up" size={22}/>
+                            this.state.isLiked ?
+                                <Icon onPress={this.unvote.bind(this)} style={styles.voteIcon} name="thumb-up"
+                                      size={22}/>
                                 :
-                                <Icon onPress={this.vote.bind(this)} style={styles.voteIcon} name="thumb-up-outline" size={22}/>
+                                <Icon onPress={this.vote.bind(this)} style={styles.voteIcon} name="thumb-up-outline"
+                                      size={22}/>
                         }
                     </View>
                 </View>
@@ -68,7 +74,7 @@ const styles = StyleSheet.create({
     },
     entityLikes: {
         position: 'absolute',
-        right: 5,
+        right: 8,
         top: 5,
         display: 'flex',
         flexDirection: 'row',
