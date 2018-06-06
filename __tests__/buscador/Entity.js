@@ -48,4 +48,12 @@ describe('Test group for EntityList', function () {
         expect(instance.showEntityInfo()).toMatchSnapshot();
     });
 
+    test('likeEntity is callable and returns nothing', () => {
+        expect(instance.likeEntity()).toMatchSnapshot();
+    });
+
+    test('dislikeEntity is callable and returns nothing', () => {
+        expect(instance.dislikeEntity()).toMatchSnapshot();
+    });
+
 });
