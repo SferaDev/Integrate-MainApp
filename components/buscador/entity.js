@@ -7,8 +7,18 @@ export default class Entity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLiked: this.props.item.isLiked
+            isLiked: this.props.item.isLiked,
+            numberLikes: this.props.item.numberLikes
         };
+    }
+
+    componentDidUpdate(prevProps,prevState){
+        if(prevState.numberLikes === undefined && this.props.item.numberLikes !== undefined){
+            this.setState({numberLikes: this.props.item.numberLikes})
+        }
+        if(prevState.isLiked === undefined && this.props.item.isLiked !== undefined){
+            this.setState({isLiked: this.props.item.isLiked})
+        }
     }
 
     showEntityInfo() {
@@ -18,16 +28,18 @@ export default class Entity extends Component {
     }
 
     async unvote() {
+        let nlikes = this.state.numberLikes - 1;
         let response = await API.dislikeEntity(this.props.item._id);
-        console.warn(response);
-        this.setState({isLiked: false});
-        }
+        if (response)
+            this.setState({isLiked: false, numberLikes: nlikes});
+    }
 
     async vote() {
+        let nlikes = this.state.numberLikes + 1;
         let response = await API.likeEntity(this.props.item._id);
-        console.warn(response);
-        this.setState({isLiked: true});
-        }
+        if (response)
+            this.setState({isLiked: true, numberLikes: nlikes});
+    }
 
     render() {
         return (
@@ -37,17 +49,23 @@ export default class Entity extends Component {
                     <Text style={styles.entityName}>{this.props.item.name}</Text>
                     <Text style={styles.entityDescription}>{this.props.item.description}</Text>
                     <Text style={styles.entityAddress}>{this.props.item.addressName}</Text>
-                    <View style={styles.entityLikes}>
-                        <Text style={styles.numberLikesStyle}>{this.props.item.numberLikes}</Text>
-                        {
-                            this.state.isLiked ?
-                                <Icon onPress={this.unvote.bind(this)} style={styles.voteIcon} name="thumb-up"
-                                      size={22}/>
-                                :
-                                <Icon onPress={this.vote.bind(this)} style={styles.voteIcon} name="thumb-up-outline"
-                                      size={22}/>
-                        }
-                    </View>
+                    {
+                        this.props.item.isDetails ?
+                            <View style={styles.entityLikes}>
+                                <Text style={styles.numberLikesStyle}>{this.state.numberLikes}</Text>
+                                {
+                                    this.state.isLiked ?
+                                        <Icon onPress={this.unvote.bind(this)} style={styles.voteIcon} name="thumb-up"
+                                              size={22}/>
+                                        :
+                                        <Icon onPress={this.vote.bind(this)} style={styles.voteIcon}
+                                              name="thumb-up-outline"
+                                              size={22}/>
+                                }
+                            </View>
+                            :
+                            null
+                    }
                 </View>
             </TouchableHighlight>
         );
