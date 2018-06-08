@@ -55,12 +55,12 @@ const API = {
         return [{name: 'Catalan',language: 'ca'}];
     },
     likeEntity: async (id = null) => {
-
-        return [{numberLikes: 1}];
+        if (id !== null) return {numberLikes: 1};
+        return null;
     },
     dislikeEntity: async (id = null) => {
-
-        return [{numberLikes: 0}];
+        if (id !== null) return {numberLikes: 0};
+        return null;
     },
 };
 

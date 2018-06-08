@@ -35,6 +35,7 @@ export default class Entity extends Component {
 
     async dislikeEntity() {
         let response = await API.dislikeEntity(this.props.item._id);
+        console.log(response);
         if (response)
             this.setState({isLiked: false, numberLikes: response.numberLikes});
     }

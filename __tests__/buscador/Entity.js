@@ -4,6 +4,9 @@ import renderer from 'react-test-renderer';
 
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
+jest.mock('../../components/api');
+
 import Entity from '../../components/buscador/entity';
 
 const navigation = {navigate: jest.fn()};
@@ -15,7 +18,7 @@ describe('Test group for EntityList', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
         entity = {
-            id: 1,
+            _id: 1,
             name: 'name',
             description: 'description',
             addressName: 'addressName',
@@ -48,12 +51,24 @@ describe('Test group for EntityList', function () {
         expect(instance.showEntityInfo()).toMatchSnapshot();
     });
 
-    /*test('likeEntity is callable and returns nothing', () => {
-        expect(instance.likeEntity()).toBe(undefined);
+    describe("likeEntity() tests", () => {
+        test('likeEntity is callable and returns nothing', async () => {
+            instance.props.item._id = undefined;
+            expect(await instance.likeEntity()).toBe(undefined);
+        });
+        test('likeEntity is callable and returns nothing', async () => {
+            instance.props.item._id = 1;
+            expect(await instance.likeEntity()).toBe(undefined);
+        });
     });
-
-    test('dislikeEntity is callable and returns nothing', () => {
-        expect(instance.dislikeEntity()).toBe(undefined);
-    });*/
-
+    describe("dislikeEntity() tests", () => {
+        test('dislikeEntity is callable and returns nothing', async () => {
+            instance.props.item._id = undefined;
+            expect(await instance.dislikeEntity()).toBe(undefined);
+        });
+        test('dislikeEntity is callable and returns nothing', async () => {
+            instance.props.item._id = 1;
+            expect(await instance.dislikeEntity()).toBe(undefined);
+        });
+    });
 });
