@@ -12,11 +12,11 @@ export default class Entity extends Component {
         };
     }
 
-    componentDidUpdate(prevProps,prevState){
-        if(prevState.numberLikes === undefined && this.props.item.numberLikes !== undefined){
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.numberLikes === undefined && this.props.item.numberLikes !== undefined) {
             this.setState({numberLikes: this.props.item.numberLikes})
         }
-        if(prevState.isLiked === undefined && this.props.item.isLiked !== undefined){
+        if (prevState.isLiked === undefined && this.props.item.isLiked !== undefined) {
             this.setState({isLiked: this.props.item.isLiked})
         }
     }
@@ -28,17 +28,15 @@ export default class Entity extends Component {
     }
 
     async likeEntity() {
-        let nlikes = this.state.numberLikes + 1;
         let response = await API.likeEntity(this.props.item._id);
         if (response)
-            this.setState({isLiked: true, numberLikes: nlikes});
+            this.setState({isLiked: true, numberLikes: response.numberLikes});
     }
 
     async dislikeEntity() {
-        let nlikes = this.state.numberLikes - 1;
         let response = await API.dislikeEntity(this.props.item._id);
         if (response)
-            this.setState({isLiked: false, numberLikes: nlikes});
+            this.setState({isLiked: false, numberLikes: response.numberLikes});
     }
 
     render() {
@@ -55,7 +53,8 @@ export default class Entity extends Component {
                                 <Text style={styles.numberLikesStyle}>{this.state.numberLikes}</Text>
                                 {
                                     this.state.isLiked ?
-                                        <Icon onPress={this.dislikeEntity.bind(this)} style={styles.voteIcon} name="thumb-up"
+                                        <Icon onPress={this.dislikeEntity.bind(this)} style={styles.voteIcon}
+                                              name="thumb-up"
                                               size={22}/>
                                         :
                                         <Icon onPress={this.likeEntity.bind(this)} style={styles.voteIcon}
