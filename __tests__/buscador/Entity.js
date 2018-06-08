@@ -22,6 +22,8 @@ describe('Test group for EntityList', function () {
             name: 'name',
             description: 'description',
             addressName: 'addressName',
+            isLiked: false,
+            numberLikes: 0
         }
     });
 
@@ -38,6 +40,13 @@ describe('Test group for EntityList', function () {
     });
 
     test('renders buscador correctly with onDetailsShow', () => {
+        entity.isLiked = false;
+        const tree = renderer.create(<Entity item={entity} onDetailsShow={jest.fn()}/>).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    test('renders buscador correctly with onDetailsShow', () => {
+        entity.isLiked = true;
         const tree = renderer.create(<Entity item={entity} onDetailsShow={jest.fn()}/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
@@ -45,6 +54,27 @@ describe('Test group for EntityList', function () {
     test('renders buscador correctly without onDetailsShow', () => {
         const tree = renderer.create(<Entity item={entity}/>).toJSON();
         expect(tree).toMatchSnapshot();
+    });
+
+    describe("componentDidUpdate() tests", () => {
+
+        test('componentDidUpdate is callable and returns nothing', () => {
+            let prevProps = {};
+            let prevState = {};
+            instance.props.item.numberLikes = 1;
+            expect(instance.componentDidUpdate(prevProps, prevState)).toBe(undefined);
+        });
+        test('componentDidUpdate is callable and returns nothing', () => {
+            let prevProps = {};
+            let prevState = {};
+            instance.props.item.isLiked = true;
+            expect(instance.componentDidUpdate(prevProps, prevState)).toBe(undefined);
+        });
+        test('componentDidUpdate is callable and returns nothing', () => {
+            let prevProps = {};
+            let prevState = {};
+            expect(instance.componentDidUpdate(prevProps, prevState)).toBe(undefined);
+        });
     });
 
     test('showEntityInfo is callable and returns nothing', () => {
@@ -61,6 +91,7 @@ describe('Test group for EntityList', function () {
             expect(await instance.likeEntity()).toBe(undefined);
         });
     });
+
     describe("dislikeEntity() tests", () => {
         test('dislikeEntity is callable and returns nothing', async () => {
             instance.props.item._id = undefined;
