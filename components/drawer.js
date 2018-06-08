@@ -77,7 +77,14 @@ class Drawer extends Component {
                     </TouchableHighlight>
 
                 </ScrollView>
-
+                <View style={styles.help_about} >
+                    <TouchableHighlight style={{flex: 1}} onPress={this.navigateToScreen.bind(this,"About")} underlayColor="transparent" >
+                        <Text style={styles.help_about_button} >Help</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight style={{flex: 1}} onPress={this.navigateToScreen.bind(this,"About")} underlayColor="transparent" >
+                        <Text style={styles.help_about_button} >About</Text>
+                    </TouchableHighlight>
+                </View>
                 <TouchableHighlight style={[styles.navSection,{backgroundColor: '#8882'}]} onPress={this.navigateToScreen.bind(this,"Logout")} underlayColor="white">
                     <View style={[styles.navItem,{height: 75}]} >
                         <Icon style={styles.navItemLogo} name="logout-variant" size={25}/>
@@ -115,9 +122,19 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         marginRight: 15
     },
-        footerContainer: {
-        padding: 20,
-        backgroundColor: 'lightgrey'
+    help_about: {
+        display: 'flex',
+        flexDirection: 'row',
+        paddingTop: 15,
+        paddingBottom: 15,
+        borderColor: 'lightgrey',
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        backgroundColor: '#8882'
+    },
+    help_about_button: {
+        fontSize: 17,
+        textAlign: 'center'
     }
 });
 
