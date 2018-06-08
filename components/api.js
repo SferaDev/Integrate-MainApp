@@ -184,7 +184,31 @@ const API = {
         let response = await http_helper.callApi(url, params, "PUT", true);
         if(response.status === 200) return JSON.parse(response._bodyText);
         return null;
-    }
+    },
+    likeEntity: async (entity_id = null) => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/entities/likes/' + entity_id;
+        let params = [{key: 'token', value: token}];
+
+        let response = await http_helper.callApi(url, params, "POST");
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
+    },
+    dislikeEntity: async (entity_id = null) => {
+
+        const token = await AsyncStorage.getItem('token');
+
+        let url = 'me/entities/likes/' + entity_id;
+        let params = [{key: 'token', value: token}];
+
+        let response = await http_helper.callApi(url, params, "DELETE");
+
+        if (response.status === 200) return JSON.parse(response._bodyText);
+        return null;
+    },
 };
 
 export default API

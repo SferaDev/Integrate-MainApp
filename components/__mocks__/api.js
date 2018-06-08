@@ -54,6 +54,14 @@ const API = {
 
         return [{name: 'Catalan',language: 'ca'}];
     },
+    likeEntity: async (id = null) => {
+        if (id !== null) return {numberLikes: 1};
+        return null;
+    },
+    dislikeEntity: async (id = null) => {
+        if (id !== null) return {numberLikes: 0};
+        return null;
+    },
 };
 
 export default API
