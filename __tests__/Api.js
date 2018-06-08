@@ -223,4 +223,34 @@ describe("API tests", () => {
             });
         });
     });
+
+    describe("likeEntity() tests", () => {
+
+        test('likeEntity() is callable and returns nothing', async () => {
+
+            let r = await API.likeEntity(undefined);
+            expect(r).toBe(null);
+        });
+
+        test('likeEntity() is callable and returns nothing', async () => {
+
+            let r = await API.likeEntity(5);
+            expect(JSON.stringify(r)).toEqual('{"something":"Hello World"}');
+        });
+    });
+
+    describe("dislikeEntity() tests", () => {
+
+        test('dislikeEntity() is callable and returns nothing', async () => {
+
+            let r = await API.dislikeEntity(undefined);
+            expect(r).toBe(null);
+        });
+
+        test('dislikeEntity() is callable and returns nothing', async () => {
+
+            let r = await API.dislikeEntity(5);
+            expect(JSON.stringify(r)).toEqual('{"something":"Hello World"}');
+        });
+    });
 });
