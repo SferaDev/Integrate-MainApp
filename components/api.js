@@ -17,7 +17,7 @@ const API = {
 
                 AsyncStorage.setItem('token', token);
                 AsyncStorage.setItem('user', JSON.stringify(user));
-                global.lang = user != null ? user.interfaceLanguage : 'en';
+                if (global.lang == null) global.lang = user != null ? user.interfaceLanguage : 'en';
 
                 return JSON.parse(response._bodyText).token;
             }
