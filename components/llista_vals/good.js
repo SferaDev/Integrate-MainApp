@@ -6,7 +6,6 @@ import language_settings from '../language_settings';
 export default class Good extends Component {
     constructor(props) {
         super(props);
-        console.warn(this.props.item)
         this.colors = ["white", "#b22222", "pink", "#ff8c00", "#9400d3", "black", "green", "#4169e1", "#ffd700", "grey"];
     }
 
