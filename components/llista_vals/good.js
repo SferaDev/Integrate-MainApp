@@ -6,7 +6,7 @@ import language_settings from '../language_settings';
 export default class Good extends Component {
     constructor(props) {
         super(props);
-
+        console.warn(this.props.item)
         this.colors = ["white", "#b22222", "pink", "#ff8c00", "#9400d3", "black", "green", "#4169e1", "#ffd700", "grey"];
     }
 
@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         paddingLeft: 15,
         fontSize: 22,
-        color: '#232323',
         fontWeight: 'bold',
         color: 'gray'
     },
@@ -94,7 +93,6 @@ const styles = StyleSheet.create({
         paddingTop: 3,
         paddingLeft: 5,
         paddingRight: 5,
-        color: '#232323',
         flex: 1,
         color: 'gray'
     },
@@ -103,7 +101,6 @@ const styles = StyleSheet.create({
         paddingTop: 1,
         paddingLeft: 5,
         paddingRight: 5,
-        color: '#232323',
         flex: 1,
         color: 'gray'
     },

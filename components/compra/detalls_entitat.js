@@ -83,7 +83,7 @@ export default class DetallsEntitat extends Component {
                 onToggleFav={this.toggleFavourite}
                 context={this}
                 isEntityDisplay={true}
-                onPress={this.showGoodDetails}
+                onPress={() => {}}
                 isFav={this.isFav(item._id)}
             />
         );
