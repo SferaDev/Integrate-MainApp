@@ -39,15 +39,6 @@ const ValsStack = StackNavigator({
     gesturesEnabled: false
 });
 
-/*const ProfileStack = StackNavigator({
-    settings: { screen: Information, }, 
-    change_password: { screen: ChangePassword }
-}, {
-    headerMode: 'none',
-    disabledBackGesture: true,
-    gesturesEnabled: false
-});*/
-
 const DrawerNavigation = DrawerNavigator({
     Buscador: {screen: BuscadorStack},
     Vals: {screen: ValsStack},

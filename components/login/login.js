@@ -86,7 +86,7 @@ export default class LogIn extends Component {
     }
 
     isEmpty() {
-        return (this.state.nifnie.length == 0 || this.state.password.length == 0)
+        return (this.state.nifnie.length === 0 || this.state.password.length === 0)
     }
 
     moveUp() {

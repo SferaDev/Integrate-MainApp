@@ -32,7 +32,6 @@ export default class LlistaVals extends Component {
     }
 
     componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
         this.getAllGoods();
     }
 
