@@ -82,10 +82,8 @@ export default class DetallsEntitat extends Component {
                 item={item}
                 onToggleFav={this.toggleFavourite}
                 context={this}
-                isFav={false}
                 isEntityDisplay={true}
-                onPress={() => {
-                }}
+                onPress={this.showGoodDetails}
                 isFav={this.isFav(item._id)}
             />
         );
@@ -113,7 +111,7 @@ export default class DetallsEntitat extends Component {
     }
 
     displayPhoneInfo() {
-        if (this.state.entity.phone != undefined) {
+        if (this.state.entity.phone !== undefined) {
             return (
                 <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent'>
                     <View style={styles.contactItem}>
@@ -126,7 +124,7 @@ export default class DetallsEntitat extends Component {
     }
 
     displayMailInfo() {
-        if (this.state.entity.email != undefined) {
+        if (this.state.entity.email !== undefined) {
             return (
                 <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent'>
                     <View style={styles.contactItem}>
