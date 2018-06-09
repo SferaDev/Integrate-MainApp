@@ -49,7 +49,7 @@ export default class LlistaVals extends Component {
         let goodsFav = await API.getGoodsFav(category, order, loc);
 
         if (goods != null && goodsFav != null) {
-            if (this.state.selectedIndex == 1) {
+            if (this.state.selectedIndex === 1) {
                 this.setState({goods_shown: goods, goods: goods, goodsFav: goodsFav});
             } else {
                 this.setState({goods_shown: goodsFav, goods: goods, goodsFav: goodsFav});
@@ -118,12 +118,12 @@ export default class LlistaVals extends Component {
 
     setIndexChange(index) {
 
-        let goods_shown = (index == 1) ? this.state.goods : this.state.goodsFav;
+        let goods_shown = (index === 1) ? this.state.goods : this.state.goodsFav;
         this.setState({selectedIndex: index, goods_shown: goods_shown})
     }
 
     canApplyFilters() {
-        if (this.state.selectedIndex == 0) return true;
+        if (this.state.selectedIndex === 0) return true;
         else return false;
     }
 

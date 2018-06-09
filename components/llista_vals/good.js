@@ -16,16 +16,20 @@ export default class Good extends Component {
                                 onPress={this.props.onPress.bind(this.props.context, this.props.item)}
                                 underlayColor='white'>
                 <View style={{flex: 1, display: 'flex', flexDirection: 'row'}}>
-                    <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
-                    <View style={[styles.viewInfo,{backgroundColor: (this.props.item.isUsable) ? 'white' : 'rgba(127,127,127,0.3)'}]}>
+                    <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}/>
+                    <View
+                        style={[styles.viewInfo, {backgroundColor: (this.props.item.isUsable) ? 'white' : 'rgba(127,127,127,0.3)'}]}>
                         <View style={styles.view1}>
-                            <Text style={[styles.goodBasicText,{color: (this.props.item.isUsable) ? 'black' : 'rgb(127,127,127)'}]}>{language_settings[global.lang].goods.period_before + ' ' + this.props.item.reusePeriod + ' ' + language_settings[global.lang].goods.period_after}</Text>
                             <Text
-                                style={[[styles.goodBasicText,{color: (this.props.item.isUsable) ? 'black' : 'rgb(127,127,127)'}], {textAlign: 'right'}]}>{this.props.item.initialPrice + '€ (-' + this.props.item.discount + '' + this.props.item.discountType + ')'}</Text>
+                                style={[styles.goodBasicText, {color: (this.props.item.isUsable) ? 'black' : 'rgb(127,127,127)'}]}>{language_settings[global.lang].goods.period_before + ' ' + this.props.item.reusePeriod + ' ' + language_settings[global.lang].goods.period_after}</Text>
+                            <Text
+                                style={[[styles.goodBasicText, {color: (this.props.item.isUsable) ? 'black' : 'rgb(127,127,127)'}], {textAlign: 'right'}]}>{this.props.item.initialPrice + '€ (-' + this.props.item.discount + '' + this.props.item.discountType + ')'}</Text>
                         </View>
-                        <Text style={[styles.entityName,{color: (this.props.item.isUsable) ? 'black' : 'rgb(127,127,127)'}]}>{this.props.item.productName}</Text>
+                        <Text
+                            style={[styles.entityName, {color: (this.props.item.isUsable) ? 'black' : 'rgb(127,127,127)'}]}>{this.props.item.productName}</Text>
                         <View style={styles.view1}>
-                            <Text style={[styles.goodNameText,{color: (this.props.item.isUsable) ? 'black' : 'rgb(127,127,127)'}]}>
+                            <Text
+                                style={[styles.goodNameText, {color: (this.props.item.isUsable) ? 'black' : 'rgb(127,127,127)'}]}>
                                 {this.props.isEntityDisplay ?
                                     '' :
                                     this.props.item.owner.name
