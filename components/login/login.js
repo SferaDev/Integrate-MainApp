@@ -179,7 +179,6 @@ export default class LogIn extends Component {
                                    onChangeText={this.updateNifNie.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'
                                    autoCorrect={false}
-                                   keyboardType="numeric"
                         >
                         </TextInput>
                         <TextInput style={[styles.basicInput]}

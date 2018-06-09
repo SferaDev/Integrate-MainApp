@@ -22,7 +22,8 @@ export default class DetallsEntitat extends Component {
                 email: '',
                 phone: '',
                 coordinates: [0, 0],
-                goods: []
+                goods: [],
+                isDetails: true
             }
         }
     }
@@ -46,6 +47,7 @@ export default class DetallsEntitat extends Component {
     }
 
     setEntity(entity) {
+        entity.isDetails = true;
         this.setState({entity: entity});
         this.map.animateToRegion({
             latitude: entity.coordinates[1],
