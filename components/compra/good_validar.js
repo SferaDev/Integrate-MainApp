@@ -12,7 +12,7 @@ export default class GoodValidar extends Component {
     render() {
         return (
             <View key={this.props.item._id} style={styles.goodView}>
-                <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
+                <View style={[styles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}/>
                 <View style={styles.viewInfo}>
                     <Text style={styles.goodNameText}>{this.props.item.productName}</Text>
                     <Text style={[styles.goodBasicText, {textAlign: 'right'}]}>

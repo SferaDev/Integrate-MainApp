@@ -13,22 +13,23 @@ const navigation = {navigate: jest.fn()};
 let wrapper;
 let instance;
 
-describe('Test group for EntityList', function () {
+describe('Test group for Login', function () {
+    
     beforeAll(() => {
         jest.useFakeTimers();
         jest.mock('react-native-maps', () => require.requireActual('../../__mocks__/react-native-maps').default);
         configure({adapter: new Adapter()});
         global.lang = 'ca';
+        global.logIn = jest.fn();
+        global.logOut = jest.fn();
     });
 
     beforeEach(function () {
-        // Before each: Shallows the EntityList component
         wrapper = shallow(<LogIn navigation={navigation}/>);
         instance = wrapper.instance();
     });
 
     afterEach(function () {
-        // After each: Clears the wrapper
         wrapper = null;
         instance = null;
     });

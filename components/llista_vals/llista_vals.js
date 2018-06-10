@@ -31,7 +31,6 @@ export default class LlistaVals extends Component {
     }
 
     componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
         this.getAllGoods();
     }
 
@@ -108,7 +107,7 @@ export default class LlistaVals extends Component {
     }
 
     canApplyFilters() {
-        if (this.state.selectedIndex == 0) return true;
+        if (this.state.selectedIndex === 0) return true;
         else return false;
     }
 

@@ -69,7 +69,6 @@ export default class DetallsEntitat extends Component {
     }
 
     renderGood(item) {
-
         if( this.props.navigation.state.params.toggleFavourite ){
             return (
                 <Good
@@ -120,7 +119,7 @@ export default class DetallsEntitat extends Component {
     }
 
     displayPhoneInfo() {
-        if (this.state.entity.phone != undefined) {
+        if (this.state.entity.phone !== undefined) {
             return (
                 <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent'>
                     <View style={styles.contactItem}>
@@ -133,7 +132,7 @@ export default class DetallsEntitat extends Component {
     }
 
     displayMailInfo() {
-        if (this.state.entity.email != undefined) {
+        if (this.state.entity.email !== undefined) {
             return (
                 <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent'>
                     <View style={styles.contactItem}>

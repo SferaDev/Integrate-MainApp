@@ -45,6 +45,12 @@ class Drawer extends Component {
         this.props.navigation.navigate(route);
     }
 
+    logOut(){
+        AsyncStorage.removeItem('user');
+        AsyncStorage.removeItem('token');
+        global.logOut();
+    }
+
     render () {
         return (
             <View style={styles.container}>
@@ -76,9 +82,22 @@ class Drawer extends Component {
                         </View>
                     </TouchableHighlight>
 
-                </ScrollView>
+                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"About")} underlayColor="white">
+                        <View style={styles.navItem} >
+                            <Icon style={styles.navItemLogo} name="help" size={25}/>
+                            <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.help}</Text>
+                        </View>
+                    </TouchableHighlight>
 
-                <TouchableHighlight style={[styles.navSection,{backgroundColor: '#8882'}]} onPress={this.navigateToScreen.bind(this,"Logout")} underlayColor="white">
+                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"About")} underlayColor="white">
+                        <View style={styles.navItem} >
+                            <Icon style={styles.navItemLogo} name="information-outline" size={25}/>
+                            <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.about}</Text>
+                        </View>
+                    </TouchableHighlight>
+
+                </ScrollView>
+                <TouchableHighlight style={[styles.navSection,{backgroundColor: '#8882'}]} onPress={this.logOut.bind(this)} underlayColor="white">
                     <View style={[styles.navItem,{height: 75}]} >
                         <Icon style={styles.navItemLogo} name="logout-variant" size={25}/>
                         <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.log_out}</Text>
@@ -115,9 +134,19 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         marginRight: 15
     },
-        footerContainer: {
-        padding: 20,
-        backgroundColor: 'lightgrey'
+    help_about: {
+        display: 'flex',
+        flexDirection: 'row',
+        paddingTop: 15,
+        paddingBottom: 15,
+        borderColor: 'lightgrey',
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        backgroundColor: '#8882'
+    },
+    help_about_button: {
+        fontSize: 17,
+        textAlign: 'center'
     }
 });
 

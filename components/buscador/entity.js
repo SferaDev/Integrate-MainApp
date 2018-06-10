@@ -35,9 +35,7 @@ export default class Entity extends Component {
 
     async dislikeEntity() {
         let response = await API.dislikeEntity(this.props.item._id);
-        console.log(response);
-        if (response)
-            this.setState({isLiked: false, numberLikes: response.numberLikes});
+        if (response) this.setState({isLiked: false, numberLikes: response.numberLikes});
     }
 
     render() {
@@ -46,7 +44,11 @@ export default class Entity extends Component {
                                 onPress={this.showEntityInfo.bind(this)} underlayColor='transparent'>
                 <View>
                     <Text style={styles.entityName}>{this.props.item.name}</Text>
-                    <Text style={styles.entityDescription}>{this.props.item.description}</Text>
+                    {this.props.item.isDetails ?
+                        <Text style={styles.entityDescription}>{this.props.item.description}</Text>
+                        :
+                        <Text style={styles.entityDescription} numberOfLines={1}>{this.props.item.description}</Text>
+                    }
                     <Text style={styles.entityAddress}>{this.props.item.addressName}</Text>
                     {
                         this.props.item.isDetails ?

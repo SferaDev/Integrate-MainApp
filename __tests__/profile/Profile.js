@@ -12,6 +12,7 @@ let wrapper;
 let instance;
 
 describe('Test group for Profile', function () {
+    
     beforeAll(() => {
         configure({adapter: new Adapter()});
         global.lang = 'ca';
@@ -52,18 +53,6 @@ describe('Test group for Profile', function () {
     test('setActiveTab is callable and returns nothing', () => {
         instance.sv = {scrollTo: jest.fn()};
         expect(instance.setActiveTab()).toBe(undefined);
-    });
-
-    describe("activeTabStyles() tests", () => {
-        test('activeTabStyles() when is active tab then returns true', () => {
-            instance.state.tabActive = 1;
-            expect( JSON.stringify(instance.activeTabStyles(1)) ).toBe( JSON.stringify({color:'white',backgroundColor:'#094671'}) );
-        });
-
-        test('activeTabStyles() when is not active tab then returns true', () => {
-            instance.state.tabActive = 1;
-            expect( JSON.stringify(instance.activeTabStyles(2)) ).toBe( JSON.stringify({color:'#98B353',backgroundColor:'#F4F3F2'}) );
-        });
     });
 
 });
