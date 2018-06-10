@@ -46,4 +46,8 @@ describe('Test group for EntityList', function () {
         expect(instance.navigateToScreen()).toBe(undefined);
     });
 
+    test('logOut() is callable and returns nothing', () => {
+        expect(instance.logOut()).toBe(undefined);
+    });
+
 });

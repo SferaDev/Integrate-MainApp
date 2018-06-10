@@ -24,10 +24,6 @@ export default class Buscador extends Component {
         navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {});
     }
 
-    handleBackButton() {
-        return true;
-    }
-
     async getEntities(loc) {
         if (!loc) loc = this.loc;
         this.loc = loc;

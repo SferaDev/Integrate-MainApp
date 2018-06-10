@@ -53,7 +53,7 @@ export default class LogIn extends Component {
         let password = this.state.password;
         let that = this;
         
-        let token = await API.login(nifnie, password); //.then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
+        let token = await API.login(nifnie, password);
         if( token === null ){
             this.showError();
         }else{
@@ -114,7 +114,7 @@ export default class LogIn extends Component {
     }
 
     navigateHome() {
-        this.props.navigation.navigate('DrawerNavigation');
+        global.logIn();
     }
 
     restorePassword() {
