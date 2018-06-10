@@ -23,7 +23,6 @@ export default class LlistaVals extends Component {
         this.state = {
             goods: [],
             goodsFav: [],
-            goods_shown: [],
             category: 0,
             order: 0,
             selectedIndex: 1,
@@ -41,7 +40,6 @@ export default class LlistaVals extends Component {
     }
 
     async getAllGoods(loc) {
-
         let category = this.state.category;
         let order = this.state.order;
 
@@ -49,10 +47,10 @@ export default class LlistaVals extends Component {
         let goodsFav = await API.getGoodsFav(category, order, loc);
 
         if (goods != null && goodsFav != null) {
-            if (this.state.selectedIndex == 1) {
-                this.setState({goods_shown: goods, goods: goods, goodsFav: goodsFav});
+            if (this.state.selectedIndex === 1) {
+                this.setState({goods: goods, goodsFav: goodsFav});
             } else {
-                this.setState({goods_shown: goodsFav, goods: goods, goodsFav: goodsFav});
+                this.setState({goods: goods, goodsFav: goodsFav});
             }
         }
     }
@@ -95,6 +93,7 @@ export default class LlistaVals extends Component {
                 context={this}
                 isFav={this.isFav(item._id)}
                 navigation={this.props.navigation}
+                refreshLists={this.getAllGoods.bind(this)}
             />
         );
     }
@@ -105,8 +104,7 @@ export default class LlistaVals extends Component {
 
     setIndexChange(index) {
 
-        let goods_shown = (index == 1) ? this.state.goods : this.state.goodsFav;
-        this.setState({selectedIndex: index, goods_shown: goods_shown})
+        this.setState({selectedIndex: index})
     }
 
     canApplyFilters() {
@@ -152,13 +150,23 @@ export default class LlistaVals extends Component {
                     </View>
                     <View style={styles.body}>
                         <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>
-                            <FlatList
-                                data={this.state.goods_shown}
-                                renderItem={this.renderGood.bind(this)}
-                                keyExtractor={this.extractKey.bind(this)}
-                                refreshing={false}
-                                onRefresh={this.getAllGoods.bind(this)}
-                            />
+                            { this.state.selectedIndex == 0 ?
+                                <FlatList
+                                    data={this.state.goodsFav}
+                                    renderItem={this.renderGood.bind(this)}
+                                    keyExtractor={this.extractKey.bind(this)}
+                                    refreshing={false}
+                                    onRefresh={this.getAllGoods.bind(this)}
+                                />
+                                :
+                                <FlatList
+                                    data={this.state.goods}
+                                    renderItem={this.renderGood.bind(this)}
+                                    keyExtractor={this.extractKey.bind(this)}
+                                    refreshing={false}
+                                    onRefresh={this.getAllGoods.bind(this)}
+                                />
+                            }
                         </View>
                     </View>
                 </View>
