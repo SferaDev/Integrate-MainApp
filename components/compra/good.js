@@ -40,12 +40,13 @@ export default class Good extends Component {
 
     async toggleFavourite() {
         if(this.props.toggleFavourite) await this.props.toggleFavourite();
-        if(this.props.refreshLists) await this.props.refreshLists();
 
         let isFav = this.state.isFav;
         if (!isFav) await API.addGoodFav(this.props.item._id);
         else await API.deleteGoodFav(this.props.item._id);
         this.setState({isFav: !isFav});
+
+        if(this.props.refreshLists) await this.props.refreshLists();
 
         return !isFav;
     }

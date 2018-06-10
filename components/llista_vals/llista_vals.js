@@ -35,23 +35,30 @@ export default class LlistaVals extends Component {
     }
 
     async getAllGoods(loc) {
+
         let category = this.state.category;
         let order = this.state.order;
 
         let goods = await API.getGoods(category, order, loc);
         let goodsFav = await API.getGoodsFav(category, order, loc);
 
-        if (goods != null && goodsFav != null) {
-            if (this.state.selectedIndex === 1) {
-                this.setState({goods: goods, goodsFav: goodsFav});
-            } else {
-                this.setState({goods: goods, goodsFav: goodsFav});
+        let mergedGoods = [];
+        for(let good of goods){
+            let isFav = false;
+
+            for(let Fgood of goodsFav){
+                if(Fgood._id === good._id)isFav = true;
             }
+
+            good.isFav = isFav;
+            mergedGoods.push(good);
         }
+
+        let that = this;
+        this.setState({goods: mergedGoods});
     }
 
     openMenu() {
-
         this.props.navigation.navigate('DrawerOpen');
     }
 
@@ -70,23 +77,19 @@ export default class LlistaVals extends Component {
         else this.getAllGoods();
     }
 
-    isFav(id) {
-        for (let good of this.state.goodsFav) {
-            if (good._id === id) return true;
-        }
-        return false;
-    }
-
     renderGood({item}) {
-        return (
-            <Good
-                item={item}
-                context={this}
-                isFav={this.isFav(item._id)}
-                navigation={this.props.navigation}
-                refreshLists={this.getAllGoods.bind(this)}
-            />
-        );
+
+        if( (this.state.selectedIndex == 0 && item.isFav) || this.state.selectedIndex == 1 ){
+            return (
+                <Good
+                    item={item}
+                    context={this}
+                    isFav={item.isFav}
+                    navigation={this.props.navigation}
+                    refreshLists={this.getAllGoods.bind(this)}
+                />
+            );
+        }
     }
 
     extractKey(item) {
@@ -94,8 +97,7 @@ export default class LlistaVals extends Component {
     }
 
     setIndexChange(index) {
-
-        this.setState({selectedIndex: index})
+        this.setState({selectedIndex: index});
     }
 
     canApplyFilters() {
@@ -141,23 +143,13 @@ export default class LlistaVals extends Component {
                     </View>
                     <View style={styles.body}>
                         <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>
-                            { this.state.selectedIndex == 0 ?
-                                <FlatList
-                                    data={this.state.goodsFav}
-                                    renderItem={this.renderGood.bind(this)}
-                                    keyExtractor={this.extractKey.bind(this)}
-                                    refreshing={false}
-                                    onRefresh={this.getAllGoods.bind(this)}
-                                />
-                                :
-                                <FlatList
-                                    data={this.state.goods}
-                                    renderItem={this.renderGood.bind(this)}
-                                    keyExtractor={this.extractKey.bind(this)}
-                                    refreshing={false}
-                                    onRefresh={this.getAllGoods.bind(this)}
-                                />
-                            }
+                            <FlatList
+                                data={this.state.goods}
+                                renderItem={this.renderGood.bind(this)}
+                                keyExtractor={this.extractKey.bind(this)}
+                                refreshing={false}
+                                onRefresh={this.getAllGoods.bind(this)}
+                            />
                         </View>
                     </View>
                 </View>

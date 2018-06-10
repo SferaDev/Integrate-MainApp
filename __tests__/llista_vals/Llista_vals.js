@@ -88,46 +88,6 @@ describe('Test group for llista_vals', function () {
         expect(instance.setIndexChange(0)).toBe(undefined);
     });
 
-    test('setIndexChange select normal goods', () => {
-
-        expect(instance.setIndexChange(1)).toBe(undefined);
-    });
-
-    describe("isFav() tests", () => {
-
-        test('isFav to normal good', () => {
-
-            instance.state.goodsFav = [
-                {
-                    _id: 1,
-                    productName: 'name',
-                    initialPrice: 24,
-                    category: 2,
-                    owner: {
-                        name: 'NAME'
-                    }
-                }
-            ];
-            expect(instance.isFav(1)).toBe(true);
-        });
-
-        test('isFav to fav good', () => {
-
-            instance.state.goodsFav = [
-                {
-                    _id: 1,
-                    productName: 'name',
-                    initialPrice: 24,
-                    category: 2,
-                    owner: {
-                        name: 'NAME'
-                    }
-                }
-            ];
-            expect(instance.isFav(2)).toBe(false);
-        });
-    });
-
     test('extractKey is callable and returns item id', () => {
         expect(instance.extractKey({_id: 1})).toBe(1);
     });
