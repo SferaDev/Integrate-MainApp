@@ -14,12 +14,18 @@ export default class DetallsGood extends Component {
     }
 
     showEntity() {
-        this.props.navigation.navigate('detalls_entitat', {selectedEntity: {_id: this.state.good.owner.id}});
+        if(!this.props.navigation.state.params.isEntityDisplay){
+            this.props.navigation.navigate('detalls_entitat', {
+                selectedEntity: {_id: this.state.good.owner.id},
+                toggleFavourite: this.toggleFavourite.bind(this)
+            });
+        }
     }
 
-    toggleFavourite() {
-       let isFav = this.props.navigation.state.params.toggleFavourite();
+    async toggleFavourite() {
+       let isFav = await this.props.navigation.state.params.toggleFavourite();
        this.setState({isFav: isFav});
+       return isFav;
     }
 
     goBack() {

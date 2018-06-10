@@ -17,59 +17,65 @@ export default class Good extends Component {
         }
     }
 
-    selectGood(){
-        if(this.props.item.isUsable)this.props.onPress.bind(this.props.context, this.props.item._id).call();
+    selectGood() {
+        if (this.props.item.isUsable) this.props.onPress.bind(this.props.context, this.props.item._id).call();
     }
 
-    getPeriodText(){
+    getPeriodText() {
         return language_settings[global.lang].goods.period_before + ' ' + this.props.item.reusePeriod + ' ' + language_settings[global.lang].goods.period_after;
     }
 
-    getDiscountText(){
+    getDiscountText() {
         return this.props.item.initialPrice + '€ (-' + this.props.item.discount + '' + this.props.item.discountType + ')';
     }
 
     showGoodDetails() {
-        this.props.navigation.navigate('detalls_good', {selectedGood: this.props.item, isFav: this.state.isFav,
-                                        toggleFavourite: this.toggleFavourite.bind(this)});
+        this.props.navigation.navigate('detalls_good', {
+            selectedGood: this.props.item,
+            isFav: this.state.isFav,
+            toggleFavourite: this.toggleFavourite.bind(this),
+            isEntityDisplay: this.props.isEntityDisplay
+        });
     }
 
     async toggleFavourite() {
+        if(this.props.toggleFavourite) await this.props.toggleFavourite();
+
         let isFav = this.state.isFav;
-        if (isFav) await API.addGoodFav(this.props.item._id);
+        if (!isFav) await API.addGoodFav(this.props.item._id);
         else await API.deleteGoodFav(this.props.item._id);
         this.setState({isFav: !isFav});
+
         return !isFav;
     }
 
-    renderGood(type){
-        switch(type){
-            case 1:
-                return this.renderBuyGood();
-                break;
-            case 2:
-                return this.renderValidationGood();
-                break;
-            default:
-                return this.renderNormalGood();
-                break;
+    renderGood(type) {
+        if (type === 1) {
+            return this.renderBuyGood();
+        } else if (type === 2) {
+            return this.renderValidationGood();
+        } else {
+            return this.renderNormalGood();
         }
     }
 
-    renderNormalGood(){
+    renderNormalGood() {
         let goodStyles = (this.props.item.isUsable) ? unsuedGoodStyles : usedGoodStyles;
         let {starColor} = (this.state.isFav) ? favoriteGoodStyles : unfavoriteGoodStyles;
 
         return (
-            <TouchableHighlight style={goodCommonStyles.goodView} onPress={this.showGoodDetails.bind(this)} underlayColor='white'>
+            <TouchableHighlight style={goodCommonStyles.goodView} onPress={this.showGoodDetails.bind(this)}
+                                underlayColor='white'>
 
-                <View style={goodCommonStyles.goodSubView} >
-                    <View style={[goodCommonStyles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}/>
+                <View style={goodCommonStyles.goodSubView}>
+                    <View
+                        style={[goodCommonStyles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}/>
                     <View style={goodStyles.viewInfo}>
 
                         <View style={goodCommonStyles.small}>
                             <Text style={goodStyles.goodBasicText}>{this.getPeriodText()}</Text>
-                            <Text style={[goodStyles.goodBasicText,{textAlign: 'right'}]}>{this.getDiscountText()}</Text>
+                            <Text
+                                style={[goodStyles.goodBasicText, {textAlign: 'right'}]}>{this.getDiscountText()}</Text>
                         </View>
 
                         <Text style={goodStyles.entityName}>{this.props.item.productName}</Text>
@@ -81,7 +87,8 @@ export default class Good extends Component {
                                     this.props.item.owner.name
                                 }
                             </Text>
-                            <Icon style={[goodCommonStyles.favoriteStar,starColor]} name="star" size={25} onPress={this.toggleFavourite.bind(this)} />
+                            <Icon style={[goodCommonStyles.favoriteStar, starColor]} name="star" size={25}
+                                  onPress={this.toggleFavourite.bind(this)}/>
                         </View>
 
                     </View>
@@ -91,23 +98,26 @@ export default class Good extends Component {
         );
     }
 
-    renderBuyGood(){
+    renderBuyGood() {
         let goodStyles = (this.props.item.isUsable) ? unsuedGoodStyles : usedGoodStyles;
         let {checkColor} = (this.props.isSelected) ? selectedGood : unselectedGood;
 
-       return (
-            <TouchableHighlight style={goodCommonStyles.goodView} onPress={this.selectGood.bind(this)} underlayColor="transparent" >
+        return (
+            <TouchableHighlight style={goodCommonStyles.goodView} onPress={this.selectGood.bind(this)}
+                                underlayColor="transparent">
                 <View
                     style={[goodCommonStyles.goodSubView, {
                         borderColor: this.props.isSelected ? '#98B353' : '#888888',
                         borderWidth: this.props.isSelected ? 2 : 1
                     }]}>
-                    <View style={[goodCommonStyles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}/>
+                    <View
+                        style={[goodCommonStyles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}/>
                     <View style={goodStyles.viewInfo}>
 
                         <View style={goodCommonStyles.small}>
                             <Text style={goodStyles.goodBasicText}>{this.getPeriodText()}</Text>
-                            <Text style={[goodStyles.goodBasicText, {textAlign: 'right'}]}>{this.getDiscountText()}</Text>
+                            <Text
+                                style={[goodStyles.goodBasicText, {textAlign: 'right'}]}>{this.getDiscountText()}</Text>
                         </View>
 
                         <View style={goodCommonStyles.small}>

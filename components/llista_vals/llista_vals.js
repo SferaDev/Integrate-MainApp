@@ -77,13 +77,6 @@ export default class LlistaVals extends Component {
         else this.getAllGoods();
     }
 
-    async toggleFavourite(id, isFav) {
-
-        if (!isFav) await API.addGoodFav(id);
-        else await API.deleteGoodFav(id);
-        this.getAllGoods();
-    }
-
     isFav(id) {
         for (let good of this.state.goodsFav) {
             if (good._id === id) return true;
@@ -99,7 +92,6 @@ export default class LlistaVals extends Component {
         return (
             <Good
                 item={item}
-                onToggleFav={this.toggleFavourite}
                 context={this}
                 isFav={this.isFav(item._id)}
                 navigation={this.props.navigation}

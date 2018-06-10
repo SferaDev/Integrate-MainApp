@@ -29,7 +29,6 @@ export default class DetallsEntitat extends Component {
     }
 
     componentDidMount() {
-        this.getEntity();
         this.getGoodsFav();
     }
 
@@ -44,6 +43,8 @@ export default class DetallsEntitat extends Component {
         if (goodsFav != null) {
             this.setState({goods: goodsFav});
         }
+
+        this.getEntity();
     }
 
     setEntity(entity) {
@@ -57,13 +58,6 @@ export default class DetallsEntitat extends Component {
         });
     }
 
-    async toggleFavourite(id, isFav) {
-
-        if (!isFav) await API.addGoodFav(id);
-        else await API.deleteGoodFav(id);
-        await this.getGoodsFav();
-    }
-
     isFav(id) {
         let goods = this.state.goods || [];
 
@@ -75,17 +69,33 @@ export default class DetallsEntitat extends Component {
     }
 
     renderGood(item) {
-        return (
-            <Good
-                key={item._id}
-                item={item}
-                onToggleFav={this.toggleFavourite}
-                context={this}
-                isEntityDisplay={true}
-                isFav={this.isFav(item._id)}
-                navigation={this.props.navigation}
-            />
-        );
+
+        if( this.props.navigation.state.params.toggleFavourite ){
+            return (
+                <Good
+                    key={item._id}
+                    type={0}
+                    item={item}
+                    context={this}
+                    isEntityDisplay={true}
+                    isFav={this.isFav(item._id)}
+                    navigation={this.props.navigation}
+                    toggleFavourite={this.props.navigation.state.params.toggleFavourite}
+                />
+            );
+        }else{
+            return (
+                <Good
+                    key={item._id}
+                    type={0}
+                    item={item}
+                    context={this}
+                    isEntityDisplay={true}
+                    isFav={this.isFav(item._id)}
+                    navigation={this.props.navigation}
+                />
+            );
+        }
     }
 
     goBack() {
