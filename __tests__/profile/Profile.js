@@ -12,6 +12,7 @@ let wrapper;
 let instance;
 
 describe('Test group for Profile', function () {
+    
     beforeAll(() => {
         configure({adapter: new Adapter()});
         global.lang = 'ca';
