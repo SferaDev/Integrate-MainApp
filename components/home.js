@@ -44,8 +44,7 @@ const DrawerNavigation = DrawerNavigator({
     Buscador: {screen: BuscadorStack},
     Vals: {screen: ValsStack},
     Profile: {screen: Profile},
-    About: {screen: About},
-    Logout: {screen: Logout}
+    About: {screen: About}
 }, {
     contentComponent: DRAWER,
     headerMode: 'none',
