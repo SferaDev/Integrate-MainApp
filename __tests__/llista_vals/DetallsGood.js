@@ -9,6 +9,7 @@ jest.mock('../../components/http_helper');
 
 const navigation = {
     navigate: jest.fn(),
+    goBack: jest.fn(),
     state: {
         params: {
             selectedGood: {
@@ -72,16 +73,7 @@ describe('Test group for DetallsGood', function () {
         wrapper = shallow(<DetallsGood navigation={navigation} />);
         instance = wrapper.instance();
 
-        expect(await instance.toggleFavourite()).toBe(true);
-    });
-
-    test('toggleFavourite is callable and returns nothing',async () => {
-
-        navigation.state.params.isFav = true;
-        wrapper = shallow(<DetallsGood navigation={navigation} />);
-        instance = wrapper.instance();
-
-        expect(await instance.toggleFavourite()).toBe(false);
+        expect(await instance.toggleFavourite()).toBe(undefined);
     });
 
 });
