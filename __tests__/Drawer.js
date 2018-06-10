@@ -15,6 +15,8 @@ describe('Test group for EntityList', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
         global.lang = 'ca';
+        global.logIn = jest.fn();
+        global.logOut = jest.fn();
     });
 
     beforeEach(function () {
