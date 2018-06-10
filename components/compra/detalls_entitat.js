@@ -7,9 +7,7 @@ import call from 'react-native-phone-call';
 import API from '../api';
 import Entity from '../buscador/entity';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Good from '../llista_vals/good';
-
-import NewGood from "./good";
+import Good from './good';
 
 export default class DetallsEntitat extends Component {
 
@@ -79,14 +77,13 @@ export default class DetallsEntitat extends Component {
     renderGood(item) {
         return (
             <Good
-                id={item._id}
+                key={item._id}
                 item={item}
                 onToggleFav={this.toggleFavourite}
                 context={this}
-                isFav={false}
                 isEntityDisplay={true}
-                onPress={() => {}}
                 isFav={this.isFav(item._id)}
+                navigation={this.props.navigation}
             />
         );
     }

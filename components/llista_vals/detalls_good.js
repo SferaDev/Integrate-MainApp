@@ -14,7 +14,7 @@ export default class DetallsGood extends Component {
     }
 
     showEntity() {
-        this.props.navigation.navigate('detalls_entitat', {selectedEntity: {_id: this.props.good.owner.id}});
+        this.props.navigation.navigate('detalls_entitat', {selectedEntity: {_id: this.state.good.owner.id}});
     }
 
     toggleFavourite() {

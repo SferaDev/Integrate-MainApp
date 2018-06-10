@@ -30,7 +30,7 @@ export default class Good extends Component {
     }
 
     showGoodDetails() {
-        this.props.navigation.navigate('detalls_good', {selectedGood: this.props.item, isFav: this.props.isFav,
+        this.props.navigation.navigate('detalls_good', {selectedGood: this.props.item, isFav: this.state.isFav,
                                         toggleFavourite: this.toggleFavourite.bind(this)});
     }
 
@@ -44,21 +44,27 @@ export default class Good extends Component {
 
     renderGood(type){
         switch(type){
-            case 1: return this.renderBuyGood();
-            case 2: return this.renderValidationGood();
-            default: return this.renderNormalGood();
+            case 1:
+                return this.renderBuyGood();
+                break;
+            case 2:
+                return this.renderValidationGood();
+                break;
+            default:
+                return this.renderNormalGood();
+                break;
         }
     }
 
     renderNormalGood(){
         let goodStyles = (this.props.item.isUsable) ? unsuedGoodStyles : usedGoodStyles;
-        let {starColor} = (this.props.isFav) ? favoriteGoodStyles : unfavoriteGoodStyles;
+        let {starColor} = (this.state.isFav) ? favoriteGoodStyles : unfavoriteGoodStyles;
 
         return (
             <TouchableHighlight style={goodCommonStyles.goodView} onPress={this.showGoodDetails.bind(this)} underlayColor='white'>
 
                 <View style={goodCommonStyles.goodSubView} >
-                    <View style={[goodCommonStyles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
+                    <View style={[goodCommonStyles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}/>
                     <View style={goodStyles.viewInfo}>
 
                         <View style={goodCommonStyles.small}>
@@ -126,7 +132,7 @@ export default class Good extends Component {
     renderValidationGood() {
         return (
             <View key={this.props.item._id} style={validationGood.goodView}>
-                <View style={[validationGood.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
+                <View style={[validationGood.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}/>
                 <View style={validationGood.viewInfo}>
                     <Text style={validationGood.goodNameText}>{this.props.item.productName}</Text>
                     <Text style={[validationGood.goodBasicText, {textAlign: 'right'}]}>

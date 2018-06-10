@@ -98,9 +98,7 @@ export default class LlistaVals extends Component {
     renderGood({item}) {
         return (
             <Good
-                id={item._id}
                 item={item}
-                onPress={()=>{}}
                 onToggleFav={this.toggleFavourite}
                 context={this}
                 isFav={this.isFav(item._id)}
