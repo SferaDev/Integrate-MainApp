@@ -76,15 +76,21 @@ class Drawer extends Component {
                         </View>
                     </TouchableHighlight>
 
+                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"About")} underlayColor="white">
+                        <View style={styles.navItem} >
+                            <Icon style={styles.navItemLogo} name="help" size={25}/>
+                            <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.help}</Text>
+                        </View>
+                    </TouchableHighlight>
+
+                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"About")} underlayColor="white">
+                        <View style={styles.navItem} >
+                            <Icon style={styles.navItemLogo} name="information-outline" size={25}/>
+                            <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.about}</Text>
+                        </View>
+                    </TouchableHighlight>
+
                 </ScrollView>
-                <View style={styles.help_about} >
-                    <TouchableHighlight style={{flex: 1}} onPress={this.navigateToScreen.bind(this,"About")} underlayColor="transparent" >
-                        <Text style={styles.help_about_button} >Help</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={{flex: 1}} onPress={this.navigateToScreen.bind(this,"About")} underlayColor="transparent" >
-                        <Text style={styles.help_about_button} >About</Text>
-                    </TouchableHighlight>
-                </View>
                 <TouchableHighlight style={[styles.navSection,{backgroundColor: '#8882'}]} onPress={this.navigateToScreen.bind(this,"Logout")} underlayColor="white">
                     <View style={[styles.navItem,{height: 75}]} >
                         <Icon style={styles.navItemLogo} name="logout-variant" size={25}/>
