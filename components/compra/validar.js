@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {FlatList, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from "../api";
-import GoodValidar from "../compra/good_validar";
+import Good from "./good";
 import Toast from "../login/toast";
 import language_settings from '../language_settings';
 
@@ -129,7 +129,8 @@ export default class Validar extends Component {
         for (let g of this.state.entity.goods) {
             if (g._id === item) {
                 return (
-                    <GoodValidar
+                    <Good
+                        type={2}
                         item={g}
                     />
                 );

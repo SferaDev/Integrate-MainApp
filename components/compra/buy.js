@@ -3,10 +3,9 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import GoodCompra from "./good_compra";
+import Good from "./good";
 import Toast from "../login/toast";
 import language_settings from '../language_settings';
-
 
 export default class Buy extends Component {
 
@@ -111,8 +110,8 @@ export default class Buy extends Component {
 
     renderGood({item}) {
         return (
-            <GoodCompra
-                key={item._id}
+            <Good
+                type={1}
                 item={item}
                 onPress={this.toggleSelected}
                 context={this}

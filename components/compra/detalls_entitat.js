@@ -9,6 +9,8 @@ import Entity from '../buscador/entity';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Good from '../llista_vals/good';
 
+import NewGood from "./good";
+
 export default class DetallsEntitat extends Component {
 
     constructor(props) {
@@ -77,15 +79,13 @@ export default class DetallsEntitat extends Component {
     renderGood(item) {
         return (
             <Good
-                key={item._id}
                 id={item._id}
                 item={item}
                 onToggleFav={this.toggleFavourite}
                 context={this}
                 isFav={false}
                 isEntityDisplay={true}
-                onPress={() => {
-                }}
+                onPress={() => {}}
                 isFav={this.isFav(item._id)}
             />
         );
