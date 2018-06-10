@@ -2,13 +2,15 @@ import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {configure} from 'enzyme';
+import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import Home from '../components/home';
 
 jest.mock('react-navigation', () => require.requireActual('../__mocks__/react-navigation').default);
 configure({adapter: new Adapter()});
+let wrapper;
+let instance;
 
 describe('Test group for Login', function () {
     beforeAll(() => {
