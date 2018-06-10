@@ -33,26 +33,29 @@ describe('Test group for EntityList', function () {
         expect(tree).toMatchSnapshot();
     });
 
-    test('changePassword() is callable and returns nothing', () => {
-        expect(instance.changePassword()).toBe(undefined);
-    });
+    describe("getButtonBackground() and getButtonColor() tests", () => {
+        
+        test('changePassword() is callable and returns nothing', () => {
+            expect(instance.changePassword()).toBe(undefined);
+        });
 
-    test('changePassword() is callable and returns nothing', () => {
-        instance.state.new_password1 = 'A';
-        instance.state.new_password2 = 'B';
-        expect(instance.changePassword()).toBe(undefined);
-    });
+        test('changePassword() is callable and returns nothing', () => {
+            instance.state.new_password1 = 'A';
+            instance.state.new_password2 = 'B';
+            expect(instance.changePassword()).toBe(undefined);
+        });
 
-    test('changePassword() is callable and returns nothing', () => {
-        instance.state.new_password1 = 'A';
-        instance.state.new_password2 = 'A';
-        expect(instance.changePassword()).toBe(undefined);
-    });
+        test('changePassword() is callable and returns nothing', () => {
+            instance.state.new_password1 = 'A';
+            instance.state.new_password2 = 'A';
+            expect(instance.changePassword()).toBe(undefined);
+        });
 
-    test('changePassword() is callable and returns nothing', () => {
-        instance.state.new_password1 = 'aaabbbccc1';
-        instance.state.new_password2 = 'aaabbbccc1';
-        expect(instance.changePassword()).toBe(undefined);
+        test('changePassword() is callable and returns nothing', () => {
+            instance.state.new_password1 = 'aaabbbccc1';
+            instance.state.new_password2 = 'aaabbbccc1';
+            expect(instance.changePassword()).toBe(undefined);
+        });
     });
 
     test('updatePassword() is callable and returns nothing', () => {

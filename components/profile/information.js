@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AsyncStorage, StyleSheet, Text, View} from 'react-native';
+import {AsyncStorage, StyleSheet, Text, View, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
 import language_settings from '../language_settings';
@@ -99,7 +99,7 @@ export default class Information extends Component {
                     </Text>
                 </View>
 
-                <View style={[styles.body, {paddingBottom: 75}]}>
+                <View style={[styles.body, {paddingBottom: 75,flex: 12}]}>
                     <Text style={styles.basicTitle}>
                         {language_settings[this.state.lang].profile.configuration}
                     </Text>
@@ -124,7 +124,16 @@ export default class Information extends Component {
                             />
                         </View>
                     </View>
-
+                    <View style={[styles.filterLanguage,{marginTop: 30}]}>
+                        <View style={{flex: 1}}>
+                            <TouchableHighlight style={styles.button} onPress={this.props.goToChangePassword} >
+                                <View style={styles.buttonContent} >
+                                    <Icon style={styles.buttonIcon} name="lock-reset" size={25}/>
+                                    <Text style={styles.buttonText} >Change Password</Text>
+                                </View>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
                 </View>
             </View>
         );
@@ -161,16 +170,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
-    button: {
-        borderWidth: 1,
-        borderColor: '#0c59cf',
-        backgroundColor: '#094671',
-        width: 260,
-        height: 30,
-        borderRadius: 4,
-        justifyContent: 'center',
-        margin: 10,
-    },
     basicTitle: {
         fontFamily: 'Helvetica',
         fontSize: 24,
@@ -195,4 +194,27 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5
     },
+    button: {
+        backgroundColor: '#094671',
+        width: '100%',
+        borderRadius: 2
+    },
+    buttonContent: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: 35,
+        position: 'relative'
+    },
+    buttonIcon: {
+        paddingLeft: 10, 
+        paddingRight: 10,
+        color: 'white',
+        position: 'absolute'
+    },
+    buttonText: {
+        color: 'white',
+        textAlign: 'center',
+        flex: 1
+    }
 });

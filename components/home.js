@@ -14,6 +14,7 @@ import Validar from './compra/validar';
 import Buy from "./compra/buy";
 
 import Profile from "./profile/profile";
+import About from "./profile/about";
 
 import DRAWER from './drawer';
 import language_settings from './language_settings';
@@ -42,7 +43,9 @@ const ValsStack = StackNavigator({
 const DrawerNavigation = DrawerNavigator({
     Buscador: {screen: BuscadorStack},
     Vals: {screen: ValsStack},
-    Profile: {screen: Profile}
+    Profile: {screen: Profile},
+    About: {screen: About},
+    Logout: {screen: Logout}
 }, {
     contentComponent: DRAWER,
     headerMode: 'none',
