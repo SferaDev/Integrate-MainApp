@@ -66,22 +66,22 @@ describe('Test group for DetallsGood', function () {
         expect(instance.goBack()).toBe(undefined);
     });
 
-    test('toggleFavourite is callable and returns nothing',await () => {
+    test('toggleFavourite is callable and returns nothing',async () => {
 
         navigation.state.params.isFav = false;
         wrapper = shallow(<DetallsGood navigation={navigation} />);
         instance = wrapper.instance();
 
-        expect(async instance.toggleFavourite()).toBe(true);
+        expect(await instance.toggleFavourite()).toBe(true);
     });
 
-    test('toggleFavourite is callable and returns nothing',await () => {
+    test('toggleFavourite is callable and returns nothing',async () => {
 
         navigation.state.params.isFav = true;
         wrapper = shallow(<DetallsGood navigation={navigation} />);
         instance = wrapper.instance();
 
-        expect(async instance.toggleFavourite()).toBe(false);
+        expect(await instance.toggleFavourite()).toBe(false);
     });
 
 });
