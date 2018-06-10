@@ -45,7 +45,7 @@ export default class Information extends Component {
             appLanguage: this.setAppLanguage(user.interfaceLanguage)
         });
         this.getAllLanguages(user.goodLanguage);
-        if (global.lang == user.interfaceLanguage) this.setState({lang: user.interfaceLanguage});
+        if (global.lang === user.interfaceLanguage) this.setState({lang: user.interfaceLanguage});
         else this.setState({lang: global.lang});
     }
 
@@ -53,7 +53,7 @@ export default class Information extends Component {
         let langs = await API.getLanguages();
         let index = 0;
         let goodsLanguages = langs.map( (lang, i) => {
-            if (iso == lang.language) index = i;
+            if (iso === lang.language) index = i;
             return {value: lang.name, iso: lang.language};
         } );
         this.setState({goodsLanguages: goodsLanguages, goodLanguage: index, goodLang: iso});

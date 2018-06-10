@@ -51,10 +51,6 @@ describe('Test group for EntityList', function () {
         expect(await instance.getEntities({coords: {longitude: 0, latitude: 0}})).toBe(undefined);
     });
 
-    test('handleBackButton is callable and returns true', () => {
-        expect(instance.handleBackButton()).toBe(true);
-    });
-
     test('showEntityInfo is callable and returns nothing', () => {
         expect(instance.showEntityInfo()).toBe(undefined);
     });
