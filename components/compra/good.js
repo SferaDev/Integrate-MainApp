@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import language_settings from '../language_settings';
+import API from "../api";
 
 export default class Good extends Component {
 
@@ -11,7 +12,8 @@ export default class Good extends Component {
         this.colors = ["white", "#b22222", "pink", "#ff8c00", "#9400d3", "black", "green", "#4169e1", "#ffd700", "grey"];
 
         this.state = {
-            type: this.props.type || 0
+            type: this.props.type || 0,
+            isFav: this.props.isFav
         }
     }
 
@@ -27,6 +29,19 @@ export default class Good extends Component {
         return this.props.item.initialPrice + '€ (-' + this.props.item.discount + '' + this.props.item.discountType + ')';
     }
 
+    showGoodDetails() {
+        this.props.navigation.navigate('detalls_good', {selectedGood: this.props.item, isFav: this.props.isFav,
+                                        toggleFavourite: this.toggleFavourite.bind(this)});
+    }
+
+    async toggleFavourite() {
+        let isFav = this.state.isFav;
+        if (isFav) await API.addGoodFav(this.props.item._id);
+        else await API.deleteGoodFav(this.props.item._id);
+        this.setState({isFav: !isFav});
+        return !isFav;
+    }
+
     renderGood(type){
         switch(type){
             case 1: return this.renderBuyGood();
@@ -40,7 +55,7 @@ export default class Good extends Component {
         let {starColor} = (this.props.isFav) ? favoriteGoodStyles : unfavoriteGoodStyles;
 
         return (
-            <TouchableHighlight style={goodCommonStyles.goodView} onPress={this.props.onPress.bind(this.props.context, this.props.item)} underlayColor='white'>
+            <TouchableHighlight style={goodCommonStyles.goodView} onPress={this.showGoodDetails.bind(this)} underlayColor='white'>
 
                 <View style={goodCommonStyles.goodSubView} >
                     <View style={[goodCommonStyles.viewBarra, {backgroundColor: this.colors[this.props.item.category]}]}></View>
@@ -60,7 +75,7 @@ export default class Good extends Component {
                                     this.props.item.owner.name
                                 }
                             </Text>
-                            <Icon style={[goodCommonStyles.favoriteStar,starColor]} name="star" size={25} onPress={this.props.onToggleFav.bind(this.props.context, this.props.item._id, this.props.isFav)} />
+                            <Icon style={[goodCommonStyles.favoriteStar,starColor]} name="star" size={25} onPress={this.toggleFavourite.bind(this)} />
                         </View>
 
                     </View>

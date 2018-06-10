@@ -28,8 +28,6 @@ export default class LlistaVals extends Component {
             order: 0,
             selectedIndex: 1,
             visible: false,
-            isGoodSelected: false,
-            selectedGood: null
         };
     }
 
@@ -93,10 +91,6 @@ export default class LlistaVals extends Component {
         return false;
     }
 
-    showGoodDetails(good) {
-        this.setState({isGoodSelected: true, selectedGood: good});
-    }
-
     showGoodsList() {
         this.setState({isGoodSelected: false, selectedGood: {}});
     }
@@ -106,10 +100,11 @@ export default class LlistaVals extends Component {
             <Good
                 id={item._id}
                 item={item}
-                onPress={this.showGoodDetails}
+                onPress={()=>{}}
                 onToggleFav={this.toggleFavourite}
                 context={this}
                 isFav={this.isFav(item._id)}
+                navigation={this.props.navigation}
             />
         );
     }
@@ -131,7 +126,7 @@ export default class LlistaVals extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>{!this.state.isGoodSelected ?
+            <View style={{flex: 1}}>
                 <View style={styles.container}>
                     <View style={styles.header}>
                         <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
@@ -177,12 +172,6 @@ export default class LlistaVals extends Component {
                         </View>
                     </View>
                 </View>
-                :
-                <DetallsGood navigation={this.props.navigation} good={this.state.selectedGood}
-                             isFav={this.isFav(this.state.selectedGood._id)}
-                             showGoodsList={this.showGoodsList.bind(this)} toggleFavourite={this.toggleFavourite}
-                             context={this}/>
-            }
             </View>
         );
     }

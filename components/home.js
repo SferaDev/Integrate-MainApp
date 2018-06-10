@@ -17,10 +17,12 @@ import Profile from "./profile/profile";
 
 import DRAWER from './drawer';
 import language_settings from './language_settings';
+import DetallsGood from "./llista_vals/detalls_good";
 
 const BuscadorStack = StackNavigator({
     buscador: { screen: Buscador },
     detalls_entitat: { screen: DetallsEntitat },
+    detalls_good: {screen: DetallsGood},
     buy: { screen: Buy },
     validar: { screen: Validar }
 }, {
@@ -31,6 +33,7 @@ const BuscadorStack = StackNavigator({
 const ValsStack = StackNavigator({
     llista_vals: { screen: LlistaVals }, 
     detalls_entitat: { screen: DetallsEntitat },
+    detalls_good: {screen: DetallsGood},
     buy: { screen: Buy },
     validar: { screen: Validar }
 }, {
