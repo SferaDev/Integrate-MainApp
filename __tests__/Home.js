@@ -16,7 +16,7 @@ describe('Test group for Login', function () {
     });
 
     beforeEach(function () {
-        wrapper = shallow(<LogIn navigation={navigation}/>);
+        wrapper = shallow(<Home/>);
         instance = wrapper.instance();
     });
 
