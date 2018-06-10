@@ -97,7 +97,7 @@ class Drawer extends Component {
                     </TouchableHighlight>
 
                 </ScrollView>
-                <TouchableHighlight style={[styles.navSection,{backgroundColor: '#8882'}]} onPress={this.navigateToScreen.bind(this,"Logout")} underlayColor="white">
+                <TouchableHighlight style={[styles.navSection,{backgroundColor: '#8882'}]} onPress={this.logOut.bind(this)} underlayColor="white">
                     <View style={[styles.navItem,{height: 75}]} >
                         <Icon style={styles.navItemLogo} name="logout-variant" size={25}/>
                         <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.log_out}</Text>
