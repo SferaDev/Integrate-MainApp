@@ -66,17 +66,6 @@ export default class Profile extends Component {
 
                         <ChangePassword style={{width: this.state.Dwidth}} />
 
-                        <View style={[styles.container,{width: this.state.Dwidth}]}>
-                            
-                            <Text style={{fontSize: 32}}>
-                                Integrate SL
-                            </Text>
-                            <Text style={{width: 275,fontSize: 16,textAlign: 'center',paddingTop: 10,paddingBottom: 10}}>
-                                {language_settings[global.lang].about.description}
-                            </Text>
-                            
-                        </View>
-
                     </ScrollView>
                 </View>
             </View>
