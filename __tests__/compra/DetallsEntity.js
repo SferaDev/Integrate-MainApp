@@ -92,17 +92,6 @@ describe('Test group for EntityList', function () {
         expect(instance.setEntity(entity)).toBe(undefined);
     });
 
-    describe("toggleFavourite() tests", () => {
-
-        test('toggleFavourite to normal good', async () => {
-            expect(await instance.toggleFavourite(1, true)).toBe(undefined);
-        });
-
-        test('toggleFavourite to fav good', async () => {
-            expect(await instance.toggleFavourite(1, false)).toBe(undefined);
-        });
-    });
-
     describe("isFav() tests", () => {
 
         test('isFav to normal good', () => {

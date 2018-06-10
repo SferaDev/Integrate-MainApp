@@ -34,10 +34,6 @@ export default class LlistaVals extends Component {
         this.getAllGoods();
     }
 
-    handleBackButton() {
-        return true;
-    }
-
     async getAllGoods(loc) {
         let category = this.state.category;
         let order = this.state.order;
@@ -79,10 +75,6 @@ export default class LlistaVals extends Component {
             if (good._id === id) return true;
         }
         return false;
-    }
-
-    showGoodsList() {
-        this.setState({isGoodSelected: false, selectedGood: {}});
     }
 
     renderGood({item}) {

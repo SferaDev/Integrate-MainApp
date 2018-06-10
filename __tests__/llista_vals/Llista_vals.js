@@ -62,10 +62,6 @@ describe('Test group for llista_vals', function () {
 
     });
 
-    test('handleBackButton is callable and returns true', () => {
-        expect(instance.handleBackButton()).toBe(true);
-    });
-
     test('selectFilter is callable and returns nothing', () => {
 
         expect(instance.selectFilter(0, 0)).toBe(undefined);
@@ -82,28 +78,9 @@ describe('Test group for llista_vals', function () {
         });
     });
 
-    test('showGoodDetails is callable and returns nothing', () => {
-        expect(instance.showGoodDetails({_id: 0})).toBe(undefined);
-    });
-
-    test('showGoodsList is callable and returns nothing', () => {
-        expect(instance.showGoodsList()).toBe(undefined);
-    });
-
     test('renderGood renders an entity correctly', () => {
 
         expect(instance.renderGood({item: {id: 1}})).toMatchSnapshot();
-    });
-
-    describe("toggleFavourite() tests", () => {
-
-        test('toggleFavourite to normal good', async () => {
-            expect(await instance.toggleFavourite(1, true)).toBe(undefined);
-        });
-
-        test('toggleFavourite to fav good', async () => {
-            expect(await instance.toggleFavourite(1, false)).toBe(undefined);
-        });
     });
 
     test('setIndexChange select fav goods', () => {
