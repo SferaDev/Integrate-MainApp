@@ -51,10 +51,10 @@ export default class LogIn extends Component {
 
         let nifnie = this.state.nifnie;
         let password = this.state.password;
-        let that = this;
-
-        let token = await API.login(nifnie, password); //.then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
-        if (token === null) {
+        let that = this;        
+        
+        let token = await API.login(nifnie, password);
+        if( token === null ){
             this.showError();
         } else {
             this.navigateHome();
@@ -86,7 +86,7 @@ export default class LogIn extends Component {
     }
 
     isEmpty() {
-        return (this.state.nifnie.length == 0 || this.state.password.length == 0)
+        return (this.state.nifnie.length === 0 || this.state.password.length === 0)
     }
 
     moveUp() {
@@ -114,7 +114,7 @@ export default class LogIn extends Component {
     }
 
     navigateHome() {
-        this.props.navigation.navigate('DrawerNavigation');
+        global.logIn();
     }
 
     restorePassword() {

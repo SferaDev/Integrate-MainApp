@@ -36,7 +36,9 @@
       "goods": "Vals",
       "log_out": "Tancar sessió",
       "validate": "Validar",
-      "settings": "Configuració del perfil"
+      "settings": "Configuració del perfil",
+      "help": "Ajuda",
+      "about": "Inforació"
     },
     "goods": {
       "favourites": "Preferits",
@@ -120,7 +122,9 @@
       "goods": "Vales",
       "log_out": "Cerrar sessión",
       "validate": "Validar",
-      "settings": "Configuración del perfil"
+      "settings": "Configuración del perfil",
+      "help": "Ayuda",
+      "about": "Inforación"
     },
     "goods": {
       "favourites": "Favoritos",
@@ -203,7 +207,9 @@
       "goods": "Goods",
       "log_out": "Log Out",
       "validate": "Validate",
-      "settings": "Profile settings"
+      "settings": "Profile settings",
+      "help": "Help",
+      "about": "About"
     },
     "goods": {
       "favourites": "Favourites",
