@@ -38,7 +38,7 @@
       "validate": "Validar",
       "settings": "Configuració del perfil",
       "help": "Ajuda",
-      "about": "Inforació"
+      "about": "Informació"
     },
     "goods": {
       "favourites": "Preferits",
@@ -82,6 +82,19 @@
     },
     "about": {
       "description": "Projecte d'integració social en el marc de l'assignatura de PES (Projecte d'enginyeria del Software)"
+    },
+    "help": {
+      "title1": "El cercador:",
+      "text1": "Em permet veure totes les entitats que hi ha al meu voltant les quals ofereixen vals de descompte. Puc veure-les en format llista i seleccionant una la informació de cadascuna d'elles",
+
+      "title2": "Comprar:",
+      "text2": "Des de l'informació detallada de l'entitat puc realitzar la compra des del botó superiorm dret. Allà podré seleccionar els vals que vull utilitzar i veuré el descopmpte que s'aplica",
+
+      "title3": "Vals:",
+      "text3": "Des de vals puc veure tots els que hi ha disponibles, filtrar-los per categories entre d'altres coses i veure tota la informació detallada d'aquests. Puc també afegir un val a favorit per a guardar-lo.",
+
+      "title4": "Configuració del perfil:",
+      "text4": "Des d'aquesta vista puc configurar l'idioma de l'aplicació, l'idioma dels vals i veure la informació del meu perfil en detall. També puc canviar la contrasenya existent per una de nova"
     }
   },
 
@@ -167,6 +180,19 @@
     },
     "about": {
       "description": "Proyecto de integración social en el marco de la assignatura de PES (Proyecto de inginyeria de Software)"
+    },
+    "help": {
+      "title1": "El buscador:",
+      "text1": "Me permite ver todas las entidades que hay a mi alrededor las cuales ofrecen vales de descuento. Puedo verlas en formato lista y seleccionando una veo la información detallada",
+
+      "title2": "Comprar:",
+      "text2": "Des de la información detallada de la entidad puedo realizar una compra des del botón superior derecho. Allí puedo seleccionar los vales que quiero utilizar y veré el descuento que se me aplica",
+
+      "title3": "Vales:",
+      "text3": "Des de los vales puedo ver todos los que hay disponibles, filtrarlos por categortias y ver su información detallada. Puedo también añadir un vale a favorito y guardarlo",
+
+      "title4": "Configuración del perfil:",
+      "text4": "Des de esta vista puedo configurar el idioma de la aplicación y de los vales, asi como ver la información de mi perfil. Tambien puedo modificar la contraseña por una de nueva"
     }
   },
 
@@ -252,6 +278,19 @@
     },
     "about": {
       "description": "Social integration project under the module SEP (Software Engineering Project)"
+    },
+    "help": {
+      "title1": "Searcher:",
+      "text1": "I can see all of the entities that are next to me, and the goods that they have. I can switch into a list view and see the entity complete information selecting one of them",
+
+      "title2": "Buy:",
+      "text2": "From the entity selected I can buy items with the right upper button entity. When I switch to the new view I can select the goods that I want to use and see the discount applied",
+
+      "title3": "Goods:",
+      "text3": "I can see all of the goods offered by different entities, filter them see what can I use. I can also add goods to favourites and save them",
+
+      "title4": "Profile configuration:",
+      "text4": "From here I can set my app language, my goods language and see my profile information. I also can modify my current password for a new one"
     }
   }
 }
