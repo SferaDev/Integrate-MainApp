@@ -11,9 +11,7 @@ import Good from '../../components/compra/good';
 const navigation = {
     navigate: jest.fn(),
     state: {
-        params: {
-
-        }
+        params: {}
     },
     goBack: jest.fn()
 };
@@ -32,7 +30,8 @@ describe('Test group for good', function () {
             owner: {
                 name: 'NAME'
             },
-            reusePeriod: 1
+            reusePeriod: 1,
+            isUsable: false
         };
         global.lang = 'ca';
     });
@@ -49,6 +48,7 @@ describe('Test group for good', function () {
                 isSelected={false}
                 toggleFavourite={jest.fn()}
                 navigation={navigation}
+                onPress={jest.fn()}
             />
         );
         instance = wrapper.instance();
@@ -60,8 +60,16 @@ describe('Test group for good', function () {
         instance = null;
     });
 
-    test('selectGood is callable and returns nothing', () => {
-        expect(instance.selectGood()).toBe(undefined);
+    describe("selectGood() tests", () => {
+
+        test('selectGood is callable and returns nothing', () => {
+            expect(instance.selectGood()).toBe(undefined);
+        });
+
+        test('selectGood is callable and returns nothing where isUsable = true', () => {
+            instance.props.item.isUsable = true;
+            expect(instance.selectGood()).toBe(undefined);
+        });
     });
 
     test('getPeriodText is callable and returns nothing', () => {
@@ -76,9 +84,53 @@ describe('Test group for good', function () {
         expect(instance.showGoodDetails()).toBe(undefined);
     });
 
-    test('toggleFavourite is callable and returns nothing',async () => {
-        expect(await instance.toggleFavourite()).toBe(false);
+    describe("toggleFavourite() tests", () => {
+
+        test('toggleFavourite is callable and returns nothing', async () => {
+            expect(await instance.toggleFavourite()).toBe(false);
+        });
+
+        test('toggleFavourite is callable and returns nothing where props.toggleFavourite = undefined ', async () => {
+            wrapper = shallow(
+                <Good
+                    type={0}
+                    item={good}
+                    context={this}
+                    isEntityDisplay={true}
+                    isFav={true}
+                    isSelected={true}
+                    navigation={navigation}
+                    onPress={jest.fn()}
+                />
+            );
+            instance = wrapper.instance();
+            expect(await instance.toggleFavourite()).toBe(false);
+        });
+
+        test('toggleFavourite is callable and returns nothing where state.isFav = false', async () => {
+            instance.state.isFav = false;
+            expect(await instance.toggleFavourite()).toBe(true);
+        });
+
+        test('toggleFavourite is callable and returns nothing where props.toggleFavourite = undefined ', async () => {
+            wrapper = shallow(
+                <Good
+                    type={0}
+                    item={good}
+                    context={this}
+                    isEntityDisplay={true}
+                    isFav={true}
+                    isSelected={true}
+                    navigation={navigation}
+                    onPress={jest.fn()}
+                    refreshLists={jest.fn()}
+                />
+            );
+            instance = wrapper.instance();
+            expect(await instance.toggleFavourite()).toBe(false);
+        });
     });
+
 
     describe("renderGood() tests", () => {
 
@@ -98,20 +150,46 @@ describe('Test group for good', function () {
     describe("renderBuyGood() tests", () => {
 
         test('renderBuyGood when isUsable = false ', () => {
-            instance.props.item.isUsable = true;
+            let good_copy = good;
+            good_copy.isUsable = false;
+            wrapper = shallow(
+                <Good
+                    type={0}
+                    item={good_copy}
+                    context={this}
+                    isEntityDisplay={true}
+                    isFav={true}
+                    isSelected={true}
+                    toggleFavourite={jest.fn()}
+                    navigation={navigation}
+                    onPress={jest.fn()}
+                />
+            );
+            instance = wrapper.instance();
+
             expect(instance.renderBuyGood()).toMatchSnapshot();
         });
 
         test('renderBuyGood when isUsable = true and isSelected = true ', () => {
-            instance.props.item.isUsable = true;
-            instance.props.isSelected = true;
+            let good_copy = good;
+            good_copy.isUsable = true;
+            wrapper = shallow(
+                <Good
+                    type={0}
+                    item={good_copy}
+                    context={this}
+                    isEntityDisplay={true}
+                    isFav={true}
+                    isSelected={true}
+                    toggleFavourite={jest.fn()}
+                    navigation={navigation}
+                    onPress={jest.fn()}
+                />
+            );
+            instance = wrapper.instance();
+
             expect(instance.renderBuyGood()).toMatchSnapshot();
         });
 
-        test('renderBuyGood when isUsable = true and isSelected = false', () => {
-            instance.props.item.isUsable = true;
-            instance.props.isSelected = false;
-            expect(instance.renderBuyGood()).toMatchSnapshot();
-        });
     });
 });

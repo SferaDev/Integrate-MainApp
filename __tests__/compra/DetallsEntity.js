@@ -149,6 +149,7 @@ describe('Test group for EntityList', function () {
             }
         };
         instance.state.goods = [{'_id': '1'}];
+        instance.props.navigation.state.params.toggleFavourite = jest.fn();
         expect(instance.renderGood(good)).toMatchSnapshot();
     });
 
