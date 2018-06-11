@@ -83,7 +83,7 @@ export default class ChangePassword extends Component {
         let new_password1 = this.state.new_password1;
         let new_password2 = this.state.new_password2;
 
-        if (new_password1 != new_password2) {
+        if (new_password1 !== new_password2) {
             this.setState({typeError: 1});
             this.showError();
         }

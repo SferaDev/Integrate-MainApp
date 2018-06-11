@@ -3,7 +3,7 @@ const USED_GOODS = ['111', '222', '333', '777'];
 
 const API = {
     login: async (nifnie = '', password = '') => {
-        
+
         if (nifnie.length === 0 || password.length === 0) return null;
         else return 'TOKEN';
     },
@@ -52,7 +52,7 @@ const API = {
     },
     getLanguages: async () => {
 
-        return [{name: 'Catalan',language: 'ca'}];
+        return [{name: 'Catalan', language: 'ca'}];
     },
     likeEntity: async (id = null) => {
         if (id !== null) return {numberLikes: 1};
@@ -62,6 +62,34 @@ const API = {
         if (id !== null) return {numberLikes: 0};
         return null;
     },
+    getGoods: async () => {
+        let good1 = {
+            _id: 1,
+            isFav: true
+        };
+        let good2 = {
+            _id: 2,
+            isFav: true
+        };
+        let good3 = {
+            _id: 3,
+            isFav: false
+        };
+        let good4 = {
+            _id: 4,
+            isFav: false
+        };
+        return [good1, good2, good3, good4];
+    },
+    getGoodsFav: async () => {
+        let good1 = {
+            _id: 1,
+        };
+        let good2 = {
+            _id: 2,
+        };
+        return [good1, good2];
+    }
 };
 
 export default API

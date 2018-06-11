@@ -26,13 +26,13 @@ export default class LogIn extends Component {
             password: "",
             error: false,
             isFieldFocused: false,
-            lang: ''
+            lang: global.lang
         };
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.integrateLogoSize = new Animated.Value(200);
-        this.integrateHeaderSize = new Animated.ValueXY({y: 58, x: 293});   
+        this.integrateHeaderSize = new Animated.ValueXY({y: 58, x: 293});
     }
 
     componentDidMount() {
@@ -51,12 +51,12 @@ export default class LogIn extends Component {
 
         let nifnie = this.state.nifnie;
         let password = this.state.password;
-        let that = this;
+        let that = this;        
         
         let token = await API.login(nifnie, password);
         if( token === null ){
             this.showError();
-        }else{
+        } else {
             this.navigateHome();
         }
     }
@@ -90,24 +90,24 @@ export default class LogIn extends Component {
     }
 
     moveUp() {
-        Animated.timing(this.integrateLogoSize,{
+        Animated.timing(this.integrateLogoSize, {
             toValue: 100,
             duration: 300
         }).start();
 
-        Animated.timing(this.integrateHeaderSize,{
+        Animated.timing(this.integrateHeaderSize, {
             toValue: {y: 40, x: 202},
             duration: 300
         }).start();
     }
 
     moveDown() {
-        Animated.timing(this.integrateLogoSize,{
+        Animated.timing(this.integrateLogoSize, {
             toValue: 200,
             duration: 300
         }).start();
 
-        Animated.timing(this.integrateHeaderSize,{
+        Animated.timing(this.integrateHeaderSize, {
             toValue: {y: 58, x: 293},
             duration: 300
         }).start();
@@ -129,9 +129,14 @@ export default class LogIn extends Component {
         return (this.isEmpty() ? '#666' : 'white');
     }
 
+    changeLang(value) {
+        global.lang = value;
+        this.setState({lang: value});
+    }
+
     render() {
-        const integrateLogoStyle = { width: this.integrateLogoSize, height: this.integrateLogoSize };
-        const integrateHeaderStyle = { width: this.integrateHeaderSize.x, height: this.integrateHeaderSize.y };
+        const integrateLogoStyle = {width: this.integrateLogoSize, height: this.integrateLogoSize};
+        const integrateHeaderStyle = {width: this.integrateHeaderSize.x, height: this.integrateHeaderSize.y};
 
         return (
             <View style={styles.container}>
@@ -139,15 +144,31 @@ export default class LogIn extends Component {
                     style={styles.imageBackground}
                     source={require('../../Images/bg.jpg')}
                 >
-                    <View style={{alignItems: 'center',width: '100%'}}>
-                        <Animated.View style={integrateLogoStyle} >
+                    <View style={{backgroundColor: 'transparent',display: 'flex',flexDirection: 'row',position: 'absolute',top: 25,right: 15}}>
+                        <Text style={{fontSize: 16,fontWeight: 'bold'}}
+                              onPress={this.changeLang.bind(this, 'ca')}>
+                            ca
+                        </Text>
+                        <Text> | </Text>
+                        <Text style={{fontSize: 16,fontWeight: 'bold'}}
+                              onPress={this.changeLang.bind(this, 'es')}>
+                            es
+                        </Text>
+                        <Text> | </Text>
+                        <Text style={{fontSize: 16,fontWeight: 'bold'}}
+                              onPress={this.changeLang.bind(this, 'en')}>
+                            en
+                        </Text>
+                    </View>
+                    <View style={{alignItems: 'center', width: '100%'}}>
+                        <Animated.View style={integrateLogoStyle}>
                             <Image style={{width: '100%', height: '100%'}}
                                    source={require('../../Images/ic_launcher.png')}>
                             </Image>
                         </Animated.View>
                     </View>
-                    <View style={{display: 'flex', alignItems: 'center',width: '100%'}}>
-                        <Animated.View style={integrateHeaderStyle} >
+                    <View style={{display: 'flex', alignItems: 'center', width: '100%'}}>
+                        <Animated.View style={integrateHeaderStyle}>
                             <Image style={{width: '100%', height: '100%'}}
                                    source={require('../../Images/integrateHeader1.png')}>
                             </Image>

@@ -3,7 +3,7 @@
     "login": {
       "nifNie": "Introduïr NIF/NIE",
       "password": "Introduïr contrasenya",
-      "restore_password": "He olvidat la contrasenya?",
+      "restore_password": "He oblidat la contrasenya?",
       "button_text": "Entra",
       "error": "El Nie / Nif o la contrasenya són incorrectes"
     },
