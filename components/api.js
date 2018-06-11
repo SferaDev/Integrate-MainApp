@@ -3,7 +3,7 @@ import http_helper from './http_helper';
 
 const API = {
     login: async (nifnie = '', password = '') => {
-        
+
         if (nifnie.length === 0 || password.length === 0) return null;
         else {
             let url = 'login';
@@ -179,10 +179,13 @@ const API = {
         const token = await AsyncStorage.getItem('token');
 
         let url = 'me/password';
-        let params = [{key: 'token', value: token}, {key: 'oldPassword', value: oldPassword}, {key: 'newPassword', value: newPassword}];
+        let params = [{key: 'token', value: token}, {key: 'oldPassword', value: oldPassword}, {
+            key: 'newPassword',
+            value: newPassword
+        }];
 
         let response = await http_helper.callApi(url, params, "PUT", true);
-        if(response.status === 200) return JSON.parse(response._bodyText);
+        if (response.status === 200) return JSON.parse(response._bodyText);
         return null;
     },
     likeEntity: async (entity_id = null) => {
