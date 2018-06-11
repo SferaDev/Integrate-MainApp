@@ -139,7 +139,6 @@ export default class Validar extends Component {
     }
 
     renderConflictGood(item) {
-        let good = null;
         for (let g of this.state.entity.goods) {
             if (g._id === item) {
                 return (

@@ -73,9 +73,20 @@ describe('Test group for llista_vals', function () {
         });
     });
 
-    test('renderGood renders an entity correctly', () => {
+    describe("renderGood() tests", () => {
 
-        expect(instance.renderGood({item: {id: 1}})).toMatchSnapshot();
+        test('renderGood renders an entity correctly', () => {
+            instance.state.selectedIndex = 0;
+            expect(instance.renderGood({item: {id: 1, isFav: true}})).toMatchSnapshot();
+        });
+        test('renderGood renders an entity correctly', () => {
+            instance.state.selectedIndex = 0;
+            expect(instance.renderGood({item: {id: 1, isFav: false}})).toMatchSnapshot();
+        });
+        test('renderGood renders an entity correctly', () => {
+            instance.state.selectedIndex = 1;
+            expect(instance.renderGood({item: {id: 1}})).toMatchSnapshot();
+        });
     });
 
     test('setIndexChange select fav goods', () => {
