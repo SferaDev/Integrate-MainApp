@@ -33,7 +33,7 @@ describe('Test group for EntityList', function () {
         expect(tree).toMatchSnapshot();
     });
 
-    describe("getButtonBackground() and getButtonColor() tests", () => {
+    describe("changePassword() tests", () => {
         
         test('changePassword() is callable and returns nothing', () => {
             expect(instance.changePassword()).toBe(undefined);
