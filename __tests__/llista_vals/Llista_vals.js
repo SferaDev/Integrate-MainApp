@@ -3,9 +3,12 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
+jest.mock('../../components/api');
+jest.mock('../../components/http_helper');
+
 import LlistaVals from '../../components/llista_vals/llista_vals';
 
-jest.mock('../../components/http_helper');
 
 const navigation = {navigate: jest.fn(), addListener: jest.fn(), removeListener: jest.fn()};
 let wrapper;
@@ -49,14 +52,6 @@ describe('Test group for llista_vals', function () {
     describe("getAllGoods() tests", () => {
 
         test('getAllGoods is callable and returns nothing', async () => {
-
-            instance.state.selectedIndex = 0;
-            expect(await instance.getAllGoods()).toBe(undefined);
-        });
-
-        test('getAllGoods is callable and returns nothing', async () => {
-
-            instance.state.selectedIndex = 1;
             expect(await instance.getAllGoods()).toBe(undefined);
         });
 

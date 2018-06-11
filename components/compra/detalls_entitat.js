@@ -69,7 +69,7 @@ export default class DetallsEntitat extends Component {
     }
 
     renderGood(item) {
-        if( this.props.navigation.state.params.toggleFavourite ){
+        if (this.props.navigation.state.params.toggleFavourite) {
             return (
                 <Good
                     key={item._id}
@@ -82,7 +82,7 @@ export default class DetallsEntitat extends Component {
                     toggleFavourite={this.props.navigation.state.params.toggleFavourite}
                 />
             );
-        }else{
+        } else {
             return (
                 <Good
                     key={item._id}
@@ -102,12 +102,15 @@ export default class DetallsEntitat extends Component {
     }
 
     goBuy() {
-        this.props.navigation.navigate('buy', {selectedEntity: this.state.entity, getEntity: this.getEntity.bind(this)});
+        this.props.navigation.navigate('buy', {
+            selectedEntity: this.state.entity,
+            getEntity: this.getEntity.bind(this)
+        });
     }
 
     sendMail() {
 
-        Linking.openURL('mailto:'+this.state.entity.email);
+        Linking.openURL('mailto:' + this.state.entity.email);
     }
 
     callTo() {

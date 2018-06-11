@@ -88,6 +88,10 @@ describe('Test group for EntityList', function () {
         expect(instance.getEntity()).toBe(undefined);
     });
 
+    test('getGoodsFav is callable and returns nothing', async () => {
+        expect(await instance.getGoodsFav()).toBe(undefined);
+    });
+
     test('setEntity is callable and returns nothing', () => {
         expect(instance.setEntity(entity)).toBe(undefined);
     });

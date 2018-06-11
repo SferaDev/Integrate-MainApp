@@ -54,7 +54,6 @@ export default class LlistaVals extends Component {
             mergedGoods.push(good);
         }
 
-        let that = this;
         this.setState({goods: mergedGoods});
     }
 
@@ -79,7 +78,7 @@ export default class LlistaVals extends Component {
 
     renderGood({item}) {
 
-        if( (this.state.selectedIndex == 0 && item.isFav) || this.state.selectedIndex == 1 ){
+        if( (this.state.selectedIndex === 0 && item.isFav) || this.state.selectedIndex === 1 ){
             return (
                 <Good
                     item={item}
@@ -101,8 +100,7 @@ export default class LlistaVals extends Component {
     }
 
     canApplyFilters() {
-        if (this.state.selectedIndex === 0) return true;
-        else return false;
+        return this.state.selectedIndex === 0;
     }
 
     render() {
