@@ -88,19 +88,12 @@ describe('Test group for EntityList', function () {
         expect(instance.getEntity()).toBe(undefined);
     });
 
-    test('setEntity is callable and returns nothing', () => {
-        expect(instance.setEntity(entity)).toBe(undefined);
+    test('getGoodsFav is callable and returns nothing', async () => {
+        expect(await instance.getGoodsFav()).toBe(undefined);
     });
 
-    describe("toggleFavourite() tests", () => {
-
-        test('toggleFavourite to normal good', async () => {
-            expect(await instance.toggleFavourite(1, true)).toBe(undefined);
-        });
-
-        test('toggleFavourite to fav good', async () => {
-            expect(await instance.toggleFavourite(1, false)).toBe(undefined);
-        });
+    test('setEntity is callable and returns nothing', () => {
+        expect(instance.setEntity(entity)).toBe(undefined);
     });
 
     describe("isFav() tests", () => {
@@ -156,6 +149,7 @@ describe('Test group for EntityList', function () {
             }
         };
         instance.state.goods = [{'_id': '1'}];
+        instance.props.navigation.state.params.toggleFavourite = jest.fn();
         expect(instance.renderGood(good)).toMatchSnapshot();
     });
 

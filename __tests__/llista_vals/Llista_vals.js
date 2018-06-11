@@ -3,9 +3,12 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
+jest.mock('../../components/api');
+jest.mock('../../components/http_helper');
+
 import LlistaVals from '../../components/llista_vals/llista_vals';
 
-jest.mock('../../components/http_helper');
 
 const navigation = {navigate: jest.fn(), addListener: jest.fn(), removeListener: jest.fn()};
 let wrapper;
@@ -49,21 +52,9 @@ describe('Test group for llista_vals', function () {
     describe("getAllGoods() tests", () => {
 
         test('getAllGoods is callable and returns nothing', async () => {
-
-            instance.state.selectedIndex = 0;
             expect(await instance.getAllGoods()).toBe(undefined);
         });
 
-        test('getAllGoods is callable and returns nothing', async () => {
-
-            instance.state.selectedIndex = 1;
-            expect(await instance.getAllGoods()).toBe(undefined);
-        });
-
-    });
-
-    test('handleBackButton is callable and returns true', () => {
-        expect(instance.handleBackButton()).toBe(true);
     });
 
     test('selectFilter is callable and returns nothing', () => {
@@ -82,73 +73,25 @@ describe('Test group for llista_vals', function () {
         });
     });
 
-    test('showGoodDetails is callable and returns nothing', () => {
-        expect(instance.showGoodDetails({_id: 0})).toBe(undefined);
-    });
+    describe("renderGood() tests", () => {
 
-    test('showGoodsList is callable and returns nothing', () => {
-        expect(instance.showGoodsList()).toBe(undefined);
-    });
-
-    test('renderGood renders an entity correctly', () => {
-
-        expect(instance.renderGood({item: {id: 1}})).toMatchSnapshot();
-    });
-
-    describe("toggleFavourite() tests", () => {
-
-        test('toggleFavourite to normal good', async () => {
-            expect(await instance.toggleFavourite(1, true)).toBe(undefined);
+        test('renderGood renders an entity correctly', () => {
+            instance.state.selectedIndex = 0;
+            expect(instance.renderGood({item: {id: 1, isFav: true}})).toMatchSnapshot();
         });
-
-        test('toggleFavourite to fav good', async () => {
-            expect(await instance.toggleFavourite(1, false)).toBe(undefined);
+        test('renderGood renders an entity correctly', () => {
+            instance.state.selectedIndex = 0;
+            expect(instance.renderGood({item: {id: 1, isFav: false}})).toMatchSnapshot();
+        });
+        test('renderGood renders an entity correctly', () => {
+            instance.state.selectedIndex = 1;
+            expect(instance.renderGood({item: {id: 1}})).toMatchSnapshot();
         });
     });
 
     test('setIndexChange select fav goods', () => {
 
         expect(instance.setIndexChange(0)).toBe(undefined);
-    });
-
-    test('setIndexChange select normal goods', () => {
-
-        expect(instance.setIndexChange(1)).toBe(undefined);
-    });
-
-    describe("isFav() tests", () => {
-
-        test('isFav to normal good', () => {
-
-            instance.state.goodsFav = [
-                {
-                    _id: 1,
-                    productName: 'name',
-                    initialPrice: 24,
-                    category: 2,
-                    owner: {
-                        name: 'NAME'
-                    }
-                }
-            ];
-            expect(instance.isFav(1)).toBe(true);
-        });
-
-        test('isFav to fav good', () => {
-
-            instance.state.goodsFav = [
-                {
-                    _id: 1,
-                    productName: 'name',
-                    initialPrice: 24,
-                    category: 2,
-                    owner: {
-                        name: 'NAME'
-                    }
-                }
-            ];
-            expect(instance.isFav(2)).toBe(false);
-        });
     });
 
     test('extractKey is callable and returns item id', () => {
