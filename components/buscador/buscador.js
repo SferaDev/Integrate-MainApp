@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BackHandler, StyleSheet, TextInput, TouchableHighlight, View} from 'react-native';
+import {StyleSheet, TextInput, View} from 'react-native';
 import Maps from './maps';
 import EntityList from './list';
 import Entity from './entity';
@@ -79,7 +79,7 @@ export default class Buscador extends Component {
     }
 
     isAnEntitySelected() {
-        return this.state.selectedEntity !== null ? true : false;
+        return this.state.selectedEntity !== null;
     }
 
     isListView() {

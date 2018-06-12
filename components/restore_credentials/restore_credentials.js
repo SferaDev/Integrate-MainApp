@@ -97,7 +97,8 @@ export default class RestoreCredentials extends Component {
                         <TouchableHighlight
                             style={[styles.buttonStyle, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.restoreCredentials.bind(this)}
-                            disabled={this.isEmpty()}v
+                            underlayColor='#094671AA'
+                            disabled={this.isEmpty()}
                         >
                             <Text
                                 style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
         height: 30,
         borderRadius: 4,
         margin: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     textGoToLogIn: {
         textDecorationLine: 'underline',

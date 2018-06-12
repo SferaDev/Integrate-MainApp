@@ -68,7 +68,7 @@ export default class Good extends Component {
 
         return (
             <TouchableHighlight style={goodCommonStyles.goodView} onPress={this.showGoodDetails.bind(this)}
-                                underlayColor='white'>
+                                underlayColor="rgba(0,0,0,0.3)">
 
                 <View style={goodCommonStyles.goodSubView}>
                     <View
@@ -107,7 +107,7 @@ export default class Good extends Component {
 
         return (
             <TouchableHighlight style={goodCommonStyles.goodView} onPress={this.selectGood.bind(this)}
-                                underlayColor="transparent">
+                                underlayColor="rgba(0,0,0,0.3)">
                 <View
                     style={[goodCommonStyles.goodSubView, {
                         borderColor: this.props.isSelected ? '#98B353' : '#888888',

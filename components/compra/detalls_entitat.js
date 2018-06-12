@@ -124,7 +124,8 @@ export default class DetallsEntitat extends Component {
     displayPhoneInfo() {
         if (this.state.entity.phone !== undefined) {
             return (
-                <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent'>
+                <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor="rgba(0,0,0,0.3)"
+                >
                     <View style={styles.contactItem}>
                         <Icon style={styles.contactIcon} name="phone" size={35}/>
                         <Text style={styles.contactInfo}>{this.state.entity.phone}</Text>
@@ -137,7 +138,7 @@ export default class DetallsEntitat extends Component {
     displayMailInfo() {
         if (this.state.entity.email !== undefined) {
             return (
-                <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent'>
+                <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor="rgba(0,0,0,0.3)">
                     <View style={styles.contactItem}>
                         <Icon style={styles.contactIcon} name="email-outline" size={35}/>
                         <Text style={styles.contactInfo}>{this.state.entity.email}</Text>
