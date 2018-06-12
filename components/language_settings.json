@@ -38,7 +38,7 @@
       "validate": "Validar",
       "settings": "Configuració del perfil",
       "help": "Ajuda",
-      "about": "Inforació"
+      "about": "Informació"
     },
     "goods": {
       "favourites": "Preferits",
@@ -58,8 +58,10 @@
       "recent": "Recents",
       "popularity": "Popularitat",
       "proximity": "Proximitat",
-      "period_before": "Cada",
-      "period_after": "dies"
+      "period_reuse": "Reutilitzable ",
+      "period_before": "cada",
+      "period_after": "dies",
+      "period_day": "cada dia"
     },
     "profile": {
       "configuration": "Configuració:",
@@ -144,8 +146,10 @@
       "recent": "Recientes",
       "popularity": "Popularidad",
       "proximity": "Proximidad",
-      "period_before": "Cada",
-      "period_after": "dias"
+      "period_reuse": "Reutilizable ",
+      "period_before": "cada",
+      "period_after": "dias",
+      "period_day": "cada día"
     },
     "profile": {
       "configuration": "Configuración:",
@@ -229,8 +233,11 @@
       "recent": "Recent",
       "popularity": "Popularity",
       "proximity": "Proximity",
-      "period_before": "Every",
-      "period_after": "days"
+      "period_reuse": "Reusable ",
+      "period_before": "every",
+      "period_after": "days",
+      "period_day": "everyday"
+
     },
     "profile": {
       "configuration": "Settings:",
