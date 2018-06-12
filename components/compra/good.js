@@ -239,7 +239,6 @@ const unsuedGoodStyles = StyleSheet.create({
         paddingTop: 5,
         paddingLeft: 15,
         fontSize: 22,
-        color: '#232323',
         fontWeight: 'bold',
         color: 'black'
     },
@@ -248,7 +247,6 @@ const unsuedGoodStyles = StyleSheet.create({
         paddingTop: 3,
         paddingLeft: 5,
         paddingRight: 5,
-        color: '#232323',
         flex: 1,
         color: 'black'
     },
@@ -257,7 +255,6 @@ const unsuedGoodStyles = StyleSheet.create({
         paddingTop: 1,
         paddingLeft: 5,
         paddingRight: 5,
-        color: '#232323',
         flex: 1,
         color: 'black'
     },
@@ -272,7 +269,6 @@ const usedGoodStyles = StyleSheet.create({
         paddingTop: 5,
         paddingLeft: 15,
         fontSize: 22,
-        color: '#232323',
         fontWeight: 'bold',
         color: 'gray'
     },
@@ -281,7 +277,6 @@ const usedGoodStyles = StyleSheet.create({
         paddingTop: 3,
         paddingLeft: 5,
         paddingRight: 5,
-        color: '#232323',
         flex: 1,
         color: 'gray'
     },
@@ -290,7 +285,6 @@ const usedGoodStyles = StyleSheet.create({
         paddingTop: 1,
         paddingLeft: 5,
         paddingRight: 5,
-        color: '#232323',
         flex: 1,
         color: 'gray'
     },
