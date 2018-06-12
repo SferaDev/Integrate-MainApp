@@ -129,7 +129,7 @@ export default class Information extends Component {
                             <TouchableHighlight style={styles.button} onPress={this.props.goToChangePassword} >
                                 <View style={styles.buttonContent} >
                                     <Icon style={styles.buttonIcon} name="lock-reset" size={25}/>
-                                    <Text style={styles.buttonText} >Change Password</Text>
+                                    <Text style={styles.buttonText} > {language_settings[this.state.lang].profile.button_text} </Text>
                                 </View>
                             </TouchableHighlight>
                         </View>
@@ -204,7 +204,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         height: 35,
-        position: 'relative'
+        position: 'relative',
+        backgroundColor: 'transparent'
     },
     buttonIcon: {
         paddingLeft: 10, 
