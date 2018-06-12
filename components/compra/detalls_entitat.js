@@ -7,7 +7,7 @@ import call from 'react-native-phone-call';
 import API from '../api';
 import Entity from '../buscador/entity';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Good from '../llista_vals/good';
+import Good from './good';
 
 export default class DetallsEntitat extends Component {
 
@@ -29,7 +29,6 @@ export default class DetallsEntitat extends Component {
     }
 
     componentDidMount() {
-        this.getEntity();
         this.getGoodsFav();
     }
 
@@ -44,6 +43,8 @@ export default class DetallsEntitat extends Component {
         if (goodsFav != null) {
             this.setState({goods: goodsFav});
         }
+
+        this.getEntity();
     }
 
     setEntity(entity) {
@@ -57,13 +58,6 @@ export default class DetallsEntitat extends Component {
         });
     }
 
-    async toggleFavourite(id, isFav) {
-
-        if (!isFav) await API.addGoodFav(id);
-        else await API.deleteGoodFav(id);
-        await this.getGoodsFav();
-    }
-
     isFav(id) {
         let goods = this.state.goods || [];
 
@@ -75,18 +69,32 @@ export default class DetallsEntitat extends Component {
     }
 
     renderGood(item) {
-        return (
-            <Good
-                key={item._id}
-                id={item._id}
-                item={item}
-                onToggleFav={this.toggleFavourite}
-                context={this}
-                isEntityDisplay={true}
-                onPress={() => {}}
-                isFav={this.isFav(item._id)}
-            />
-        );
+        if (this.props.navigation.state.params.toggleFavourite) {
+            return (
+                <Good
+                    key={item._id}
+                    type={0}
+                    item={item}
+                    context={this}
+                    isEntityDisplay={true}
+                    isFav={this.isFav(item._id)}
+                    navigation={this.props.navigation}
+                    toggleFavourite={this.props.navigation.state.params.toggleFavourite}
+                />
+            );
+        } else {
+            return (
+                <Good
+                    key={item._id}
+                    type={0}
+                    item={item}
+                    context={this}
+                    isEntityDisplay={true}
+                    isFav={this.isFav(item._id)}
+                    navigation={this.props.navigation}
+                />
+            );
+        }
     }
 
     goBack() {
@@ -94,12 +102,15 @@ export default class DetallsEntitat extends Component {
     }
 
     goBuy() {
-        this.props.navigation.navigate('buy', {selectedEntity: this.state.entity, getEntity: this.getEntity.bind(this)});
+        this.props.navigation.navigate('buy', {
+            selectedEntity: this.state.entity,
+            getEntity: this.getEntity.bind(this)
+        });
     }
 
     sendMail() {
 
-        Linking.openURL('mailto:'+this.state.entity.email);
+        Linking.openURL('mailto:' + this.state.entity.email);
     }
 
     callTo() {

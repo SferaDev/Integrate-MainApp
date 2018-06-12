@@ -40,10 +40,10 @@ export default class Information extends Component {
             surname: user.lastName,
             nif: user.nif,
             email: user.email,
-            lang: user.interfaceLanguage,
-            goodLang: user.goodLanguage,
-            appLanguage: this.setAppLanguage(user.interfaceLanguage)
+            lang: global.lang,
+            goodLang: user.goodLanguage
         });
+        this.setState({appLanguage: this.setAppLanguage(this.state.lang)});
         this.getAllLanguages(user.goodLanguage);
         if (global.lang === user.interfaceLanguage) this.setState({lang: user.interfaceLanguage});
         else this.setState({lang: global.lang});

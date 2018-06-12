@@ -86,10 +86,10 @@ export default class RestoreCredentials extends Component {
 
                     <Animated.View style={[styles.body,integrateTopPaddingStyle]}>
                         <Text style={styles.basicTitle}>
-                            Recuperar credencials:
+                            {language_settings[global.lang].restoreCredentials.title}
                         </Text>
                         <TextInput style={styles.basicInput}
-                                   placeholder="NIE/NIF"
+                                   placeholder={language_settings[global.lang].restoreCredentials.nif_nie}
                                    value={this.state.nifNie}
                                    onChangeText={this.updateText.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'>
@@ -97,15 +97,15 @@ export default class RestoreCredentials extends Component {
                         <TouchableHighlight
                             style={[styles.buttonStyle, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.restoreCredentials.bind(this)}
-                            disabled={this.isEmpty()}
+                            disabled={this.isEmpty()}v
                         >
                             <Text
                                 style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
-                                Sol·licitar
+                                {language_settings[global.lang].restoreCredentials.button_text}
                             </Text>
                         </TouchableHighlight>
                         <Text style={styles.textGoToLogIn} onPress={this.goToLogIn.bind(this)}>
-                            Enrera
+                            {language_settings[global.lang].restoreCredentials.go_back}
                         </Text>
                     </Animated.View>
 

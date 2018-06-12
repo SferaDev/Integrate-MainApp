@@ -47,6 +47,7 @@ describe('Test group for EntityList', function () {
 
     test('renders buscador correctly with onDetailsShow', () => {
         entity.isLiked = true;
+        entity.isDetails = true;
         const tree = renderer.create(<Entity item={entity} onDetailsShow={jest.fn()}/>).toJSON();
         expect(tree).toMatchSnapshot();
     });
@@ -77,8 +78,17 @@ describe('Test group for EntityList', function () {
         });
     });
 
-    test('showEntityInfo is callable and returns nothing', () => {
-        expect(instance.showEntityInfo()).toMatchSnapshot();
+    describe("showEntityInfo() tests", () => {
+
+        test('showEntityInfo is callable and returns nothing', () => {
+            expect(instance.showEntityInfo()).toMatchSnapshot();
+        });
+
+        test('showEntityInfo is callable and returns nothing', () => {
+            wrapper = shallow(<Entity item={entity}/>);
+            instance = wrapper.instance();
+            expect(instance.showEntityInfo()).toMatchSnapshot();
+        });
     });
 
     describe("likeEntity() tests", () => {
