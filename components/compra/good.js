@@ -22,6 +22,7 @@ export default class Good extends Component {
     }
 
     getPeriodText() {
+        if (this.props.item.reusePeriod === 0) return language_settings[global.lang].goods.period_no_reuse;
         if (this.props.item.reusePeriod === 1) return language_settings[global.lang].goods.period_reuse + language_settings[global.lang].goods.period_day;
         return language_settings[global.lang].goods.period_reuse + language_settings[global.lang].goods.period_before + ' ' + this.props.item.reusePeriod + ' ' + language_settings[global.lang].goods.period_after;
     }
@@ -76,9 +77,9 @@ export default class Good extends Component {
                     <View style={goodStyles.viewInfo}>
 
                         <View style={goodCommonStyles.small}>
-                            <Text style={goodStyles.goodBasicText}>{this.getPeriodText()}</Text>
+                            <Text style={[goodStyles.goodBasicText, {flex: 7}]}>{this.getPeriodText()}</Text>
                             <Text
-                                style={[goodStyles.goodBasicText, {textAlign: 'right'}]}>{this.getDiscountText()}</Text>
+                                style={[goodStyles.goodBasicText, {flex: 3, textAlign: 'right'}]}>{this.getDiscountText()}</Text>
                         </View>
 
                         <Text style={goodStyles.entityName}>{this.props.item.productName}</Text>
@@ -118,9 +119,9 @@ export default class Good extends Component {
                     <View style={goodStyles.viewInfo}>
 
                         <View style={goodCommonStyles.small}>
-                            <Text style={goodStyles.goodBasicText}>{this.getPeriodText()}</Text>
+                            <Text style={[goodStyles.goodBasicText, {flex: 7}]}>{this.getPeriodText()}</Text>
                             <Text
-                                style={[goodStyles.goodBasicText, {textAlign: 'right'}]}>{this.getDiscountText()}</Text>
+                                style={[goodStyles.goodBasicText, {textAlign: 'right', flex: 3}]}>{this.getDiscountText()}</Text>
                         </View>
 
                         <View style={goodCommonStyles.small}>

@@ -62,7 +62,8 @@
       "period_reuse": "Reutilitzable ",
       "period_before": "cada",
       "period_after": "dies",
-      "period_day": "cada dia"
+      "period_day": "cada dia",
+      "period_no_reuse": "Reutilitzable fins a fi d'existències"
     },
     "profile": {
       "configuration": "Configuració:",
@@ -174,7 +175,8 @@
       "period_reuse": "Reutilizable ",
       "period_before": "cada",
       "period_after": "dias",
-      "period_day": "cada día"
+      "period_day": "cada día",
+      "period_no_reuse": "Reutilizable hasta fin de existencias"
     },
     "profile": {
       "configuration": "Configuración:",
@@ -285,8 +287,8 @@
       "period_reuse": "Reusable ",
       "period_before": "every",
       "period_after": "days",
-      "period_day": "everyday"
-
+      "period_day": "everyday",
+      "period_no_reuse": "Reusable until end of stock"
     },
     "profile": {
       "configuration": "Settings:",
