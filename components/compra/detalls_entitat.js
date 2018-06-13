@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Linking, ScrollView, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import MarkerImage from '../../Images/marker60.png';
+import MarkerImage from '../../Images/marker30.png';
 import call from 'react-native-phone-call';
 
 import API from '../api';
@@ -182,9 +182,6 @@ export default class DetallsEntitat extends Component {
                             showsMyLocationButton={false}
                             showsCompass={false}
                             toolbarEnabled={false}
-                            zoomEnabled={false}
-                            rotateEnabled={false}
-                            scrollEnabled={false}
                             pitchEnabled={false}
                             style={{...StyleSheet.absoluteFillObject}}
                         >
