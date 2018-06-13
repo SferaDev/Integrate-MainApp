@@ -171,8 +171,7 @@ describe('Test group for EntityList', function () {
     describe("displayPhoneInfo() tests", () => {
 
         test('displayPhoneInfo to normal good', () => {
-            let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
-            let instance = wrapper.instance();
+            
             instance.state.entity = {
                 phone: '000000',
             };
@@ -180,8 +179,7 @@ describe('Test group for EntityList', function () {
         });
 
         test('displayPhoneInfo to normal good', () => {
-            let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
-            let instance = wrapper.instance();
+            
             instance.state.entity = {};
             expect(instance.displayPhoneInfo()).toBe(undefined);
         });
@@ -190,17 +188,13 @@ describe('Test group for EntityList', function () {
     describe("displayMailInfo() tests", () => {
 
         test('displayMailInfo to normal good', () => {
-            let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
-            let instance = wrapper.instance();
-            instance.state.entity = {
-                email: 'ofhdfkzn',
-            };
+            
+            instance.state.entity = { email: 'ofhdfkzn', };
             expect(instance.displayMailInfo()).toMatchSnapshot();
         });
 
         test('displayMailInfo to normal good', () => {
-            let wrapper = shallow(<DetallsEntity navigation={navigation}/>);
-            let instance = wrapper.instance();
+            
             instance.state.entity = {};
             expect(instance.displayMailInfo()).toBe(undefined);
         });

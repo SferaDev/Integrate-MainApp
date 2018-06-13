@@ -71,12 +71,7 @@ export default class Information extends Component {
 
     selectGoodsLanguage(value, index) {
         let goodLang = this.state.goodsLanguages[index].iso;
-        this.setState(
-            {
-                goodLanguage: index
-            },
-            () => global.updateContentLanguage( goodLang )
-        );
+        this.setState({goodLanguage: index }, () => global.updateContentLanguage( goodLang ) );
     }
 
     render() {

@@ -14,7 +14,6 @@ const navigation = {navigate: jest.fn()};
 let wrapper;
 let instance;
 
-
 describe('Test group for EntityList', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
@@ -51,7 +50,7 @@ describe('Test group for EntityList', function () {
           expect(await instance.getAllLanguages('ca')).toBe(undefined);
       });*/
 
-    test('selectAppLanguage() is callable and returns nothing', () => {
+    test('selectAppLanguage() is callable and returns nothing',() => {
         instance.state.appLanguages = [{iso: 'ca'}];
         expect(instance.selectAppLanguage('ca', 0)).toBe(undefined);
     });
