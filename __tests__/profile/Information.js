@@ -44,6 +44,7 @@ describe('Test group for EntityList', function () {
     });
 
     /*test('setUserInformation() is callable and returns nothing', async() => {
+
           expect(await instance.setUserInformation()).toBe(undefined);
       });
 

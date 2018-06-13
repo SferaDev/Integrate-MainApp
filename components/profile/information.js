@@ -204,7 +204,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         height: 35,
-        position: 'relative'
+        position: 'relative',
+        backgroundColor: 'transparent'
     },
     buttonIcon: {
         paddingLeft: 10, 

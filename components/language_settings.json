@@ -60,9 +60,9 @@
       "popularity": "Popularitat",
       "proximity": "Proximitat",
       "period_reuse": "Reutilitzable ",
-      "period_before": "cada",
+      "period_before": "Cada",
       "period_after": "dies",
-      "period_day": "cada dia",
+      "period_day": "Cada dia",
       "period_no_reuse": "Reutilitzable fins a fi d'existències"
     },
     "profile": {
@@ -86,6 +86,29 @@
     },
     "about": {
       "description": "Projecte d'integració social en el marc de l'assignatura de PES (Projecte d'enginyeria del Software)"
+    },
+    "help": {
+      "category1": "Funcionalitat:",
+      "question1": "Què indica el mapa?",
+      "answer1": "El mapa mostra la teva posició actual i totes les entitats més properes que ofereixen vals de descompte.",
+      "question2": "Com buscar una entitat?",
+      "answer2": "Es poden llistar totes o se’n pot buscar una de concreta a través del cercador",
+      "category2": "Sobre els vals:",
+      "question3": "Com saber quins vals de descompte ofereix cada entitat?",
+      "answer3": "Fent clic sobre una entitat veiem la seva informació i tots els vals de descompte que ens ofereix.",
+      "question4": "Com usar els vals?",
+      "answer4": "Des d'una entitat, fent clic sobre l'icona del cistell, seleccionem els vals que es volen utilitzar. Després, l'entitat haurà d'introduïr el seu codi de validació.",
+      "question5": "Classificació dels vals:",
+      "answer5": "Els vals es poden llistar segons: proximitat, popularitat, categoria i data de creació.",
+      "question6": "Caducitat dels vals:",
+      "answer6": "En cada val s’indica la freqüència de reutilització. Els vals utilitzats apareixeran en gris.",
+      "category3": "Configuració:",
+      "question7": "Canvi de contrasenya:",
+      "answer7": "Per canviar la contrasenya, anar a: menú->configuració del perfil->canviar contrasenya.",
+      "question8": "Canvi d’idioma de l’aplicació:",
+      "answer8": "Per canviar l’idioma de l’aplicació, anar a: menú->configuració del perfil->idioma de l’aplicació.",
+      "question9": "Canvi d’idioma dels vals:",
+      "answer9": "Per canviar l’idioma dels vals, anar a: menú->configuració del perfil->idioma dels vals."
     }
   },
 
@@ -150,9 +173,9 @@
       "popularity": "Popularidad",
       "proximity": "Proximidad",
       "period_reuse": "Reutilizable ",
-      "period_before": "cada",
+      "period_before": "Cada",
       "period_after": "dias",
-      "period_day": "cada día",
+      "period_day": "Cada día",
       "period_no_reuse": "Reutilizable hasta fin de existencias"
     },
     "profile": {
@@ -174,7 +197,30 @@
       "set_password": "La contraseña modificada correctamente"
     },
     "about": {
-      "description": "Proyecto de integración social en el marco de la assignatura de PES (Proyecto de inginyeria de Software)"
+      "description": ""
+    },
+    "help": {
+      "category1": "Funcionalidad:",
+      "question1": "Qué indica el mapa?",
+      "answer1": "El mapa muestra tu posición actual i todas las entidades más próximas que ofrecen cupones de descuento.",
+      "question2": "Cómo buscar una entidad?",
+      "answer2": "Se pueden listar todas o se puede buscar una en concreto a través del buscador.",
+      "category2": "Acerca de los cupones:",
+      "question3": "Cómo saber qué cupones de descuento ofrece cada entidad?",
+      "answer3": "Haciendo clic sobre una entidad podemos ver su información i todos los cupones de descuento que nos ofrece.",
+      "question4": "Cómo utilizar los cupones?",
+      "answer4": "Desde una entidad, haciendo clic sobre el icono de la cesta, seleccionamos los cupones que se quieren usar. Después, la entidad tendrá que introducir su codigo de validación.",
+      "question5": "Clasificación de los cupones:",
+      "answer5": "Los cupones se pueden listar según: proximidad, popularidad, categoría y fecha de creación.",
+      "question6": "Caducidad de los cupones",
+      "answer6": "En cada cupón se indica la frecuencia de reutilización. Los cupones usados aparecerán en gris.",
+      "category3": "Configuración:",
+      "question7": "Cambio de contraseña:",
+      "answer7": "Para cambiar la contraseña, ir a: menú->configuración del perfil->cambiar contraseña.",
+      "question8": "Cambio del idioma de la aplicación:",
+      "answer8": "Para cambiar el idioma de la aplicación, ir a: menú->configuración del perfil->idioma de la aplicación.",
+      "question9": "Cambio del idioma de los cupones:",
+      "answer9": "Para cambiar el idioma de los cupones, ir a: menú->configuración del perfil->idioma de los cupones."
     }
   },
 
@@ -239,9 +285,9 @@
       "popularity": "Popularity",
       "proximity": "Proximity",
       "period_reuse": "Reusable ",
-      "period_before": "every",
+      "period_before": "Every",
       "period_after": "days",
-      "period_day": "everyday",
+      "period_day": "Everyday",
       "period_no_reuse": "Reusable until end of stock"
     },
     "profile": {
@@ -264,6 +310,29 @@
     },
     "about": {
       "description": "Social integration project under the module SEP (Software Engineering Project)"
+    },
+    "help": {
+      "category1": "Functionality:",
+      "question1": "What does the map show?",
+      "answer1": "The map shows your current location and all the closest entities that offer any discount goods.",
+      "question2": "How to search an entity?",
+      "answer2": "You can list all entities or just look for an specific one using the searcher.",
+      "category2": "About goods:",
+      "question3": "How to know which discount goods offers each entity?",
+      "answer3": "Clicking on the entity we can see the information and all the discount goods it offers.",
+      "question4": "How to use a good?",
+      "answer4": "From an entity, clicking over the basket icon, we can select the goods we want to use. Afterwards, the entity will have to introduce its validation code.",
+      "question5": "Goods’ clasification:",
+      "answer5": "Goods can be listed by: proximity, popularity, category and creation date.",
+      "question6": "Goods expiration date:",
+      "answer6": "Each good shows the frequency of reuse. Used goods will appear in gray.",
+      "category3": "Settings:",
+      "question7": "Password change:",
+      "answer7": "To change the password, you must go to: menu->profile settings->change password.",
+      "question8": "Change of application’s language:",
+      "answer8": "To change the application’s language, you must go to: menu->profile settings->app language.",
+      "question9": "Change of goods’ language:",
+      "answer9": "To change the goods’ language, you must go to: menu->profile settings->goods language."
     }
   }
 }

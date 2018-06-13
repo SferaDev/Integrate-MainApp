@@ -82,12 +82,12 @@ class Drawer extends Component {
                         </View>
                     </TouchableHighlight>
 
-                    {/*<TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"About")} underlayColor="white">
+                    <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"Help")} underlayColor="white">
                         <View style={styles.navItem} >
                             <Icon style={styles.navItemLogo} name="help" size={25}/>
                             <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.help}</Text>
                         </View>
-                    </TouchableHighlight>*/}
+                    </TouchableHighlight>
 
                     <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"About")} underlayColor="white">
                         <View style={styles.navItem} >
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         borderTopWidth: 0.5,
         paddingTop: 5,
-        paddingBottom: 5
+        paddingBottom: 5,
     },
     navItem: {
         display: 'flex',
