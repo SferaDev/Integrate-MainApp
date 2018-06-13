@@ -6,8 +6,6 @@ import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import Information from '../../components/profile/information';
-import API from "../../components/api";
-import {AsyncStorage} from "react-native";
 
 jest.mock('../../components/http_helper');
 jest.mock('../../components/api');
@@ -15,6 +13,7 @@ jest.mock('../../components/api');
 const navigation = {navigate: jest.fn()};
 let wrapper;
 let instance;
+
 
 describe('Test group for EntityList', function () {
     beforeAll(() => {
@@ -40,26 +39,27 @@ describe('Test group for EntityList', function () {
         expect(tree).toMatchSnapshot();
     });
 
-    test('setAppLanguage() is callable and returns nothing',() => {
+    test('setAppLanguage() is callable and returns nothing', () => {
         expect(instance.setAppLanguage()).toBe(-1);
     });
 
     /*test('setUserInformation() is callable and returns nothing', async() => {
-        expect(await instance.setUserInformation()).toBe(undefined);
-    });
+
+          expect(await instance.setUserInformation()).toBe(undefined);
+      });
 
     test('getAllLanguages() is callable and returns nothing', async() => {
-        expect(await instance.getAllLanguages('ca')).toBe(undefined);
-    });*/
+          expect(await instance.getAllLanguages('ca')).toBe(undefined);
+      });*/
 
-    test('selectAppLanguage() is callable and returns nothing',() => {
+    test('selectAppLanguage() is callable and returns nothing', () => {
         instance.state.appLanguages = [{iso: 'ca'}];
-        expect(instance.selectAppLanguage('ca',0)).toBe(undefined);
+        expect(instance.selectAppLanguage('ca', 0)).toBe(undefined);
     });
 
-    test('selectGoodsLanguage() is callable and returns nothing',() => {
+    test('selectGoodsLanguage() is callable and returns nothing', () => {
         instance.state.goodsLanguages = [{iso: 'ca'}];
-        expect(instance.selectGoodsLanguage('ca',0)).toBe(undefined);
+        expect(instance.selectGoodsLanguage('ca', 0)).toBe(undefined);
     });
 
 });

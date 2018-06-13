@@ -13,7 +13,7 @@ class Drawer extends Component {
 
         this.state = {
             appLanguage: global.lang
-        }
+        };
 
         global.updateAppLanguage = this.updateAppLanguage.bind(this);
         global.updateContentLanguage = this.updateContentLanguage.bind(this);
@@ -87,7 +87,7 @@ class Drawer extends Component {
                             <Icon style={styles.navItemLogo} name="help" size={25}/>
                             <Text style={styles.navItemLabel}>{language_settings[ this.state.appLanguage ].home.help}</Text>
                         </View>
-                    </TouchableHighlight>
+                    </TouchableHighlight>*/}
 
                     <TouchableHighlight style={styles.navSection} onPress={this.navigateToScreen.bind(this,"About")} underlayColor="white">
                         <View style={styles.navItem} >

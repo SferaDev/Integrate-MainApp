@@ -22,7 +22,8 @@ export default class Good extends Component {
     }
 
     getPeriodText() {
-        return language_settings[global.lang].goods.period_before + ' ' + this.props.item.reusePeriod + ' ' + language_settings[global.lang].goods.period_after;
+        if (this.props.item.reusePeriod === 1) return language_settings[global.lang].goods.period_reuse + language_settings[global.lang].goods.period_day;
+        return language_settings[global.lang].goods.period_reuse + language_settings[global.lang].goods.period_before + ' ' + this.props.item.reusePeriod + ' ' + language_settings[global.lang].goods.period_after;
     }
 
     getDiscountText() {
@@ -67,7 +68,7 @@ export default class Good extends Component {
 
         return (
             <TouchableHighlight style={goodCommonStyles.goodView} onPress={this.showGoodDetails.bind(this)}
-                                underlayColor='white'>
+                                underlayColor="rgba(0,0,0,0.3)">
 
                 <View style={goodCommonStyles.goodSubView}>
                     <View
@@ -106,7 +107,7 @@ export default class Good extends Component {
 
         return (
             <TouchableHighlight style={goodCommonStyles.goodView} onPress={this.selectGood.bind(this)}
-                                underlayColor="transparent">
+                                underlayColor="rgba(0,0,0,0.3)">
                 <View
                     style={[goodCommonStyles.goodSubView, {
                         borderColor: this.props.isSelected ? '#98B353' : '#888888',
@@ -123,7 +124,7 @@ export default class Good extends Component {
                         </View>
 
                         <View style={goodCommonStyles.small}>
-                            <Text style={goodStyles.entityName}>{this.props.item.productName}</Text>
+                            <Text style={[goodStyles.entityName, {flex: 9}]}>{this.props.item.productName}</Text>
                             {
                                 this.props.item.isUsable ?
                                     this.props.isSelected ?
@@ -238,7 +239,6 @@ const unsuedGoodStyles = StyleSheet.create({
         paddingTop: 5,
         paddingLeft: 15,
         fontSize: 22,
-        color: '#232323',
         fontWeight: 'bold',
         color: 'black'
     },
@@ -247,7 +247,6 @@ const unsuedGoodStyles = StyleSheet.create({
         paddingTop: 3,
         paddingLeft: 5,
         paddingRight: 5,
-        color: '#232323',
         flex: 1,
         color: 'black'
     },
@@ -256,7 +255,6 @@ const unsuedGoodStyles = StyleSheet.create({
         paddingTop: 1,
         paddingLeft: 5,
         paddingRight: 5,
-        color: '#232323',
         flex: 1,
         color: 'black'
     },
@@ -271,7 +269,6 @@ const usedGoodStyles = StyleSheet.create({
         paddingTop: 5,
         paddingLeft: 15,
         fontSize: 22,
-        color: '#232323',
         fontWeight: 'bold',
         color: 'gray'
     },
@@ -280,7 +277,6 @@ const usedGoodStyles = StyleSheet.create({
         paddingTop: 3,
         paddingLeft: 5,
         paddingRight: 5,
-        color: '#232323',
         flex: 1,
         color: 'gray'
     },
@@ -289,7 +285,6 @@ const usedGoodStyles = StyleSheet.create({
         paddingTop: 1,
         paddingLeft: 5,
         paddingRight: 5,
-        color: '#232323',
         flex: 1,
         color: 'gray'
     },

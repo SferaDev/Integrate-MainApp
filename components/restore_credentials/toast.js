@@ -23,6 +23,7 @@ export default class Toast extends Component {
                         El Nie / Nif introduït no existeix
                     </Text>
                     <TouchableHighlight style={styles.closeButton}
+                                        underlayColor='#094671AA'
                                         onPress={this.props.onClose}>
                         <Text style={[styles.text, {color: '#094671', fontWeight: 'bold'}]}>
                             Tancar
