@@ -1,15 +1,15 @@
 {
   "ca": {
     "login": {
-      "nifNie": "Introduïr NIF/NIE",
+      "nifNie": "Introduïr Nif/Nie",
       "password": "Introduïr contrasenya",
       "restore_password": "He oblidat la contrasenya?",
       "button_text": "Entra",
-      "error": "El Nie / Nif o la contrasenya són incorrectes"
+      "error": "El Nie/Nif o la contrasenya són incorrectes"
     },
     "restoreCredentials": {
       "title": "Recuperar credencials",
-      "nif_nie": "Introduïr NIF/NIE",
+      "nif_nie": "Introduïr Nif/Nie",
       "button_text": "Sol·licitar",
       "go_back": "Enrera"
     },
@@ -18,7 +18,7 @@
     },
     "validate": {
       "discount_applied": "S'ha d'aplicar un descompte de -",
-      "wrong_code": "Codi incorrecte",
+      "wrong_code": "El codi introduït és incorrecte",
       "conflict": "Conflicte amb els vals:",
       "summary": "Resum compra:",
       "discount": "Descompte total",
@@ -29,11 +29,11 @@
       "default_error": "Error desconegut"
     },
     "toast": {
-      "message": "El Nie / Nif introduït no existeix",
+      "message": "El Nie/Nif introduït no existeix",
       "exit": "Tancar"
     },
     "home": {
-      "searcher": "Cercador",
+      "searcher": "Inici",
       "goods": "Vals",
       "log_out": "Tancar sessió",
       "validate": "Validar",
@@ -79,7 +79,7 @@
       "new_password2_placeHolder": "Confirmar la nova contrasenya",
       "button_text": "Guardar contrasenya",
       "different_passwords": "Les contrasenyes no coincideixen",
-      "wrong_password": "La contrasenya ha de contenir mínim 8 caracters i ha d'incloure un número",
+      "wrong_password": "La contrasenya ha de contenir mínim 8 caracters i ha d'incloure 1 número",
       "set_password": "La contrasenya s'ha modificat correctament"
 
     },
@@ -90,15 +90,15 @@
 
   "es": {
     "login": {
-      "nifNie": "Introducir NIF/NIE",
+      "nifNie": "Introducir Nif/Nie",
       "password": "Introducir contraseña",
       "restore_password": "He olvidado la contraseña?",
       "button_text": "Entra",
-      "error": "El Nie / Nif o la contraseña son incorrectos"
+      "error": "El Nif/Nie o la contraseña son incorrectos"
     },
     "restoreCredentials": {
       "title": "Recuperar credenciales",
-      "nif_nie": "Introducir NIF/NIE",
+      "nif_nie": "Introducir Nif/Nie",
       "button_text": "Solicitar",
       "go_back": "Atrás"
     },
@@ -107,8 +107,8 @@
     },
     "validate": {
       "discount_applied": "Se debe aplicar un descuento de -",
-      "wrong_code": "Código incorrecto",
-      "conflict": "Conflicto con los vales:",
+      "wrong_code": "El código introducido es incorrecto",
+      "conflict": "Conflicto con los cupones:",
       "summary": "Resumen compra:",
       "discount": "Descuento total",
       "title": "Introducir código de validación:",
@@ -118,17 +118,17 @@
       "default_error": "Error desconocido"
     },
     "toast": {
-      "message": "El Nie / Nif introducido no existe",
+      "message": "El Nif/Nie introducido no existe",
       "exit": "Cerrar"
     },
     "home": {
-      "searcher": "Buscador",
-      "goods": "Vales",
-      "log_out": "Cerrar sessión",
+      "searcher": "Inicio",
+      "goods": "Cupones",
+      "log_out": "Cerrar sesión",
       "validate": "Validar",
       "settings": "Configuración del perfil",
       "help": "Ayuda",
-      "about": "Inforación"
+      "about": "Información"
     },
     "goods": {
       "favourites": "Favoritos",
@@ -156,7 +156,7 @@
     "profile": {
       "configuration": "Configuración:",
       "app_language": "Idioma de la aplicación",
-      "good_language": "Idioma de los vales",
+      "good_language": "Idioma de los cupones",
       "button_text": "Cambiar contraseña"
     },
     "change_password": {
@@ -165,11 +165,11 @@
       "actual_password_placeHolder": "Introducir contraseña actual",
       "new_password_title": "Contraseña nueva:",
       "new_password_placeHolder": "Introducir nueva contraseña",
-      "new_password2_placeHolder": "Confirmar la nueva contraseña",
+      "new_password2_placeHolder": "Confirmar nueva contraseña",
       "button_text": "Guardar contraseña",
       "different_passwords": "Las contraseñas no coinciden",
-      "wrong_password": "La contraseña ha de contener mínimo 8 caracteres y incluir un numero",
-      "set_password": "La contraseña se ha modificado correctamente"
+      "wrong_password": "La contraseña debe contener mínimo 8 caracteres y incluir 1 numero",
+      "set_password": "La contraseña modificada correctamente"
     },
     "about": {
       "description": "Proyecto de integración social en el marco de la assignatura de PES (Proyecto de inginyeria de Software)"
@@ -178,15 +178,15 @@
 
   "en": {
     "login": {
-      "nifNie": "Introduce NIF/NIE",
+      "nifNie": "Introduce Nif/Nie",
       "password": "Introduce password",
       "restore_password": "Forgot password?",
       "button_text": "Enter",
-      "error": "Nie / Nif or password is incorrect"
+      "error": "Nie/Nif or password is incorrect"
     },
     "restoreCredentials": {
       "title": "Restore credentials",
-      "nif_nie": "Introduce NIF/NIE",
+      "nif_nie": "Introduce Nif/Nie",
       "button_text": "Restore",
       "go_back": "Back"
     },
@@ -195,22 +195,22 @@
     },
     "validate": {
       "discount_applied": "Should apply a discount of -",
-      "wrong_code": "Wrong code",
+      "wrong_code": "The introduced code is wrong",
       "conflict": "Goods in conflict:",
       "summary": "Purchase summary:",
       "discount": "Total discount",
-      "title": "Introduce validation's code:",
+      "title": "Introduce validation code:",
       "code": "Introduce code",
       "button_text": "Validate",
       "done": "DONE",
       "default_error": "Unknown error"
     },
     "toast": {
-      "message": "Nie / Nif introduced doesn't exist",
+      "message": "Nif/Nie introduced doesn't exist",
       "exit": "Close"
     },
     "home": {
-      "searcher": "Searcher",
+      "searcher": "Home",
       "goods": "Goods",
       "log_out": "Log Out",
       "validate": "Validate",
@@ -256,9 +256,9 @@
       "new_password_placeHolder": "Introduce new password",
       "new_password2_placeHolder": "Confirm new password",
       "button_text": "Save password",
-      "different_passwords": "Passwords not match",
-      "wrong_password": "New password should include minimum 8 characters and one number",
-      "set_password": "Password changed correctly"
+      "different_passwords": "Passwords do not match",
+      "wrong_password": "New password should include at least 8 characters and 1 digit",
+      "set_password": "Password updated"
     },
     "about": {
       "description": "Social integration project under the module SEP (Software Engineering Project)"

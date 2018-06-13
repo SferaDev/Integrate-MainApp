@@ -89,7 +89,6 @@ export default class Validar extends Component {
 
         let response = await API.newOrder(this.props.navigation.state.params.selected_goods, this.state.entity._id, this.state.code);
         this.setState({typeError: response.status});
-
         switch (response.status) {
             case 201: //Mostrar toast
                 this.updateToast();
@@ -103,6 +102,7 @@ export default class Validar extends Component {
                 break;
             default:
                 this.updateToast();
+                break;
         }
     }
 
@@ -171,7 +171,7 @@ export default class Validar extends Component {
                     </View>
                 );
             default:
-                return (<Text style={{textAlign: 'center'}}>Error</Text>);
+                return (<Text style={{textAlign: 'center'}}>{language_settings[global.lang].validate.default_error}</Text>);
         }
     }
 
