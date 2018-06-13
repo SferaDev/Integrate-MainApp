@@ -101,6 +101,8 @@ export default class Validar extends Component {
                 this.updateToast();
                 this.updateErrorState(response.body);
                 break;
+            default:
+                this.updateToast();
         }
     }
 
@@ -219,7 +221,6 @@ export default class Validar extends Component {
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.validar.bind(this)}
-                            underlayColor='#094671AA'
                             disabled={this.isEmpty()}>
                             <Text style={{
                                 alignSelf: 'center',

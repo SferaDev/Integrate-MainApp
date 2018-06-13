@@ -124,7 +124,7 @@ export default class Good extends Component {
                         </View>
 
                         <View style={goodCommonStyles.small}>
-                            <Text style={goodStyles.entityName}>{this.props.item.productName}</Text>
+                            <Text style={[goodStyles.entityName, {flex: 9}]}>{this.props.item.productName}</Text>
                             {
                                 this.props.item.isUsable ?
                                     this.props.isSelected ?
