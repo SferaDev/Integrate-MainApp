@@ -104,11 +104,11 @@
       "answer6": "En cada val s’indica la freqüència de reutilització",
       "category3": "Configuració:",
       "question7": "Canvi de contrasenya:",
-      "answer7": "Per canviar la contrasenya, anar a: menú -> configuració del perfil -> canviar contrasenya.",
+      "answer7": "Per canviar la contrasenya, anar a: menú->configuració del perfil->canviar contrasenya.",
       "question8": "Canvi d’idioma de l’aplicació:",
-      "answer8": "Per canviar l’idioma de l’aplicació, anar a: menú -> configuració del perfil -> idioma de l’aplicació.",
+      "answer8": "Per canviar l’idioma de l’aplicació, anar a: menú->configuració del perfil->idioma de l’aplicació.",
       "question9": "Canvi d’idioma dels vals:",
-      "answer9": "Per canviar l’idioma dels vals, anar a: menú -> configuració del perfil -> idioma dels vals."
+      "answer9": "Per canviar l’idioma dels vals, anar a: menú->configuració del perfil->idioma dels vals."
     }
   },
 
@@ -216,11 +216,11 @@
       "answer6": "En cada cupón se indica la frecuencia de reutilización:",
       "category3": "Configuración:",
       "question7": "Cambio de contraseña:",
-      "answer7": "Para cambiar la contraseña, ir a: menú -> configuración del perfil -> cambiar contraseña.",
+      "answer7": "Para cambiar la contraseña, ir a: menú->configuración del perfil->cambiar contraseña.",
       "question8": "Cambio del idioma de la aplicación:",
-      "answer8": "Para cambiar el idioma de la aplicación, ir a: menú -> configuración del perfil -> idioma de la aplicación.",
+      "answer8": "Para cambiar el idioma de la aplicación, ir a: menú->configuración del perfil->idioma de la aplicación.",
       "question9": "Cambio del idioma de los cupones:",
-      "answer9": "Para cambiar el idioma de los cupones, ir a: menú -> configuración del perfil -> idioma de los cupones."
+      "answer9": "Para cambiar el idioma de los cupones, ir a: menú->configuración del perfil->idioma de los cupones."
     }
   },
 
@@ -328,11 +328,11 @@
       "answer6": "Each good shows the frequency of reuse",
       "category3": "Settings:",
       "question7": "Password change:",
-      "answer7": "To change the password, you must go to: menu -> profile settings -> change password.",
+      "answer7": "To change the password, you must go to: menu->profile settings->change password.",
       "question8": "Change of application’s language:",
-      "answer8": "To change the application’s language, you must go to: menu -> profile settings -> app language.",
+      "answer8": "To change the application’s language, you must go to: menu->profile settings->app language.",
       "question9": "Change of goods’ language:",
-      "answer9": "To change the goods’ language, you must go to: menu -> profile settings -> goods language."
+      "answer9": "To change the goods’ language, you must go to: menu->profile settings->goods language."
     }
   }
 }
