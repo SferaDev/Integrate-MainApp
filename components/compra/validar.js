@@ -120,7 +120,7 @@ export default class Validar extends Component {
                 this.props.navigation.state.params.forceRefresh();
                 this.goBack();
                 break;
-            default:
+            default: //Error desconegut
                 this.props.navigation.state.params.forceRefresh();
                 this.goBack();
                 break;
