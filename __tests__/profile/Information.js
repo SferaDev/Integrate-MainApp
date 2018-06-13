@@ -16,12 +16,12 @@ const navigation = {navigate: jest.fn()};
 let wrapper;
 let instance;
 
-test('selectGoodsLanguage() is callable and returns nothing',() => {
+/*test('selectGoodsLanguage() is callable and returns nothing',() => {
     //instance.state.goodsLanguages = [{iso: 'ca'}];
     expect(1).toBe(1);
-});
+});*/
 
-/*describe('Test group for EntityList', function () {
+describe('Test group for EntityList', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
         global.lang = 'ca';
@@ -57,7 +57,7 @@ test('selectGoodsLanguage() is callable and returns nothing',() => {
         expect(await instance.getAllLanguages('ca')).toBe(undefined);
     });
 
-    test('selectAppLanguage() is callable and returns nothing',() => {
+    /*test('selectAppLanguage() is callable and returns nothing',() => {
         instance.state.appLanguages = [{iso: 'ca'}];
         expect(instance.selectAppLanguage('ca',0)).toBe(undefined);
     });
@@ -65,6 +65,6 @@ test('selectGoodsLanguage() is callable and returns nothing',() => {
     test('selectGoodsLanguage() is callable and returns nothing',() => {
         instance.state.goodsLanguages = [{iso: 'ca'}];
         expect(instance.selectGoodsLanguage('ca',0)).toBe(undefined);
-    });
+    });*/
 
-});*/
+});
