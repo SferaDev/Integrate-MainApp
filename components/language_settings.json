@@ -25,7 +25,8 @@
       "title": "Introduïr codi de validació:",
       "code": "Introduïr codi",
       "button_text": "Validar",
-      "done": "FET"
+      "done": "FET",
+      "default_error": "Error desconegut"
     },
     "toast": {
       "message": "El Nie / Nif introduït no existeix",
@@ -113,7 +114,8 @@
       "title": "Introducir código de validación:",
       "code": "Introducir código",
       "button_text": "Validar",
-      "done": "HECHO"
+      "done": "HECHO",
+      "default_error": "Error desconocido"
     },
     "toast": {
       "message": "El Nie / Nif introducido no existe",
@@ -200,7 +202,8 @@
       "title": "Introduce validation's code:",
       "code": "Introduce code",
       "button_text": "Validate",
-      "done": "DONE"
+      "done": "DONE",
+      "default_error": "Unknown error"
     },
     "toast": {
       "message": "Nie / Nif introduced doesn't exist",
