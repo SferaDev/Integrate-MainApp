@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
     body: {
         flex: 8,
         alignItems: 'center',
-        //justifyContent: 'center',
         backgroundColor: '#F4F3F2',
         width: '100%',
         height: '100%',

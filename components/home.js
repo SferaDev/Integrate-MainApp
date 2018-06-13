@@ -15,6 +15,7 @@ import Buy from "./compra/buy";
 
 import Profile from "./profile/profile";
 import About from "./profile/about";
+import Help from "./profile/help";
 
 import DRAWER from './drawer';
 import language_settings from './language_settings';
@@ -47,6 +48,7 @@ const DrawerNavigation = DrawerNavigator({
     Buscador: {screen: BuscadorStack},
     Vals: {screen: ValsStack},
     Profile: {screen: Profile},
+    Help: {screen: Help},
     About: {screen: About}
 }, {
     contentComponent: DRAWER,
