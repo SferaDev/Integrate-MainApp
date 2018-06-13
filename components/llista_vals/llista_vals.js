@@ -3,12 +3,10 @@ import {BackHandler, FlatList, StyleSheet, View} from 'react-native';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
-//import Good from './good';
+import Good from '../compra/good';
 import DetallsGood from './detalls_good';
 import SegmentControl from 'react-native-segment-controller';
 import language_settings from '../language_settings';
-
-import Good from '../compra/good';
 
 export default class LlistaVals extends Component {
 
