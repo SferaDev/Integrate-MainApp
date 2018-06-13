@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         borderTopWidth: 0.5,
         paddingTop: 5,
-        paddingBottom: 5
+        paddingBottom: 5,
     },
     navItem: {
         display: 'flex',

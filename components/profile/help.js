@@ -23,26 +23,34 @@ export default class Help extends Component {
                     <View style={styles.container}>
                         <View style={styles.body}>
                             <Text style={styles.category}>{language_settings[global.lang].help.category1}</Text>
-                            <Text style={styles.question}>{language_settings[global.lang].help.question1}</Text>
-                            <Text style={styles.answer}>{language_settings[global.lang].help.answer1}</Text>
-                            <Text style={styles.question}>{language_settings[global.lang].help.question2}</Text>
-                            <Text style={styles.answer}>{language_settings[global.lang].help.answer2}</Text>
+                                <Text style={styles.question}>{language_settings[global.lang].help.question1}</Text>
+                                <Text style={styles.answer}>{language_settings[global.lang].help.answer1}</Text>
+
+                                <Text style={styles.question}>{language_settings[global.lang].help.question2}</Text>
+                                <Text style={styles.answer}>{language_settings[global.lang].help.answer2}</Text>
+
                             <Text style={styles.category}>{language_settings[global.lang].help.category2}</Text>
-                            <Text style={styles.question}>{language_settings[global.lang].help.question3}</Text>
-                            <Text style={styles.answer}>{language_settings[global.lang].help.answer3}</Text>
-                            <Text style={styles.question}>{language_settings[global.lang].help.question4}</Text>
-                            <Text style={styles.answer}>{language_settings[global.lang].help.answer4}</Text>
-                            <Text style={styles.question}>{language_settings[global.lang].help.question5}</Text>
-                            <Text style={styles.answer}>{language_settings[global.lang].help.answer5}</Text>
-                            <Text style={styles.question}>{language_settings[global.lang].help.question6}</Text>
-                            <Text style={styles.answer}>{language_settings[global.lang].help.answer6}</Text>
+                                <Text style={styles.question}>{language_settings[global.lang].help.question3}</Text>
+                                <Text style={styles.answer}>{language_settings[global.lang].help.answer3}</Text>
+
+                                <Text style={styles.question}>{language_settings[global.lang].help.question4}</Text>
+                                <Text style={styles.answer}>{language_settings[global.lang].help.answer4}</Text>
+
+                                <Text style={styles.question}>{language_settings[global.lang].help.question5}</Text>
+                                <Text style={styles.answer}>{language_settings[global.lang].help.answer5}</Text>
+
+                                <Text style={styles.question}>{language_settings[global.lang].help.question6}</Text>
+                                <Text style={styles.answer}>{language_settings[global.lang].help.answer6}</Text>
+
                             <Text style={styles.category}>{language_settings[global.lang].help.category3}</Text>
-                            <Text style={styles.question}>{language_settings[global.lang].help.question7}</Text>
-                            <Text style={styles.answer}>{language_settings[global.lang].help.answer7}</Text>
-                            <Text style={styles.question}>{language_settings[global.lang].help.question8}</Text>
-                            <Text style={styles.answer}>{language_settings[global.lang].help.answer8}</Text>
-                            <Text style={styles.question}>{language_settings[global.lang].help.question9}</Text>
-                            <Text style={styles.answer}>{language_settings[global.lang].help.answer9}</Text>
+                                <Text style={styles.question}>{language_settings[global.lang].help.question7}</Text>
+                                <Text style={styles.answer}>{language_settings[global.lang].help.answer7}</Text>
+
+                                <Text style={styles.question}>{language_settings[global.lang].help.question8}</Text>
+                                <Text style={styles.answer}>{language_settings[global.lang].help.answer8}</Text>
+                                
+                                <Text style={styles.question}>{language_settings[global.lang].help.question9}</Text>
+                                <Text style={styles.answer}>{language_settings[global.lang].help.answer9}</Text>
                             <Text style={styles.answer}> </Text>
                             <Text style={styles.answer}> </Text>
                         </View>
@@ -90,18 +98,20 @@ const styles = StyleSheet.create({
     },
     category:  {
         width: '100%',
-        fontSize: 22,
+        fontSize: 26,
         textAlign: 'justify',
         fontWeight: 'bold',
-        textDecorationLine: 'underline',
         paddingTop: 25,
         paddingBottom: 8,
         paddingLeft: 35,
         paddingRight: 35,
+        borderBottomWidth: 1,
+        borderTopWidth: 1,
+        borderColor: '#AAA',
     },
     question:  {
         width: '100%',
-        fontSize: 16,
+        fontSize: 20,
         textAlign: 'justify',
         fontStyle: 'italic',
         fontWeight: 'bold',
@@ -109,6 +119,7 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
         paddingLeft: 35,
         paddingRight: 35,
+        backgroundColor: '#AAAAAA2F',
     },
     answer:  {
         width: '100%',
