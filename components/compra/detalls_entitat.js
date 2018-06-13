@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Linking, ScrollView, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import MarkerImage from '../../Images/marker60.png';
+import MarkerImage from '../../Images/marker30.png';
 import call from 'react-native-phone-call';
 
 import API from '../api';
@@ -124,7 +124,8 @@ export default class DetallsEntitat extends Component {
     displayPhoneInfo() {
         if (this.state.entity.phone !== undefined) {
             return (
-                <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent'>
+                <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor="rgba(0,0,0,0.3)"
+                >
                     <View style={styles.contactItem}>
                         <Icon style={styles.contactIcon} name="phone" size={35}/>
                         <Text style={styles.contactInfo}>{this.state.entity.phone}</Text>
@@ -137,7 +138,7 @@ export default class DetallsEntitat extends Component {
     displayMailInfo() {
         if (this.state.entity.email !== undefined) {
             return (
-                <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent'>
+                <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor="rgba(0,0,0,0.3)">
                     <View style={styles.contactItem}>
                         <Icon style={styles.contactIcon} name="email-outline" size={35}/>
                         <Text style={styles.contactInfo}>{this.state.entity.email}</Text>
@@ -181,9 +182,6 @@ export default class DetallsEntitat extends Component {
                             showsMyLocationButton={false}
                             showsCompass={false}
                             toolbarEnabled={false}
-                            zoomEnabled={false}
-                            rotateEnabled={false}
-                            scrollEnabled={false}
                             pitchEnabled={false}
                             style={{...StyleSheet.absoluteFillObject}}
                         >

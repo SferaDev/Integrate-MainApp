@@ -41,7 +41,8 @@ export default class Entity extends Component {
     render() {
         return (
             <TouchableHighlight key={this.props.item._id} style={styles.entityView}
-                                onPress={this.showEntityInfo.bind(this)} underlayColor='transparent'>
+                                underlayColor="rgba(0,0,0,0.3)"
+                                onPress={this.showEntityInfo.bind(this)}>
                 <View>
                     <Text style={styles.entityName}>{this.props.item.name}</Text>
                     {this.props.item.isDetails ?
