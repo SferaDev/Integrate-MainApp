@@ -22,6 +22,7 @@ export default class Good extends Component {
     }
 
     getPeriodText() {
+        if (this.props.item.reusePeriod === 0) return language_settings[global.lang].goods.period_no_reuse;
         if (this.props.item.reusePeriod === 1) return language_settings[global.lang].goods.period_reuse + language_settings[global.lang].goods.period_day;
         return language_settings[global.lang].goods.period_reuse + language_settings[global.lang].goods.period_before + ' ' + this.props.item.reusePeriod + ' ' + language_settings[global.lang].goods.period_after;
     }
