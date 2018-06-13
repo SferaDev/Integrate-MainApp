@@ -137,9 +137,7 @@ const API = {
 
         let url = 'me/orders?token=' + token + '&entityId=' + entityId + '&validationCode=' + validationCode;
         let params = [{key: 'goodIds', value: selected_goods}];
-
         let response = await http_helper.callApi(url, params, "POST", true);
-
         return {status: response.status, body: JSON.parse(response._bodyText)};
     },
     getLanguages: async () => {
