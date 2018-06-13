@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
+import {AsyncStorage, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View, ScrollView} from 'react-native';
 import Toast from '../login/toast';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import language_settings from '../language_settings';
+import API from '../api';
 
 export default class ChangePassword extends Component {
 
@@ -12,16 +14,27 @@ export default class ChangePassword extends Component {
             new_password1: "",
             new_password2: "",
             isFieldFocused: false,
-            error: false
+            error: false,
+            typeError: 0
         };
     }
 
-    handleBackButton() {
-        return true;
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
     }
 
-    openMenu() {
-        this.props.navigation.navigate('DrawerOpen');
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
+    }
+
+    moveUp() {
+        this.setState({isFieldFocused: true});
+    }
+
+    moveDown() {
+        this.setState({isFieldFocused: false});
     }
 
     updatePassword(value) {
@@ -48,24 +61,6 @@ export default class ChangePassword extends Component {
         return (this.isEmpty() ? '#CCC' : '#094671');
     }
 
-    componentDidMount() {
-        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
-        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
-    }
-
-    componentWillUnmount() {
-        this.keyboardDidShowListener.remove();
-        this.keyboardDidHideListener.remove();
-    }
-
-    moveUp() {
-        this.setState({isFieldFocused: true});
-    }
-
-    moveDown() {
-        this.setState({isFieldFocused: false});
-    }
-
     showError() {
         this.setState({error: true});
     }
@@ -74,46 +69,73 @@ export default class ChangePassword extends Component {
         this.setState({error: false});
     }
 
+    hasNumber() {
+        return /\d/.test(this.state.new_password1);
+    }
+
+    isPasswordOk() {
+        if (this.state.new_password1.length >= 8 && this.hasNumber()) return true;
+        else return false;
+    }
+
     changePassword() {
         let password = this.state.password;
         let new_password1 = this.state.new_password1;
         let new_password2 = this.state.new_password2;
 
-        if (new_password1 != new_password2) this.showError();
-        //TO DO: Canviar el text del toast fent que el text que es mostra sigui un paràmetre que se li passa
+        if (new_password1 !== new_password2) {
+            this.setState({typeError: 1});
+            this.showError();
+        }
+        else if (!this.isPasswordOk()) {
+            this.setState({typeError: 2});
+            this.showError();
+        }
+        else if (this.isPasswordOk()) {
+            API.changePassword(password,new_password1).catch(this.showError.bind(this));
+            this.setState({typeError: 3});
+            this.showError();
+        }
+    }
 
-        //else {crida a la api passant password1 o password2 i el password antic}
-
+    displayToastContent() {
+        switch (this.state.typeError) {
+            case 1: //Contrasenyes diferents
+                return (<Text style={{textAlign: 'center'}}> {language_settings[global.lang].change_password.different_passwords} </Text>);
+            case 2: //Contrasenya incorrecte
+                return (<Text style={{textAlign: 'center'}}> {language_settings[global.lang].change_password.wrong_password} </Text>);
+            case 3: //Cas d'èxit
+                return (<Text style={{textAlign: 'center'}}> {language_settings[global.lang].change_password.set_password} </Text>);
+            default:
+                return (<Text style={{textAlign: 'center'}}>Error</Text>);
+        }
     }
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
-                </View>
-                <View style={[styles.body, {marginBottom: this.state.isFieldFocused ? 260 : 0}]}>
-                    <Text style={[styles.basicTitle, {paddingBottom: 25}]}>
-                        Canvi de contrasenya
+            <View style={[styles.container,this.props.style]}>
+                <ScrollView style={styles.body} alignItems="center">
+                    <Text style={[styles.basicTitle, {paddingTop: 75}]}>
+                        {language_settings[global.lang].change_password.title}
                     </Text>
                     <Text style={styles.basicText}>
-                        Contrasenya actual:
+                        {language_settings[global.lang].change_password.actual_password_title}
                     </Text>
                     <TextInput style={[styles.basicInput]}
                                value={this.state.password}
                                secureTextEntry={true}
-                               placeholder={"Introduïr contrasenya actual"}
+                               placeholder={language_settings[global.lang].change_password.actual_password_placeHolder}
                                onChangeText={this.updatePassword.bind(this)}
                                underlineColorAndroid='rgba(0,0,0,0)'
                     >
                     </TextInput>
                     <Text style={styles.basicText}>
-                        Nova contrasenya:
+                        {language_settings[global.lang].change_password.new_password_title}
                     </Text>
                     <TextInput style={[styles.basicInput]}
                                value={this.state.new_password1}
                                secureTextEntry={true}
-                               placeholder={"Introduïr nova contrasenya"}
+                               placeholder={language_settings[global.lang].change_password.new_password_placeHolder}
                                onChangeText={this.updateNewPassword1.bind(this)}
                                underlineColorAndroid='rgba(0,0,0,0)'
                     >
@@ -121,7 +143,7 @@ export default class ChangePassword extends Component {
                     <TextInput style={[styles.basicInput]}
                                value={this.state.new_password2}
                                secureTextEntry={true}
-                               placeholder={"Confirmar la nova contrasenya"}
+                               placeholder={language_settings[global.lang].change_password.new_password2_placeHolder}
                                onChangeText={this.updateNewPassword2.bind(this)}
                                underlineColorAndroid='rgba(0,0,0,0)'
                     >
@@ -131,13 +153,17 @@ export default class ChangePassword extends Component {
                         onPress={this.changePassword.bind(this)}
                         disabled={this.isEmpty()}>
                         <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
-                            Guardar contrasenya
+                            {language_settings[global.lang].change_password.button_text}
                         </Text>
                     </TouchableHighlight>
-                    <Toast
-                        visible={this.state.error}
-                        onClose={this.updateError.bind(this)}/>
-                </View>
+                    
+                </ScrollView>
+
+                <Toast
+                    visible={this.state.error}
+                    onClose={this.updateError.bind(this)}>
+                    {this.displayToastContent()}
+                </Toast>
             </View>
         );
     }
@@ -166,8 +192,6 @@ const styles = StyleSheet.create({
     },
     body: {
         flex: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#F4F3F2',
         width: '100%',
         height: '100%'

@@ -3,38 +3,33 @@ import {BackHandler, FlatList, StyleSheet, View} from 'react-native';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Dropdown} from 'react-native-material-dropdown';
-import Good from './good';
+import Good from '../compra/good';
 import DetallsGood from './detalls_good';
 import SegmentControl from 'react-native-segment-controller';
+import language_settings from '../language_settings';
 
 export default class LlistaVals extends Component {
 
     constructor(props) {
         super(props);
 
-        this.categories = [{value: "Totes"}, {value: "Alimentació"}, {value: "Cultura"}, {value: "Formació"}, {value: "Mobilitat"}, {value: "Tecnologia"}, {value: "Salut"}, {value: "Esports"}, {value: "Lleure"}, {value: "Altres"}];
-        this.orders = [{value: "Recents"}, {value: "Popularitat"}, {value: "Proximitat"}];
+        this.categories = [{value: language_settings[global.lang].goods.all}, {value: language_settings[global.lang].goods.feeding}, {value: language_settings[global.lang].goods.culture},
+            {value: language_settings[global.lang].goods.education}, {value: language_settings[global.lang].goods.mobility}, {value: language_settings[global.lang].goods.technology}, {value: language_settings[global.lang].goods.health},
+            {value: language_settings[global.lang].goods.sports}, {value: language_settings[global.lang].goods.leisure}, {value: language_settings[global.lang].goods.others}];
+        this.orders = [{value: language_settings[global.lang].goods.recent}, {value: language_settings[global.lang].goods.popularity}, {value: language_settings[global.lang].goods.proximity}];
 
         this.state = {
             goods: [],
             goodsFav: [],
-            goods_shown: [],
             category: 0,
             order: 0,
             selectedIndex: 1,
             visible: false,
-            isGoodSelected: false,
-            selectedGood: null
         };
     }
 
     componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
         this.getAllGoods();
-    }
-
-    handleBackButton() {
-        return true;
     }
 
     async getAllGoods(loc) {
@@ -45,17 +40,22 @@ export default class LlistaVals extends Component {
         let goods = await API.getGoods(category, order, loc);
         let goodsFav = await API.getGoodsFav(category, order, loc);
 
-        if (goods != null && goodsFav != null) {
-            if (this.state.selectedIndex == 1) {
-                this.setState({goods_shown: goods, goods: goods, goodsFav: goodsFav});
-            } else {
-                this.setState({goods_shown: goodsFav, goods: goods, goodsFav: goodsFav});
+        let mergedGoods = [];
+        for(let good of goods){
+            let isFav = false;
+
+            for(let Fgood of goodsFav){
+                if(Fgood._id === good._id)isFav = true;
             }
+
+            good.isFav = isFav;
+            mergedGoods.push(good);
         }
+
+        this.setState({goods: mergedGoods});
     }
 
     openMenu() {
-
         this.props.navigation.navigate('DrawerOpen');
     }
 
@@ -74,39 +74,19 @@ export default class LlistaVals extends Component {
         else this.getAllGoods();
     }
 
-    async toggleFavourite(id, isFav) {
-
-        if (!isFav) await API.addGoodFav(id);
-        else await API.deleteGoodFav(id);
-        this.getAllGoods();
-    }
-
-    isFav(id) {
-        for (let good of this.state.goodsFav) {
-            if (good._id === id) return true;
-        }
-        return false;
-    }
-
-    showGoodDetails(good) {
-        this.setState({isGoodSelected: true, selectedGood: good});
-    }
-
-    showGoodsList() {
-        this.setState({isGoodSelected: false, selectedGood: {}});
-    }
-
     renderGood({item}) {
-        return (
-            <Good
-                id={item._id}
-                item={item}
-                onPress={this.showGoodDetails}
-                onToggleFav={this.toggleFavourite}
-                context={this}
-                isFav={this.isFav(item._id)}
-            />
-        );
+
+        if( (this.state.selectedIndex === 0 && item.isFav) || this.state.selectedIndex === 1 ){
+            return (
+                <Good
+                    item={item}
+                    context={this}
+                    isFav={item.isFav}
+                    navigation={this.props.navigation}
+                    refreshLists={this.getAllGoods.bind(this)}
+                />
+            );
+        }
     }
 
     extractKey(item) {
@@ -114,25 +94,22 @@ export default class LlistaVals extends Component {
     }
 
     setIndexChange(index) {
-
-        let goods_shown = (index == 1) ? this.state.goods : this.state.goodsFav;
-        this.setState({selectedIndex: index, goods_shown: goods_shown})
+        this.setState({selectedIndex: index});
     }
 
     canApplyFilters() {
-        if (this.state.selectedIndex == 0) return true;
-        else return false;
+        return this.state.selectedIndex === 0;
     }
 
     render() {
         return (
-            <View style={{flex: 1}}>{!this.state.isGoodSelected ?
+            <View style={{flex: 1}}>
                 <View style={styles.container}>
                     <View style={styles.header}>
                         <Icon onPress={this.openMenu.bind(this)} style={styles.headerLeftIco} name="menu" size={30}/>
                     </View>
                     <SegmentControl
-                        values={['Preferits', 'Tots']}
+                        values={[language_settings[global.lang].goods.favourites, language_settings[global.lang].goods.show_all]}
                         height={50}
                         borderRadius={1}
                         selectedIndex={this.state.selectedIndex}
@@ -141,7 +118,7 @@ export default class LlistaVals extends Component {
                     <View style={[styles.filterGoods, {height: (this.canApplyFilters()) ? 1 : 60}]}>
                         <View style={{flex: 1}}>
                             <Dropdown
-                                label='Categoria'
+                                label={language_settings[global.lang].goods.category}
                                 data={this.categories}
                                 onChangeText={this.selectFilter.bind(this)}
                                 itemCount={10}
@@ -151,7 +128,7 @@ export default class LlistaVals extends Component {
                         </View>
                         <View style={{flex: 1}}>
                             <Dropdown
-                                label='Filtre'
+                                label={language_settings[global.lang].goods.filter}
                                 data={this.orders}
                                 onChangeText={this.selectOrder.bind(this)}
                                 itemCount={3}
@@ -163,7 +140,7 @@ export default class LlistaVals extends Component {
                     <View style={styles.body}>
                         <View style={[{...StyleSheet.absoluteFillObject}, {paddingTop: 15, backgroundColor: 'white'}]}>
                             <FlatList
-                                data={this.state.goods_shown}
+                                data={this.state.goods}
                                 renderItem={this.renderGood.bind(this)}
                                 keyExtractor={this.extractKey.bind(this)}
                                 refreshing={false}
@@ -172,12 +149,6 @@ export default class LlistaVals extends Component {
                         </View>
                     </View>
                 </View>
-                :
-                <DetallsGood navigation={this.props.navigation} good={this.state.selectedGood}
-                             isFav={this.isFav(this.state.selectedGood._id)}
-                             showGoodsList={this.showGoodsList.bind(this)} toggleFavourite={this.toggleFavourite}
-                             context={this}/>
-            }
             </View>
         );
     }

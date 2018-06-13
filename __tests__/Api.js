@@ -10,22 +10,20 @@ configure({adapter: new Adapter()});
 describe("API tests", () => {
 
     describe("login() tests", () => {
-        it('login() return a token', () => {
-            API.login('12334', '1234').then((s) => {
-                expect(typeof s).toBe('string');
-            });
+        it('login() return a token', async () => {
+            
+            // TOKEN can't be mocked
+            expect(await API.login('12334', '1234')).toBe(undefined);
         });
 
-        it('login() when nifnie is missing', () => {
-            API.login('', '1234').catch((s) => {
-                expect(typeof s).toBe('string');
-            });
+        it('login() when nifnie is missing', async () => {
+            
+            expect(await API.login('', '1234')).toBe(null);
         });
 
-        it('login() when password is missing', () => {
-            API.login('12334', '').catch((s) => {
-                expect(typeof s).toBe('string');
-            });
+        it('login() when password is missing', async () => {
+            
+            expect(await API.login('12334', '')).toBe(null);
         });
     });
 
@@ -167,6 +165,92 @@ describe("API tests", () => {
 
             let r = await API.newOrder(['555'], 1, '5555');
             expect(JSON.stringify(r)).toBe('{"status":200,"body":{"something":"Hello World"}}');
+        });
+    });
+
+    describe("getLanguages() tests", () => {
+
+        test('getLanguages() is callable and returns nothing', async () => {
+
+            let r = await API.getLanguages();
+            expect(JSON.stringify(r)).toBe('{"something":"Hello World"}');
+        });
+    });
+
+    describe("setAppLanguage() tests", () => {
+
+        test('setAppLanguage() is callable and returns nothing', async () => {
+
+            let r = await API.setAppLanguage(undefined);
+            expect(JSON.stringify(r)).toBe('{"something":"Hello World"}');
+        });
+
+        test('setAppLanguage() is callable and returns nothing', async () => {
+
+            let r = await API.setAppLanguage(null);
+            expect(JSON.stringify(r)).toBe('null');
+        });
+    });
+
+    describe("setGoodLanguage() tests", () => {
+
+        test('setGoodLanguage() is callable and returns nothing', async () => {
+
+            let r = await API.setGoodLanguage(undefined);
+            expect(JSON.stringify(r)).toBe('{"something":"Hello World"}');
+        });
+
+        test('setGoodLanguage() is callable and returns nothing', async () => {
+
+            let r = await API.setGoodLanguage(null);
+            expect(JSON.stringify(r)).toBe('null');
+        });
+    });
+
+    describe("changePassword() tests", () => {
+
+        test('changePassword() is callable and returns nothing', async () => {
+
+            let r = await API.changePassword('12345678','funcionabe12');
+            expect(JSON.stringify(r)).toBe('{"something":"Hello World"}');
+        });
+
+        test('changePassword() is callable and returns nothing', async () => {
+
+            await AsyncStorage.removeItem('token');
+            API.changePassword(null).catch((s) => {
+                expect(s).toBe(null);
+            });
+        });
+    });
+
+    describe("likeEntity() tests", () => {
+
+        test('likeEntity() is callable and returns nothing', async () => {
+
+            let r = await API.likeEntity(undefined);
+            expect(r).toBe(null);
+        });
+
+        test('likeEntity() is callable and returns nothing', async () => {
+
+            let r = await API.likeEntity(5);
+            expect(JSON.stringify(r)).toEqual('{"something":"Hello World"}');
+        });
+    });
+
+    describe("dislikeEntity() tests", () => {
+
+        test('dislikeEntity() is callable and returns nothing', async () => {
+
+            let r = await API.dislikeEntity(undefined);
+            expect(r).toBe(null);
+        });
+
+        test('dislikeEntity() is callable and returns nothing', async () => {
+
+            let r = await API.dislikeEntity(5);
+            expect(JSON.stringify(r)).toEqual('{"something":"Hello World"}');
         });
     });
 });

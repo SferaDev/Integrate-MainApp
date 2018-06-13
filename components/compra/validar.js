@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {FlatList, Keyboard, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import API from "../api";
-import GoodValidar from "../compra/good_validar";
+import Good from "./good";
 import Toast from "../login/toast";
+import language_settings from '../language_settings';
 
 export default class Validar extends Component {
     constructor(props) {
@@ -88,7 +89,6 @@ export default class Validar extends Component {
 
         let response = await API.newOrder(this.props.navigation.state.params.selected_goods, this.state.entity._id, this.state.code);
         this.setState({typeError: response.status});
-
         switch (response.status) {
             case 201: //Mostrar toast
                 this.updateToast();
@@ -99,6 +99,9 @@ export default class Validar extends Component {
             case 409: //Error conflicte vals
                 this.updateToast();
                 this.updateErrorState(response.body);
+                break;
+            default:
+                this.updateToast();
                 break;
         }
     }
@@ -117,7 +120,7 @@ export default class Validar extends Component {
                 this.props.navigation.state.params.forceRefresh();
                 this.goBack();
                 break;
-            default:
+            default: //Error desconegut
                 this.props.navigation.state.params.forceRefresh();
                 this.goBack();
                 break;
@@ -128,7 +131,8 @@ export default class Validar extends Component {
         for (let g of this.state.entity.goods) {
             if (g._id === item) {
                 return (
-                    <GoodValidar
+                    <Good
+                        type={2}
                         item={g}
                     />
                 );
@@ -137,7 +141,6 @@ export default class Validar extends Component {
     }
 
     renderConflictGood(item) {
-        let good = null;
         for (let g of this.state.entity.goods) {
             if (g._id === item) {
                 return (
@@ -153,9 +156,9 @@ export default class Validar extends Component {
         let typeError = this.state.typeError;
         switch (typeError) {
             case 201: //Descompte aplicat correctament
-                return (<Text style={{textAlign: 'center', fontWeight: 'bold'}}>S'ha d'aplicar un descompte de -{this.state.total_discount} € </Text>);
+                return (<Text style={{textAlign: 'center', fontWeight: 'bold'}}> {language_settings[global.lang].validate.discount_applied} {this.state.total_discount} € </Text>);
             case 403: //Error Codi Incorrecte
-                return (<Text style={{textAlign: 'center', fontWeight: 'bold'}}>Codi incorrecte</Text>);
+                return (<Text style={{textAlign: 'center', fontWeight: 'bold'}}> {language_settings[global.lang].validate.wrong_code} </Text>);
             case 409: //Error conflicte vals
                 let soldOutGoods = this.state.soldOutGoods;
                 let nonUsableGoods = this.state.nonUsableGoods;
@@ -163,12 +166,12 @@ export default class Validar extends Component {
                 let conflictList = conflictGoods.map(this.renderConflictGood.bind(this));
                 return (
                     <View style={{marginBottom: 10}}>
-                        <Text style={{fontSize: 18, fontWeight: 'bold', paddingBottom: 5}}>Conflicte amb els vals: </Text>
+                        <Text style={{fontSize: 18, fontWeight: 'bold'}}> {language_settings[global.lang].validate.conflict} </Text>
                         {conflictList}
                     </View>
                 );
             default:
-                return (<Text style={{textAlign: 'center'}}>Error</Text>);
+                return (<Text style={{textAlign: 'center'}}>{language_settings[global.lang].validate.default_error}</Text>);
         }
     }
 
@@ -184,7 +187,7 @@ export default class Validar extends Component {
                 </View>
                 <View style={styles.resum}>
                     <Text style={styles.textResum}>
-                        Resum compra:
+                        {language_settings[global.lang].validate.summary}
                     </Text>
                     <View style={[styles.body, {display: this.state.isFieldFocused ? 'none' : 'flex'}]}>
                         <View style={[{...StyleSheet.absoluteFillObject},
@@ -198,7 +201,7 @@ export default class Validar extends Component {
                     </View>
                     <View style={styles.viewTotalEstalvi}>
                         <Text style={styles.textDescompte}>
-                            Descompte total
+                            {language_settings[global.lang].validate.discount}
                         </Text>
                         <Text style={[styles.textDescompte, {textAlign: 'right'}]}>
                             -{this.state.total_discount} €
@@ -206,11 +209,11 @@ export default class Validar extends Component {
                     </View>
                     <View style={styles.validateView}>
                         <Text style={styles.textCodi}>
-                            Introduir codi de validació:
+                            {language_settings[global.lang].validate.title}
                         </Text>
                         <TextInput style={styles.basicInput}
                                    value={this.state.code}
-                                   placeholder={"Introduir codi"}
+                                   placeholder={language_settings[global.lang].validate.code}
                                    secureTextEntry={true}
                                    onChangeText={this.updateCode.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'>
@@ -218,7 +221,6 @@ export default class Validar extends Component {
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.validar.bind(this)}
-                            underlayColor='none'
                             disabled={this.isEmpty()}>
                             <Text style={{
                                 alignSelf: 'center',
@@ -226,7 +228,7 @@ export default class Validar extends Component {
                                 fontWeight: 'bold',
                                 fontSize: 17
                             }}>
-                                Validar
+                                {language_settings[global.lang].validate.button_text}
                             </Text>
                         </TouchableHighlight>
                     </View>

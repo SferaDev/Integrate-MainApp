@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {BackHandler, StyleSheet, TextInput, TouchableHighlight, View} from 'react-native';
+import {StyleSheet, TextInput, View} from 'react-native';
 import Maps from './maps';
 import EntityList from './list';
 import Entity from './entity';
 import API from '../api';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import language_settings from '../language_settings'
 
 export default class Buscador extends Component {
 
@@ -20,14 +21,7 @@ export default class Buscador extends Component {
     }
 
     componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-
-        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {
-        });
-    }
-
-    handleBackButton() {
-        return true;
+        navigator.geolocation.getCurrentPosition(this.getEntities.bind(this), () => {});
     }
 
     async getEntities(loc) {
@@ -85,7 +79,7 @@ export default class Buscador extends Component {
     }
 
     isAnEntitySelected() {
-        return this.state.selectedEntity !== null ? true : false;
+        return this.state.selectedEntity !== null;
     }
 
     isListView() {
@@ -134,7 +128,7 @@ export default class Buscador extends Component {
                     <TextInput
                         style={{flex: 18, padding: 0, paddingLeft: 5}}
                         value={this.state.searchText}
-                        placeholder="Search"
+                        placeholder={language_settings[global.lang].searcher.search}
                         onFocus={this.showListView.bind(this)}
                         onChangeText={this.updateSearchText.bind(this)}
                         autoComplete={false}

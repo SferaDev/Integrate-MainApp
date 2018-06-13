@@ -1,6 +1,6 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import MarkerImage from '../../Images/marker60.png';
+import MarkerImage from '../../Images/marker30.png';
 
 const renderMarkers = (props) => {
 

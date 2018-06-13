@@ -15,6 +15,7 @@ let instance;
 describe('Test group for EntityList', function () {
     beforeAll(() => {
         configure({adapter: new Adapter()});
+        global.lang = 'ca';
     });
 
     beforeEach(function () {
@@ -48,10 +49,6 @@ describe('Test group for EntityList', function () {
 
     test('getEntities is callable and returns an array', async () => {
         expect(await instance.getEntities({coords: {longitude: 0, latitude: 0}})).toBe(undefined);
-    });
-
-    test('handleBackButton is callable and returns true', () => {
-        expect(instance.handleBackButton()).toBe(true);
     });
 
     test('showEntityInfo is callable and returns nothing', () => {

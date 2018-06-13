@@ -8,27 +8,36 @@ import {
     Text,
     TextInput,
     TouchableHighlight,
-    View
+    View,
+    Animated,
+    SafeAreaView
 } from 'react-native';
 
 import Toast from './toast';
 import API from '../api';
+import language_settings from '../language_settings';
 
 export default class LogIn extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             nifnie: "",
             password: "",
             error: false,
-            isFieldFocused: false
+            isFieldFocused: false,
+            lang: global.lang
         };
+    }
+
+    componentWillMount() {
+        this.integrateLogoSize = new Animated.Value(200);
+        this.integrateHeaderSize = new Animated.ValueXY({y: 58, x: 293});
     }
 
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.moveUp.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.moveDown.bind(this));
-
         AsyncStorage.getItem('token').then(this.autologin.bind(this));
     }
 
@@ -37,15 +46,25 @@ export default class LogIn extends Component {
         this.keyboardDidHideListener.remove();
     }
 
-    login() {
+    async login() {
+        Keyboard.dismiss();
+
         let nifnie = this.state.nifnie;
         let password = this.state.password;
-        let that = this;
-        API.login(nifnie, password).then(this.navigateHome.bind(this)).catch(this.showError.bind(this));
+        let that = this;        
+        
+        let token = await API.login(nifnie, password);
+        if( token === null ){
+            this.showError();
+        } else {
+            this.navigateHome();
+        }
     }
 
-    autologin(token) {
+    async autologin(token) {
         if (token !== null) {
+            let user = JSON.parse(await AsyncStorage.getItem('user')) || {interfaceLanguage: 'en'};
+            global.lang = user.interfaceLanguage;
             this.navigateHome();
         }
     }
@@ -67,19 +86,35 @@ export default class LogIn extends Component {
     }
 
     isEmpty() {
-        return (this.state.nifnie.length == 0 || this.state.password.length == 0)
+        return (this.state.nifnie.length === 0 || this.state.password.length === 0)
     }
 
     moveUp() {
-        this.setState({isFieldFocused: true});
+        Animated.timing(this.integrateLogoSize, {
+            toValue: 100,
+            duration: 300
+        }).start();
+
+        Animated.timing(this.integrateHeaderSize, {
+            toValue: {y: 40, x: 202},
+            duration: 300
+        }).start();
     }
 
     moveDown() {
-        this.setState({isFieldFocused: false});
+        Animated.timing(this.integrateLogoSize, {
+            toValue: 200,
+            duration: 300
+        }).start();
+
+        Animated.timing(this.integrateHeaderSize, {
+            toValue: {y: 58, x: 293},
+            duration: 300
+        }).start();
     }
 
     navigateHome() {
-        this.props.navigation.navigate('DrawerNavigation');
+        global.logIn();
     }
 
     restorePassword() {
@@ -94,58 +129,84 @@ export default class LogIn extends Component {
         return (this.isEmpty() ? '#666' : 'white');
     }
 
+    changeLang(value) {
+        global.lang = value;
+        this.setState({lang: value});
+    }
+
     render() {
+        const integrateLogoStyle = {width: this.integrateLogoSize, height: this.integrateLogoSize};
+        const integrateHeaderStyle = {width: this.integrateHeaderSize.x, height: this.integrateHeaderSize.y};
 
         return (
             <View style={styles.container}>
                 <ImageBackground
                     style={styles.imageBackground}
-                    source={require('../../Images/bg.jpg')}>
-                    <View style={{alignItems: 'center', display: this.state.isFieldFocused ? 'none' : 'flex'}}>
-                        <Image style={styles.ic_launcher}
-                               source={require('../../Images/ic_launcher.png')}>
-                        </Image>
+                    source={require('../../Images/bg.jpg')}
+                >
+                    <View style={{backgroundColor: 'transparent',display: 'flex',flexDirection: 'row',position: 'absolute',top: 25,right: 15}}>
+                        <Text style={{fontSize: 16,fontWeight: 'bold'}}
+                              onPress={this.changeLang.bind(this, 'ca')}>
+                            ca
+                        </Text>
+                        <Text> | </Text>
+                        <Text style={{fontSize: 16,fontWeight: 'bold'}}
+                              onPress={this.changeLang.bind(this, 'es')}>
+                            es
+                        </Text>
+                        <Text> | </Text>
+                        <Text style={{fontSize: 16,fontWeight: 'bold'}}
+                              onPress={this.changeLang.bind(this, 'en')}>
+                            en
+                        </Text>
                     </View>
-                    <View style={{display: 'flex', alignItems: 'center'}}>
-                        <Image style={[styles.integrateHeader, {
-                            marginBottom: this.state.isFieldFocused ? 50 : 20,
-                            marginTop: this.state.isFieldFocused ? 20 : 10
-                        }]}
-                               source={require('../../Images/integrateHeader1.png')}>
-                        </Image>
+                    <View style={{alignItems: 'center', width: '100%'}}>
+                        <Animated.View style={integrateLogoStyle}>
+                            <Image style={{width: '100%', height: '100%'}}
+                                   source={require('../../Images/ic_launcher.png')}>
+                            </Image>
+                        </Animated.View>
+                    </View>
+                    <View style={{display: 'flex', alignItems: 'center', width: '100%'}}>
+                        <Animated.View style={integrateHeaderStyle}>
+                            <Image style={{width: '100%', height: '100%'}}
+                                   source={require('../../Images/integrateHeader1.png')}>
+                            </Image>
+                        </Animated.View>
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.nifnie}
-                                   placeholder={"Introduir NIF/NIE"}
+                                   placeholder={language_settings[global.lang].login.nifNie}
                                    onChangeText={this.updateNifNie.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'
+                                   autoCorrect={false}
                         >
                         </TextInput>
                         <TextInput style={[styles.basicInput]}
                                    value={this.state.password}
                                    secureTextEntry={true}
-                                   placeholder={"Introduir contrasenya"}
+                                   placeholder={language_settings[global.lang].login.password}
                                    onChangeText={this.updatePassword.bind(this)}
                                    underlineColorAndroid='rgba(0,0,0,0)'
                         >
                         </TextInput>
                         <Text style={styles.recuperarContrasenyaText}
                               onPress={this.restorePassword.bind(this)}>
-                            He oblidat la contrasenya?
+                            {language_settings[global.lang].login.restore_password}
                         </Text>
                         <TouchableHighlight
                             style={[styles.button, {backgroundColor: this.getButtonBackground()}]}
                             onPress={this.login.bind(this)}
-                            underlayColor='none'
+                            underlayColor='#094671AA'
                             disabled={this.isEmpty()}>
                             <Text style={{alignSelf: 'center', color: this.getButtonColor(), fontWeight: 'bold'}}>
-                                Entra
+                                {language_settings[global.lang].login.button_text}
                             </Text>
                         </TouchableHighlight>
                     </View>
                     <Toast
                         visible={this.state.error}
                         onClose={this.updateError.bind(this)}>
-                        <Text style={{textAlign: 'center'}}>El Nie / Nif o la contrasenya són incorrectes</Text>
+                        <Text style={{textAlign: 'center'}}> {language_settings[global.lang].login.error} </Text>
                     </Toast>
                 </ImageBackground>
             </View>
@@ -186,14 +247,6 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         justifyContent: 'center',
         margin: 10,
-    },
-    ic_launcher: {
-        width: 200,
-        height: 200,
-    },
-    integrateHeader: {
-        width: 293,
-        height: 58,
     },
     recuperarContrasenyaText: {
         textDecorationLine: 'underline',

@@ -1,66 +1,43 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {AsyncStorage, Text, View} from 'react-native';
 import {DrawerNavigator, StackNavigator} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Login from './login/login';
-import Buscador from './buscador/buscador';
-import LlistaVals from './llista_vals/llista_vals';
-import DetallsEntitat from './compra/detalls_entitat';
-import App from '../App';
-import Logout from "./login/logout";
 import RestoreCredentials from "./restore_credentials/restore_credentials";
+
+import Buscador from './buscador/buscador';
+import DetallsEntitat from './compra/detalls_entitat';
+
+import LlistaVals from './llista_vals/llista_vals';
 import Validar from './compra/validar';
-import ChangePassword from "./profile/change_password";
 import Buy from "./compra/buy";
 
-const BuscadorStack = StackNavigator({
-        buscador: {
-            screen: Buscador,
-            navigationOptions: {
-                drawerLabel: 'Buscador',
-                drawerIcon: <Icon name="home" size={25}/>,
-                gesturesEnabled: false
-            }
-        },
-        detalls_entitat: {
-            screen: DetallsEntitat
-        },
-        buy: {
-            screen: Buy
-        },
-        validar: {
-            screen: Validar
-        }
-    },
-    {
-        headerMode: 'none',
-        disabledBackGesture: true,
-    });
+import Profile from "./profile/profile";
+import About from "./profile/about";
+import Help from "./profile/help";
 
-const ValsStack = StackNavigator({
-    llista_vals: {
-        screen: LlistaVals,
-        navigationOptions: {
-            drawerLabel: 'Vals',
-            drawerIcon: <Icon name="ticket-percent" size={25}/>,
-        }
-    }, detalls_entitat: {
-        screen: DetallsEntitat
-    }
+import DRAWER from './drawer';
+import language_settings from './language_settings';
+import DetallsGood from "./llista_vals/detalls_good";
+
+const BuscadorStack = StackNavigator({
+    buscador: { screen: Buscador },
+    detalls_entitat: { screen: DetallsEntitat },
+    detalls_good: {screen: DetallsGood},
+    buy: { screen: Buy },
+    validar: { screen: Validar }
 }, {
     headerMode: 'none',
     disabledBackGesture: true,
-    gesturesEnabled: false
 });
 
-const ProfileStack = StackNavigator({
-    change_password: {
-        screen: ChangePassword,
-        navigationOptions: {
-            drawerLabel: 'Change password',
-            drawerIcon: <Icon name="settings" size={25}/>,
-        }
-    },
+const ValsStack = StackNavigator({
+    llista_vals: { screen: LlistaVals }, 
+    detalls_entitat: { screen: DetallsEntitat },
+    detalls_good: {screen: DetallsGood},
+    buy: { screen: Buy },
+    validar: { screen: Validar }
 }, {
     headerMode: 'none',
     disabledBackGesture: true,
@@ -70,15 +47,11 @@ const ProfileStack = StackNavigator({
 const DrawerNavigation = DrawerNavigator({
     Buscador: {screen: BuscadorStack},
     Vals: {screen: ValsStack},
-    Profile: {screen: ProfileStack},
-    Logout: {
-        screen: Logout,
-        navigationOptions: {
-            drawerLabel: 'Log Out',
-            drawerIcon: <Icon name="logout-variant" size={25}/>,
-        }
-    },
+    Profile: {screen: Profile},
+    Help: {screen: Help},
+    About: {screen: About}
 }, {
+    contentComponent: DRAWER,
     headerMode: 'none',
     disabledBackGesture: true,
     gesturesEnabled: false
@@ -93,16 +66,32 @@ const LoginStack = StackNavigator({
     gesturesEnabled: false
 });
 
-// Manifest of possible screens
-const Home = StackNavigator({
-    LoginStack: {screen: LoginStack},
-    DrawerNavigation: {screen: DrawerNavigation}
-}, {
-    // Default config for all screens
-    headerMode: 'none',
-    initialRouteName: 'LoginStack',
-    disabledBackGesture: true,
-    gesturesEnabled: false
-});
+export default class Home extends Component {
 
-export default Home;
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isLoggedIn: false
+        };
+
+        global.logIn = this.logIn.bind(this);
+        global.logOut = this.logOut.bind(this);
+    }
+
+    logIn(){
+        this.setState({isLoggedIn: true});
+    }
+
+    logOut(){
+        this.setState({isLoggedIn: false});
+    }
+
+    render(){
+        return (
+            <View style={{flex: 1,backgroundColor: 'red'}} >
+                {(this.state.isLoggedIn) ? <DrawerNavigation /> : <LoginStack />}
+            </View>
+        )
+    }
+}

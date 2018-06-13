@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Linking, ScrollView, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import MarkerImage from '../../Images/marker60.png';
+import MarkerImage from '../../Images/marker30.png';
 import call from 'react-native-phone-call';
 
 import API from '../api';
 import Entity from '../buscador/entity';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Good from '../llista_vals/good';
+import Good from './good';
 
 export default class DetallsEntitat extends Component {
 
@@ -22,13 +22,13 @@ export default class DetallsEntitat extends Component {
                 email: '',
                 phone: '',
                 coordinates: [0, 0],
-                goods: []
+                goods: [],
+                isDetails: true
             }
         }
     }
 
     componentDidMount() {
-        this.getEntity();
         this.getGoodsFav();
     }
 
@@ -43,9 +43,12 @@ export default class DetallsEntitat extends Component {
         if (goodsFav != null) {
             this.setState({goods: goodsFav});
         }
+
+        this.getEntity();
     }
 
     setEntity(entity) {
+        entity.isDetails = true;
         this.setState({entity: entity});
         this.map.animateToRegion({
             latitude: entity.coordinates[1],
@@ -53,13 +56,6 @@ export default class DetallsEntitat extends Component {
             latitudeDelta: 0.01,
             longitudeDelta: 0.01
         });
-    }
-
-    async toggleFavourite(id, isFav) {
-
-        if (!isFav) await API.addGoodFav(id);
-        else await API.deleteGoodFav(id);
-        await this.getGoodsFav();
     }
 
     isFav(id) {
@@ -73,20 +69,32 @@ export default class DetallsEntitat extends Component {
     }
 
     renderGood(item) {
-        return (
-            <Good
-                key={item._id}
-                id={item._id}
-                item={item}
-                onToggleFav={this.toggleFavourite}
-                context={this}
-                isFav={false}
-                isEntityDisplay={true}
-                onPress={() => {
-                }}
-                isFav={this.isFav(item._id)}
-            />
-        );
+        if (this.props.navigation.state.params.toggleFavourite) {
+            return (
+                <Good
+                    key={item._id}
+                    type={0}
+                    item={item}
+                    context={this}
+                    isEntityDisplay={true}
+                    isFav={this.isFav(item._id)}
+                    navigation={this.props.navigation}
+                    toggleFavourite={this.props.navigation.state.params.toggleFavourite}
+                />
+            );
+        } else {
+            return (
+                <Good
+                    key={item._id}
+                    type={0}
+                    item={item}
+                    context={this}
+                    isEntityDisplay={true}
+                    isFav={this.isFav(item._id)}
+                    navigation={this.props.navigation}
+                />
+            );
+        }
     }
 
     goBack() {
@@ -94,12 +102,15 @@ export default class DetallsEntitat extends Component {
     }
 
     goBuy() {
-        this.props.navigation.navigate('buy', {selectedEntity: this.state.entity, getEntity: this.getEntity.bind(this)});
+        this.props.navigation.navigate('buy', {
+            selectedEntity: this.state.entity,
+            getEntity: this.getEntity.bind(this)
+        });
     }
 
     sendMail() {
 
-        Linking.openURL('mailto:'+this.state.entity.email);
+        Linking.openURL('mailto:' + this.state.entity.email);
     }
 
     callTo() {
@@ -111,9 +122,10 @@ export default class DetallsEntitat extends Component {
     }
 
     displayPhoneInfo() {
-        if (this.state.entity.phone != undefined) {
+        if (this.state.entity.phone !== undefined) {
             return (
-                <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor='transparent'>
+                <TouchableHighlight style={{flex: 1}} onPress={this.callTo.bind(this)} underlayColor="rgba(0,0,0,0.3)"
+                >
                     <View style={styles.contactItem}>
                         <Icon style={styles.contactIcon} name="phone" size={35}/>
                         <Text style={styles.contactInfo}>{this.state.entity.phone}</Text>
@@ -124,9 +136,9 @@ export default class DetallsEntitat extends Component {
     }
 
     displayMailInfo() {
-        if (this.state.entity.email != undefined) {
+        if (this.state.entity.email !== undefined) {
             return (
-                <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor='transparent'>
+                <TouchableHighlight style={{flex: 1}} onPress={this.sendMail.bind(this)} underlayColor="rgba(0,0,0,0.3)">
                     <View style={styles.contactItem}>
                         <Icon style={styles.contactIcon} name="email-outline" size={35}/>
                         <Text style={styles.contactInfo}>{this.state.entity.email}</Text>
@@ -170,9 +182,6 @@ export default class DetallsEntitat extends Component {
                             showsMyLocationButton={false}
                             showsCompass={false}
                             toolbarEnabled={false}
-                            zoomEnabled={false}
-                            rotateEnabled={false}
-                            scrollEnabled={false}
                             pitchEnabled={false}
                             style={{...StyleSheet.absoluteFillObject}}
                         >
